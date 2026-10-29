@@ -1,0 +1,57 @@
+// Vendored from three-geospatial storybook-webgpu/src/controls/rendererControls.ts @ b012ad06
+// (MIT, Copyright (c) 2024 Shota Matsuda).
+// Verbatim.
+
+import type { Frameloop } from '@react-three/fiber'
+import type { ArgTypes } from '@storybook/react-vite'
+
+export interface RendererArgs {
+  showStats: boolean
+  forceWebGL: boolean
+  pixelRatio: number
+  frameloop: Exclude<Frameloop, 'never'>
+}
+
+export const rendererArgs = (
+  defaults?: Partial<RendererArgs>
+): RendererArgs => ({
+  showStats: false,
+  forceWebGL: false,
+  pixelRatio: Math.min(window.devicePixelRatio, 2),
+  frameloop: 'always',
+  ...defaults
+})
+
+export const rendererArgTypes = (): ArgTypes<RendererArgs> => ({
+  showStats: {
+    control: {
+      type: 'boolean'
+    },
+    table: { category: 'renderer' }
+  },
+  forceWebGL: {
+    name: 'force webgl',
+    control: {
+      type: 'boolean'
+    },
+    table: { category: 'renderer' }
+  },
+  pixelRatio: {
+    name: 'pixel ratio',
+    control: {
+      type: 'range',
+      min: 0.5,
+      max: 3.5,
+      step: 0.1
+    },
+    table: { category: 'renderer' }
+  },
+  frameloop: {
+    name: 'frameloop',
+    control: {
+      type: 'select'
+    },
+    options: ['always', 'demand'],
+    table: { category: 'renderer' }
+  }
+})

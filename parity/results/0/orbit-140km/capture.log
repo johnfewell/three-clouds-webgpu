@@ -1,0 +1,11 @@
+[capture][orbit-140km] starting (phase 0, #2)
+[capture][orbit-140km] screenshots: A=43153b B=39774b
+[capture][orbit-140km] metrics: ssim=0.9747 deMean=0.31 deP95=0.55 histDist=0.0085 maxDelta=0.0501
+[capture][orbit-140km] dual-L: measuredL=0.0596 ssim@measuredL=0.9707 (gated ssim is @refL=0.09) stabiliserShare=13.6% sigmaA=4.82e-3 sigmaB=4.12e-3 sigmaD=1.12e-3
+[capture][orbit-140km] plate: A mean=0.1013 std=0.0067 B mean=0.1009 std=0.0057 cloudFraction=7.634%
+[capture][orbit-140km] gpuMs: A=4.03ms (32 samples) B=2.78ms (32 samples)
+[capture][orbit-140km] eval: pass
+[capture][orbit-140km] temporalUpscale: A=false B=false
+[capture][orbit-140km] subgroups: true
+[capture][orbit-140km] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][orbit-140km] provenance: commit (private history) branch (private) dirty 1 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

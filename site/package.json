@@ -1,0 +1,14 @@
+{
+  "name": "three-clouds-webgpu-site",
+  "private": true,
+  "type": "module",
+  "description": "Deploys the assembled public site (dist/site) as a Cloudflare Worker with static assets",
+  "scripts": {
+    "deploy:preview": "cf deploy --mode preview",
+    "deploy": "cf deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/config": "^0.28.1",
+    "wrangler": "^4.154.0"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "case": "debug-shadow-map",
+  "phase": 4,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.381119,
+  "deMean": 41.04,
+  "deP95": 58.86,
+  "histDist": 14.078847,
+  "plate": {
+    "A": {
+      "mean": 0.097104,
+      "std": 0.062085
+    },
+    "B": {
+      "mean": 1.463258,
+      "std": 0.978136,
+      "cloudFraction": 1
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 107
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.1389507741696434,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.3784740008990866,
+    "ssimAtReferenceL": 0.3773095516094238,
+    "stabiliserShareOfDeficit": -0.001873532710372975,
+    "meanLuminanceTerm": 0.39120483226910086,
+    "meanContrastStructureTerm": 0.9394129226289514,
+    "sigmaA": 0.002169469076376083,
+    "sigmaB": 0.012682010713369874,
+    "sigmaD": 0.012153708184519106,
+    "bandFractions": [
+      0.8856716579861111,
+      0.009967447916666667,
+      0.016437717013888888,
+      0.08792317708333333
+    ]
+  },
+  "shadedFraction": {
+    "skipped": "the subject is the shadow atlas; clearing the casters DARKENS the view (A rise -0.319), the receipt's brighten premise inverts"
+  },
+  "atlasChannels": {
+    "A": {
+      "r": 0.4510268,
+      "g": 0.0012369,
+      "b": 0.004583
+    },
+    "B": {
+      "r": 6.8770995,
+      "g": 0.0012152,
+      "b": 0.0044044
+    },
+    "ratio": {
+      "r": 15.247652,
+      "g": 0.98248,
+      "b": 0.961018
+    },
+    "deviation": {
+      "r": 14.247652,
+      "g": 0.01752,
+      "b": 0.038982
+    },
+    "gated": [
+      "g",
+      "b"
+    ],
+    "tolerance": 0.05,
+    "reasons": []
+  },
+  "convergence": {
+    "A": 0.075735,
+    "B": 0.06134
+  },
+  "shadowRadius": {
+    "laneAbsent": false,
+    "error": null,
+    "lanePixels": 921600,
+    "framePixels": 921600,
+    "reasons": [],
+    "summary": {
+      "sampled": 921600,
+      "classified": 921600,
+      "min": 3,
+      "median": 3,
+      "p95": 3,
+      "max": 3,
+      "armedFraction": 1,
+      "atCeilingFraction": 1
+    }
+  },
+  "subgroups": true,
+  "result": "expected-difference",
+  "reasons": [
+    "ssim 0.3811 < 0.9800",
+    "accepted: ADR-011 Amendment 13: the view's RED channel is frontDepth x 1e-5, and frontDepth has no consumer above the march's out-of-range fallback — readShadowOpticalDepth's distanceToFront = max(0, distanceToTop - distanceOffset - frontDepth) clamps to 0 on both sides there, so the plate renders a difference in a quantity both sides discard. The two channels that DECIDE optical depth (meanExtinction, maxOpticalDepth) are the case's positive receipt: the atlas-channel gate holds each to 5 % and measured r 15.2561 / g 1.0046 / b 0.9842 (2026-10-05). Side A's red is additionally pinned at fp16's 65504 because the reference stores metres in the atlas while the port stores unit space (ATTACHMENT UNITS). Footprint from the re-capture on a private-history revision + the case's atlasChannelGate: gated ssim 0.381061 at the reference L, floor = that minus the 1.1e-5 cross-session floor. SCOPE: the red channel's storage divergence only; a drop in green or blue is a real defect that fails the atlas-channel gate, and below this floor the case FAILS as beyond the accepted footprint. [floor ssim 0.3810]"
+  ],
+  "maxDiffDelta": 15.705151,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 5297,
+  "metricsMs": 814,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 8.71,
+      "passes": {
+        "total": 8.71
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 3.94,
+      "passes": {
+        "render": 3.94
+      },
+      "sampleCount": 32
+    }
+  }
+}

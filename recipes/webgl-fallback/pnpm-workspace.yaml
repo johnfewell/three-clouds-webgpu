@@ -1,0 +1,14 @@
+packages:
+  - '.'
+autoInstallPeers: false
+# The original @takram/three-clouds depends on @takram/three-atmosphere, which
+# the override below resolves by URL, so it becomes a URL sub-dependency and
+# pnpm's exotic-subdependency guard would refuse the install (the repository
+# itself turns the guard off for the same reason). The lockfile still records
+# the resolved tarball and its integrity
+blockExoticSubdeps: false
+allowBuilds:
+  esbuild: true
+overrides:
+  '@takram/three-atmosphere': https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz
+  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.7.tgz

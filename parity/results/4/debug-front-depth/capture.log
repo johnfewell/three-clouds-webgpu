@@ -1,0 +1,11 @@
+[capture][debug-front-depth] starting (phase 4, #51)
+[capture][debug-front-depth] screenshots: A=804812b B=770864b
+[capture][debug-front-depth] metrics: ssim=0.9690 deMean=0.10 deP95=0.59 histDist=0.0007 maxDelta=0.1600
+[capture][debug-front-depth] dual-L: measuredL=0.1222 ssim@measuredL=0.9734 (gated ssim is @refL=0.09) stabiliserShare=-21.1% sigmaA=6.49e-3 sigmaB=5.99e-3 sigmaD=1.58e-3
+[capture][debug-front-depth] plate: A mean=0.6966 std=0.0144 B mean=0.6963 std=0.0139 cloudFraction=100.000%
+[capture][debug-front-depth] gpuMs: A=13.39ms (32 samples) B=2.56ms (32 samples)
+[capture][debug-front-depth] eval: expected-difference — ssim 0.9690 < 0.9800; accepted: ADR-011 Amendment 6: turbo expands sub-pixel march-front precision variance after cloud-hit and scene-or-far miss depths are source-aligned
+[capture][debug-front-depth] temporalUpscale: A=false B=false
+[capture][debug-front-depth] subgroups: true
+[capture][debug-front-depth] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][debug-front-depth] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

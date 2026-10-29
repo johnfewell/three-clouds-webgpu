@@ -1,0 +1,7 @@
+packages:
+  - .
+# wrangler's esbuild and workerd postinstall builds are not needed to deploy
+# static assets, and an unreviewed build makes pnpm 11 exit non-zero
+allowBuilds:
+  esbuild: false
+  workerd: false

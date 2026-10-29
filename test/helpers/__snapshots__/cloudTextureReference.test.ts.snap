@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`cloud texture generators > fixed points are stable 1`] = `
+[
+  {
+    "detail": 0.6967812635,
+    "shape": 0.7429700454,
+  },
+  {
+    "detail": 0.6642818116,
+    "shape": 0.8588055148,
+  },
+  {
+    "detail": 0.6505648432,
+    "shape": 0.9161387918,
+  },
+  {
+    "detail": 0.4472823288,
+    "shape": 0.8822907951,
+  },
+]
+`;

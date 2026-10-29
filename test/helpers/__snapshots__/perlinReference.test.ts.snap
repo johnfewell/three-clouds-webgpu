@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`perlinReference > fixed points are stable 1`] = `
+[
+  0.0203125339,
+  0.0163542623,
+  0.2999473913,
+  -0.5091820379,
+  0.2177346451,
+  -0.3307004324,
+  -0.0690812641,
+  -0.0590891098,
+]
+`;

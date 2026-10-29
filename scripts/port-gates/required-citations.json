@@ -1,0 +1,225 @@
+{
+  "attributionHeader": "// Ported from @takram/three-clouds (MIT, Copyright (c) 2024 Shota Matsuda)",
+  "attributionAllowlist": [
+    "src/integration.ts",
+    "src/diagnostics.ts",
+    "src/index.ts",
+    "src/webgpu/index.ts",
+    "src/CloudsContext.ts",
+    "src/CloudsPassNode.ts",
+    "src/experimental/cloudTypePresets.ts",
+    "src/experimental/scenePresets.ts",
+    "src/experimental/timeOfDay.ts",
+    "src/textures/loadBakedCloudTextures.ts",
+    "src/textures/blueNoiseRankMap.ts",
+    "src/experimental/waterProSky.ts",
+    "src/shadow/aerialShadowAdapter.ts",
+    "src/shadow/CloudShadowedAtmosphereLightNode.ts",
+    "src/referenceMode.ts"
+  ],
+  "jsdocAllowlist": [
+    "src/integration.ts",
+    "src/QualityGovernor.ts",
+    "src/diagnostics.ts",
+    "src/CloudsContext.ts",
+    "src/CloudsPassNode.ts",
+    "src/index.ts",
+    "src/CloudLayer.ts",
+    "src/CloudLayers.ts",
+    "src/qualityPresets.ts",
+    "src/textures/loadBakedCloudTextures.ts",
+    "src/experimental/scenePresets.ts",
+    "src/experimental/timeOfDay.ts",
+    "src/experimental/waterProSky.ts"
+  ],
+  "urls": [
+    {
+      "url": "http://mathproofs.blogspot.com/2005/07/mapping-cube-to-sphere.html",
+      "phase": 1,
+      "where": "src/density/globeUv.ts"
+    },
+    {
+      "url": "https://developer.download.nvidia.com/gameworks/events/GDC2016/msalvi_temporal_supersampling.pdf",
+      "phase": 2,
+      "where": "src/resolve/varianceClipping.ts"
+    },
+    {
+      "url": "https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-10-parallel-split-shadow-maps-programmable-gpus",
+      "phase": 3,
+      "where": "src/shadow/CascadedShadowMaps.ts"
+    },
+    {
+      "url": "https://dilipkumar.medium.com/interval-coding-pattern-068c36197cf5",
+      "phase": 1,
+      "where": "src/CloudLayers.ts"
+    },
+    {
+      "url": "https://fpsunflower.github.io/ckulla/data/oz_volumes.pdf",
+      "phase": 1,
+      "where": "src/lighting/multiScatter.ts"
+    },
+    {
+      "url": "https://gamedev.stackexchange.com/questions/184388/fragment-shader-map-dot-texture-repeatedly-over-the-sphere",
+      "phase": 1,
+      "where": "src/density/globeUv.ts"
+    },
+    {
+      "url": "https://gist.github.com/TheRealMJP/c83b8c0f46b63f3a88a5986f4fa982b1",
+      "phase": 2,
+      "where": "src/resolve/catmullRom.ts"
+    },
+    {
+      "url": "https://github.com/Prograda/Skybolt/blob/master/Assets/Core/Shaders/Clouds.h#L63",
+      "phase": 1,
+      "where": "src/density/sampleWeather.ts"
+    },
+    {
+      "url": "https://github.com/StrandedKitty/three-csm/",
+      "phase": 3,
+      "where": "src/shadow/CascadedShadowMaps.ts"
+    },
+    {
+      "url": "https://github.com/g-truc/glm/blob/master/glm/gtc/noise.inl",
+      "phase": 4,
+      "where": "src/textures/perlin.ts"
+    },
+    {
+      "url": "https://github.com/huwb/volsample",
+      "phase": 1,
+      "where": "src/march/structuredSampling.ts"
+    },
+    {
+      "url": "https://github.com/huwb/volsample/blob/master/src/unity/Assets/Shaders/RayMarchCore.cginc",
+      "phase": 1,
+      "where": "src/march/structuredSampling.ts"
+    },
+    {
+      "url": "https://github.com/mmikk/hextile-demo",
+      "phase": 1,
+      "where": "src/density/globeUv.ts"
+    },
+    {
+      "url": "https://github.com/mrdoob/three.js/tree/r169/examples/jsm/csm",
+      "phase": 3,
+      "where": "src/shadow/CascadedShadowMaps.ts"
+    },
+    {
+      "url": "https://github.com/playdeadgames/temporal",
+      "phase": 2,
+      "where": "src/resolve/varianceClipping.ts"
+    },
+    {
+      "url": "https://github.com/sebh/TileableVolumeNoise",
+      "phase": 4,
+      "where": ["src/textures/tileableNoise.ts", "src/textures/cloudShape.ts"]
+    },
+    {
+      "url": "https://iquilezles.org/articles/fog/",
+      "phase": 1,
+      "where": "src/march/hazeMarch.ts"
+    },
+    {
+      "url": "https://iquilezles.org/articles/texturerepetition/",
+      "phase": 1,
+      "where": "src/density/globeUv.ts"
+    },
+    {
+      "url": "https://media.contentapi.ea.com/content/dam/eacom/frostbite/files/s2016-pbs-frostbite-sky-clouds-new.pdf",
+      "phase": 1,
+      "where": ["src/lighting/phaseFunction.ts", "src/march/primaryMarch.ts"]
+    },
+    {
+      "url": "https://research.nvidia.com/labs/rtr/approximate-mie/",
+      "phase": 1,
+      "where": "src/lighting/phaseFunction.ts"
+    },
+    {
+      "url": "https://www.ppsloan.org/publications/AmbientDice.pdf",
+      "phase": 1,
+      "where": "src/march/structuredSampling.ts"
+    },
+    {
+      "url": "https://www.shadertoy.com/view/4tyGDD",
+      "phase": 2,
+      "where": "src/resolve/catmullRom.ts"
+    },
+    {
+      "url": "https://www.shadertoy.com/view/MtVGWz",
+      "phase": 2,
+      "where": "src/resolve/catmullRom.ts"
+    },
+    {
+      "url": "https://www.shadertoy.com/view/ttVfDc",
+      "phase": 1,
+      "where": "src/march/structuredSampling.ts"
+    }
+  ],
+  "markers": [
+    {
+      "text": "NOTE(port): Not exactly",
+      "source": "CloudsMaterial.ts:346",
+      "phase": 1,
+      "where": "src/march/primaryMarch.ts"
+    },
+    {
+      "text": "TODO(port): Position the sun on the top atmosphere sphere.",
+      "source": "CloudsEffect.ts:380",
+      "phase": 1,
+      "where": "src/CloudsPassNode.ts"
+    },
+    {
+      "text": "TODO(port): We cloud decrease multi-scattering octaves for lower quality presets, but it leads to a loss of higher frequency scattering, making it darker overall, which suggests the need for a fudge factor to scale the radiance.",
+      "source": "qualityPresets.ts:60",
+      "phase": 1,
+      "where": "src/qualityPresets.ts"
+    },
+    {
+      "text": "TODO(port): Tile and fix seams.",
+      "source": "clouds.glsl:17",
+      "phase": 1,
+      "where": "src/density/globeUv.ts"
+    },
+    {
+      "text": "TODO(port): Define in physical length.",
+      "source": "clouds.glsl:129",
+      "phase": 1,
+      "where": "src/density/sampleWeather.ts"
+    },
+    {
+      "text": "TODO(port): Remove it.",
+      "source": "clouds.frag:359",
+      "phase": 1,
+      "where": "src/march/primaryMarch.ts"
+    },
+    {
+      "text": "TODO(port): Construct spherical harmonics of degree 2 using 2 sample points positioned near the horizon occlusion points on the sun direction plane.",
+      "source": "clouds.frag:417",
+      "phase": 1,
+      "where": "src/lighting/sunSkyLight.ts"
+    },
+    {
+      "text": "TODO(port): This produces banding artifacts. Possible improvement: Binary search refinement",
+      "source": "clouds.frag:519",
+      "phase": 1,
+      "where": "src/march/primaryMarch.ts"
+    },
+    {
+      "text": "TODO(port): This march is closed, and sample resolution can be much lower. Refining the termination by binary search will make it much more efficient.",
+      "source": "clouds.frag:635",
+      "phase": 3,
+      "where": "src/march/shadowLengthMarch.ts"
+    },
+    {
+      "text": "TODO(port): Use 5-taps version: https://www.shadertoy.com/view/MtVGWz",
+      "source": "catmullRomSampling.glsl:2",
+      "phase": 2,
+      "where": "src/resolve/catmullRom.ts"
+    },
+    {
+      "text": "TODO(port): Calculate from the main camera frustum perhaps?",
+      "source": "shadow.frag:182",
+      "phase": 3,
+      "where": "src/shadow/opticalDepthMarch.ts"
+    }
+  ]
+}

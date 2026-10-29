@@ -1,0 +1,11 @@
+[capture][polar-altitude-corrected] starting (phase 1, #55)
+[capture][polar-altitude-corrected] screenshots: A=899003b B=859408b
+[capture][polar-altitude-corrected] metrics: ssim=0.9901 deMean=0.35 deP95=0.71 histDist=0.0142 maxDelta=0.0740
+[capture][polar-altitude-corrected] dual-L: measuredL=0.0737 ssim@measuredL=0.9893 (gated ssim is @refL=0.09) stabiliserShare=8.0% sigmaA=4.50e-3 sigmaB=4.02e-3 sigmaD=8.47e-4
+[capture][polar-altitude-corrected] plate: A mean=0.0673 std=0.0085 B mean=0.0663 std=0.0077 cloudFraction=16.962%
+[capture][polar-altitude-corrected] gpuMs: A=13.82ms (32 samples) B=2.86ms (32 samples)
+[capture][polar-altitude-corrected] eval: pass
+[capture][polar-altitude-corrected] temporalUpscale: A=false B=false
+[capture][polar-altitude-corrected] subgroups: true
+[capture][polar-altitude-corrected] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][polar-altitude-corrected] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

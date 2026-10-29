@@ -1,0 +1,6 @@
+packages:
+  - '.'
+overrides:
+  '@arethetypeswrong/core>fflate': 0.8.2
+allowBuilds:
+  esbuild: true

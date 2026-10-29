@@ -1,0 +1,112 @@
+name: CI
+# workflow: public
+
+# The public repo's CI. Lives in the private tree under
+# .github/public-workflows/ so it never runs here; the exporter copies it to
+# .github/workflows/ in the public tree.
+#
+# No e2e job, and that is a decision rather than an omission. The parity and
+# storybook suites need a real GPU, and a GitHub runner has none: the software
+# rasteriser is refused by the harness gate on purpose. Run them locally on
+# hardware with `pnpm e2e` and `pnpm --filter parity capture`.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    # A draft is work in progress: CI runs when a PR opens ready or is marked ready
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_OPTIONS: --max-old-space-size=4096
+
+jobs:
+  build-and-test:
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # verify-results.mjs reads git history to decide whether a committed
+          # metrics.json predates a correction commit. A shallow clone reads as
+          # undecidable. Note this does NOT make the check meaningful in the
+          # public repo: the correction commit (f4f5111) lives only in the
+          # private history, so the ancestry test stays undecidable and
+          # annotates every load-bearing receipt. Annotations alone do not fail
+          # the gate, but metric failures still block deployment.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm build
+
+      - name: Check committed API reference
+        run: pnpm docs:api:check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: pnpm lint
+
+      - name: Check formatting
+        run: pnpm format:check
+
+      - name: Test
+        run: pnpm test
+
+      - name: Quality gates
+        run: pnpm gates
+
+      # A measurement of committed evidence, not a code gate: an honest ladder
+      # fail is reported and published to the summary without failing the run.
+      # The public site is not deployed by CI (see the README beside this file)
+      - name: Verify parity results
+        id: verdict
+        continue-on-error: true
+        run: |
+          set +e
+          out=$(node scripts/verify-results.mjs 2>&1)
+          code=$?
+          set -e
+          printf '%s\n' "$out"
+          {
+            echo "## Parity ladder verdict"
+            echo
+            echo '```'
+            printf '%s\n' "$out" | grep -E 'summary:|→ fail' || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$code"
+
+      - name: Scan diagnostic artifacts
+        id: diagnostics
+        if: always() && vars.PUBLIC_DIAGNOSTICS_APPROVED == 'true'
+        continue-on-error: true
+        run: node scripts/release/public-scan.mjs test-results diagnostics
+
+      - name: Upload test results
+        if: always() && vars.PUBLIC_DIAGNOSTICS_APPROVED == 'true' && steps.diagnostics.outcome == 'success'
+        # Diagnostic storage must not turn a green code gate red.
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 30

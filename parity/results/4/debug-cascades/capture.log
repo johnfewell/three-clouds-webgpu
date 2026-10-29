@@ -1,0 +1,13 @@
+[capture][debug-cascades] starting (phase 4, #47)
+[capture][debug-cascades] screenshots: A=2126164b B=2095660b
+[capture][debug-cascades] metrics: ssim=0.9753 deMean=1.13 deP95=3.70 histDist=0.0335 maxDelta=0.4235
+[capture][debug-cascades] dual-L: measuredL=0.1459 ssim@measuredL=0.9764 (gated ssim is @refL=0.09) stabiliserShare=-4.6% sigmaA=1.92e-2 sigmaB=1.72e-2 sigmaD=3.90e-3
+[capture][debug-cascades] plate: A mean=0.0557 std=0.0259 B mean=0.0561 std=0.0237 cloudFraction=16.514%
+[capture][debug-cascades] gpuMs: A=12.15ms (32 samples) B=18.62ms (32 samples)
+[capture][debug-cascades] shaded: receipt declared not applicable — the subject is the shadow atlas; clearing the casters empties the visualisation, so the receipt's brighten premise does not hold (it happened to brighten +24 % — luck, not a receipt)
+[capture][debug-cascades] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][debug-cascades] eval: expected-difference — ssim 0.9753 < 0.9800; accepted: ADR-011 Amendment 6: the discrete cascade selector amplifies cross-backend floating-point boundary variance after the selector and colour table are source-aligned
+[capture][debug-cascades] temporalUpscale: A=false B=false
+[capture][debug-cascades] subgroups: true
+[capture][debug-cascades] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][debug-cascades] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

@@ -1,0 +1,11 @@
+[capture][sun-grazing] starting (phase 3, #56)
+[capture][sun-grazing] screenshots: A=874266b B=838408b
+[capture][sun-grazing] metrics: ssim=0.9881 deMean=0.34 deP95=0.72 histDist=0.0138 maxDelta=0.1093
+[capture][sun-grazing] dual-L: measuredL=0.0762 ssim@measuredL=0.9873 (gated ssim is @refL=0.09) stabiliserShare=6.3% sigmaA=4.60e-3 sigmaB=4.09e-3 sigmaD=9.03e-4
+[capture][sun-grazing] plate: A mean=0.0673 std=0.0087 B mean=0.0663 std=0.0078 cloudFraction=16.514%
+[capture][sun-grazing] gpuMs: A=14.35ms (32 samples) B=3.22ms (32 samples)
+[capture][sun-grazing] eval: pass
+[capture][sun-grazing] temporalUpscale: A=false B=false
+[capture][sun-grazing] subgroups: true
+[capture][sun-grazing] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][sun-grazing] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

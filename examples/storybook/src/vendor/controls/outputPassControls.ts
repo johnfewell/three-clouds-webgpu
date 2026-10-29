@@ -1,0 +1,106 @@
+// @ts-nocheck
+// Vendored from three-geospatial storybook-webgpu/src/controls/outputPassControls.ts @ b012ad06
+// (MIT, Copyright (c) 2024 Shota Matsuda).
+// Verbatim, bar the @ts-nocheck above: tsc checks every file the
+// program reaches and these are imported by the stories, so a tsconfig
+// exclude cannot reach them. Not ours to typecheck, like reference/**.
+
+import type { ArgTypes } from '@storybook/react-vite'
+import { useMemo } from 'react'
+import { directionToColor, vec4 } from 'three/tsl'
+import type { PassNode, RenderPipeline } from 'three/webgpu'
+
+import { depthToColor, type Node } from '@takram/three-geospatial/webgpu'
+
+import { useTransientControl } from '../hooks/useTransientControl'
+
+export interface OutputPassArgs {
+  outputDepth: boolean
+  outputNormal: boolean
+  outputVelocity: boolean
+}
+
+export const outputPassArgs = (
+  defaults?: Partial<OutputPassArgs>
+): OutputPassArgs => ({
+  outputDepth: false,
+  outputNormal: false,
+  outputVelocity: false,
+  ...defaults
+})
+
+export const outputPassArgTypes = (
+  options: {
+    hasDepth?: boolean
+    hasNormal?: boolean
+    hasVelocity?: boolean
+  } = {}
+): ArgTypes<OutputPassArgs> => ({
+  outputDepth: {
+    name: 'depth',
+    control: {
+      type: 'boolean',
+      disable: options.hasDepth === false
+    },
+    table: { category: 'output pass' }
+  },
+  outputNormal: {
+    name: 'normal',
+    control: {
+      type: 'boolean',
+      disable: options.hasNormal !== true
+    },
+    table: { category: 'output pass' }
+  },
+  outputVelocity: {
+    name: 'velocity',
+    control: {
+      type: 'boolean',
+      disable: options.hasVelocity !== true
+    },
+    table: { category: 'output pass' }
+  }
+})
+
+export function useOutputPassControls(
+  renderPipeline: RenderPipeline,
+  passNode: PassNode,
+  onChange: (outputNode: Node, outputColorTransform: boolean) => void
+): void {
+  const initial = useMemo(
+    () => ({
+      outputNode: renderPipeline.outputNode,
+      outputColorTransform: renderPipeline.outputColorTransform
+    }),
+    [renderPipeline]
+  )
+
+  useTransientControl(
+    ({ outputDepth, outputNormal, outputVelocity }: OutputPassArgs) => ({
+      outputDepth,
+      outputNormal,
+      outputVelocity
+    }),
+    ({ outputDepth, outputNormal, outputVelocity }) => {
+      let outputNode = initial.outputNode
+      let outputColorTransform = initial.outputColorTransform
+
+      // In reverse order:
+      if (outputNormal) {
+        const normalNode = passNode.getTextureNode('normal')
+        outputNode = directionToColor(normalNode)
+        outputColorTransform = false
+      } else if (outputDepth) {
+        const depthNode = passNode.getTextureNode('depth')
+        outputNode = depthToColor(depthNode, passNode.camera)
+        outputColorTransform = false
+      } else if (outputVelocity) {
+        const velocityNode = passNode.getTextureNode('velocity')
+        outputNode = vec4(velocityNode.xyz.mul(20).add(0.5), 1)
+        outputColorTransform = true
+      }
+
+      onChange(outputNode, outputColorTransform)
+    }
+  )
+}

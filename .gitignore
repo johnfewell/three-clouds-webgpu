@@ -1,0 +1,42 @@
+node_modules/
+dist/
+build/
+types/
+.vite/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+coverage/
+test-output/
+# Optional HTML reference (pnpm docs:api:html, typedoc). Not committed: it is a
+# build artifact of the JSDoc in src/, like types/ and build/.
+api/
+examples/parity/dist/
+test-results/
+# Storybook's local debug log, written into the package it runs in
+examples/storybook/debug-storybook.log
+*.linear.bin
+parity/results/**/*.bin
+
+# bv (tasks viewer) local config and caches
+.bv/
+.claude/worktrees/
+
+# --keep-linear readbacks (ADR-011: never committed)
+parity/results/**/*.linear.f32
+parity/results/**/linear.json
+
+# Capture images are local output, not committed evidence; metrics.json and
+# capture.log are the record.
+parity/results/**/*.png
+parity/results/**/*.webm
+
+# The `**/stbn.bin` route fixture, generated from this repository's own
+# void-and-cluster code by scripts/setup-assets.mjs. It used to be NVIDIA's
+# spatiotemporal blue-noise volume, committed here and mislabelled MIT; that
+# data is non-commercial-only and is gone (ADR-009 Amendment 3).
+test/fixtures/experimental/stbn.bin
+test/fixtures/experimental/stbn.bin.sha256.json
+# The site Worker's generated types and build output (site/cloudflare.config.ts)
+site/.cloudflare/

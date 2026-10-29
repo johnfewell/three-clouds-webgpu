@@ -1,0 +1,23 @@
+{
+  "name": "basic",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5199",
+    "build": "vite build",
+    "setup-assets": "node ../../scripts/setup-assets.mjs --example examples/basic --from three-clouds-webgpu",
+    "predev": "pnpm setup-assets",
+    "prebuild": "pnpm setup-assets"
+  },
+  "dependencies": {
+    "three-clouds-webgpu": "workspace:*",
+    "@takram/three-atmosphere": "0.19.1",
+    "@takram/three-geospatial": "0.9.1",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2",
+    "vite": "^7.1.5"
+  }
+}

@@ -1,0 +1,14 @@
+[capture][debug-shadow-map] starting (phase 4, #48)
+[capture][debug-shadow-map] screenshots: A=188913b B=188698b
+[capture][debug-shadow-map] metrics: ssim=0.3811 deMean=41.04 deP95=58.86 histDist=14.0788 maxDelta=15.7052
+[capture][debug-shadow-map] dual-L: measuredL=0.1390 ssim@measuredL=0.3785 (gated ssim is @refL=0.09) stabiliserShare=-0.2% sigmaA=2.17e-3 sigmaB=1.27e-2 sigmaD=1.22e-2
+[capture][debug-shadow-map] plate: A mean=0.0971 std=0.0621 B mean=1.4633 std=0.9781 cloudFraction=100.000%
+[capture][debug-shadow-map] gpuMs: A=8.71ms (32 samples) B=3.94ms (32 samples)
+[capture][debug-shadow-map] shaded: receipt declared not applicable — the subject is the shadow atlas; clearing the casters DARKENS the view (A rise -0.319), the receipt's brighten premise inverts
+[capture][debug-shadow-map] atlas: r 15.2477 g 0.9825* b 0.9610* tolerance=5.00% → receipt ok
+[capture][debug-shadow-map] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][debug-shadow-map] eval: expected-difference — ssim 0.3811 < 0.9800; accepted: ADR-011 Amendment 13: the view's RED channel is frontDepth x 1e-5, and frontDepth has no consumer above the march's out-of-range fallback — readShadowOpticalDepth's distanceToFront = max(0, distanceToTop - distanceOffset - frontDepth) clamps to 0 on both sides there, so the plate renders a difference in a quantity both sides discard. The two channels that DECIDE optical depth (meanExtinction, maxOpticalDepth) are the case's positive receipt: the atlas-channel gate holds each to 5 % and measured r 15.2561 / g 1.0046 / b 0.9842 (2026-10-05). Side A's red is additionally pinned at fp16's 65504 because the reference stores metres in the atlas while the port stores unit space (ATTACHMENT UNITS). Footprint from the re-capture on a private-history revision + the case's atlasChannelGate: gated ssim 0.381061 at the reference L, floor = that minus the 1.1e-5 cross-session floor. SCOPE: the red channel's storage divergence only; a drop in green or blue is a real defect that fails the atlas-channel gate, and below this floor the case FAILS as beyond the accepted footprint. [floor ssim 0.3810]
+[capture][debug-shadow-map] temporalUpscale: A=false B=false
+[capture][debug-shadow-map] subgroups: true
+[capture][debug-shadow-map] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][debug-shadow-map] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

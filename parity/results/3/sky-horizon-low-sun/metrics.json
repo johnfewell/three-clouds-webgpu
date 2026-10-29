@@ -1,0 +1,125 @@
+{
+  "case": "sky-horizon-low-sun",
+  "phase": 3,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.987776,
+  "deMean": 0.53,
+  "deP95": 1.27,
+  "histDist": 0.024737,
+  "plate": {
+    "A": {
+      "mean": 0.061671,
+      "std": 0.043862
+    },
+    "B": {
+      "mean": 0.063192,
+      "std": 0.044946,
+      "cloudFraction": 0.252751
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 75
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.1683751717209816,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.98963107676527,
+    "ssimAtReferenceL": 0.9877756314183185,
+    "stabiliserShareOfDeficit": -0.17894291479917449,
+    "meanLuminanceTerm": 0.9995817513554373,
+    "meanContrastStructureTerm": 0.9900391189688738,
+    "sigmaA": 0.004667167369557767,
+    "sigmaB": 0.004485910818608168,
+    "sigmaD": 0.0009236537323124036,
+    "bandFractions": [
+      0.6654828559027778,
+      0.06526801215277778,
+      0.07467339409722222,
+      0.19457573784722224
+    ]
+  },
+  "shadedFraction": null,
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0.000031,
+    "B": 0.000055
+  },
+  "shadowRadius": null,
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.092649,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 5432,
+  "metricsMs": 854,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 15.36,
+      "passes": {
+        "total": 15.36
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 20.48,
+      "passes": {
+        "render": 20.48
+      },
+      "sampleCount": 32
+    }
+  }
+}

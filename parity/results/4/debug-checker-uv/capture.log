@@ -1,0 +1,11 @@
+[capture][debug-checker-uv] starting (phase 4, #49)
+[capture][debug-checker-uv] screenshots: A=27188b B=29083b
+[capture][debug-checker-uv] metrics: ssim=0.9892 deMean=0.14 deP95=0.01 histDist=0.0024 maxDelta=0.9991
+[capture][debug-checker-uv] dual-L: measuredL=0.9991 ssim@measuredL=0.9917 (gated ssim is @refL=0.09) stabiliserShare=-30.4% sigmaA=1.16e-2 sigmaB=9.60e-3 sigmaD=3.23e-3
+[capture][debug-checker-uv] plate: A mean=0.4987 std=0.4995 B mean=0.4999 std=0.4993 cloudFraction=100.000%
+[capture][debug-checker-uv] gpuMs: A=6.07ms (32 samples) B=2.53ms (32 samples)
+[capture][debug-checker-uv] eval: pass
+[capture][debug-checker-uv] temporalUpscale: A=false B=false
+[capture][debug-checker-uv] subgroups: true
+[capture][debug-checker-uv] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][debug-checker-uv] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

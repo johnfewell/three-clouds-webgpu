@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "vitest/globals", "node"],
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "three-clouds-webgpu": ["./src/index.ts"],
+      "three-clouds-webgpu/webgpu": ["./src/webgpu/index.ts"]
+    },
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src",
+    "test",
+    "scripts",
+    "examples/parity/cases",
+    "core/src",
+    "core/test",
+    "vite.config.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "reference",
+    "dist",
+    "build",
+    "types",
+    "scripts/port-gates/fixtures"
+  ]
+}

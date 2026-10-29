@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "three-clouds-webgpu": ["./src/index.ts"],
+      "three-clouds-webgpu/webgpu": ["./src/webgpu/index.ts"],
+      "three-clouds-webgpu/r3f": ["./src/r3f/index.ts"]
+    }
+  },
+  "include": ["../../recipes/*/src", "../../recipes/*/vite.config.ts"]
+}

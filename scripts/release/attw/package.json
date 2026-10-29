@@ -1,0 +1,8 @@
+{
+  "name": "clouds-release-types-check",
+  "private": true,
+  "packageManager": "pnpm@11.8.0",
+  "dependencies": {
+    "@arethetypeswrong/cli": "0.18.2"
+  }
+}

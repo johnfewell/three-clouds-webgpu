@@ -1,0 +1,13 @@
+[capture][shadow-plane] starting (phase 3, #34)
+[capture][shadow-plane] screenshots: A=1993114b B=1969268b
+[capture][shadow-plane] metrics: ssim=0.9838 deMean=0.74 deP95=1.26 histDist=0.0287 maxDelta=0.0961
+[capture][shadow-plane] dual-L: measuredL=0.0781 ssim@measuredL=0.9836 (gated ssim is @refL=0.09) stabiliserShare=1.5% sigmaA=8.81e-3 sigmaB=8.51e-3 sigmaD=1.56e-3
+[capture][shadow-plane] plate: A mean=0.0515 std=0.0113 B mean=0.0530 std=0.0114 cloudFraction=16.514%
+[capture][shadow-plane] gpuMs: A=13.11ms (32 samples) B=21.29ms (32 samples)
+[capture][shadow-plane] shaded: A=99.69% B=97.68% ratio=0.980 plate rise A=31.0% B=28.2% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-plane] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shadow-plane] eval: pass
+[capture][shadow-plane] temporalUpscale: A=false B=false
+[capture][shadow-plane] subgroups: true
+[capture][shadow-plane] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-plane] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

@@ -1,0 +1,13 @@
+[capture][shadow-sphere] starting (phase 3, #35)
+[capture][shadow-sphere] screenshots: A=1027582b B=1018076b
+[capture][shadow-sphere] metrics: ssim=0.9714 deMean=0.82 deP95=4.83 histDist=0.0128 maxDelta=0.2354
+[capture][shadow-sphere] dual-L: measuredL=0.2420 ssim@measuredL=0.9752 (gated ssim is @refL=0.09) stabiliserShare=-16.0% sigmaA=3.20e-2 sigmaB=2.81e-2 sigmaD=7.27e-3
+[capture][shadow-sphere] plate: A mean=0.2469 std=0.0618 B mean=0.2500 std=0.0564 cloudFraction=16.182%
+[capture][shadow-sphere] gpuMs: A=12.28ms (32 samples) B=15.96ms (32 samples)
+[capture][shadow-sphere] shaded: A=9.61% B=4.27% ratio=0.445 plate rise A=1.0% B=0.3% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-sphere] shadowRadius: shadow-radius receipt not applicable — lighting:'lights' routes the ground shadow through the light node, not the aerial lane this reads
+[capture][shadow-sphere] eval: pass
+[capture][shadow-sphere] temporalUpscale: A=false B=false
+[capture][shadow-sphere] subgroups: true
+[capture][shadow-sphere] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-sphere] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

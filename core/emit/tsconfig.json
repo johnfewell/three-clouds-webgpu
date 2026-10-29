@@ -1,0 +1,13 @@
+{
+  // The emitter drives the parity harness's side B, so it compiles under the
+  // parity project's settings, and resolves the library from src/ as the
+  // emit script does
+  "extends": "../../examples/parity/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../..",
+    "paths": {
+      "three-clouds-webgpu": ["./src/index.ts"]
+    }
+  },
+  "include": ["."]
+}

@@ -1,0 +1,13 @@
+[capture][shafts-sky-horizon] starting (phase 3, #61)
+[capture][shafts-sky-horizon] screenshots: A=1024238b B=1012319b
+[capture][shafts-sky-horizon] metrics: ssim=0.9851 deMean=0.64 deP95=1.69 histDist=0.0355 maxDelta=0.1388
+[capture][shafts-sky-horizon] dual-L: measuredL=0.1606 ssim@measuredL=0.9866 (gated ssim is @refL=0.09) stabiliserShare=-11.1% sigmaA=5.58e-3 sigmaB=5.26e-3 sigmaD=1.06e-3
+[capture][shafts-sky-horizon] plate: A mean=0.0542 std=0.0390 B mean=0.0562 std=0.0404 cloudFraction=25.275%
+[capture][shafts-sky-horizon] gpuMs: A=36.49ms (32 samples) B=99.12ms (32 samples)
+[capture][shafts-sky-horizon] shaded: A=40.80% B=40.63% ratio=0.996 plate rise A=12.0% B=11.1% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shafts-sky-horizon] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=388540/921600
+[capture][shafts-sky-horizon] eval: pass
+[capture][shafts-sky-horizon] temporalUpscale: A=false B=false
+[capture][shafts-sky-horizon] subgroups: true
+[capture][shafts-sky-horizon] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shafts-sky-horizon] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

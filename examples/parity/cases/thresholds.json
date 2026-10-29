@@ -1,0 +1,137 @@
+{
+  "phases": {
+    "0": {
+      "ssim": 0.95,
+      "deP95": 5.0,
+      "histDist": 0.1
+    },
+    "1": {
+      "ssim": 0.95,
+      "deP95": 5.0,
+      "histDist": 0.1
+    },
+    "2": {
+      "ssim": 0.95,
+      "deP95": 5.0,
+      "histDist": 0.1
+    },
+    "3": {
+      "ssim": 0.95,
+      "deP95": 5.0,
+      "histDist": 0.1
+    },
+    "4": {
+      "ssim": 0.98,
+      "deP95": null,
+      "histDist": null
+    }
+  },
+  "metricsVersion": 4,
+  "definitions": {
+    "ssim": "Wang et al. 2004, Gaussian window sigma = 1.5 on Rec.709 linear luminance, C1 = (0.01*L)^2, C2 = (0.03*L)^2 where L is the LADDER REFERENCE dynamic range 0.09 for every case (metricsVersion 4, ADR-011 amendment 3). Higher is better. Fixed L = 1.0 was wrong for the linear readback and made the metric non-structural (amendment 2); side A's per-case span (v3) made the pass bar scale inversely with frame content — a near-empty frame was held to a ~14x stricter bar and 84% of coverage-020's deficit was the stabiliser. The measured-L number is still computed and reported as ssimAttribution.ssimAtMeasuredL as a sensitivity diagnostic; it is never the gate. On plates darker than the reference the gated SSIM is less sensitive to structure — the plate check carries the black/flat regime.",
+    "deP95": "CIE deltaE2000 (Sharma, Wu, Dalal 2005) on linear RGB -> D65 Lab, nearest-rank 95th percentile at index floor(0.95*n). Lower is better.",
+    "histDist": "Wasserstein-1 between the two luminance CDFs divided by mean(A): sum|sortedA[i] - sortedB[i]| / n / mean(A). Lower is better. A uniform exposure error xk scores exactly |k - 1|, so the 0.1 floor means 'no more than a 10% exposure-equivalent tonal mismatch'; the x2 sabotage scores 1.0. A 50% coverage difference at the ladder's own cloud/sky contrast scores ~0.18. Replaced a 256-bin normalised L1 in the ADR-011 amendment of 2026-08-31."
+  },
+  "accepted": [
+    {
+      "pattern": "debug-cascades",
+      "reason": "ADR-011 Amendment 6: the discrete cascade selector amplifies cross-backend floating-point boundary variance after the selector and colour table are source-aligned"
+    },
+    {
+      "pattern": "debug-sample-count",
+      "reason": "ADR-011 Amendment 6: integer weather, shape and detail branch counters are discontinuous under cross-backend floating-point and filtering variance; channel semantics and a structured plate are the receipt"
+    },
+    {
+      "pattern": "debug-front-depth",
+      "reason": "ADR-011 Amendment 6: turbo expands sub-pixel march-front precision variance after cloud-hit and scene-or-far miss depths are source-aligned"
+    },
+    {
+      "pattern": "debug-shadow-map",
+      "reason": "ADR-011 Amendment 13: the view's RED channel is frontDepth x 1e-5, and frontDepth has no consumer above the march's out-of-range fallback — readShadowOpticalDepth's distanceToFront = max(0, distanceToTop - distanceOffset - frontDepth) clamps to 0 on both sides there, so the plate renders a difference in a quantity both sides discard. The two channels that DECIDE optical depth (meanExtinction, maxOpticalDepth) are the case's positive receipt: the atlas-channel gate holds each to 5 % and measured r 15.2561 / g 1.0046 / b 0.9842 (2026-10-05). Side A's red is additionally pinned at fp16's 65504 because the reference stores metres in the atlas while the port stores unit space (ATTACHMENT UNITS). Footprint from the re-capture on a private-history revision + the case's atlasChannelGate: gated ssim 0.381061 at the reference L, floor = that minus the 1.1e-5 cross-session floor. SCOPE: the red channel's storage divergence only; a drop in green or blue is a real defect that fails the atlas-channel gate, and below this floor the case FAILS as beyond the accepted footprint.",
+      "floor": {
+        "ssim": 0.38105
+      }
+    },
+    {
+      "pattern": "procedural-textures",
+      "reason": "ADR-014: the reference's compiled looped getWorleyNoise deviates from its own source arithmetic in a hash-argument band the port does not reproduce, so LocalWeather's R (low composed) and G (mid worley) channels differ by construction — texture footprint R corr 0.746 / 67.03% differ, G corr 0.474 / 66.78%, B (perlin) exact, byte-identical across 7 receipts (01:52Z); shape volume bit-exact (#619). Frame footprint from the paired in-session captures on a private-history revision plus the follow-up (a later private-history revision, 2026-09-02 03:08Z, provenance in capture.log, ratified LilacOtter #1680): gated ssim 0.696454 at the reference L, deP95 5.20, histDist 0.023800; the follow-up's share +0.002801 over the same-slot baseline 0.693653. SCOPE (D3, the register-entry rule): the weather-content mechanism only. NOT covered: the B channel is exact and any regression there is a real defect; a residual outside the mechanism's signature (blob positions) is a new task, never register material; below the floor the case FAILS as beyond the accepted footprint.",
+      "floor": {
+        "ssim": 0.696443
+      }
+    },
+    {
+      "pattern": "layers-4-shadow",
+      "reason": "ADR-015: per-texel threshold flips at cloud edges in the raw shadow render (c0 +/-0.7 %, c1 +/-12 % at LOD 0.5, c2 +/-0.07 %) are amplified 10-50x by the reference's own temporal shadow resolve (9-tap variance clip, alpha 0.01, zero-initialised history over a pinned warm-up), which the port reproduces arithmetically (CPU twin, CHECKPOINTS 6-7, 12:07Z/12:17Z). Density, primary march, jitter and local sun march match to fp16 (CHECKPOINTS 1-3, 11:49Z-11:53Z); the first departing stage is the BSM optical depth and it lives in the shadow temporal pass (CHECKPOINTS 3-5). Temporal-off bound 0.9764 (older main). SCOPE: this case only, after the updateInterval pin (+0.0013); the 0.98 phase-4 bar holds for every other case. Footprint from the post-pin capture (layers-4-shadow, two deterministic arms, served build 683b9f1b): gated ssim 0.971489361 at the reference L, floor = that minus the 1.1e-5 cross-session floor; below the floor the case FAILS as beyond the accepted footprint.",
+      "floor": {
+        "ssim": 0.971478
+      }
+    }
+  ],
+  "acceptedPolicy": "Accepted entries are a NARROW allowlist for small, named, documented non-parity (an ADR or a cited source behaviour). NEVER use pattern '*' or any glob that matches all cases, and NEVER cite a bug, a runtime error or an unfinished port path as the reason — those are fails. Black-vs-content, stub-vs-reference and SSIM near 0 stay fail until the port actually matches; the plate check and the metricsVersion check both run before accepted[] and are never downgraded. An entry may carry floor:{ssim} — the measured footprint of the documented difference, set from a capture (footprint ssim minus the 1.1e-5 cross-session floor), never argued; the acceptance holds only at or above it and the case FAILS as beyond the accepted footprint below it (ADR-014 tripwire).",
+  "bias": {
+    "measuredOn": {
+      "commit": "the v3 branch, merged with main at a private-history revision",
+      "date": "2026-08-31",
+      "cases": 31,
+      "phases": [0, 1],
+      "gpu": "hardware",
+      "metricsVersion": 3,
+      "includesFix": "the atmosphere LUT length-unit fix"
+    },
+    "warmup": 64,
+    "note": "measured, not applied",
+    "why": "The phase thresholds stay at the design floors. These numbers describe the port's CURRENT state, which still contains at least one open defect (the plate luminance offset: side B 9-13% brighter). Calibrating against them would bake that into the bias and make the ladder agree with itself instead of with side A. The ssim spread is a measurement of how far the port is from parity, not of metric noise -- mean-2sigma is negative for every metric, which is a sign the distribution is dominated by real defects, not by scatter.",
+    "measured": {
+      "ssim": {
+        "n": 31,
+        "mean": 0.308686,
+        "sigma": 0.203535,
+        "min": -0.061233,
+        "median": 0.296374,
+        "max": 0.966526,
+        "meanMinus2Sigma": -0.098384,
+        "meanPlus2Sigma": 0.715757,
+        "note": "First distribution under metricsVersion 3 (L = side A's robust span), captured after the atmosphere LUT length-unit fix landed. Structural, and brutal: mean 0.309 against a 0.95 floor. surface-up -- pure sky, no cloud structure -- scores 0.967, while every case containing cloud structure scores -0.061 to 0.672; coverage-070 and coverage-090 are NEGATIVE (anti-correlated) at ~100% coverage. The atmosphere agrees and the march does not. NOT a calibration candidate."
+      },
+      "deMean": {
+        "n": 31,
+        "mean": 3.252581,
+        "sigma": 1.738123,
+        "min": 1.46,
+        "median": 2.85,
+        "max": 9.91,
+        "meanMinus2Sigma": -0.223665,
+        "meanPlus2Sigma": 6.728826,
+        "note": "deltaE2000 is validated against all 34 Sharma et al. (2005) reference pairs. Not gated."
+      },
+      "deP95": {
+        "n": 31,
+        "mean": 6.139032,
+        "sigma": 4.042319,
+        "min": 2.63,
+        "median": 4.96,
+        "max": 21.2,
+        "meanMinus2Sigma": -1.945606,
+        "meanPlus2Sigma": 14.223671,
+        "note": "mean 6.14 against the 5.0 floor, max 21.2 at coverage-090. The coverage-response fix raised deP95 on the high-coverage cases (coverage-070 14.48 -> 19.74, coverage-090 14.43 -> 21.20) while improving inside-deck (8.82 -> 6.55): worth a look from whoever owns coverage."
+      },
+      "histDist": {
+        "n": 31,
+        "mean": 0.164123,
+        "sigma": 0.137312,
+        "min": 0.066316,
+        "median": 0.121965,
+        "max": 0.70592,
+        "meanMinus2Sigma": -0.110502,
+        "meanPlus2Sigma": 0.438748,
+        "note": "Measurable for the first time (v1 values were void). Median 0.122 = a ~12% exposure-equivalent mismatch, min 0.066, max 0.706 (coverage-090). The median independently corroborates the plate luminance offset, which measured side B as 9-13% brighter by a different route. Fix that before calibrating: most of this distribution is one defect, not metric spread."
+      }
+    }
+  },
+  "procedure": "Calibrate only after a fully green synthetic ladder with a rendering side B AND no open defects that would be baked into the bias. Compute each metric's distribution across cases, then set the threshold two sigma into the failing direction, never beyond the phase floor: for lower-is-worse metrics (ssim) that is the measured mean minus 2*sigma; for higher-is-worse metrics (deP95, histDist) it is the measured mean plus 2*sigma. Record the bias block with measuredOn and re-run. Every later phase repeats this once. A metric whose definition changed since the ladder was captured cannot be calibrated from it — bump metricsVersion and re-capture instead. Do not widen accepted[] to hide broken captures.",
+  "plate": {
+    "minStd": 0.002,
+    "minCloudFraction": 0.0005,
+    "reason": "Linear luminance std below minStd on either side is a black plate; a side-B cloud-layer coverage (fraction of layer pixels with opacity > 0.01) below minCloudFraction means the march produced nothing — the old sky-only plates. Checked before accepted[]; never downgraded (the vacuous-gate rule)."
+  }
+}

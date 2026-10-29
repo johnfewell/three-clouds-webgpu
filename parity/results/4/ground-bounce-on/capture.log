@@ -1,0 +1,13 @@
+[capture][ground-bounce-on] starting (phase 4, #43)
+[capture][ground-bounce-on] screenshots: A=489061b B=473683b
+[capture][ground-bounce-on] metrics: ssim=0.9908 deMean=0.83 deP95=1.13 histDist=0.0818 maxDelta=0.1342
+[capture][ground-bounce-on] dual-L: measuredL=0.2425 ssim@measuredL=0.9921 (gated ssim is @refL=0.09) stabiliserShare=-16.6% sigmaA=1.50e-3 sigmaB=1.45e-3 sigmaD=3.68e-4
+[capture][ground-bounce-on] plate: A mean=0.0263 std=0.0304 B mean=0.0284 std=0.0306 cloudFraction=30.834%
+[capture][ground-bounce-on] gpuMs: A=17.06ms (32 samples) B=-851317303.93ms (32 samples)
+[capture][ground-bounce-on] shaded: receipt declared not applicable — shadow: true is the shadowTopHeight gate PREREQUISITE for ground bounce, not the subject of the case. The camera sits at 100 m looking up, so no ground shadow is in frame and the receipt has nothing to measure (mail #673: A 0.00 %, B 0.02 %, ratio 10.7 from dividing two near-zero fractions)
+[capture][ground-bounce-on] shadowRadius: shadow-radius receipt VACUOUS: the lane is present but no pixel runs the site-2 consumer (classified = 0), so min/median/max would summarise an empty set. Nothing is claimed about this case.
+[capture][ground-bounce-on] eval: pass
+[capture][ground-bounce-on] temporalUpscale: A=false B=false
+[capture][ground-bounce-on] subgroups: true
+[capture][ground-bounce-on] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][ground-bounce-on] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

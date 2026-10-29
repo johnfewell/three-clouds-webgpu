@@ -1,0 +1,12 @@
+[
+  {
+    "name": "atmosphere",
+    "url": "https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz",
+    "sha256": "3e77db75b7410589b076db6f74caeac5f3a2f787cef5cb7b363285c5ee85f9e0"
+  },
+  {
+    "name": "geospatial",
+    "url": "https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-geospatial-0.9.1%2Bfork.7.tgz",
+    "sha256": "319ea47db67a9372e6dce58317cc702b6fd105e051964ed4c8e474bf072d9e44"
+  }
+]

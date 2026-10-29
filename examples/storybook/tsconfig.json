@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "types": ["vite/client", "@webgpu/types"]
+  },
+  // .storybook is in the project for the same reason examples/r3f keeps its
+  // vite.config.ts in: eslint's typed rules run through the TS project service,
+  // and a file outside every tsconfig is a parse error rather than a lint result.
+  "include": ["src", "typings", ".storybook/*.ts", ".storybook/*.tsx"],
+  // vendored stories stay in the project so eslint's typed rules reach them,
+  // and typings/vendor-shims.d.ts keeps the verbatim copies out of tsc's program
+  "exclude": ["node_modules"]
+}

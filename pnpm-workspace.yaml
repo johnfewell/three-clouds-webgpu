@@ -1,0 +1,13 @@
+packages:
+  - '.'
+  - 'examples/*'
+  - 'core'
+allowBuilds:
+  esbuild: true
+# Off for the whole workspace: the parity reference's WebGL @takram/three-clouds
+# depends on atmosphere, which makes its release URL a sub-dependency. The
+# compensating control is test/pins.test.ts, which pins the installed bytes
+blockExoticSubdeps: false
+overrides:
+  '@takram/three-atmosphere': https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz
+  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.7.tgz

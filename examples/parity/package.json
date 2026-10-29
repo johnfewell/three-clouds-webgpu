@@ -1,0 +1,31 @@
+{
+  "name": "parity",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "pnpm setup-assets",
+    "prebuild": "pnpm setup-assets",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "setup-assets": "node ../../scripts/setup-assets.mjs --example examples/parity --from @takram/three-clouds",
+    "capture": "node scripts/capture.mjs",
+    "e2e": "playwright test --config e2e/playwright.config.ts"
+  },
+  "dependencies": {
+    "3d-tiles-renderer": "0.4.28",
+    "@takram/three-atmosphere": "0.19.1",
+    "@takram/three-clouds": "0.7.6",
+    "@takram/three-geospatial": "0.9.1",
+    "postprocessing": "6.39.4",
+    "three": "0.185.1",
+    "three-clouds-webgpu": "workspace:*"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/three": "0.185.0",
+    "typescript": "5.9.2",
+    "vite": "^7.1.5"
+  }
+}

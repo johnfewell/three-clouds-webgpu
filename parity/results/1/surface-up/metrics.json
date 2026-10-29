@@ -1,0 +1,125 @@
+{
+  "case": "surface-up",
+  "phase": 1,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.995619,
+  "deMean": 0.46,
+  "deP95": 0.52,
+  "histDist": 0.050141,
+  "plate": {
+    "A": {
+      "mean": 0.015625,
+      "std": 0.011975
+    },
+    "B": {
+      "mean": 0.016408,
+      "std": 0.011947,
+      "cloudFraction": 0.308336
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 9
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.09013598598539829,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.9956204369308177,
+    "ssimAtReferenceL": 0.9956185131404074,
+    "stabiliserShareOfDeficit": -0.0004392653741750391,
+    "meanLuminanceTerm": 0.9981838714322517,
+    "meanContrastStructureTerm": 0.9974345992648153,
+    "sigmaA": 0.0006399794382587268,
+    "sigmaB": 0.0006156975150246473,
+    "sigmaD": 0.00015564880139985285,
+    "bandFractions": [
+      0.9417523871527778,
+      0.006476779513888889,
+      0.009585503472222222,
+      0.042185329861111114
+    ]
+  },
+  "shadedFraction": null,
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0,
+    "B": 0
+  },
+  "shadowRadius": null,
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.05411,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 5442,
+  "metricsMs": 817,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 15.6,
+      "passes": {
+        "total": 15.6
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": -850819662.25,
+      "passes": {
+        "render": -850819662.25
+      },
+      "sampleCount": 32
+    }
+  }
+}

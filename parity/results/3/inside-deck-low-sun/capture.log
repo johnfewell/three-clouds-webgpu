@@ -1,0 +1,11 @@
+[capture][inside-deck-low-sun] starting (phase 3, #58)
+[capture][inside-deck-low-sun] screenshots: A=1100142b B=1088128b
+[capture][inside-deck-low-sun] metrics: ssim=0.9955 deMean=0.35 deP95=0.64 histDist=0.0097 maxDelta=0.0372
+[capture][inside-deck-low-sun] dual-L: measuredL=0.1179 ssim@measuredL=0.9956 (gated ssim is @refL=0.09) stabiliserShare=-4.2% sigmaA=7.80e-3 sigmaB=7.56e-3 sigmaD=1.04e-3
+[capture][inside-deck-low-sun] plate: A mean=0.0873 std=0.0239 B mean=0.0881 std=0.0239 cloudFraction=40.341%
+[capture][inside-deck-low-sun] gpuMs: A=17.26ms (32 samples) B=25.86ms (32 samples)
+[capture][inside-deck-low-sun] eval: pass
+[capture][inside-deck-low-sun] temporalUpscale: A=false B=false
+[capture][inside-deck-low-sun] subgroups: true
+[capture][inside-deck-low-sun] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][inside-deck-low-sun] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

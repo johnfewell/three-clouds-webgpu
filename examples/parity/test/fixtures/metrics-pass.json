@@ -1,0 +1,17 @@
+{
+  "ssim": 0.9823,
+  "deMean": 1.42,
+  "deP95": 3.87,
+  "histDist": 0.0231,
+  "gpuMs": { "A": { "total": 4.2 }, "B": { "total": 3.8 } },
+  "size": [1024, 768],
+  "time": 0.0,
+  "frame": 64,
+  "warmup": 64,
+  "env": {
+    "chrome": "128.0",
+    "adapter": "Apple M2 Pro",
+    "os": "darwin",
+    "gpu": "hardware"
+  }
+}

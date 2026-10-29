@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"]
+  },
+  // vite.config.ts is in the PROJECT, not just on disk: eslint's typed rules run
+  // through the TS project service, and a config file outside every tsconfig is
+  // a parse error rather than a lint result — which is how it took main red
+  // after the example landed.
+  "include": ["src", "vite.config.ts"]
+}

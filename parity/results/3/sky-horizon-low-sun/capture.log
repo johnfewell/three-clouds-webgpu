@@ -1,0 +1,11 @@
+[capture][sky-horizon-low-sun] starting (phase 3, #60)
+[capture][sky-horizon-low-sun] screenshots: A=755180b B=751597b
+[capture][sky-horizon-low-sun] metrics: ssim=0.9878 deMean=0.53 deP95=1.27 histDist=0.0247 maxDelta=0.0926
+[capture][sky-horizon-low-sun] dual-L: measuredL=0.1684 ssim@measuredL=0.9896 (gated ssim is @refL=0.09) stabiliserShare=-17.9% sigmaA=4.67e-3 sigmaB=4.49e-3 sigmaD=9.24e-4
+[capture][sky-horizon-low-sun] plate: A mean=0.0617 std=0.0439 B mean=0.0632 std=0.0449 cloudFraction=25.275%
+[capture][sky-horizon-low-sun] gpuMs: A=15.36ms (32 samples) B=20.48ms (32 samples)
+[capture][sky-horizon-low-sun] eval: pass
+[capture][sky-horizon-low-sun] temporalUpscale: A=false B=false
+[capture][sky-horizon-low-sun] subgroups: true
+[capture][sky-horizon-low-sun] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][sky-horizon-low-sun] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

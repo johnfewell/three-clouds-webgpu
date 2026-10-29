@@ -1,0 +1,11 @@
+[capture][sun-horizon] starting (phase 1, #9)
+[capture][sun-horizon] screenshots: A=864396b B=831690b
+[capture][sun-horizon] metrics: ssim=0.9883 deMean=0.35 deP95=0.72 histDist=0.0148 maxDelta=0.1237
+[capture][sun-horizon] dual-L: measuredL=0.0747 ssim@measuredL=0.9874 (gated ssim is @refL=0.09) stabiliserShare=6.7% sigmaA=4.59e-3 sigmaB=4.08e-3 sigmaD=9.03e-4
+[capture][sun-horizon] plate: A mean=0.0646 std=0.0087 B mean=0.0637 std=0.0079 cloudFraction=16.514%
+[capture][sun-horizon] gpuMs: A=13.14ms (32 samples) B=3.12ms (32 samples)
+[capture][sun-horizon] eval: pass
+[capture][sun-horizon] temporalUpscale: A=false B=false
+[capture][sun-horizon] subgroups: true
+[capture][sun-horizon] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][sun-horizon] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

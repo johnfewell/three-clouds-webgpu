@@ -1,0 +1,146 @@
+{
+  "case": "debug-cascades",
+  "phase": 4,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.97529,
+  "deMean": 1.13,
+  "deP95": 3.7,
+  "histDist": 0.033534,
+  "plate": {
+    "A": {
+      "mean": 0.055717,
+      "std": 0.025942
+    },
+    "B": {
+      "mean": 0.056142,
+      "std": 0.023663,
+      "cloudFraction": 0.165141
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 107
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.14585013315081596,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.9763799791194477,
+    "ssimAtReferenceL": 0.9752902514398559,
+    "stabiliserShareOfDeficit": -0.04613576275409004,
+    "meanLuminanceTerm": 0.9996473102749408,
+    "meanContrastStructureTerm": 0.9767176802660539,
+    "sigmaA": 0.019178085099793452,
+    "sigmaB": 0.017164084261428656,
+    "sigmaD": 0.0039031480804916944,
+    "bandFractions": [
+      0,
+      0.00011610243055555556,
+      0.38072591145833334,
+      0.6191579861111111
+    ]
+  },
+  "shadedFraction": {
+    "skipped": "the subject is the shadow atlas; clearing the casters empties the visualisation, so the receipt's brighten premise does not hold (it happened to brighten +24 % — luck, not a receipt)"
+  },
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0.914527,
+    "B": 0.913309
+  },
+  "shadowRadius": {
+    "laneAbsent": false,
+    "error": null,
+    "lanePixels": 921600,
+    "framePixels": 921600,
+    "reasons": [],
+    "summary": {
+      "sampled": 921600,
+      "classified": 921600,
+      "min": 3,
+      "median": 3,
+      "p95": 3,
+      "max": 3,
+      "armedFraction": 1,
+      "atCeilingFraction": 1
+    }
+  },
+  "subgroups": true,
+  "result": "expected-difference",
+  "reasons": [
+    "ssim 0.9753 < 0.9800",
+    "accepted: ADR-011 Amendment 6: the discrete cascade selector amplifies cross-backend floating-point boundary variance after the selector and colour table are source-aligned"
+  ],
+  "maxDiffDelta": 0.423519,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 5596,
+  "metricsMs": 954,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 12.15,
+      "passes": {
+        "total": 12.15
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 18.62,
+      "passes": {
+        "render": 18.62
+      },
+      "sampleCount": 32
+    }
+  }
+}

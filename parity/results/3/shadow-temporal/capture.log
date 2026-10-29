@@ -1,0 +1,35 @@
+[capture][shadow-temporal] starting (phase 3, #41)
+[capture][shadow-temporal] screenshots: A=1704153b B=1764120b
+[capture][shadow-temporal] metrics: ssim=0.9673 deMean=0.46 deP95=0.80 histDist=0.0266 maxDelta=0.1134
+[capture][shadow-temporal] dual-L: measuredL=0.0380 ssim@measuredL=0.9629 (gated ssim is @refL=0.09) stabiliserShare=11.9% sigmaA=4.26e-3 sigmaB=4.94e-3 sigmaD=1.22e-3
+[capture][shadow-temporal] plate: A mean=0.0544 std=0.0059 B mean=0.0531 std=0.0066 cloudFraction=16.592%
+[capture][shadow-temporal] gpuMs: A=9.99ms (32 samples) B=7.32ms (32 samples)
+[capture][shadow-temporal] shaded: A=99.78% B=99.53% ratio=0.998 plate rise A=26.5% B=27.5% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-temporal] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shadow-temporal] eval: pass
+[capture][shadow-temporal] sequence: 16 frames, dt=0.016666666666666666
+[capture][shadow-temporal] seq-frame: frame=0 time=0.000 plateMeanA=0.04630800 plateMeanB=0.04798051
+[capture][shadow-temporal] seq-frame: frame=1 time=0.017 plateMeanA=0.04849298 plateMeanB=0.04891804
+[capture][shadow-temporal] seq-frame: frame=2 time=0.033 plateMeanA=0.04840077 plateMeanB=0.04876017
+[capture][shadow-temporal] seq-frame: frame=3 time=0.050 plateMeanA=0.04789232 plateMeanB=0.04870969
+[capture][shadow-temporal] seq-frame: frame=4 time=0.067 plateMeanA=0.04768472 plateMeanB=0.04851923
+[capture][shadow-temporal] seq-frame: frame=5 time=0.083 plateMeanA=0.04806596 plateMeanB=0.04864776
+[capture][shadow-temporal] seq-frame: frame=6 time=0.100 plateMeanA=0.05089990 plateMeanB=0.04987470
+[capture][shadow-temporal] seq-frame: frame=7 time=0.117 plateMeanA=0.05056390 plateMeanB=0.04970199
+[capture][shadow-temporal] seq-frame: frame=8 time=0.133 plateMeanA=0.05047281 plateMeanB=0.05004071
+[capture][shadow-temporal] seq-frame: frame=9 time=0.150 plateMeanA=0.05031348 plateMeanB=0.04996540
+[capture][shadow-temporal] seq-frame: frame=10 time=0.167 plateMeanA=0.05052498 plateMeanB=0.05018862
+[capture][shadow-temporal] seq-frame: frame=11 time=0.183 plateMeanA=0.05033639 plateMeanB=0.05006210
+[capture][shadow-temporal] seq-frame: frame=12 time=0.200 plateMeanA=0.04994363 plateMeanB=0.04952569
+[capture][shadow-temporal] seq-frame: frame=13 time=0.217 plateMeanA=0.04974191 plateMeanB=0.04936137
+[capture][shadow-temporal] seq-frame: frame=14 time=0.233 plateMeanA=0.04999816 plateMeanB=0.04960749
+[capture][shadow-temporal] seq-frame: frame=15 time=0.250 plateMeanA=0.05020203 plateMeanB=0.04996902
+[capture][shadow-temporal] flickerA: mean=0.2563 max=0.9190
+[capture][shadow-temporal] flickerB: mean=0.1899 max=0.4589
+[capture][shadow-temporal] ghostingA: mean=4.3194 p95=6.3423
+[capture][shadow-temporal] ghostingB: mean=4.3639 p95=6.3180
+[capture][shadow-temporal] motion: A=(0.0,0.0) score=0.907 B=(0.0,0.0) score=0.921 direction not measurable
+[capture][shadow-temporal] temporalUpscale: A=true B=true
+[capture][shadow-temporal] subgroups: true
+[capture][shadow-temporal] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-temporal] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

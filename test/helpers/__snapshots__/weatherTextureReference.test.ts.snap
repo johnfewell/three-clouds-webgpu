@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`localWeather > fixed points are stable 1`] = `
+[
+  {
+    "a": 1,
+    "b": 0.53804261,
+    "g": 0.02453477,
+    "r": 0.46030317,
+  },
+  {
+    "a": 1,
+    "b": 0.5,
+    "g": 1,
+    "r": 0,
+  },
+  {
+    "a": 1,
+    "b": 0.47879506,
+    "g": 0,
+    "r": 0.12576557,
+  },
+]
+`;

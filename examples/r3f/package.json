@@ -1,0 +1,29 @@
+{
+  "name": "r3f",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5200",
+    "build": "vite build",
+    "setup-assets": "node ../../scripts/setup-r3f-assets.ts",
+    "predev": "pnpm setup-assets",
+    "prebuild": "pnpm setup-assets"
+  },
+  "dependencies": {
+    "3d-tiles-renderer": "0.4.28",
+    "@react-three/fiber": "9.7.0",
+    "@takram/three-atmosphere": "0.19.1",
+    "@takram/three-geospatial": "0.9.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.185.1",
+    "three-clouds-webgpu": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "5.9.2",
+    "vite": "^7.1.5"
+  }
+}

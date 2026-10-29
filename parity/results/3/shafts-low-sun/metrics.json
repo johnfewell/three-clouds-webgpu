@@ -1,0 +1,187 @@
+{
+  "case": "shafts-low-sun",
+  "phase": 3,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.981918,
+  "deMean": 0.73,
+  "deP95": 1.28,
+  "histDist": 0.05507,
+  "plate": {
+    "A": {
+      "mean": 0.049772,
+      "std": 0.011357
+    },
+    "B": {
+      "mean": 0.052513,
+      "std": 0.011357,
+      "cloudFraction": 0.165141
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 75
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.07844044268131256,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.9816486870493012,
+    "ssimAtReferenceL": 0.9819182076800111,
+    "stabiliserShareOfDeficit": 0.014686721949215553,
+    "meanLuminanceTerm": 0.998391651586434,
+    "meanContrastStructureTerm": 0.983226846636607,
+    "sigmaA": 0.008877908763490502,
+    "sigmaB": 0.008518247135492181,
+    "sigmaD": 0.0015871400840977263,
+    "bandFractions": [
+      0,
+      0,
+      0.003654513888888889,
+      0.9963454861111111
+    ]
+  },
+  "shadedFraction": {
+    "A": {
+      "fraction": 0.999282,
+      "meanOn": 0.049772,
+      "meanOff": 0.074672,
+      "rise": 0.333456,
+      "classified": 921600
+    },
+    "B": {
+      "fraction": 0.983363,
+      "meanOn": 0.052513,
+      "meanOff": 0.073837,
+      "rise": 0.2888,
+      "classified": 921600
+    },
+    "ratio": 0.98407,
+    "compare": "ratio",
+    "flagsOff": {
+      "A": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "B": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "flagsRestored": {
+      "A": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "B": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "reasons": []
+  },
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0.966156,
+    "B": 0.933378
+  },
+  "shadowRadius": {
+    "laneAbsent": false,
+    "error": null,
+    "lanePixels": 921600,
+    "framePixels": 921600,
+    "reasons": [],
+    "summary": {
+      "sampled": 921600,
+      "classified": 921600,
+      "min": 3,
+      "median": 3,
+      "p95": 3,
+      "max": 3,
+      "armedFraction": 1,
+      "atCeilingFraction": 1
+    }
+  },
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.09474,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 11290,
+  "metricsMs": 5482,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 36,
+      "passes": {
+        "total": 36
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 80.36,
+      "passes": {
+        "render": 80.36
+      },
+      "sampleCount": 32
+    }
+  }
+}

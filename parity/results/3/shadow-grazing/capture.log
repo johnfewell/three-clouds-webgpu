@@ -1,0 +1,13 @@
+[capture][shadow-grazing] starting (phase 3, #57)
+[capture][shadow-grazing] screenshots: A=1859433b B=1861407b
+[capture][shadow-grazing] metrics: ssim=0.9907 deMean=0.43 deP95=0.74 histDist=0.0336 maxDelta=0.0965
+[capture][shadow-grazing] dual-L: measuredL=0.0670 ssim@measuredL=0.9905 (gated ssim is @refL=0.09) stabiliserShare=3.0% sigmaA=6.71e-3 sigmaB=6.45e-3 sigmaD=9.27e-4
+[capture][shadow-grazing] plate: A mean=0.0406 std=0.0101 B mean=0.0393 std=0.0097 cloudFraction=16.514%
+[capture][shadow-grazing] gpuMs: A=12.90ms (32 samples) B=20.60ms (32 samples)
+[capture][shadow-grazing] shaded: A=99.78% B=99.77% ratio=1.000 plate rise A=39.6% B=40.8% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-grazing] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shadow-grazing] eval: pass
+[capture][shadow-grazing] temporalUpscale: A=false B=false
+[capture][shadow-grazing] subgroups: true
+[capture][shadow-grazing] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-grazing] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

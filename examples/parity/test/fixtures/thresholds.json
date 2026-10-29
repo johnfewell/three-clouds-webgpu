@@ -1,0 +1,12 @@
+{
+  "phases": {
+    "1": { "ssim": 0.95, "deP95": 5.0, "histDist": 0.1 }
+  },
+  "accepted": [
+    {
+      "pattern": "float-precision-*",
+      "reason": "WGSL vs GLSL float precision"
+    },
+    { "pattern": "bayer-dither-*", "reason": "Bayer phase alignment" }
+  ]
+}

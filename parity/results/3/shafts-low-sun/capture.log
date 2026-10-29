@@ -1,0 +1,13 @@
+[capture][shafts-low-sun] starting (phase 3, #38)
+[capture][shafts-low-sun] screenshots: A=1965019b B=1961303b
+[capture][shafts-low-sun] metrics: ssim=0.9819 deMean=0.73 deP95=1.28 histDist=0.0551 maxDelta=0.0947
+[capture][shafts-low-sun] dual-L: measuredL=0.0784 ssim@measuredL=0.9816 (gated ssim is @refL=0.09) stabiliserShare=1.5% sigmaA=8.88e-3 sigmaB=8.52e-3 sigmaD=1.59e-3
+[capture][shafts-low-sun] plate: A mean=0.0498 std=0.0114 B mean=0.0525 std=0.0114 cloudFraction=16.514%
+[capture][shafts-low-sun] gpuMs: A=36.00ms (32 samples) B=80.36ms (32 samples)
+[capture][shafts-low-sun] shaded: A=99.93% B=98.34% ratio=0.984 plate rise A=33.3% B=28.9% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shafts-low-sun] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shafts-low-sun] eval: pass
+[capture][shafts-low-sun] temporalUpscale: A=false B=false
+[capture][shafts-low-sun] subgroups: true
+[capture][shafts-low-sun] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shafts-low-sun] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

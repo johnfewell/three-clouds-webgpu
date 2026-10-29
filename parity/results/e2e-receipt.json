@@ -1,0 +1,717 @@
+{
+  "key": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+  "filtered": false,
+  "dirty": false,
+  "tests": [
+    {
+      "spec": "e2e/basicSkySeam.spec.ts",
+      "title": "chromium-webgpu › basicSkySeam.spec.ts › examples/basic renders a sky › no wedge: the sky band has no near-black region",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/cirrusDeck.spec.ts",
+      "title": "chromium-webgpu › cirrusDeck.spec.ts › the cirrus deck changes the sky, and its strength is what changes it",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/cirrusDeck.spec.ts",
+      "title": "chromium-webgpu › cirrusDeck.spec.ts › the cirrus deck costs one texture read per march fragment",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/cloudShadow.spec.ts",
+      "title": "chromium-webgpu › cloudShadow.spec.ts › public cloudShadow on a material › a material darkens under a cloud and not in the open",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › experimental options render finite cloud pixels at an odd viewport size",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › compute agrees with fragment resolve, upscale=false",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › compute agrees with fragment resolve, upscale=true",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › wind reprojection follows shape advection and rejects time cuts",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › compute resolve GPU timing includes render and compute work",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › realism option changes cloud pixels: cloudFrontRefinement",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › realism option changes cloud pixels: distantCloudShadows",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › realism option changes cloud pixels: directionalSkylight",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimental.spec.ts",
+      "title": "chromium-webgpu › experimental.spec.ts › realism option changes cloud pixels: rainShafts",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/experimentalVisibility.spec.ts",
+      "title": "chromium-webgpu › experimentalVisibility.spec.ts › every opt-in visual option moves the image past its own noise bracket",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/gates.spec.ts",
+      "title": "chromium-webgpu › gates.spec.ts › gates: console-clean sweep › p0 gate: every case ≤ current phase renders side B with zero console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › renders one row per case number in the grid",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › grid rows have status badges",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › lightbox opens on thumbnail click",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › lightbox tabs flip A/B/diff",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › arrow keys navigate lightbox tabs",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › Escape closes lightbox",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/grid.spec.ts",
+      "title": "chromium-webgpu › grid.spec.ts › index grid page › live-twin link carries ?case=",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/heightResidue.spec.ts",
+      "title": "chromium-webgpu › heightResidue.spec.ts › height-residue invariant (temporal upscale, both sides) › the directional statistic does not move with the size residue mod 4",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/lightning.spec.ts",
+      "title": "chromium-webgpu › lightning.spec.ts › a lit flash lights the deck, and an idle storm does not",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/lightning.spec.ts",
+      "title": "chromium-webgpu › lightning.spec.ts › a lit flash costs more than an idle storm, which costs the option off",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 1. boots — both sides ready, no errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 2. non-blank — both canvases have luminance variance",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 3. layer encoding — opacity in [0,1], sky=0, shell>0",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 4. enabled=false — B composite equals aerial-only",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 5. resolutionScale — layer target resizes at 0.5",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 7. no double sky — sky pixel luminance unchanged by clouds",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 8. punch-through — inside-deck has pixels with layer opacity 0",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 9. camera trap — moving camera changes shell readback",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 10. jitter alive — different frames give different layer readbacks",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 11. side A frame pin — same frame gives identical output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p0.spec.ts",
+      "title": "chromium-webgpu › p0.spec.ts › Phase 0 scenarios › 12. enabled round-trip — both sides lose cloud structure and regain it exactly",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 1. camera regimes › orbit poses have non-zero layer opacity",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 1. camera regimes › below-deck-1km has lower opacity than orbit",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 1. camera regimes › no NaN/Inf in layer readback",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 2. coverage monotonicity › mean layer opacity increases with coverage",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 3. presets › preset-low boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 3. presets › preset-medium boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 3. presets › preset-high boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 3. presets › preset-ultra boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 4. feature toggles › shapeDetail toggle changes readback",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 4. feature toggles › multiScatteringOctaves 1 vs 8 changes luminance",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 4. feature toggles › accurateSunSkyLight toggle changes output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 5. wind › different times produce different readbacks",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 6. altitude/ECEF › correctAltitude toggle changes output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 6. altitude/ECEF › ecef cases boot without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 7. API surface › Phase 1 PARITY_KEYS entries can be set without error",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 8. sun elevation › luminance decreases from noon to twilight",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p1.spec.ts",
+      "title": "chromium-webgpu › p1.spec.ts › 9. resolution scale › res-050 and res-100 boot without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 1. temporal convergence › 16-frame static sequence has low flicker",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 1. temporal convergence › temporal output is non-blank",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 2. Bayer coverage › 16 consecutive frames produce 16 distinct readbacks",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 2. Bayer coverage › frame 0 and frame 64 produce similar output (Bayer + STBN wrap)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 2. Bayer coverage › a reset immediately before a single render produces a REAL render, not a stale plate",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 3. velocity sanity › depthVelocity readback has finite values",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 3. velocity sanity › static camera has near-zero velocity",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 4. resetHistory › toggling temporalUpscale resets history (output changes)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 4. resetHistory › enabled false→true resets history",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 5. resize invalidation › resolutionScale change with temporal produces valid output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 5. resize invalidation › resize back to full produces valid output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 6. temporalUpscale × resolutionScale matrix › noTemporal-full boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 6. temporalUpscale × resolutionScale matrix › noTemporal-half boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 6. temporalUpscale × resolutionScale matrix › temporal-full boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 6. temporalUpscale × resolutionScale matrix › temporal-half boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 6. temporalUpscale × resolutionScale matrix › temporal-on produces different march target size than off",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 7. temporal cases boot › temporal-on-static boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 7. temporal cases boot › temporal-on-orbit boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 7. temporal cases boot › temporal-on-wind boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 7. temporal cases boot › temporal-cut boots without errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 8. TAA-off parity › temporal converges to non-temporal baseline at static camera",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 9. A/B sequence agreement › temporal-on-static A vs B after warmup",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 10. stale-frame warning › pinned frame with temporal emits warning after 17 renders",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 10. stale-frame warning › no stale warning without temporalUpscale",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p2.spec.ts",
+      "title": "chromium-webgpu › p2.spec.ts › 10. stale-frame warning › no stale warning when warnings suppressed",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 1. shadow atlas target exists when shadow maps enabled",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 2. cloudShadow descriptor populated with cascade data",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 3. the aerial node holds the SAME cloudShadowLength node the pass exposes",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 3b. lights-mode aerial holds the live cloudShadowLength node",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 4. shadow-length MRT attachment present when lightShafts on",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 5. shadow-length MRT absent when lightShafts off",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 6. shadow-length resolve attachment created when lightShafts on",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 7. shadow-length resolve attachment absent when lightShafts off",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 8. cascadeCount change resizes shadow atlas depth",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 9. atlas readback proves four-channel and no-sample semantics",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 9b. sampler tail distinguishes in-cloud 3 from ground 2",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 10. shadow cascade temporal resolve converges over frames",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 11. per-layer shadow mask — shadow=false suppresses shadow on layer",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 12. every shadow knob round-trips and 2 -> 4 -> 2 leaves no live-target growth",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 13. resetHistory invalidates shadow-length history",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 14. lightShafts toggle recreates MRT with correct count",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 15. 3.2a darkens the plane on both sides with matching receiver ratios",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 16. 3.2b darkens the lights-mode sphere only through the cloud-shadowed light",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 17. wind moves the moving-plane shadow field in the reference direction",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 18. shafts expose x-positive/y-zero vec2 pixels and darken the aerial output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 19. enabled=false suppresses shadow, shafts, atlas, and march work and re-enable restores shadow",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — scene/atmosphere readback › clouds-off full-frame scenes agree without a vacuous plate",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — ADR-007 3.2b (port addition, side B only) › cloud shadows reach the visible atmosphere-light receiver",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — ADR-007 3.2b (port addition, side B only) › case 35 is a lights-mode case, so A/B parity cannot cover 3.2b",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — feature knobs › 1. haze changes the render below the deck, and is inert from orbit",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — feature knobs › 1b. from orbit, haze is bit-identical to zero haze density (the early-out)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — feature knobs › 2b. ground bounce brightens the deck underside at below-deck-1km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — feature knobs › 2. ground bounce brightens the undersides, and responds to the knob",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — feature knobs › 3. the Draine phase function rebuilds and changes the silver lining",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6. debug-cascades renders on side B without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6. debug-shadow-map renders on side B without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6. debug-checker-uv renders on side B without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6. debug-sample-count renders on side B without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6. debug-front-depth renders on side B without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6b. the debug views differ from each other",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — debug views › 6c. all nine debug values render on both sides and replace the beauty pass",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — generated textures › 4. procedural textures render, and differ from the baked path",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — generated textures › 4b. the generated 128^3 shape volume matches side A to 1/255, every slice",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5. the log-depth case boots both sides and renders (SMOKE ONLY)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5b. log depth on side A: keeps the order of two surfaces 45 m apart at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5b. log depth on side B: keeps the order of two surfaces 45 m apart at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5c. log depth on side B: the clouds march stops at an occluder at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5b. linear depth on side A: loses the order of two surfaces 45 m apart at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5b. linear depth on side B: loses the order of two surfaces 45 m apart at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — log depth › 5c. linear depth on side B: the clouds march runs through an occluder at 45 km",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — four layers › 7. a fourth cloud layer changes the render",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — four layers › 7b. interval skipping in the [2200, 7500] m gap removes at least 95% of the reference reduction on side B",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — four layers › 7c. changing layer 2 (cloudLayers[1]) channel bumps graphVersion and changes the readback",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f smoke › 9a. smoke pixel assertions reject blank and cloud-free output",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f smoke › 9. examples/r3f boots and renders without console errors (800x600)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f smoke › 9. examples/r3f boots and renders without console errors (390x844)",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/basic smoke › 10. examples/basic boots and renders without console errors",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — WebGL2 backend › 8. case 54: side B refuses WebGL2 with the documented message, or renders like side A",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — WebGL2 backend › 8. ?backend=webgl2: side B refuses WebGL2 with the documented message, or renders like side A",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/rainShafts.spec.ts",
+      "title": "chromium-webgpu › rainShafts.spec.ts › rain shafts darken pixels under a convective cell",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/rainShafts.spec.ts",
+      "title": "chromium-webgpu › rainShafts.spec.ts › rain shafts cost one closed march of four steps",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/site.spec.ts",
+      "title": "chromium-webgpu › site.spec.ts › static site (built) › index page loads grid with one row per case number @p0",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/site.spec.ts",
+      "title": "chromium-webgpu › site.spec.ts › static site (built) › footer shows gate numbers @p0",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/site.spec.ts",
+      "title": "chromium-webgpu › site.spec.ts › static site (built) › live page shows WebGPU notice or renders @p0",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/skyOrientation.spec.ts",
+      "title": "chromium-webgpu › skyOrientation.spec.ts › sky-pose orientation guard (both sides, linear buffers) › the projected sun disc and the cloud layer sit where physics puts them on BOTH sides",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/staticMode.spec.ts",
+      "title": "chromium-webgpu › staticMode.spec.ts › static mode produces identical visual output on hardware",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/staticMode.spec.ts",
+      "title": "chromium-webgpu › staticMode.spec.ts › static mode reduces idle-scene frame time",
+      "status": "passed"
+    }
+  ],
+  "ts": "2026-10-08T13:02:56.403Z",
+  "build": {
+    "builtRoot": "<worktree>",
+    "servedRoot": "<worktree>",
+    "builtSharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880",
+    "servedSharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880",
+    "servedIsBuilt": true,
+    "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+    "error": null
+  }
+}

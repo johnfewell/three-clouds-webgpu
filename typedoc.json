@@ -1,0 +1,16 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts", "src/webgpu/index.ts", "src/r3f/index.ts"],
+  "out": "api",
+  "name": "three-clouds-webgpu",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeProtected": true,
+  "skipErrorChecking": true,
+  "validation": {
+    "notExported": false,
+    "invalidLink": false,
+    "notDocumented": false
+  }
+}

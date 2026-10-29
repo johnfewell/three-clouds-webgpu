@@ -1,0 +1,11 @@
+[capture][procedural-textures] starting (phase 4, #45)
+[capture][procedural-textures] screenshots: A=917261b B=919644b
+[capture][procedural-textures] metrics: ssim=0.6967 deMean=0.85 deP95=5.22 histDist=0.0091 maxDelta=0.1418
+[capture][procedural-textures] dual-L: measuredL=0.0946 ssim@measuredL=0.7004 (gated ssim is @refL=0.09) stabiliserShare=-1.2% sigmaA=5.45e-3 sigmaB=5.33e-3 sigmaD=5.22e-3
+[capture][procedural-textures] plate: A mean=0.1011 std=0.0100 B mean=0.1004 std=0.0096 cloudFraction=17.445%
+[capture][procedural-textures] gpuMs: A=13.67ms (32 samples) B=2.84ms (32 samples)
+[capture][procedural-textures] eval: expected-difference — ssim 0.6967 < 0.9800; accepted: ADR-014: the reference's compiled looped getWorleyNoise deviates from its own source arithmetic in a hash-argument band the port does not reproduce, so LocalWeather's R (low composed) and G (mid worley) channels differ by construction — texture footprint R corr 0.746 / 67.03% differ, G corr 0.474 / 66.78%, B (perlin) exact, byte-identical across 7 receipts (01:52Z); shape volume bit-exact (#619). Frame footprint from the paired in-session captures on a private-history revision plus the follow-up (a later private-history revision, 2026-09-02 03:08Z, provenance in capture.log, ratified LilacOtter #1680): gated ssim 0.696454 at the reference L, deP95 5.20, histDist 0.023800; the follow-up's share +0.002801 over the same-slot baseline 0.693653. SCOPE (D3, the register-entry rule): the weather-content mechanism only. NOT covered: the B channel is exact and any regression there is a real defect; a residual outside the mechanism's signature (blob positions) is a new task, never register material; below the floor the case FAILS as beyond the accepted footprint. [floor ssim 0.6964]
+[capture][procedural-textures] temporalUpscale: A=false B=false
+[capture][procedural-textures] subgroups: true
+[capture][procedural-textures] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][procedural-textures] provenance: commit (private history) branch (private) dirty 107 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

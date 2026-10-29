@@ -1,0 +1,13 @@
+[capture][shadow-cascades-2x512] starting (phase 3, #37)
+[capture][shadow-cascades-2x512] screenshots: A=1648219b B=1556073b
+[capture][shadow-cascades-2x512] metrics: ssim=0.9583 deMean=0.99 deP95=1.51 histDist=0.0965 maxDelta=0.0624
+[capture][shadow-cascades-2x512] dual-L: measuredL=0.0377 ssim@measuredL=0.9430 (gated ssim is @refL=0.09) stabiliserShare=26.9% sigmaA=3.75e-3 sigmaB=3.10e-3 sigmaD=1.09e-3
+[capture][shadow-cascades-2x512] plate: A mean=0.0296 std=0.0063 B mean=0.0268 std=0.0054 cloudFraction=16.514%
+[capture][shadow-cascades-2x512] gpuMs: A=22.26ms (32 samples) B=61.53ms (32 samples)
+[capture][shadow-cascades-2x512] shaded: A=100.00% B=100.00% ratio=1.000 plate rise A=60.3% B=63.7% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-cascades-2x512] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shadow-cascades-2x512] eval: pass
+[capture][shadow-cascades-2x512] temporalUpscale: A=false B=false
+[capture][shadow-cascades-2x512] subgroups: true
+[capture][shadow-cascades-2x512] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-cascades-2x512] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

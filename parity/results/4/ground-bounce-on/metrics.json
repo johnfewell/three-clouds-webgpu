@@ -1,0 +1,136 @@
+{
+  "case": "ground-bounce-on",
+  "phase": 4,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.99076,
+  "deMean": 0.83,
+  "deP95": 1.13,
+  "histDist": 0.081768,
+  "plate": {
+    "A": {
+      "mean": 0.026274,
+      "std": 0.030367
+    },
+    "B": {
+      "mean": 0.028422,
+      "std": 0.030583,
+      "cloudFraction": 0.308336
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "branch": "(private)",
+      "dirty": 107
+    },
+    "e2e": {
+      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "verdict": "green",
+      "detail": "e2e passed, all 140 tests",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
+        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.24252408742904663,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.9920754938864534,
+    "ssimAtReferenceL": 0.9907596502449462,
+    "stabiliserShareOfDeficit": -0.16604740063963155,
+    "meanLuminanceTerm": 0.9942030865704521,
+    "meanContrastStructureTerm": 0.9978696551251183,
+    "sigmaA": 0.0014997139364976487,
+    "sigmaB": 0.0014526077831113892,
+    "sigmaD": 0.00036837100193140256,
+    "bandFractions": [
+      0.9456684027777778,
+      0.007486979166666667,
+      0.01629123263888889,
+      0.030553385416666665
+    ]
+  },
+  "shadedFraction": {
+    "skipped": "shadow: true is the shadowTopHeight gate PREREQUISITE for ground bounce, not the subject of the case. The camera sits at 100 m looking up, so no ground shadow is in frame and the receipt has nothing to measure (mail #673: A 0.00 %, B 0.02 %, ratio 10.7 from dividing two near-zero fractions)"
+  },
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0.027108,
+    "B": 0.027498
+  },
+  "shadowRadius": {
+    "laneAbsent": false,
+    "error": null,
+    "lanePixels": 921600,
+    "framePixels": 921600,
+    "reasons": [
+      "shadow-radius receipt VACUOUS: the lane is present but no pixel runs the site-2 consumer (classified = 0), so min/median/max would summarise an empty set. Nothing is claimed about this case."
+    ],
+    "summary": null
+  },
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.134219,
+  "width": 1280,
+  "height": 720,
+  "captureMs": 5432,
+  "metricsMs": 830,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 17.06,
+      "passes": {
+        "total": 17.06
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": -851317303.93,
+      "passes": {
+        "render": -851317303.93
+      },
+      "sampleCount": 32
+    }
+  }
+}

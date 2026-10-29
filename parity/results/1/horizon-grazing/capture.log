@@ -1,0 +1,11 @@
+[capture][horizon-grazing] starting (phase 1, #6)
+[capture][horizon-grazing] screenshots: A=1201143b B=1169638b
+[capture][horizon-grazing] metrics: ssim=0.9935 deMean=1.02 deP95=1.24 histDist=0.0261 maxDelta=0.0758
+[capture][horizon-grazing] dual-L: measuredL=0.1235 ssim@measuredL=0.9939 (gated ssim is @refL=0.09) stabiliserShare=-7.2% sigmaA=8.57e-3 sigmaB=8.34e-3 sigmaD=1.14e-3
+[capture][horizon-grazing] plate: A mean=0.1231 std=0.0187 B mean=0.1263 std=0.0184 cloudFraction=49.517%
+[capture][horizon-grazing] gpuMs: A=17.69ms (32 samples) B=35.40ms (32 samples)
+[capture][horizon-grazing] eval: pass
+[capture][horizon-grazing] temporalUpscale: A=false B=false
+[capture][horizon-grazing] subgroups: true
+[capture][horizon-grazing] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][horizon-grazing] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

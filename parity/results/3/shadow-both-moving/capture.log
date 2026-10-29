@@ -1,0 +1,37 @@
+[capture][shadow-both-moving] starting (phase 3, #36)
+[capture][shadow-both-moving] screenshots: A=1993114b B=1969268b
+[capture][shadow-both-moving] metrics: ssim=0.9838 deMean=0.74 deP95=1.26 histDist=0.0287 maxDelta=0.0961
+[capture][shadow-both-moving] dual-L: measuredL=0.0781 ssim@measuredL=0.9836 (gated ssim is @refL=0.09) stabiliserShare=1.5% sigmaA=8.81e-3 sigmaB=8.51e-3 sigmaD=1.56e-3
+[capture][shadow-both-moving] plate: A mean=0.0515 std=0.0113 B mean=0.0530 std=0.0114 cloudFraction=16.514%
+[capture][shadow-both-moving] gpuMs: A=12.55ms (32 samples) B=20.19ms (32 samples)
+[capture][shadow-both-moving] shaded: A=99.69% B=97.68% ratio=0.980 plate rise A=31.0% B=28.2% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][shadow-both-moving] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][shadow-both-moving] eval: pass
+[capture][shadow-both-moving] sequence: 16 frames, dt=0.25
+[capture][shadow-both-moving] sequence velocity: 0.02, 0.01 (verified on side B)
+[capture][shadow-both-moving] seq-frame: frame=0 time=0.000 plateMeanA=0.06037116 plateMeanB=0.04948861
+[capture][shadow-both-moving] seq-frame: frame=1 time=0.250 plateMeanA=0.05544636 plateMeanB=0.04580508
+[capture][shadow-both-moving] seq-frame: frame=2 time=0.500 plateMeanA=0.05590174 plateMeanB=0.04639873
+[capture][shadow-both-moving] seq-frame: frame=3 time=0.750 plateMeanA=0.05572018 plateMeanB=0.04380317
+[capture][shadow-both-moving] seq-frame: frame=4 time=1.000 plateMeanA=0.05637309 plateMeanB=0.04330954
+[capture][shadow-both-moving] seq-frame: frame=5 time=1.250 plateMeanA=0.05610176 plateMeanB=0.04302914
+[capture][shadow-both-moving] seq-frame: frame=6 time=1.500 plateMeanA=0.05491559 plateMeanB=0.04702573
+[capture][shadow-both-moving] seq-frame: frame=7 time=1.750 plateMeanA=0.05457496 plateMeanB=0.04832324
+[capture][shadow-both-moving] seq-frame: frame=8 time=2.000 plateMeanA=0.05307323 plateMeanB=0.04819119
+[capture][shadow-both-moving] seq-frame: frame=9 time=2.250 plateMeanA=0.05311654 plateMeanB=0.04737991
+[capture][shadow-both-moving] seq-frame: frame=10 time=2.500 plateMeanA=0.05270230 plateMeanB=0.04806699
+[capture][shadow-both-moving] seq-frame: frame=11 time=2.750 plateMeanA=0.05115567 plateMeanB=0.04985978
+[capture][shadow-both-moving] seq-frame: frame=12 time=3.000 plateMeanA=0.05270381 plateMeanB=0.05063054
+[capture][shadow-both-moving] seq-frame: frame=13 time=3.250 plateMeanA=0.05034906 plateMeanB=0.05295120
+[capture][shadow-both-moving] seq-frame: frame=14 time=3.500 plateMeanA=0.05162868 plateMeanB=0.05270051
+[capture][shadow-both-moving] sun-receipt: OK over 16 frames — elevation 10 -> 13.750, azimuth 180 -> 180.000, A === B on all three axes every frame
+[capture][shadow-both-moving] seq-frame: frame=15 time=3.750 plateMeanA=0.05891992 plateMeanB=0.05475372
+[capture][shadow-both-moving] flickerA: mean=0.6375 max=1.9654
+[capture][shadow-both-moving] flickerB: mean=0.6490 max=1.3852
+[capture][shadow-both-moving] ghostingA: mean=1.3659 p95=2.4333
+[capture][shadow-both-moving] ghostingB: mean=1.6553 p95=3.2157
+[capture][shadow-both-moving] motion: A=(80.0,-40.0) score=0.466 B=(80.0,-40.0) score=0.548 cosine=1.000 aligned
+[capture][shadow-both-moving] temporalUpscale: A=false B=false
+[capture][shadow-both-moving] subgroups: true
+[capture][shadow-both-moving] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][shadow-both-moving] provenance: commit (private history) branch (private) dirty 75 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

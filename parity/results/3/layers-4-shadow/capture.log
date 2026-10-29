@@ -1,0 +1,14 @@
+[capture][layers-4-shadow] starting (phase 3, #27)
+[capture][layers-4-shadow] screenshots: A=1971856b B=1970846b
+[capture][layers-4-shadow] metrics: ssim=0.9826 deMean=0.45 deP95=0.99 histDist=0.0229 maxDelta=0.0917
+[capture][layers-4-shadow] dual-L: measuredL=0.0796 ssim@measuredL=0.9822 (gated ssim is @refL=0.09) stabiliserShare=2.0% sigmaA=8.14e-3 sigmaB=7.95e-3 sigmaD=1.43e-3
+[capture][layers-4-shadow] plate: A mean=0.0718 std=0.0112 B mean=0.0701 std=0.0105 cloudFraction=27.925%
+[capture][layers-4-shadow] gpuMs: A=11.90ms (32 samples) B=23.98ms (32 samples)
+[capture][layers-4-shadow] shaded: A=99.46% B=99.46% ratio=1.000 plate rise A=28.0% B=29.3% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][layers-4-shadow] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=921600/921600
+[capture][layers-4-shadow] eval: pass
+[capture][layers-4-shadow] linear readbacks preserved: A.linear.f32 B.linear.f32 (1280x720 RGBA float32le, 14745600 bytes each; never committed)
+[capture][layers-4-shadow] temporalUpscale: A=false B=false
+[capture][layers-4-shadow] subgroups: true
+[capture][layers-4-shadow] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][layers-4-shadow] provenance: commit (private history) branch (private) dirty 1 key c841c50e1fc1 e2e stale skips(build=false typecheck=false) served 16ccecb07dd4 built 16ccecb07dd4 servedIsBuilt true servedTree <worktree>

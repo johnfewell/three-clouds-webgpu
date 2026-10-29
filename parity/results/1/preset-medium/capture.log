@@ -1,0 +1,11 @@
+[capture][preset-medium] starting (phase 1, #16)
+[capture][preset-medium] screenshots: A=909441b B=878103b
+[capture][preset-medium] metrics: ssim=0.9863 deMean=0.32 deP95=0.55 histDist=0.0078 maxDelta=0.0990
+[capture][preset-medium] dual-L: measuredL=0.0941 ssim@measuredL=0.9865 (gated ssim is @refL=0.09) stabiliserShare=-1.8% sigmaA=5.38e-3 sigmaB=4.93e-3 sigmaD=1.02e-3
+[capture][preset-medium] plate: A mean=0.1010 std=0.0100 B mean=0.1005 std=0.0091 cloudFraction=16.514%
+[capture][preset-medium] gpuMs: A=14.11ms (32 samples) B=2.53ms (32 samples)
+[capture][preset-medium] eval: pass
+[capture][preset-medium] temporalUpscale: A=false B=false
+[capture][preset-medium] subgroups: true
+[capture][preset-medium] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][preset-medium] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>

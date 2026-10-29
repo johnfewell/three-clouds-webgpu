@@ -1,0 +1,28 @@
+reference/
+build/
+dist/
+# Generated API reference (pnpm docs:api). A build artifact of the JSDoc in
+# src/, like build/ and types/ above
+api/
+types/
+# Capture evidence, written by examples/parity/scripts/capture.mjs as
+# JSON.stringify(obj, null, 2). Prettier collapses short arrays ("reasons") that
+# JSON.stringify always expands, so formatting these files puts them in a churn
+# loop with the next capture. Results are produced by
+# scripts and committed as evidence, not edited.
+parity/results/
+examples/parity/e2e/evidence/reversed-depth/**/*.json
+# Raw benchmark receipts, written by the benchmark scripts: evidence.
+perf/
+pnpm-lock.yaml
+*.md
+.beads/
+.ntm/
+.opencode/
+.claude/
+
+# the emitter output (core/scripts/emit.mjs), gitignored in core/.gitignore
+core/generated/
+# the site Worker's generated deploy output and its own lockfile
+site/.cloudflare/
+site/pnpm-lock.yaml

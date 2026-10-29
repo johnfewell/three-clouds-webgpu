@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clouds vanilla recipe</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #10202c;
+        color: white;
+        font: 14px system-ui;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      aside {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        padding: 12px;
+        background: #101820dd;
+        border-radius: 8px;
+      }
+      button {
+        margin-right: 6px;
+      }
+      #status {
+        max-width: 540px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas aria-label="Volumetric clouds"></canvas>
+    <aside>
+      <button id="clouds-toggle" aria-pressed="true" disabled>
+        Clouds: on
+      </button>
+      <button id="pause">Pause</button>
+      <button id="seek">Seek to 0 seconds</button>
+      <a href="?manual=1">Manual graph</a>
+      <button id="stop">Dispose</button>
+      <p id="status" role="status" data-state="loading">Initializing WebGPU…</p>
+    </aside>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
