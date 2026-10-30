@@ -3146,7 +3146,9 @@ describe('pass materials compile', () => {
       reads: lines.filter(
         l =>
           new RegExp(`\\b${name}\\b`).test(l) &&
-          !new RegExp(`^\\s*${name} = `).test(l)
+          !new RegExp(
+            `^\\s*(?:(?:let|var)\\s+)?${name}(?:\\s*:\\s*[^=;]+)?\\s*=`
+          ).test(l)
       ).length,
       outsideAssigningBlock: readsOutsideAssigningBlock(march, name).length
     }))
@@ -3328,7 +3330,7 @@ describe('pass materials compile', () => {
     const ray = /(\w+) = CloudsFragmentRay\(/.exec(wgsl)?.[1] ?? ''
     const d = `${ray}.sceneRayDistance`
     const encoding = new RegExp(
-      `if \\( \\( ${d} > 0\\.0 \\) \\) \\{ (\\w+) = max\\( min\\( (\\w+)\\.x, ${d} \\), 0\\.0 \\); (\\w+) = vec2<f32>\\( \\1, \\( ${d} - \\1 \\) \\); \\} else \\{ \\3 = vec2<f32>\\( max\\( \\2\\.x, 0\\.0 \\), 0\\.0 \\); \\}`
+      `if \\( \\( ${d} > 0\\.0 \\) \\) \\{ (?:let )?(\\w+) = max\\( min\\( (\\w+)\\.x, ${d} \\), 0\\.0 \\); (\\w+) = vec2<f32>\\( \\1, \\( ${d} - \\1 \\) \\); \\} else \\{ \\3 = vec2<f32>\\( max\\( \\2\\.x, 0\\.0 \\), 0\\.0 \\); \\}`
     ).exec(wgsl)
     const toOutput =
       encoding != null &&

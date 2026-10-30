@@ -23,7 +23,7 @@ import { ProceduralWeather } from './proceduralWeather'
 // every sibling: same recipe, comparable literals. normalizeWGSL replaces
 // three's nodeVar3 counters, so a node added elsewhere does not move them
 
-const MAIN_COMMIT = '95b7c5df'
+const MAIN_COMMIT = 'r187 migration'
 
 const digest = (wgsl: string): string =>
   createHash('sha256').update(normalizeWGSL(wgsl)).digest('hex')
@@ -31,15 +31,14 @@ const digest = (wgsl: string): string =>
 // The generator and the march's consumer of it: two graphs this feature could
 // have perturbed and did not
 
-// Measured on 0.185.1 AND re-measured on stock 0.184.0: normalizeWGSL drops
-// three's revision banner, so one graph has one digest across the peer range
+// Re-measured with the stock r187 compiler and matching declarations
 const MAIN = {
   localWeatherGenerator:
-    'e57e7af5c911bf386e4b9c1b171b030792904649dd376d0ad5277283ea326ae2',
-  localWeatherGeneratorChars: 432206,
+    '4b639ce612209cf33ecd163e83b6100d63fa2815f18afbff28391d3296d23f3b',
+  localWeatherGeneratorChars: 381945,
   weatherSample:
-    '7cc332f4976a529444b7f79519a7c84fc8f20f2970eaa092ba6e99055b61a53b',
-  weatherSampleChars: 1796
+    'db748a3fea177a6de8d711b3a6a48fe5dde4b753d9d156c028a7cea30a2a097e',
+  weatherSampleChars: 1764
 }
 
 function placeholder2D(): DataTexture {

@@ -28,38 +28,40 @@ the tarball and its public peers, not this repository's workspace.
 
 ## Install
 
-Approved archives are distributed through [GitHub Releases](https://github.com/johnfewell/three-clouds-webgpu/releases), not npm.
-The public download becomes available when this candidate is approved and published:
+This branch targets Three.js r187 and prepares **0.1.0-alpha.7**, which is not
+published yet. Build its archive from this checkout using the commands below.
+The published alpha.6 archive keeps its original r185/r186 dependency contract.
+
+Copy the newly built clouds archive and both fork archives from this checkout
+into your application's `vendor/` directory:
 
 ```sh
 mkdir -p vendor
-curl -fL -o vendor/three-clouds-webgpu-0.1.0-alpha.6.tgz \
-  https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.6/three-clouds-webgpu-0.1.0-alpha.6.tgz
+cp /path/to/checkout/three-clouds-webgpu-0.1.0-alpha.7.tgz vendor/
+cp /path/to/checkout/vendor/takram-three-atmosphere-0.19.1+fork.8.tgz vendor/
+cp /path/to/checkout/vendor/takram-three-geospatial-0.9.1+fork.8.tgz vendor/
 ```
 
-Place the tarball in your project's `vendor/` directory, along with the fork
-build of `@takram/three-geospatial` (SHA-256 `319ea47d…9e44`):
-
-```sh
-curl -fLo vendor/takram-three-geospatial-0.9.1+fork.7.tgz \
-  https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-geospatial-0.9.1%2Bfork.7.tgz
-```
-
-The npm builds of the two takram packages fail to import on Three.js 0.185, so
-pin the fork builds in `pnpm-workspace.yaml`. Override both names:
+Pin both fork builds in `pnpm-workspace.yaml`. They carry the required runtime
+fixes and declarations compatible with r187's typed uniform nodes:
 
 ```yaml
 overrides:
-  '@takram/three-atmosphere': https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz
-  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.7.tgz
+  '@takram/three-atmosphere': file:./vendor/takram-three-atmosphere-0.19.1+fork.8.tgz
+  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.8.tgz
 ```
 
 Then install the known consumer dependency set:
 
 ```sh
-pnpm add ./vendor/three-clouds-webgpu-0.1.0-alpha.6.tgz three@0.185.1 @takram/three-atmosphere@0.19.1 @takram/three-geospatial@0.9.1 postprocessing@6.39.4
-pnpm add -D typescript@5.9.2 @types/three@0.185.0
+pnpm add ./vendor/three-clouds-webgpu-0.1.0-alpha.7.tgz three@0.187.0 @takram/three-atmosphere@0.19.1 @takram/three-geospatial@0.9.1 postprocessing@6.39.4
+pnpm add -D typescript@5.9.2 @types/three@0.187.0
 ```
+
+The pinned `postprocessing` peer still declares an older Three.js range, so
+installation reports a peer warning. Even its latest release, 6.39.5, excludes
+r187. The native consumer and parity checks cover the combination above; this
+does not claim upstream compatibility for every postprocessing effect.
 
 Use ESM, a browser bundler, `moduleResolution: "bundler"`, and
 `skipLibCheck: true` for upstream declarations. Application code is still
@@ -74,12 +76,12 @@ disables peer auto-installation and explicitly lists the runtime peers above.
 
 | Boundary | Supported or tested scope |
 | --- | --- |
-| Consumer Three.js | Stock **0.185.1** with `@types/three` 0.185.0; declared range `>=0.184.0 <0.187.0`. Stock 0.186.1 with `@types/three` 0.186.0 is qualified on fork release 7 only: the npm builds fail at import there as on 0.185, fork releases before 6 build the atmosphere's scattering LUT wrong, and only release 7's atmosphere build declares the fix. The package refuses anything else at load |
-| Atmosphere / geospatial | Fork builds **0.19.1+fork.7 / 0.9.1+fork.7** pinned by `overrides`, required for correct rendering. On three 0.184 the npm 0.19.1 / 0.9.1 builds install and typecheck, but the package refuses to load on them: it needs geospatial fork release 5 or later. On three 0.186 both builds must come from fork release 7 |
+| Consumer Three.js | Stock **0.187.0** with `@types/three` **0.187.0**; declared range `>=0.187.0 <0.188.0` |
+| Atmosphere / geospatial | Vendored fork builds **0.19.1+fork.8 / 0.9.1+fork.8**, pinned together by `overrides` |
 | Browser / backend | Native WebGPU; local hardware evidence uses Chrome on Apple Metal |
 | Projection | Perspective camera; orthographic projection is unsupported |
 | WebGL2 fallback | Refused, including fallback selected by `WebGPURenderer` |
-| Repository development | The same stock Three.js 0.185.1 and fork builds; no dependency is patched |
+| Repository development | The same stock Three.js 0.187.0 and fork builds; no dependency is patched |
 | TypeScript | Browser-bundler resolution with `skipLibCheck: true`; full-recipe NodeNext is not qualified |
 
 The npm builds of the takram packages fail to import on Three.js 0.185: they
@@ -93,14 +95,12 @@ See the [support details](WEBGPU.md#support-matrix) and
 These commands run in a repository clone, not in `node_modules`:
 
 ```sh
-git clone https://github.com/johnfewell/three-clouds-webgpu.git
-cd three-clouds-webgpu
 corepack enable
 pnpm install --frozen-lockfile
 pnpm build
 pnpm pack
-pnpm pack:verify ./three-clouds-webgpu-0.1.0-alpha.6.tgz
-pnpm pack:qualify ./three-clouds-webgpu-0.1.0-alpha.6.tgz --keep-projects
+pnpm pack:verify ./three-clouds-webgpu-0.1.0-alpha.7.tgz
+pnpm pack:qualify ./three-clouds-webgpu-0.1.0-alpha.7.tgz --keep-projects
 ```
 
 Building requires Node 24 and the repository's pinned pnpm. Packing refuses
@@ -112,10 +112,9 @@ archive, checks its content and local documentation links, and writes a
 SHA-256 receipt beside it. `pack:qualify` separately installs and builds both
 complete recipes in isolated temporary projects, verifies their assets at root
 and nested URL bases, and records a CPU-only receipt under `test-results/`.
-`--keep-projects` retains those projects for browser checks. `--three 0.186.1`
-qualifies the recipes on stock three 0.186.1 and `@types/three` 0.186.0 instead
-of the 0.185.1 they pin, and the receipt records which. Neither command claims
-GPU qualification.
+`--keep-projects` retains those projects for browser checks. Qualification uses
+stock Three.js 0.187.0 with matching types. These CPU checks do not claim GPU
+qualification.
 
 Full recipe qualification is opt-in, not part of `pnpm test`; a cold package
 store needs network access. Recipe build output, bundler caches and local

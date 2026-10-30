@@ -16,25 +16,23 @@ function installedVersion(pkg: string, from = ROOT): string {
   return readPkg(join(from, 'node_modules', pkg)).version as string
 }
 
-const FORK_TAG = 'fork.7'
-const ATMOSPHERE_URL =
-  'https://github.com/johnfewell/three-geospatial/releases/download/' +
-  'fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz'
+const FORK_TAG = 'fork.8'
+const ATMOSPHERE_URL = 'file:./vendor/takram-three-atmosphere-0.19.1+fork.8.tgz'
 const ATMOSPHERE_WEBGPU_SHA256 =
-  '4c0ef92f2ef3a288196e088a6c0d49e9f0b841222632624ff1ef90ea864b124f'
-const GEOSPATIAL_TARBALL = 'takram-three-geospatial-0.9.1+fork.7.tgz'
+  '90e7f7a076c038d2ea498f880f7adcc064c59e7ab0c1418b147e8d6d0c5877d9'
+const GEOSPATIAL_TARBALL = 'takram-three-geospatial-0.9.1+fork.8.tgz'
 const GEOSPATIAL_TARBALL_SHA256 =
-  '319ea47db67a9372e6dce58317cc702b6fd105e051964ed4c8e474bf072d9e44'
+  '10127715aeb9ac35e7d7e8bf443817d08e9bae845851810d5471628c3b91be25'
 const sha256 = (path: string): string =>
   createHash('sha256').update(readFileSync(path)).digest('hex')
 
 // The committed lockfile carries sha512 integrity for the URL entry, but a
 // resolve on a warm store writes it without one and a replaced release asset
-// then installs silently. These are the bytes of fork release 7
+// then installs silently. These are the bytes of fork release 8
 describe('fork builds', () => {
   const overrides = workspaceOverrides(ROOT)
 
-  it('pins the atmosphere build by its release URL and its bytes', () => {
+  it('pins the atmosphere build by its vendored tarball and its bytes', () => {
     const dir = join(ROOT, 'node_modules/@takram/three-atmosphere')
     const actual = {
       override: overrides['@takram/three-atmosphere'],
@@ -44,7 +42,7 @@ describe('fork builds', () => {
     console.table([actual])
     expect(actual).toEqual({
       override: ATMOSPHERE_URL,
-      version: '0.19.1+fork.7',
+      version: '0.19.1+fork.8',
       webgpu: ATMOSPHERE_WEBGPU_SHA256
     })
   })

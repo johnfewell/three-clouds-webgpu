@@ -1,6 +1,6 @@
 {
   "name": "three-clouds-webgpu",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "description": "Unofficial WebGPU/TSL volumetric clouds for Three.js, with explicit composition, baked assets and optional React bindings",
   "keywords": [
     "three",
@@ -116,7 +116,7 @@
     "@takram/three-atmosphere": "^0.19.1",
     "@takram/three-geospatial": "^0.9.1",
     "react": ">=19.0.0",
-    "three": ">=0.184.0 <0.187.0"
+    "three": ">=0.187.0 <0.188.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -127,7 +127,7 @@
     "@testing-library/react": "^16.1.0",
     "@types/node": "^22.19.19",
     "@types/react": "^19.0.0",
-    "@types/three": "0.185.0",
+    "@types/three": "0.187.0",
     "@vitest/coverage-v8": "^4.1.11",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
@@ -139,7 +139,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "stats-gl": "^4.1.0",
-    "three": "0.185.1",
+    "three": "0.187.0",
     "typescript": "5.9.2",
     "typescript-eslint": "^8.59.3",
     "type-fest": "^5.4.4",

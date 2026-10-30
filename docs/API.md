@@ -1,4 +1,4 @@
-# API reference: three-clouds-webgpu 0.1.0-alpha.6
+# API reference: three-clouds-webgpu 0.1.0-alpha.7
 
 Generated from this version’s public TypeScript surface, JSDoc and runtime defaults. Start with recommended integration; the advanced and reference groups remain exported for compatibility, not as required setup steps.
 
@@ -117,7 +117,7 @@ Caller-owned seconds and sample index, with optional authoritative inputs
 
 ### clouds
 
-[Source](../src/CloudsPassNode.ts#L2143)
+[Source](../src/CloudsPassNode.ts#L2142)
 
 ```ts
 clouds(options: CloudsOptions): CloudsPassNode
@@ -264,7 +264,7 @@ Detach borrowed slots before disposal and release the pass separately
 
 ### CloudsPassNode
 
-[Source](../src/CloudsPassNode.ts#L290)
+[Source](../src/CloudsPassNode.ts#L289)
 
 ```ts
 class CloudsPassNode
@@ -318,7 +318,7 @@ The renderer, scene, camera and atmosphere remain caller-owned
 
 ### CloudsOptions
 
-[Source](../src/CloudsPassNode.ts#L159)
+[Source](../src/CloudsPassNode.ts#L158)
 
 ```ts
 interface CloudsOptions
@@ -641,7 +641,7 @@ upstream and assign it (see ADR-009).
 
 ### assertWebGPUSupported
 
-[Source](../src/CloudsPassNode.ts#L263)
+[Source](../src/CloudsPassNode.ts#L262)
 
 ```ts
 assertWebGPUSupported(renderer: unknown): void
@@ -765,7 +765,7 @@ Existing objects to inspect, never a second configuration store
 | [`CLOUD_SHAPE_TEXTURE_SIZE`](../src/constants.ts#L4) | `CLOUD_SHAPE_TEXTURE_SIZE: 128` | See source declaration |
 | [`cloudShadowAtlasResolution`](../src/shadow/cloudShadowNode.ts#L79) | `cloudShadowAtlasResolution(descriptor: CloudShadowDescriptor): Node<"vec2">` | See source declaration |
 | [`CloudShadowAtOptions`](../src/shadow/cloudShadowNode.ts#L32) | `interface CloudShadowAtOptions` | See source declaration |
-| [`CloudShadowDescriptor`](../src/CloudsPassNode.ts#L188) | `interface CloudShadowDescriptor` | See source declaration |
+| [`CloudShadowDescriptor`](../src/CloudsPassNode.ts#L187) | `interface CloudShadowDescriptor` | See source declaration |
 | [`CloudShadowedAtmosphereLightNode`](../src/shadow/CloudShadowedAtmosphereLightNode.ts#L15) | `class CloudShadowedAtmosphereLightNode` | See source declaration |
 | [`CloudShadowNodeDeps`](../src/shadow/cloudShadowNode.ts#L19) | `interface CloudShadowNodeDeps` | See source declaration |
 | [`CloudShadowNodeOptions`](../src/shadow/cloudShadowNode.ts#L27) | `interface CloudShadowNodeOptions` | See source declaration |
@@ -778,7 +778,7 @@ Existing objects to inspect, never a second configuration store
 | [`createCloudShadowTransmittance`](../src/shadow/sampleCloudShadowOpticalDepth.ts#L214) | `createCloudShadowTransmittance(descriptor: CloudShadowDescriptor, deps: GroundShadowExtraDeps, options?: { enabled?: boolean; shadowSampleCount?: number; }): FnNode<[Node<"vec3"> \| Vector3, number \| Node<"float"> \| Node<"uint">, number \| Node<"float"> \| Node<"uint">], Node<"float">>` | See source declaration |
 | [`createGetShadowRadius`](../src/shadow/shadowRadius.ts#L39) | `createGetShadowRadius(deps: ShadowRadiusDeps): FnNode<[Node<"vec3"> \| Vector3], Node<"float">>` | See source declaration |
 | [`createQualityGovernor`](../src/QualityGovernor.ts#L375) | `createQualityGovernor(target: QualityGovernorTarget, options?: QualityGovernorOptions): QualityGovernor` | Create a governor for a target and register it as the target's<br>`qualityGovernor`, which is what `applyReferenceMode` disarms. The governor<br>starts disarmed: call `arm()` to begin, and feed `update(frameMs)` per frame. |
-| [`createSampleCloudShadowOpticalDepth`](../src/shadow/sampleCloudShadowOpticalDepth.ts#L53) | `createSampleCloudShadowOpticalDepth(descriptor: CloudShadowDescriptor, deps: GroundShadowExtraDeps, options?: { shadowSampleCount?: number; }): FnNode<[Node<"vec3"> \| Vector3, number \| Node<"float"> \| Node<"uint">, number \| Node<"float"> \| Node<"uint">], VarNode<"float", VarNode<"float", ConstNode<"float", number>>>>` | See source declaration |
+| [`createSampleCloudShadowOpticalDepth`](../src/shadow/sampleCloudShadowOpticalDepth.ts#L53) | `createSampleCloudShadowOpticalDepth(descriptor: CloudShadowDescriptor, deps: GroundShadowExtraDeps, options?: { shadowSampleCount?: number; }): FnNode<[Node<"vec3"> \| Vector3, number \| Node<"float"> \| Node<"uint">, number \| Node<"float"> \| Node<"uint">], VarNode<"float", ConstNode<"float", number>>>` | See source declaration |
 | [`DebugView`](../src/CloudsContext.ts#L89) | `type DebugView =<br>  \| 'none'<br>  \| 'cascades'<br>  \| 'shadowMap'<br>  \| 'uv'<br>  \| 'sampleCount'<br>  \| 'frontDepth'<br>  \| 'shadowLength'<br>  \| 'velocity'<br>  \| 'marchIntervals'` | Which diagnostic view the resolve pass writes, or `'none'` for the shaded<br>image. A change rebuilds the graph. |
 | [`DEFAULT_LOCAL_WEATHER_URL`](../src/constants.ts#L6) | `DEFAULT_LOCAL_WEATHER_URL: "assets/local_weather.png"` | See source declaration |
 | [`DEFAULT_SHADOW_RADIUS`](../src/shadow/shadowRadius.ts#L20) | `DEFAULT_SHADOW_RADIUS: 3` | See source declaration |

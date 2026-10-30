@@ -7,10 +7,9 @@
 
 import { Fn, uv, vec4 } from 'three/tsl'
 import {
+  Node,
   NodeUpdateType,
-  TempNode,
   TextureNode,
-  type Node,
   type NodeBuilder,
   type NodeFrame
 } from 'three/webgpu'
@@ -48,7 +47,7 @@ export class CloudsTextureNode extends TextureNode {
   }
 }
 
-export class CloudsCompositeNode extends TempNode {
+export class CloudsCompositeNode extends Node {
   static get type(): string {
     return 'CloudsCompositeNode'
   }

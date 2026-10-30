@@ -16,11 +16,11 @@ import {
 } from '../../test/helpers/defaultChainDigest'
 import { CloudsContext } from '../CloudsContext'
 
-// Measured on origin/main, after cloudFrontRefinement became a default,
-// with this file and test/helpers/defaultChainDigest.ts copied in unmodified
+// WGSL refreshed for the stock r187 compiler, default uniforms are unchanged
+// The two-arm density-chain comparison below still checks distinct programs
 // A failure prints the digest, so a stale literal names its own replacement
 const DEFAULT_WGSL_SHA256 =
-  '97342f4bf56b020184a529721e8016d372140b1d68f9573dae096bb9462c8100'
+  'f7122d6ac2dad868a810350fb845df7ec400e5eb7ecfcf50a11828b9311370f6'
 const DEFAULT_UNIFORMS_SHA256 =
   'd3e9b12a3fd38acb71368b0f9c01f57aff9c4ca9ad55dae1e7e0b97e18ffb37d'
 

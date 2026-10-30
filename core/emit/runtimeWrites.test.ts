@@ -2,8 +2,6 @@
 // name, against the bytes three wrote for the same case (state.json). A field
 // that drifts here renders a different frame on the GPU
 
-import { REVISION } from 'three'
-
 import { log } from '../../test/helpers/log'
 import { framePart, type Description } from '../src/runtime/description'
 import { resizeTextures } from '../src/runtime/runtime'
@@ -177,10 +175,10 @@ describe.each(CASES)('runtime uniform writes equal three for %s', name => {
       mismatches: mismatches.length
     })
     for (const m of mismatches.slice(0, 40)) log('mismatch', { ...m })
-    // a comparison over nothing would pass vacuously. three 0.185.1 writes
-    // 266-285 fields per case and r186, sharing more uniforms, 242-259
+    // A comparison over nothing would pass vacuously. r187 shares uniforms
+    // and writes 239-256 fields across these cases
     expect(computed.length).toBeGreaterThan(15)
-    expect(compared).toBeGreaterThan(REVISION.startsWith('186') ? 200 : 250)
+    expect(compared).toBeGreaterThan(200)
     expect(mismatches).toEqual([])
   })
 

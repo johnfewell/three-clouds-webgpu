@@ -1,9 +1,3 @@
-// three 0.185 removed `struct().layout`, which the npm builds of
-// @takram/three-atmosphere and @takram/three-geospatial read while their module
-// bodies evaluate. The pinned fork builds no longer read it, so 0.185 is in
-// range. 0.186 is in range on fork release 7, whose scattering-LUT kernel
-// builds correctly on r186. 0.187 has not been measured.
-
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -13,15 +7,16 @@ import { log } from './helpers/log'
 const ROOT = join(import.meta.dirname, '..')
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'))
 
-describe('the three peer range excludes every broken version', () => {
-  it('caps three below 0.187', () => {
+describe('the Three.js r187 consumer contract', () => {
+  it('admits only the r187 release line and develops against its exact version', () => {
     const declared: string = pkg.peerDependencies.three
-    log('three-peer-range', { declared })
-    expect(declared).toContain('<0.187.0')
-  })
-
-  it('still admits 0.184, the oldest verified version', () => {
-    expect(pkg.peerDependencies.three).toContain('>=0.184.0')
+    log('three-peer-range', {
+      declared,
+      development: pkg.devDependencies.three
+    })
+    expect(declared).toBe('>=0.187.0 <0.188.0')
+    expect(pkg.devDependencies.three).toBe('0.187.0')
+    expect(pkg.devDependencies['@types/three']).toBe('0.187.0')
   })
 
   it('ships no dependency patch', () => {

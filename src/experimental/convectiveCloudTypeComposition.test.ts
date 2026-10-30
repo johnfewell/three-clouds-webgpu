@@ -54,23 +54,23 @@ import {
 } from './cloudTypeMap'
 import { convectiveHeightProfileCPU } from './convectiveProfile'
 
-// sha256 of normalizeWGSL(fragment), one pair per flag state. Both carry the
-// stbn rename and core intersection helper, shadow the fused ray projection
+// r187 sha256 of normalizeWGSL(fragment), one pair per flag state
+// The structural delta checks below remain independent of these snapshots
 const MAIN_CONVECTIVE_ONLY = {
-  march: '81028e2b9daa3648806c3f5a41384f3a842690cf829d178718a7b270cdbcc80d',
-  shadow: 'ba4797e3f34d8c00a73cd3fd872946f68a7330b1eadf6ec0434d3865a48fc128'
+  march: '9bc4cf47e135fc490e9b4428effa2f19aceb60146931d96a8aafe3fc9a8fd323',
+  shadow: '7cb0539800bd220829771d1bca01981912c7d4fc2113db69c9bca0041a8e4e1e'
 } as const
 const MAIN_CLOUD_TYPE_MAP_ONLY = {
-  march: '8edf3a05fb3421d98f2d7261c7714fe0d9348d0435d2760a81321f3618eb58b7',
-  shadow: '49b5e068bf793f0d03f6968333df8a5e7c8b02c2d5d452cfc0bbf4f7432b84e2'
+  march: 'd3b7b7f80399310daa933bafa53629e5441463382082a8d54fbead914d92a9a5',
+  shadow: 'd92ac1859f4a87b240d1a1f1a576e3f12882c9a33532a8abde8cea8563a02ea6'
 } as const
 const MAIN_BOTH_OFF = {
-  march: 'fef872c2f458dd73a99e2d2969439c023cb7184a9ed91f3dc32f2cf6770e34aa',
-  shadow: '460bd79155c4e810684c3c86fee3bb6a24303bca328a7c75c8b7702d05d0e51d'
+  march: '11ca5e4683ea92167c1f1230d01f3cd5eb45bd28532123f13be725ff38b72ce1',
+  shadow: '60b3c811200ecab5a74728bce1c30d9398950bcdae96f8d3efaba1a00ecd3b04'
 } as const
 const BOTH_ON_AFTER_FIX = {
-  march: 'ed4e44cbcaeff2f3b5dbfcfbc83837f6f2d6c02cd0e395351439c1ecf1f16ef1',
-  shadow: 'eeab9423e1a3e974155934252c70773fdc71679f99417166b78c33f7fb9ce633'
+  march: '288655d348cb54e1aed95933a49cf610e6926b363982f39db6516bbdbb4aa96f',
+  shadow: 'fb66c85c8fc86381a1fcd4f4fbb1395a11578a0119502a7d6b12c6b27ac2eb5d'
 } as const
 
 interface PassInternals {

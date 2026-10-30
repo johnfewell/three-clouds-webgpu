@@ -144,7 +144,7 @@ function digestWith(rainShafts: boolean): Arm {
 
 // The cell mask's Perlin, and the shaft's lean constant as the compiler prints
 // it, so "the graph moved" cannot be satisfied by some unrelated difference
-const CELL_PERLIN = 'mx_perlin_noise_float_0('
+const CELL_PERLIN = /fn (fn\d+) \( p : vec2<f32> \) -> f32/
 const LEAN = '0.9285456809284321'
 
 describe(
@@ -197,8 +197,12 @@ describe(
     it('the pass with the option on emits a different graph', () => {
       const off = digestWith(false)
       const on = digestWith(true)
-      const perlin = (arm: Arm) =>
-        (arm.march.match(/mx_perlin_noise_float_0\(/g) ?? []).length
+      const perlin = (arm: Arm) => {
+        const name = CELL_PERLIN.exec(arm.march)?.[1]
+        return name == null
+          ? 0
+          : (arm.march.match(new RegExp(`\\b${name}\\(`, 'g')) ?? []).length
+      }
       log('rain shafts on digest', {
         off: off.digest,
         on: on.digest,
@@ -218,7 +222,7 @@ describe(
       expect(on.march.length).toBeGreaterThan(off.march.length)
       expect(on.march.includes(LEAN)).toBe(true)
       expect(off.march.includes(LEAN)).toBe(false)
-      expect(off.march.includes(CELL_PERLIN)).toBe(false)
+      expect(CELL_PERLIN.test(off.march)).toBe(false)
       expect(perlin(on)).toBeGreaterThan(perlin(off))
     })
   }

@@ -211,9 +211,9 @@ multiple synchronous renders do not imply multiple completed samples.
 ## Supported consumer boundary
 
 Use ESM with a browser bundler and native WebGPU. The package's declared Three.js
-range is `>=0.184.0 <0.187.0`; on r185 and r186 the `@takram` packages must be the fork builds
+range is `>=0.187.0 <0.188.0`; on r187 the `@takram` packages must be the fork builds
 pinned with `overrides`, because the npm builds fail at import there. The complete
-recipes pass TypeScript bundler resolution on stock r185. The existing NodeNext smoke test
+recipes pass TypeScript bundler resolution on stock r187. The existing NodeNext smoke test
 covers a smaller surface and uses `skipLibCheck: true`; it does not qualify the
 complete recipe under NodeNext, which encounters upstream missing-export errors.
 Use the packed recipe checks for the exact dependency and compiler matrix rather

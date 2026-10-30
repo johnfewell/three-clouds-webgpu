@@ -114,7 +114,7 @@ describe('turbulence, WGSL', () => {
     log('turbulence-wgsl-cross', { found: cross != null })
     expect(cross).not.toBeNull()
     // six node vars appear across the three components, two per axis
-    const used = new Set(cross![1]!.match(/nodeVar\d+/g) ?? [])
+    const used = new Set(cross![1]!.match(/node(?:Var|Const)\d+/g) ?? [])
     expect(used.size).toBe(6)
   })
 })

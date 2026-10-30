@@ -224,13 +224,13 @@ describe.each(names)('%s complete consumer recipe', name => {
       include: string[]
     }
     expect(manifest.dependencies).toMatchObject({
-      three: '0.185.1',
+      three: '0.187.0',
       '@takram/three-atmosphere': '0.19.1',
       '@takram/three-geospatial': '0.9.1',
       postprocessing: '6.39.4',
       'three-clouds-webgpu': 'file:./vendor/three-clouds-webgpu.tgz'
     })
-    expect(manifest.devDependencies['@types/three']).toBe('0.185.0')
+    expect(manifest.devDependencies['@types/three']).toBe('0.187.0')
     expect(manifest.scripts.build).toBe('tsc --noEmit && vite build')
     expect(config.compilerOptions.strict).toBe(true)
     expect(config.compilerOptions.moduleResolution).toBe('bundler')

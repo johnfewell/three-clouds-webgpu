@@ -215,27 +215,28 @@ describe('the three release a qualification runs on', () => {
     devDependencies: { '@types/three': '0.185.0', typescript: '5.9.2' }
   }
 
-  it('defaults to 0.185.1 and admits 0.186.1, each with its types', () => {
-    const rows = [selectThree(), selectThree('0.186.1')]
-    log('qualify-three', { releases: JSON.stringify(rows) })
-    expect(rows).toEqual([
-      { version: '0.185.1', types: '0.185.0' },
-      { version: '0.186.1', types: '0.186.0' }
-    ])
+  it('defaults to stock r187 with matching declarations', () => {
+    const actual = selectThree()
+    log('qualify-three', { ...actual })
+    expect(actual).toEqual({ version: '0.187.0', types: '0.187.0' })
+    expect(selectThree('0.187.0')).toEqual(actual)
   })
 
-  it.each(['0.184.0', '0.186', '0.187.0', 'latest'])('refuses %s', version => {
-    expect(() => selectThree(version)).toThrow(
-      `supports stock three 0.185.1 or 0.186.1, not ${version}`
-    )
-  })
+  it.each(['0.184.0', '0.185.1', '0.186.1', '0.188.0', 'latest'])(
+    'refuses %s',
+    version => {
+      expect(() => selectThree(version)).toThrow(
+        `supports stock three 0.187.0, not ${version}`
+      )
+    }
+  )
 
   it('writes the release into the recipe copy and nothing else', () => {
-    const pinned = pinRecipeThree(recipe, selectThree('0.186.1'))
+    const pinned = pinRecipeThree(recipe, selectThree('0.187.0'))
     expect(pinned).toEqual({
       name: 'recipe',
-      dependencies: { three: '0.186.1', 'three-clouds-webgpu': 'file:x.tgz' },
-      devDependencies: { '@types/three': '0.186.0', typescript: '5.9.2' }
+      dependencies: { three: '0.187.0', 'three-clouds-webgpu': 'file:x.tgz' },
+      devDependencies: { '@types/three': '0.187.0', typescript: '5.9.2' }
     })
     expect(recipe.dependencies.three, 'the source is not mutated').toBe(
       '0.185.1'

@@ -14,7 +14,7 @@
     "three-clouds-webgpu": "workspace:*",
     "@takram/three-atmosphere": "0.19.1",
     "@takram/three-geospatial": "0.9.1",
-    "three": "0.185.1"
+    "three": "0.187.0"
   },
   "devDependencies": {
     "typescript": "5.9.2",

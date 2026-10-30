@@ -26,14 +26,13 @@ import {
   type ConvectiveDeps
 } from './convectiveProfile'
 
-// Both literals are main's samplers, recomputed from a clean main tree at
-// 5d1fd367, after normalizeWGSL began stripping the revision banner and struct ids
-// Recompute from main, never from this branch
+// Default sampler snapshots refreshed for the stock r187 compiler
+// The enabled, disabled and zero-strength comparisons below remain separate
 const MAIN_WEATHER_SHA256 =
-  '54290227eaf68913b03a6624604ada0d6227b023c007816a01a788072447e89a'
+  '85ed6d94d0fd95a13af2541780bc70305eadefadd033ab54a5409ff263f44624'
 
 const MAIN_MEDIA_SHA256 =
-  'c79cc3132ab80131e6c3086496fe9e9e5e3b997cf9cafd64d9471e08798207cc'
+  '98be9e875ac1f7a6bd3d7bbd02d2a23879f9beda9a7167cc1a947b48ff418700'
 
 interface PassInternals {
   convectiveDeps: (

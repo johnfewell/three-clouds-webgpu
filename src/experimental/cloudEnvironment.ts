@@ -24,7 +24,7 @@ import {
   vec3,
   vec4
 } from 'three/tsl'
-import { NodeMaterial, TempNode, type Node } from 'three/webgpu'
+import { Node, NodeMaterial } from 'three/webgpu'
 
 import { sky } from '@takram/three-atmosphere/webgpu'
 import { QuadGeometry, radians } from '@takram/three-geospatial'
@@ -120,7 +120,7 @@ export interface CloudEnvironmentBakeInput {
 // capture it before any graph exists, and it reads back null until
 // experimental.cloudEnvironment is on and a graph has been built
 
-export class CloudEnvironmentNode extends TempNode {
+export class CloudEnvironmentNode extends Node {
   static get type(): string {
     return 'CloudEnvironmentNode'
   }

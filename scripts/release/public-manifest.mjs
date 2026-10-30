@@ -104,7 +104,7 @@ export const KEEP = [
   {
     path: 'vendor',
     reason:
-      'the fork geospatial build pnpm-workspace.yaml overrides point at, ' +
+      'the fork builds pnpm-workspace.yaml overrides point at, ' +
       'so a frozen install resolves'
   },
   { path: 'vite.config.ts', reason: 'build needs it' },
@@ -248,11 +248,15 @@ export const DOCS_EXCLUDE = [
  */
 export function decide(path) {
   if (
+    path === 'UPGRADE_LOG.md' ||
     path === 'docs/PUBLIC_LAUNCH.md' ||
-    /^scripts\/release\/(?:export-public|export-verify|bead-refs|audit-remotes)\./.test(
+    path === 'docs/PUBLIC_SYNC.md' ||
+    path === '.github/workflows/public-sync.yml' ||
+    path === 'scripts/release/public-sync-policy.json' ||
+    /^scripts\/release\/(?:export-public|export-verify|bead-refs|audit-remotes|public-sync)\./.test(
       path
     ) ||
-    /^scripts\/release\/(?:exportPublic|exportVerify|auditRemotes)\.test\.ts$/.test(
+    /^scripts\/release\/(?:exportPublic|exportVerify|auditRemotes|publicSync)\.test\.ts$/.test(
       path
     )
   ) {

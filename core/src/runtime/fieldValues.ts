@@ -135,6 +135,7 @@ function threeField(s: FieldSources, key: string, site: FieldSite) {
     case 'screenDPR':
       return b.pixelRatio
     case 'matrixUniform':
+    case 'uvTransform':
       return b.uvTransform
     case 'modelWorldMatrix':
       return modelMatrix(s, site, 'modelWorldMatrix')

@@ -1,12 +1,12 @@
 [
   {
     "name": "atmosphere",
-    "url": "https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz",
-    "sha256": "3e77db75b7410589b076db6f74caeac5f3a2f787cef5cb7b363285c5ee85f9e0"
+    "path": "vendor/takram-three-atmosphere-0.19.1+fork.8.tgz",
+    "sha256": "829ec23b8754700f93e9764b8473924ac4995c634dccd6e96401f5b944eb34e1"
   },
   {
     "name": "geospatial",
-    "url": "https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-geospatial-0.9.1%2Bfork.7.tgz",
-    "sha256": "319ea47db67a9372e6dce58317cc702b6fd105e051964ed4c8e474bf072d9e44"
+    "path": "vendor/takram-three-geospatial-0.9.1+fork.8.tgz",
+    "sha256": "10127715aeb9ac35e7d7e8bf443817d08e9bae845851810d5471628c3b91be25"
   }
 ]

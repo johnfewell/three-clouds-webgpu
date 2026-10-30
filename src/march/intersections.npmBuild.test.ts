@@ -46,7 +46,7 @@ describe('the march on a geospatial build without four masked lanes', () => {
     log('installed-fork-marker', [actual])
     expect(actual).toEqual({
       forkBuild:
-        '{"release":7,"raySpheresIntersectionsLanes":4,"r186Kernels":true}',
+        '{"release":8,"raySpheresIntersectionsLanes":4,"r186Kernels":true}',
       getIntersections: 'function'
     })
   })
@@ -122,7 +122,7 @@ describe('the r186 kernel markers', () => {
     )
   })
 
-  it('loads on r186 with the installed release 7 builds', async () => {
+  it('loads on r186 with the installed release 8 builds', async () => {
     const atmosphere = await import('@takram/three-atmosphere/webgpu')
     const actual = {
       atmosphere: JSON.stringify(
@@ -136,7 +136,7 @@ describe('the r186 kernel markers', () => {
     }
     log('installed-atmosphere-marker', [actual])
     expect(actual).toEqual({
-      atmosphere: '{"release":7,"r186Kernels":true}',
+      atmosphere: '{"release":8,"r186Kernels":true}',
       loads: 'function'
     })
   })

@@ -14,7 +14,7 @@ initialization path to run alongside the helper.
 ## Compatibility before configuration
 
 Use the exact dependency pins in the recipe first. The consumer Three.js
-revision is stock **0.185.1**, with the fork builds of `@takram/three-atmosphere`
+revision is stock **0.187.0**, with the fork builds of `@takram/three-atmosphere`
 and `@takram/three-geospatial` pinned by the recipe's `overrides`. The npm builds
 of those two packages fail to import on 0.185.
 Use native WebGPU and a perspective camera. Keep a single resolved copy of

@@ -208,8 +208,8 @@ export const Story: StoryFC<StoryProps, StoryArgs> = props => (
   <WebGPUCanvas
     camera={{ position: [2, 1, 2], near: 0.1, far: 1e5 }}
     renderer={{
-      onInit: renderer => {
-        renderer.library.addLight(CloudShadowedLightNode, AtmosphereLight)
+      onInit: () => {
+        AtmosphereLight.registerNode(CloudShadowedLightNode)
       }
     }}
   >

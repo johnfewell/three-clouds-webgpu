@@ -19,8 +19,9 @@ import { createCloudTypeMap } from './cloudTypeMap'
 
 // sha256 of normalizeWGSL(fragment) with cloudTypeMap off. Re-pinned for the
 // stbnMarch rename, then for the shells moving to the core intersection helper
+// Snapshot refreshed for the stock r187 compiler
 const MAIN_MARCH_FRAGMENT_SHA256 =
-  '63572e09b1e3055a978fcee87a065d1124ef7915f9365e31d40ea72f3eade298'
+  '745789521d3973cd80250ff14b42740f5b801abc0b4e111bfe6cb801b754875b'
 
 function digest(wgsl: string): string {
   return createHash('sha256').update(normalizeWGSL(wgsl)).digest('hex')

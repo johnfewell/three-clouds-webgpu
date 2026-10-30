@@ -155,8 +155,10 @@ describe('the shaft is placed by the convective cell mask', () => {
     }
     const shaftSmoothsteps = calls(shaftWGSL, 'smoothstep(')
     const cellSmoothsteps = calls(cellWGSL, 'smoothstep(')
+    const helpers = (wgsl: string) =>
+      wgsl.slice(wgsl.indexOf('// codes'), wgsl.indexOf('@fragment'))
     const perlinCalls = (wgsl: string) =>
-      calls(wgsl, 'mx_perlin_noise_float_0(')
+      wgsl.slice(wgsl.indexOf('@fragment')).match(/\bfn\d+\(/g) ?? []
     // smoothstep's first two arguments are its iso-contour level and width, so
     // they are the whole claim: same edges over the same noise. Split at
     // commas that are not inside a parenthesis, which a regex cannot do
@@ -195,6 +197,8 @@ describe('the shaft is placed by the convective cell mask', () => {
     // the ragged term reuses it, while the mask inlines the call
     expect(shaftWGSL).toContain('floor(')
     expect(cellWGSL).toContain('floor(')
+    expect(helpers(shaftWGSL)).toContain('fn fn')
+    expect(helpers(shaftWGSL)).toBe(helpers(cellWGSL))
     expect(perlinCalls(shaftWGSL)).toHaveLength(1)
     expect(perlinCalls(cellWGSL)).toHaveLength(1)
     // normalizeWGSL folds only unnamed uniforms, and the shaft's are named, so
@@ -204,7 +208,7 @@ describe('the shaft is placed by the convective cell mask', () => {
       edges(cellSmoothsteps[0]!).map(role)
     )
     // and the hoisted noise the shaft smoothsteps is the Perlin itself
-    expect(shaftSmoothsteps[0]).toContain('nodeVarN')
+    expect(shaftSmoothsteps[0]).toContain('nodeConstN')
   })
 
   it('the cell term is the mask CPU twin, shifted by that twin own pivot', () => {

@@ -83,13 +83,6 @@ export type LightingMode = 'post' | 'lights'
 // Each replaces an `as any` and names the missing member: `any` disables
 // checking wherever it flows, a shim disables exactly one member
 
-// three types renderer.library as StandardNodeLibrary, which does not declare
-// addLight even though the runtime has it: that is how custom light nodes are
-// registered (see three's own examples)
-interface NodeLibraryWithAddLight {
-  addLight: (nodeClass: unknown, lightClass: unknown) => void
-}
-
 // inverseViewMatrix() is typed as a bare Node<T> with no TSL operators. The
 // runtime value is a mat4 node, and .mul is the documented way to transform a
 // vec4 by it
@@ -213,7 +206,9 @@ export async function createSideB(opts: SideBOptions): Promise<SideBHandle> {
 
   // AtmosphereLight for 'lights' mode (harmless in 'post': BasicNodeMaterial
   // ignores lights)
-  const atmosphereLight = new AtmosphereLight()
+  // Registration is class-wide in r187, so each scene owns its light class
+  class ParityAtmosphereLight extends AtmosphereLight {}
+  const atmosphereLight = new ParityAtmosphereLight()
   atmosphereLight.name = 'atmosphereLight'
   scene.add(atmosphereLight)
 
@@ -350,10 +345,7 @@ export async function createSideB(opts: SideBOptions): Promise<SideBHandle> {
         this.stbnNode = shadowStbn
       }
     }
-    ;(renderer.library as unknown as NodeLibraryWithAddLight).addLight(
-      ParityShadowedLightNode,
-      AtmosphereLight
-    )
+    ParityAtmosphereLight.registerNode(ParityShadowedLightNode)
   } else {
     // 3.2a: aerial perspective multiplies direct illuminance by shadow
     // transmittance via a standalone node that reconstructs surface position
@@ -409,10 +401,7 @@ export async function createSideB(opts: SideBOptions): Promise<SideBHandle> {
       return vec4(radius, valid, 0, 1)
     })()
 
-    ;(renderer.library as unknown as NodeLibraryWithAddLight).addLight(
-      AtmosphereLightNode,
-      AtmosphereLight
-    )
+    ParityAtmosphereLight.registerNode(AtmosphereLightNode)
   }
 
   // Both lighting modes need the live shadow-length node for light shafts

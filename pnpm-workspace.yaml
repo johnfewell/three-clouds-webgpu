@@ -8,6 +8,9 @@ allowBuilds:
 # depends on atmosphere, which makes its release URL a sub-dependency. The
 # compensating control is test/pins.test.ts, which pins the installed bytes
 blockExoticSubdeps: false
+minimumReleaseAgeExclude:
+  - '@types/three@0.187.0'
+  - three@0.187.0
 overrides:
-  '@takram/three-atmosphere': https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-atmosphere-0.19.1%2Bfork.7.tgz
-  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.7.tgz
+  '@takram/three-atmosphere': file:./vendor/takram-three-atmosphere-0.19.1+fork.8.tgz
+  '@takram/three-geospatial': file:./vendor/takram-three-geospatial-0.9.1+fork.8.tgz

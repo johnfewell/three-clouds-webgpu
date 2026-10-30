@@ -247,7 +247,7 @@ describe('the WebGL fallback recipe', () => {
       devDependencies: Record<string, string>
     }
     expect(manifest.dependencies).toMatchObject({
-      three: '0.185.1',
+      three: '0.187.0',
       '@takram/three-clouds': '0.7.6',
       '@takram/three-atmosphere': '0.19.1',
       '@takram/three-geospatial': '0.9.1',
@@ -255,7 +255,7 @@ describe('the WebGL fallback recipe', () => {
       'three-clouds-webgpu': 'file:./vendor/three-clouds-webgpu.tgz'
     })
     expect(manifest.dependencies.react).toBeUndefined()
-    expect(manifest.devDependencies['@types/three']).toBe('0.185.0')
+    expect(manifest.devDependencies['@types/three']).toBe('0.187.0')
     expect(manifest.scripts.build).toBe('tsc --noEmit && vite build')
     const config = JSON.parse(
       readFileSync(join(recipe, 'tsconfig.json'), 'utf8')

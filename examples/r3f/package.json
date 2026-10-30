@@ -17,7 +17,7 @@
     "@takram/three-geospatial": "0.9.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "0.185.1",
+    "three": "0.187.0",
     "three-clouds-webgpu": "workspace:*"
   },
   "devDependencies": {

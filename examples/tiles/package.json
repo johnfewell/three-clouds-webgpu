@@ -14,7 +14,7 @@
     "3d-tiles-renderer": "0.4.28",
     "@takram/three-atmosphere": "0.19.1",
     "@takram/three-geospatial": "0.9.1",
-    "three": "0.185.1",
+    "three": "0.187.0",
     "three-clouds-webgpu": "workspace:*"
   },
   "devDependencies": {

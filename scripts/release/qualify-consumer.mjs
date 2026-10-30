@@ -39,8 +39,8 @@ const VENDORED = /^file:\.\/vendor\/([^/]+\.tgz)$/
 const REPOSITORY = resolve(import.meta.dirname, '../..')
 // The stock three releases a recipe may qualify on, each with its types. The
 // recipes pin the first, and --three writes another into each recipe copy
-const THREE_RELEASES = { '0.185.1': '0.185.0', '0.186.1': '0.186.0' }
-const DEFAULT_THREE = '0.185.1'
+const THREE_RELEASES = { '0.187.0': '0.187.0' }
+const DEFAULT_THREE = '0.187.0'
 
 export function selectThree(version = DEFAULT_THREE) {
   insist(
@@ -670,7 +670,7 @@ if (
   }
   if (positional.length !== 1 || positional[0].startsWith('-')) {
     console.error(
-      'Usage: pnpm pack:qualify archive.tgz [--three 0.185.1|0.186.1] [--receipt path.json] [--keep-projects]'
+      'Usage: pnpm pack:qualify archive.tgz [--three 0.187.0] [--receipt path.json] [--keep-projects]'
     )
     process.exitCode = 1
   } else {

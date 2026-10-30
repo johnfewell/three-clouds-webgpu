@@ -37,7 +37,7 @@ describe('three struct layout API compatibility', () => {
           DensityProfileLayer as unknown as { isStructTypeNode?: boolean }
         ).isStructTypeNode
       }
-      log('struct-0185-api', [
+      log('struct-0187-api', [
         { field: 'name', expected: 'DensityProfileLayer', actual: actual.name },
         {
           field: 'isStructTypeNode',
@@ -139,10 +139,7 @@ describe('packed consumer installation compatibility', () => {
   }
 
   // @types/three publishes .0 releases only
-  const TYPES_FOR: Record<string, string> = {
-    '0.185.1': '0.185.0',
-    '0.186.1': '0.186.0'
-  }
+  const TYPES_FOR: Record<string, string> = { '0.187.0': '0.187.0' }
 
   function createConsumer(version: string, fork = false): string {
     const dir = mkdtempSync(join(tmpdir(), 'three-clouds-consumer-'))
@@ -322,33 +319,13 @@ export { clouds, cloudsWebgpu, Clouds, CloudLayer, CloudsPassNode, context };
     expect(actual.geospatial).toMatch(/^0\.9\.1\+fork\.\d+$/)
   }
 
-  describe('npm builds on three 0.184', () => {
+  describe('npm builds on stock three 0.187', () => {
     let consumerDir: string
     beforeAll(() => {
-      consumerDir = createConsumer('0.184.0')
+      consumerDir = createConsumer('0.187.0')
     }, 200_000)
 
-    it('packs the package and installs cleanly into an isolated consumer project', () => {
-      const installedPkg = JSON.parse(
-        readFileSync(
-          join(consumerDir, 'node_modules/three-clouds-webgpu/package.json'),
-          'utf8'
-        )
-      ) as { name: string; exports: Record<string, { types?: string }> }
-      log('consumer-installed-package', [
-        {
-          field: 'webgpu types export',
-          expected: './types/index.d.ts',
-          actual: installedPkg.exports['./webgpu']?.types
-        }
-      ])
-      expect(installedPkg.name).toBe('three-clouds-webgpu')
-      expect(installedPkg.exports['./webgpu']?.types).toBe('./types/index.d.ts')
-    })
-
-    // The npm geospatial build masks only lanes .x and .y of
-    // raySpheresIntersections, so the package refuses to load on it
-    it('refuses to load on three@0.184.0 with the npm geospatial build', () => {
+    it('reproduces the npm builds struct layout error on stock three@0.187.0', () => {
       let caughtError: string | null = null
       try {
         run(consumerDir, process.execPath, ['test-import.mjs'])
@@ -356,39 +333,7 @@ export { clouds, cloudsWebgpu, Clouds, CloudLayer, CloudsPassNode, context };
         caughtError =
           (err as { stderr?: string }).stderr ?? (err as Error).message
       }
-      log('consumer-import-0184-npm', [
-        {
-          field: 'names the four-lane fork build',
-          expected: true,
-          actual: caughtError?.includes('fork build 0.9.1+fork.7')
-        }
-      ])
-      expect(caughtError).toContain(
-        'does not mask every lane of raySpheresIntersections'
-      )
-      expect(caughtError).toContain('fork build 0.9.1+fork.7')
-    })
-
-    it('typechecks a tiny import-only NodeNext fixture with skipLibCheck: true', () => {
-      typecheckFixture(consumerDir, 'consumer-typecheck-0184')
-    })
-  })
-
-  describe('npm builds on stock three 0.185', () => {
-    let consumerDir: string
-    beforeAll(() => {
-      consumerDir = createConsumer('0.185.1')
-    }, 200_000)
-
-    it('reproduces the npm builds struct layout error on stock three@0.185.1', () => {
-      let caughtError: string | null = null
-      try {
-        run(consumerDir, process.execPath, ['test-import.mjs'])
-      } catch (err: unknown) {
-        caughtError =
-          (err as { stderr?: string }).stderr ?? (err as Error).message
-      }
-      log('consumer-import-0185-npm', [
+      log('consumer-import-0187-npm', [
         {
           field: 'fails on struct layout skew',
           expected: true,
@@ -404,53 +349,19 @@ export { clouds, cloudsWebgpu, Clouds, CloudLayer, CloudsPassNode, context };
     })
   })
 
-  describe('fork builds on stock three 0.185', () => {
+  describe('fork builds on stock three 0.187', () => {
     let consumerDir: string
     beforeAll(() => {
-      consumerDir = createConsumer('0.185.1', true)
+      consumerDir = createConsumer('0.187.0', true)
     }, 200_000)
 
-    it('imports cleanly across all export subpaths on stock three@0.185.1', () => {
-      expectForkBuilds(consumerDir, 'consumer-fork-versions-0185')
+    it('imports cleanly across all export subpaths on stock three@0.187.0', () => {
+      expectForkBuilds(consumerDir, 'consumer-fork-versions-0187')
       checkImports(consumerDir)
     })
 
-    it('typechecks the import-only NodeNext fixture on three@0.185.1', () => {
-      typecheckFixture(consumerDir, 'consumer-typecheck-0185-fork')
-    })
-  })
-
-  // 0.186 needs fork release 7, whose scattering-LUT kernel builds correctly
-  // on r186. packageReadiness reads this consumer as the ceiling's evidence
-  describe('fork builds on stock three 0.186', () => {
-    let consumerDir: string
-    beforeAll(() => {
-      consumerDir = createConsumer('0.186.1', true)
-    }, 200_000)
-
-    it('imports cleanly across all export subpaths on stock three@0.186.1', () => {
-      expectForkBuilds(consumerDir, 'consumer-fork-versions-0186')
-      checkImports(consumerDir)
-    })
-
-    it('typechecks the import-only NodeNext fixture on three@0.186.1', () => {
-      typecheckFixture(consumerDir, 'consumer-typecheck-0186-fork')
-    })
-  })
-
-  describe('fork builds on three 0.184', () => {
-    let consumerDir: string
-    beforeAll(() => {
-      consumerDir = createConsumer('0.184.0', true)
-    }, 200_000)
-
-    it('imports cleanly across all export subpaths on three@0.184.0', () => {
-      expectForkBuilds(consumerDir, 'consumer-fork-versions-0184')
-      checkImports(consumerDir)
-    })
-
-    it('typechecks the import-only NodeNext fixture on three@0.184.0', () => {
-      typecheckFixture(consumerDir, 'consumer-typecheck-0184-fork')
+    it('typechecks the import-only NodeNext fixture on three@0.187.0', () => {
+      typecheckFixture(consumerDir, 'consumer-typecheck-0187-fork')
     })
   })
 })

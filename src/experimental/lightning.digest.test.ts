@@ -25,8 +25,9 @@ import {
 
 // Main's primary march under the stub deps below, taken from origin/main at
 // c4a7b346. Recompute from main, never from this branch
+// Snapshot refreshed for the stock r187 compiler
 const MAIN_MARCH_SHA256 =
-  '18ec0b78e9f7e4174dc693e707f369d3918bd38eaa358cd6240b01a81d8937b5'
+  'aa461977971678c3a9e0c011b571fec5a08c4251676d538172dc8dc1a9d4c1b7'
 
 const sha256 = (text: string): string =>
   createHash('sha256').update(text).digest('hex')

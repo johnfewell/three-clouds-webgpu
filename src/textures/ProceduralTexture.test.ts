@@ -143,8 +143,10 @@ describe('Procedural3DTexture bookkeeping', () => {
     const { fragment } = compileWGSL(node)
 
     // i32 operands on both the divide and the modulo
-    expect(fragment).toMatch(/i32\([^)]*\)\s*\/\s*32/)
-    expect(fragment).toMatch(/i32\([^)]*\)\s*%\s*32/)
+    const index = /let (\w+) = i32\([^)]*\);/.exec(fragment)?.[1]
+    expect(index).toBeDefined()
+    expect(fragment).toMatch(new RegExp(`${index}\\s*\\/\\s*32`))
+    expect(fragment).toMatch(new RegExp(`${index}\\s*%\\s*32`))
     // and the slice stride, not a second divide by size
     expect(fragment).toContain('1024')
   })

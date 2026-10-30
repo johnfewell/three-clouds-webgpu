@@ -30,8 +30,10 @@ it('compiles shared shadow tiles and a storage array without derivatives', () =>
   // The array layer sits BETWEEN the coord and the value. Matched on the
   // layer's own neighbours, not by splitting the call on commas: the coord
   // nests commas in its parens, and 0.184 has no StorageTextureNode.store()
+  const layer = /let (\w+) = f32\( workgroupId\.z \);/.exec(shader)?.[1]
+  expect(layer).toBeDefined()
   expect(shader).toMatch(
-    /,\s*i32\(\s*f32\(\s*workgroupId\.z\s*\)\s*\)\s*,\s*\w/
+    new RegExp(`,\\s*i32\\(\\s*${layer}\\s*\\)\\s*,\\s*\\w`)
   )
 
   expect(shader).not.toContain('textureSample(')

@@ -388,7 +388,7 @@ describe('installed native recipe provenance', () => {
         status: 'passed',
         qualification: 'cpu-only',
         retained: true,
-        three: selectThree('0.185.1')
+        three: selectThree('0.187.0')
       })
     ).toThrow('missing archive inventory')
     expect(() =>
@@ -402,7 +402,7 @@ describe('installed native recipe provenance', () => {
     )
   })
 
-  it.each(['0.185.1', '0.186.1'])(
+  it.each(['0.187.0'])(
     'accepts only the exact prepared Three pin for %s',
     version => {
       const archive = fixture()

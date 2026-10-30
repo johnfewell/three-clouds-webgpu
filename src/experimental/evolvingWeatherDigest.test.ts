@@ -8,13 +8,11 @@ import { beforeEach, describe, expect, test } from 'vitest'
 import { log, setCurrentSpec } from '../../test/helpers/log'
 import { offAndOnDigests } from '../../test/helpers/marchWGSLDigest'
 
-// March bytes are the stbn rename and the core intersection helper. Shadow
-// bytes add the fused ray projection. A failure means one moved. Re-measure
-// on the merged tree, do not paste a hash from a run you did not cause
+// Default march and shadow snapshots refreshed for the stock r187 compiler
 const MAINLINE_MARCH_DIGEST =
-  'ff1b1f1fbbb7b103216acf02424e27e1ad7405255100aeefe30c1b1c3ab63f55'
+  '6dc555922a6ac3df4b1e46090a7758ab64a0e3eacbc9cec24887d0435f43583b'
 const MAINLINE_SHADOW_DIGEST =
-  '8f1667b3b048356404060a5c946e69ecc96834a422867930e85d5eafb06931d1'
+  '6e821e499b4bfc899e55ea34d7c2ef1c3a61a7e429106e9248179115c6fe9d5d'
 
 describe('default graph is byte-identical to mainline', () => {
   beforeEach(() => {

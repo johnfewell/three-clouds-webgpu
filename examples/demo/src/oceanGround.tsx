@@ -96,8 +96,8 @@ const sunIlluminanceAt = FnVar(
     const ctx = getAtmosphereContext(builder)
     const ecef = ctx.matrixWorldToECEF.mul(vec4(positionWorldNode, 1)).xyz
     const point = ecef
-      .mul(ctx.parametersNode.worldToUnit)
-      .add(ctx.altitudeCorrectionUnit)
+      .mul(ctx.parametersNode.worldToUnit as Node<'float'>)
+      .add(ctx.altitudeCorrectionUnit as unknown as Node<'vec3'>)
     return getSplitIlluminance(
       point,
       ctx.sunDirectionECEF,

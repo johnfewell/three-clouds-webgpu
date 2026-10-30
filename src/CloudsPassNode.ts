@@ -19,14 +19,13 @@ import {
   uniformArray
 } from 'three/tsl'
 import {
+  Node,
   NodeMaterial,
   NodeUpdateType,
   NodeUtils,
   QuadMesh,
   RendererUtils,
-  TempNode,
   type ComputeNode,
-  type Node,
   type NodeBuilder,
   type NodeFrame,
   type RenderTarget,
@@ -287,7 +286,7 @@ export function assertWebGPUSupported(renderer: unknown): void {
  * Ownership: dispose() releases pass resources, not assigned context textures
  * The renderer, scene, camera and atmosphere remain caller-owned
  */
-export class CloudsPassNode extends TempNode {
+export class CloudsPassNode extends Node {
   static get type(): string {
     return 'CloudsPassNode'
   }

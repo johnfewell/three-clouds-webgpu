@@ -14,10 +14,10 @@ Use Node 24 and pnpm 11.8.0. From your copied folder:
 
 ```sh
 mkdir -p vendor
-cp /absolute/path/to/three-clouds-webgpu-0.1.0-alpha.6.tgz vendor/three-clouds-webgpu.tgz
-curl -fLo vendor/takram-three-geospatial-0.9.1+fork.7.tgz \
-  https://github.com/johnfewell/three-geospatial/releases/download/fork-release-7/takram-three-geospatial-0.9.1%2Bfork.7.tgz
-shasum -a 256 vendor/takram-three-geospatial-0.9.1+fork.7.tgz
+cp /absolute/path/to/three-clouds-webgpu-0.1.0-alpha.7.tgz vendor/three-clouds-webgpu.tgz
+cp /absolute/path/to/checkout/vendor/takram-three-atmosphere-0.19.1+fork.8.tgz vendor/
+cp /absolute/path/to/checkout/vendor/takram-three-geospatial-0.9.1+fork.8.tgz vendor/
+shasum -a 256 vendor/takram-*.tgz
 corepack pnpm install
 pnpm build
 pnpm dev
@@ -29,17 +29,18 @@ Substitute the real input archive path, but keep the destination filename:
 lockfile for subsequent `pnpm install --frozen-lockfile` runs. Serve over
 localhost or HTTPS in a browser with native WebGPU; WebGL fallback is rejected.
 
-The checksum must be
-`319ea47db67a9372e6dce58317cc702b6fd105e051964ed4c8e474bf072d9e44`.
-The npm builds of `@takram/three-atmosphere` and `@takram/three-geospatial`
-fail to import on Three.js 0.185, so `pnpm-workspace.yaml` overrides both with
-fork builds that carry the upstream fix: atmosphere from its release URL,
-geospatial from the tarball above. A local tarball keeps pnpm's guard against
-URL sub-dependencies on and puts its integrity hash in the lockfile. Override
-both names, never one, so a single copy of each package resolves.
+Copy both fork archives from the same r187 checkout. Their SHA-256 values are:
 
-The exact baseline is stock Three.js 0.185.1, atmosphere 0.19.1+fork.7,
-geospatial 0.9.1+fork.7, `@types/three` 0.185.0, TypeScript 5.9.2 and Vite 7.3.6.
+- `takram-three-atmosphere-0.19.1+fork.8.tgz`: `829ec23b8754700f93e9764b8473924ac4995c634dccd6e96401f5b944eb34e1`
+- `takram-three-geospatial-0.9.1+fork.8.tgz`: `10127715aeb9ac35e7d7e8bf443817d08e9bae845851810d5471628c3b91be25`
+
+The npm takram builds use the removed struct-layout API. These vendored forks
+carry the runtime fixes and explicit uniform types required by r187. Override
+both names so one copy of each package resolves; pnpm records their integrity
+hashes in the generated lockfile.
+
+The exact baseline is stock Three.js 0.187.0, atmosphere 0.19.1+fork.8,
+geospatial 0.9.1+fork.8, `@types/three` 0.187.0, TypeScript 5.9.2 and Vite 7.3.6.
 React/React DOM 19.2.8 and Fiber 9.7.0 are explicit dependencies.
 
 Both templates disable automatic peer installation and explicitly satisfy the

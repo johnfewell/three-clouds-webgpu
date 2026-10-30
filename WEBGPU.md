@@ -11,32 +11,19 @@ This port is not on npm. Pack a tarball from a clone and install it, as the
 
 Peer dependencies:
 
-- `three >= 0.184.0 < 0.187.0`, unpatched. Three 0.185 removed `struct().layout`, which the
-  npm builds of `@takram/three-atmosphere` 0.19.1 and `@takram/three-geospatial` 0.9.1 read
-  at import time, so on 0.185 they fail for every entrypoint
-  ([three-geospatial#111](https://github.com/takram-design-engineering/three-geospatial/issues/111)).
-  The fork builds (`0.19.1+fork.7` / `0.9.1+fork.7`, published as release assets of
-  [johnfewell/three-geospatial](https://github.com/johnfewell/three-geospatial/releases/tag/fork-release-7))
-  carry the upstream fix and import on stock 0.184 and 0.185. Release 3 also
-  adds the `shadowNode` and `lightingMaskNode` inputs to `AerialPerspectiveNode`
-  that the cloud-shadow adapter sets. Pin them with pnpm
-  `overrides` in `pnpm-workspace.yaml`, as both recipes do, so exactly one copy of each
-  package resolves. On 0.184 the npm builds install and typecheck only. Their
-  `raySpheresIntersections` masks two lanes where the march needs four, so the package throws
-  at load and names the fork build (`0.9.1+fork.7`), whose `forkBuild` marker it checks.
-  On 0.186 only the fork builds from release 7 work: three r186 declares a node
-  shared across branches in one branch only, which broke the atmosphere's scattering
-  LUT before release 6. On r186 the package also checks that both packages'
-  `forkBuild` markers set `r186Kernels` and name the same release, which only release 7's
-  atmosphere build carries, and refuses anything else at load. `test/threeStructCompat.test.ts` installs the
-  packed package into five consumers: fork builds on 0.184.0, 0.185.1 and 0.186.1, which import
-  and typecheck, npm builds on 0.184.0, which typecheck and must refuse to load, and npm builds on
-  0.185.1, which must fail at import. `test/threePeerRange.test.ts` pins the range.
+- `three >=0.187.0 <0.188.0`, unpatched; development and recipes pin 0.187.0.
+  Use the vendored `0.19.1+fork.8` atmosphere and `0.9.1+fork.8` geospatial
+  builds together. They retain the struct-layout, four-lane intersection and
+  scattering-LUT fixes and emit explicit shader/value uniform types for r187.
+  The npm builds still read the removed `struct().layout` API at import time.
+  Pin both packages with the recipe's `overrides` so one copy of each resolves.
+  `test/threeStructCompat.test.ts` installs the packed package with stock r187,
+  verifies the fork imports/types, and checks the npm builds' import refusal.
 - `@takram/three-atmosphere ^0.19.1`
 - `@takram/three-geospatial ^0.9.1`
 
 Use `@types/three` matching your three minor version. The packed-package checks use stock
-three 0.185.1 with `@types/three` 0.185.0 and the fork builds; see the
+three 0.187.0 with `@types/three` 0.187.0 and the fork builds; see the
 [install section](README.md#install) for the consumer pins.
 Those checks use TypeScript's `skipLibCheck: true` for upstream declaration
 compatibility. This skips dependency declaration checking, not application
@@ -387,10 +374,8 @@ invalidates the reuse. Ordinary post-process consumers need no extra call.
 | WebGL2 (fallback)   | Unsupported | Call `assertWebGPUSupported(renderer)` — see below.         |
 | Perspective camera  | **Full**    | The only projection the reference supports.                |
 | Orthographic camera | Unsupported | Same as the reference — see below.                         |
-| three 0.185.1, stock | Consumer baseline | With `@types/three` 0.185.0 and the fork atmosphere/geospatial builds pinned by `overrides`. Import/build checks and native installed-recipe checks are separate qualifications; workspace parity evidence does not substitute for either. |
-| three 0.185.1 + npm `@takram` builds | Unsupported | The npm builds fail at import because r185 removed `struct().layout` ([three-geospatial#111](https://github.com/takram-design-engineering/three-geospatial/issues/111)). Use the fork builds. |
-| three 0.184.0       | Supported | With the fork `@takram` builds (release 7) a packed consumer imports and typechecks. With the npm builds it installs and typechecks only: the package refuses to load, because their `raySpheresIntersections` masks two of the four lanes the march reads (`test/threeStructCompat.test.ts`). The recipes are qualified on 0.185.1 only. |
-| three 0.186         | Supported, fork builds only | Stock 0.186.1 with `@types/three` 0.186.0 and fork release 7, which the package requires on r186. The npm builds fail at import as on 0.185. Qualified by the packed consumer in `test/threeStructCompat.test.ts`, the recipes and a hardware run of the parity ladder; the repository itself develops on 0.185.1. |
+| three 0.187.0, stock | Consumer baseline | With `@types/three` 0.187.0 and the fork atmosphere/geospatial builds pinned by `overrides`. Import/build checks and native installed-recipe checks are separate qualifications; workspace parity evidence does not substitute for either. |
+| three 0.187.0 + npm `@takram` builds | Unsupported | The npm builds fail at import because r185 removed `struct().layout` ([three-geospatial#111](https://github.com/takram-design-engineering/three-geospatial/issues/111)). Use the fork builds. |
 | Chrome on Apple Metal | Hardware tested | The local hardware checks use Chrome with `--enable-unsafe-webgpu`; this is not cross-browser qualification. |
 | Edge / Safari / Firefox | Unverified | Native WebGPU availability alone does not establish this package's compatibility. |
 | `subgroups` feature | Optional    | Only `lightShaftsHalfResolution` uses it (quad operations in the march); without it the flag is ignored and the shafts march per fragment. three requests the feature whenever the adapter offers it. |

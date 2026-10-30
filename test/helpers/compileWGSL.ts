@@ -257,7 +257,7 @@ function assertNoJsClassTypes(shaders: Record<string, string>): void {
   )
 }
 
-const NODE_VAR_RE = /node(Var|Uniform|Attribute|Varying)\d+/g
+const NODE_VAR_RE = /node(Var|Const|Uniform|Attribute|Varying)\d+/g
 // three names generated structs from a per-build counter (NodeBuffer_21507),
 // so two builds of one graph differ in those ids alone. Normalising them lets a
 // test say "the same program" rather than "the same up to a counter"
@@ -268,10 +268,15 @@ const NODE_ID_RE = /Node([A-Za-z]+)_?\d+/g
 const BANNER_RE = /^\/\/ Three\.js r\d+ - Node System$/m
 
 export function normalizeWGSL(wgsl: string): string {
+  const functions = new Map<string, string>()
   return wgsl
     .replace(BANNER_RE, '// Three.js - Node System')
     .replace(NODE_VAR_RE, (_, kind: string) => `node${kind}N`)
     .replace(NODE_ID_RE, (_, type: string) => `Node${type}N`)
+    .replace(/\bfn\d+\b/g, name => {
+      if (!functions.has(name)) functions.set(name, `fn${functions.size}`)
+      return functions.get(name)!
+    })
     .replace(/\s+/g, ' ')
     .trim()
 }

@@ -115,6 +115,16 @@ struct NodeBuffer_21507 {
     expect(normalizeWGSL(wgsl)).toContain('NodeBufferN')
   })
 
+  it('normalises r187 function counters while retaining distinct call targets', () => {
+    const a = 'fn fn92() { return fn103(); } fn fn103() { return 1.0; }'
+    const b = 'fn fn8() { return fn21(); } fn fn21() { return 1.0; }'
+    expect(normalizeWGSL(a)).toBe(normalizeWGSL(b))
+    expect(normalizeWGSL(a)).toContain('return fn1();')
+    expect(normalizeWGSL(a)).not.toBe(
+      normalizeWGSL(a.replace('return fn103()', 'return fn92()'))
+    )
+  })
+
   it('finds nothing in a struct that three typed properly', () => {
     const wgsl = `
 struct DirectionalSkySamples {
