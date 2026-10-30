@@ -129,7 +129,7 @@ export function assembleSite(demoDist, showcaseDist, out) {
   if (existsSync(join(demoDist, 'storybook')))
     refuse('demo output already has a storybook entry')
   clearOwnOutput(out)
-  mkdirSync(out, { recursive: true })
+  mkdirSync(dirname(out), { recursive: true })
   const copy = {
     recursive: true,
     dereference: false,
