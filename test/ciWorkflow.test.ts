@@ -123,11 +123,11 @@ describe.runIf(PRIVATE)('CI diagnostic artifacts', () => {
     expect(unboundedE2eUploads(longRetention)).toContain('Upload e2e results')
   })
 
-  it('keeps the small unit-test evidence on its existing policy', () => {
+  it('retains failed unit-test diagnostics for one day', () => {
     const upload = stepBlock(WORKFLOW, 'Upload test results')
 
-    expect(upload).toContain('if: always()')
-    expect(upload).toContain('retention-days: 30')
+    expect(upload).toContain('if: failure()')
+    expect(upload).toContain('retention-days: 1')
   })
 })
 

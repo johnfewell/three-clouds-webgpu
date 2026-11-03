@@ -47,6 +47,13 @@ installation; do not run the GPU benchmark inside WSL.
 Use LF checkouts on every machine (`core.autocrlf=false` when cloning), since
 source provenance hashes the actual file bytes, not just Git's commit ID.
 
+By default, the benchmark runner launches Playwright's bundled Chromium for
+Testing binary. To run with installed Google Chrome stable instead, set the
+`BENCHMARK_BROWSER_CHANNEL=chrome` environment variable. Because different
+browser channels may vary in engine revisions, driver flags, and compiler
+behavior, benchmark reports produced with different browser channels are not
+directly comparable unless executed using the exact same channel.
+
 From the benchmark checkout:
 
 ```sh
@@ -82,10 +89,14 @@ Use distinct filenames for subsequent runs.
 
 Close other GPU applications and animated browser tabs, stop other captures,
 connect laptops to power, disable low-power mode, and let the machine cool to
-a repeatable starting condition. Keep the benchmark Chrome window visible and
-do not interact with it. The tool records the actual selected GPU; on a hybrid
-Windows PC, verify that Chrome selected the intended NVIDIA GPU. Software
-renderers are not accepted as hardware results.
+a repeatable starting condition. Keep the benchmark browser window visible and
+do not interact with it. The tool records the actual selected GPU, browser channel,
+and user agent; on a hybrid Windows PC, verify that the browser selected the
+intended NVIDIA GPU. Software renderers are not accepted as hardware results.
+
+When comparing against historical runs, ensure the browser channel is identical:
+the runner defaults to bundled Chromium for Testing; set `BENCHMARK_BROWSER_CHANNEL=chrome`
+to target system Chrome. Comparisons across different browser channels are invalid.
 
 Idle confirmation is an operator assertion, not automatic proof that the
 machine is idle. The runner never terminates unrelated applications.
@@ -410,6 +421,25 @@ so the two sides of that subtraction are not comparable at that size. Use the
   this feel like" and the wrong number for "which pass costs what".
 - **The cross-contaminated A/B timer inside the parity capture is not used
   anywhere above.** Protocol 2 is the harness with one renderer live at a time.
+
+### 2026-11-02: Three.js r187 Performance Qualification
+
+Comprehensive qualification comparing Three.js **0.185.1** (alpha.6) to **0.187.0** (alpha.7).
+Measurements conducted on an Apple Silicon GPU running native WebGPU under counterbalanced paired runs (18 pairs / 36 runs, 120 sample frames per run; 4,320 total frames). Raw data and methodology in `docs/experiments/r187-performance/`.
+
+| Case @ Resolution | Metric | r185.1 Median | r187.0 Median | Delta | Verdict |
+|---|---|---:|---:|---:|---|
+| `baseline-medium` @ 1920×1080 | GPU Time (Pair) | ~11.2 ms | ~11.2 ms | **-0.02 ms / pair** | No measurable difference |
+| `shadow-plane` @ 1920×1080 | GPU Time (Pair) | ~28.2 ms | ~28.2 ms | **+0.04 ms / pair** | No measurable difference |
+| `shadow-cascades-2x512` @ 1920×1080 | GPU Time (Pair) | ~24.3 ms | ~24.3 ms | **-0.05 ms / pair** | No measurable difference (an unpaired median of the alternating shadow and no-shadow frames is not a frame time) |
+| Cold Start (Initial 2 Frames) | Total Time | 1258 ms | 586 ms | **-671 ms median** | Faster in 10/10 rounds (automatic r187 gain) |
+| Vanilla Consumer Bundle | Minified Size | 308.20 KB | 310.19 KB | +1.99 KB (+0.6%) | three, this library and the atmosphere packages all differ between the arms, so no single cause |
+
+- **Cross-Depth Pipeline Sharing**: Three.js r187 introduces `RenderContext.stateKey` (`attachmentState-mrtState-cameraState`), eliminating `callDepth` pipeline partitioning and allowing nested passes (cascades, postprocessing) to share compiled pipelines.
+- **Cold Start Acceleration**: r187 pipeline compilation architecture completes initial scene startup 671 ms faster median across 10 counterbalanced rounds.
+- **Pipeline Prewarm**: Evaluated an explicit prewarm path (`pass.prewarm(renderer)` / `compileAsync`). Measured on hardware, prewarm cost ~674 ms and the first frame still stalled (~454 ms), adding ~600 ms before the first clouds. It was dropped and is not part of the library.
+- **Bindings & Uniform Sharing**: `TextureNode.getBase()` deduplicates texture matrix and `flipY` uniforms. Warm unchanged frames execute with 0 bind-group key string allocations.
+- **Cloud Environment Map**: Dynamic cube PMREM generation in r187 is ~1 ms/frame more expensive overall (+2.1 ms per bake frame). Default remains 64×64, 4-frame update interval, and strictly opt-in (`cloudEnvironment = false`) with zero overhead when disabled. The bake overhead in scenes that enable it, such as the ocean examples, is a known follow-up.
 
 ## Agent Run Instructions
 

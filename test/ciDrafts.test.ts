@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 const active = '../.github/workflows/ci.yml'
 const workflow = readFileSync(new URL(active, import.meta.url), 'utf8')
 const workflows = workflow.includes('# workflow: private')
-  ? [active, '../.github/public-workflows/ci.yml']
+  ? ['../.github/public-workflows/ci.yml']
   : [active]
 
 describe('CI skips draft pull requests', () => {

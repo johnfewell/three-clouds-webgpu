@@ -236,7 +236,11 @@ export const DOCS_EXCLUDE = [
       'a dated licence audit with its open findings, written for this ' +
       'release rather than by the port'
   },
-  { path: 'docs/profiling', reason: 'raw profiling dumps' }
+  { path: 'docs/profiling', reason: 'raw profiling dumps' },
+  {
+    path: 'docs/experiments',
+    reason: 'internal performance experiment writeups and raw artifacts'
+  }
 ]
 
 /**

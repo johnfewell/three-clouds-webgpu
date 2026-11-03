@@ -17,6 +17,7 @@ export declare const DEFAULT_FLAGS: readonly string[]
 export declare function launchBenchmarkBrowser(options?: {
   headless?: boolean
   flags?: readonly string[]
+  channel?: string
 }): Promise<unknown>
 export declare function summarise(values: number[]): BenchmarkMetric
 export declare function benchmarkUrl(

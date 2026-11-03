@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "296a95afdb1c530ec65539adefbcc866da2eb6a01761d65b84488b7920817adf",
+  "sourceFingerprint": "9aa7207baf5ad8fe4b98405c34550577fd50a3647c25e23eb56b08492403221f",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -36,7 +36,7 @@
     },
     "README.md": {
       "mode": "100644",
-      "sha256": "4988b278eeb19629894ecfed8855d53b197edec2bce9bbd9933014c34a1ee58a"
+      "sha256": "b0773a02e23a956cc16e29fd2a2c03e265900784a64da063a8d682619c8fb482"
     },
     "THIRD_PARTY_NOTICES.md": {
       "mode": "100644",
@@ -308,7 +308,7 @@
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
-      "sha256": "3af069247d14907a7f1117fbe4f2a5cd9298019a76262fd1d3669fef627e18d7"
+      "sha256": "2a3c1460be73265f1b041a5eabf56ec4b65e550945bcd9adcbac82573142362e"
     },
     "docs/CONSUMER_CONTRACT.md": {
       "mode": "100644",
@@ -836,11 +836,11 @@
     },
     "examples/parity/scripts/benchmarks/browser.d.mts": {
       "mode": "100644",
-      "sha256": "2e205d705635a50274fecc149890330324675b0df5bf6c57ef412a3f72e3adfc"
+      "sha256": "30a750f042a34d95800eb229fc8ddf0b8e71960bc2eae65aabf672d55501c9ad"
     },
     "examples/parity/scripts/benchmarks/browser.mjs": {
       "mode": "100644",
-      "sha256": "140d12d005bdbbdaa2951c4e7040aeee7d92ab1d71c7636c6ac21a21635777a1"
+      "sha256": "8435bb0b90e19e01cf7ad0e4fe9b4e8c735612c95d5db64caced7fc9fa3c893e"
     },
     "examples/parity/scripts/benchmarks/clock.d.mts": {
       "mode": "100644",
@@ -4032,7 +4032,7 @@
     },
     "scripts/release/public-manifest.mjs": {
       "mode": "100644",
-      "sha256": "e9df7b5670842520bd95f99ccd7b65c26ab65857f11f3ee8eb66930adc79cd30"
+      "sha256": "27372cea8e65e9f7ad39e3fafe0be813140cba718f4ddee8a775eaf6d95c9c1a"
     },
     "scripts/release/public-scan.d.mts": {
       "mode": "100644",
@@ -5110,6 +5110,10 @@
       "mode": "100644",
       "sha256": "2f8bbe091e53846dbb360389d6321b7e88a4064f478c02816f1d5cb458a9d717"
     },
+    "test/bindingsUniforms.test.ts": {
+      "mode": "100644",
+      "sha256": "d9f2d10d592a955f808621e95d8582ca22d9c89ff5338f9074aabf0910b45728"
+    },
     "test/captureLinear.test.ts": {
       "mode": "100644",
       "sha256": "a9503e2e695f176a223a15c1622456e2f57ba77cea80e408273e2f37a672d4f6"
@@ -5124,11 +5128,19 @@
     },
     "test/ciDrafts.test.ts": {
       "mode": "100644",
-      "sha256": "bb48cb4fcdb82d25a22baff484c44cf22affdaa483b980df9af1df23e06ec785"
+      "sha256": "7fe39c7f575769dfef1bac66ddb7345578dd9e9b0e1d5be159bf948b12976997"
     },
     "test/ciWorkflow.test.ts": {
       "mode": "100644",
-      "sha256": "103fe4a272e62a8da621ac5e4830bfe95826f75f047e9071c6ae041a28d70176"
+      "sha256": "50af2ca0c75296c6ddece4ac41b202ebf9f7f8503e74933628381d0feca8b746"
+    },
+    "test/cloudEnvironmentPerformance.test.ts": {
+      "mode": "100644",
+      "sha256": "fae4bd9b931b5dd10c3656e97cdc8193521631b42c43a69d0cc82b67b33d2df2"
+    },
+    "test/compilationStages.test.ts": {
+      "mode": "100644",
+      "sha256": "9cabbdc86ab54ea345dfd2acb1d6c4ab1d5ca25d74acff764fd359112780a9a7"
     },
     "test/consoleFilters.test.ts": {
       "mode": "100644",
@@ -5301,6 +5313,10 @@
     "test/jitterFixture.test.ts": {
       "mode": "100644",
       "sha256": "bc477773f9143a1891266cd7ab54edd7e3b6f088cc3080c2328c6c932b73cc15"
+    },
+    "test/lifecycleResources.test.ts": {
+      "mode": "100644",
+      "sha256": "11ce988107954e8615cfb126a79679fe8e9b51a13942581839cbaf03ad3210b4"
     },
     "test/lockfileManifests.test.ts": {
       "mode": "100644",

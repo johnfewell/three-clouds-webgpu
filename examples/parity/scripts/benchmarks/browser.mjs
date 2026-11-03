@@ -24,12 +24,17 @@ export class BenchmarkUnsupportedError extends Error {
 
 export async function launchBenchmarkBrowser({
   headless = false,
-  flags = DEFAULT_FLAGS
+  flags = DEFAULT_FLAGS,
+  channel = process.env.BENCHMARK_BROWSER_CHANNEL
 } = {}) {
   const { chromium } = await import(
     pathToFileURL(join(playwrightPackage, 'index.mjs'))
   )
-  return chromium.launch({ channel: 'chrome', headless, args: [...flags] })
+  const options = { headless, args: [...flags] }
+  if (channel) {
+    options.channel = channel
+  }
+  return chromium.launch(options)
 }
 
 export function summarise(values) {
