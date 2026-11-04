@@ -601,14 +601,18 @@ that made it and the two cannot drift apart. The mask term is the same smoothste
 over the same Perlin the coverage uses; the shafts add a ragged multiplier taken
 from that same noise value, which is why the ragged edge costs no second sample.
 With `convectiveProfile` off the shafts still work, because they read the
-parameters rather than the option.
+parameters rather than the option. In that mode they form independent rain
+cells; they do not follow the clouds of a fair-weather preset. Enable both
+options to use the same cell mask for convection and rain.
 
 **It is marched in its own closed segment, not in the primary march.** For a
 camera below the deck, `getRayNearFar` starts the primary march *at* the base
 crossing (`second.y`, `src/march/intersections.ts:130`), so the band a shaft
 hangs in is never a marched sample, and the interval skip would empty it anyway.
-Four fixed steps over the part of the ray that is inside the shell and in front
-of whatever the ray hits is the cheap option the design allows: against up to 500
+The segment stops at the first ground-sphere intersection, even in a sky-only
+scene with no geometry depth. Scene depth and the maximum ray distance can
+shorten it further. Density is zero below ground and above the cloud base.
+Four fixed steps over this bounded segment is the cheap option the design allows: against up to 500
 primary steps with three texture samples each, this is four steps of pure ALU.
 An empty segment marches four zero-length steps and integrates to a
 transmittance of 1, so no branch is needed to reject the pixels that have no

@@ -11,6 +11,7 @@ import {
   max,
   mix,
   mx_noise_float,
+  select,
   smoothstep,
   uniform,
   vec2
@@ -92,14 +93,17 @@ export const rainShaftDensity = Fn(
       clamp(noise.mul(0.5).add(0.5), float(0), float(1)),
       float(RAIN_SHAFT_RAGGEDNESS)
     )
-    // 0 at the ground, 1 at the base. The caller clamps heightFraction, so a
-    // sample above the base cannot brighten the shaft
+    // 0 at the ground, 1 at the base. Outside this band there is no rain
     const vertical = mix(
       float(RAIN_SHAFT_GROUND_FADE),
       float(1),
       smoothstep(float(0), float(RAIN_SHAFT_TOP_SOFTNESS), heightFraction)
     )
-    return cell.mul(ragged).mul(vertical).mul(strength).mul(density)
+    return select(
+      heightFraction.greaterThanEqual(0).and(heightFraction.lessThanEqual(1)),
+      cell.mul(ragged).mul(vertical).mul(strength).mul(density),
+      float(0)
+    )
   }
 )
 
@@ -127,6 +131,7 @@ export function rainShaftDensityFromNoiseCPU(
   strength: number,
   density: number
 ): number {
+  if (heightFraction < 0 || heightFraction > 1) return 0
   const cell = rainShaftCellCPU(noise, threshold, softness)
   const field = Math.min(1, Math.max(0, noise * 0.5 + 0.5))
   const ragged = 1 + (field - 1) * RAIN_SHAFT_RAGGEDNESS
@@ -260,12 +265,15 @@ export function buildRainShaftDeps(
 
   return {
     density: (height, uv) => {
-      const heightFraction = clamp(height.div(baseHeight), 0, 1)
+      const heightFraction = height.div(max(baseHeight, float(1e-3)))
       // Scaled first, so a slant of 0.35 is 35% of a cell whatever the tiling
       // The lean grows as the sample falls, so the base stays under the tower and
       // the ground is the part that drifts downwind
       const maskUv = uv.mul(cellScale)
-      const offset = heightFraction.oneMinus().mul(uniforms.slant).mul(lean)
+      const offset = clamp(heightFraction, 0, 1)
+        .oneMinus()
+        .mul(uniforms.slant)
+        .mul(lean)
       return rainShaftDensity(
         maskUv.add(offset),
         threshold,

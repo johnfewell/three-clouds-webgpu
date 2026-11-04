@@ -4,20 +4,10 @@
 // the primary march starts after and its skip would empty anyway
 // Ray geometry from clouds.frag:743-769, read at the cloud base
 
-import {
-  dot,
-  exp,
-  float,
-  Fn,
-  Loop,
-  max,
-  min,
-  select,
-  sqrt,
-  vec3,
-  vec4
-} from 'three/tsl'
+import { exp, float, Fn, Loop, max, min, select, vec3, vec4 } from 'three/tsl'
 import type { Node, StructNode } from 'three/webgpu'
+
+import { raySpheresIntersections } from '@takram/three-geospatial/webgpu'
 
 import { getGlobeUv } from '../density/globeUv'
 import {
@@ -52,26 +42,33 @@ export function createRainShaftMarch(deps: RainShaftMarchDeps) {
       Node<'float'>,
       Node<'float'>
     ]) => {
-      // The shell the shafts hang from. A ray is inside it between the two
-      // roots of |origin + t * direction|^2 - r^2
-      const shellRadius = deps.bottomRadius.add(deps.baseHeight)
-      const b = dot(cameraPosition, rayDirection)
-      const c = dot(cameraPosition, cameraPosition).sub(
-        shellRadius.mul(shellRadius)
+      // Reuse the cloud march's sphere helper, including its miss sentinel
+      // Cite: clouds.frag:730-741, core webgpu/math.ts raySpheresIntersections
+      const intersections = raySpheresIntersections(
+        cameraPosition,
+        rayDirection,
+        vec3(0),
+        deps.bottomRadius.add(vec4(0, deps.baseHeight, 0, deps.baseHeight))
       )
-      const halfChord = sqrt(max(b.mul(b).sub(c), float(0)))
-      const entry = b.negate().sub(halfChord)
-      const exit = b.negate().add(halfChord)
-      // The camera is the near bound: it is never inside the medium at t < 0
-      const near = max(entry, float(0))
-      // sceneRayDistance is 0 when the ray hits no scene, so it is only a bound
-      // where it is positive. maxRayDistance stands in for the unbounded case
+      const entry = intersections.get('near') as Node<'vec4'>
+      const exit = intersections.get('far') as Node<'vec4'>
+      const near = max(entry.y, float(0))
+      // Bare-ellipsoid skies have no scene depth, but the planet still blocks
+      // rain. An origin inside the ground has no visible shaft segment
+      const groundBound = select(
+        cameraPosition.length().lessThan(deps.bottomRadius),
+        float(0),
+        select(entry.x.greaterThanEqual(0), entry.x, deps.maxRayDistance)
+      ).toVar('rainGroundBound')
       const sceneBound = select(
         sceneRayDistance.greaterThan(0),
         sceneRayDistance,
         deps.maxRayDistance
       )
-      const far = min(exit, sceneBound)
+      const far = max(
+        near,
+        min(min(exit.y, sceneBound), min(groundBound, deps.maxRayDistance))
+      ).toVar('rainFar')
       // Clamped, not branched: an empty segment then marches four zero-length
       // steps, which integrate to no in-scatter and a transmittance of 1
       const span = max(far.sub(near), float(0)).toVar()
@@ -157,16 +154,31 @@ export function rainShaftSegmentCPU(
   cameraAlongRay: number,
   shellRadius: number,
   maxRayDistance: number,
-  sceneRayDistance: number
+  sceneRayDistance: number,
+  bottomRadius: number
 ): { near: number; far: number; steps: number } {
   const b = cameraAlongRay
   const c = cameraRadius * cameraRadius - shellRadius * shellRadius
-  const halfChord = Math.sqrt(Math.max(b * b - c, 0))
-  const entry = -b - halfChord
-  const exit = -b + halfChord
+  const discriminant = b * b - c
+  const halfChord = Math.sqrt(Math.max(discriminant, 0))
+  const entry = discriminant >= 0 ? -b - halfChord : -1
+  const exit = discriminant >= 0 ? -b + halfChord : -1
+  const groundDiscriminant =
+    b * b - (cameraRadius * cameraRadius - bottomRadius * bottomRadius)
+  const groundEntry =
+    groundDiscriminant >= 0 ? -b - Math.sqrt(groundDiscriminant) : -1
+  const groundBound =
+    cameraRadius < bottomRadius
+      ? 0
+      : groundEntry >= 0
+        ? groundEntry
+        : maxRayDistance
   const sceneBound = sceneRayDistance > 0 ? sceneRayDistance : maxRayDistance
   const near = Math.max(entry, 0)
-  const far = Math.min(exit, sceneBound)
+  const far = Math.max(
+    near,
+    Math.min(exit, sceneBound, groundBound, maxRayDistance)
+  )
   const span = Math.max(far - near, 0)
   return { near, far, steps: span / RAIN_SHAFT_STEP_COUNT }
 }

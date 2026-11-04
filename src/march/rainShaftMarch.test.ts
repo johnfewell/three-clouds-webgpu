@@ -67,7 +67,8 @@ describe('the shaft segment', () => {
       BOTTOM_RADIUS + 2,
       shell,
       200_000,
-      0
+      0,
+      BOTTOM_RADIUS
     )
     table('shaft segment, ray up', [
       { field: 'near', expected: 0, actual: segment.near },
@@ -92,7 +93,8 @@ describe('the shaft segment', () => {
       -(BOTTOM_RADIUS + 1200),
       shell,
       200_000,
-      900
+      900,
+      BOTTOM_RADIUS
     )
     log('shaft segment, ray down at terrain', { ...segment })
     expect(segment.far).toBeCloseTo(900, 6)
@@ -109,11 +111,76 @@ describe('the shaft segment', () => {
       BOTTOM_RADIUS + 5000,
       shell,
       200_000,
-      0
+      0,
+      BOTTOM_RADIUS
     )
     log('shaft segment, ray up from above the deck', { ...segment })
-    expect(segment.far).toBeLessThan(0)
+    expect(segment.far).toBe(segment.near)
     expect(segment.steps).toBe(0)
+  })
+
+  it.each([5, 30, 90])(
+    'clips a %s degree downward sky ray at the ground',
+    degrees => {
+      const radius = BOTTOM_RADIUS + 100
+      const b = -radius * Math.sin((degrees * Math.PI) / 180)
+      const expected =
+        -b - Math.sqrt(b * b - (radius * radius - BOTTOM_RADIUS ** 2))
+      const segment = rainShaftSegmentCPU(
+        radius,
+        b,
+        shell,
+        200_000,
+        0,
+        BOTTOM_RADIUS
+      )
+      log('rain ground boundary', { degrees, expected, ...segment })
+      expect(segment.far).toBeCloseTo(expected, 6)
+      expect(segment.steps).toBeGreaterThan(0)
+      for (let i = 0; i < RAIN_SHAFT_STEP_COUNT; i++) {
+        const distance = segment.near + (i + 0.5) * segment.steps
+        const height =
+          Math.sqrt(radius ** 2 + 2 * b * distance + distance ** 2) -
+          BOTTOM_RADIUS
+        expect(height).toBeGreaterThan(0)
+      }
+    }
+  )
+
+  it.each([-10, 0])('has no underground segment from altitude %s', altitude => {
+    const radius = BOTTOM_RADIUS + altitude
+    const segment = rainShaftSegmentCPU(
+      radius,
+      -radius,
+      shell,
+      200_000,
+      0,
+      BOTTOM_RADIUS
+    )
+    log('rain at or inside ground', { altitude, ...segment })
+    expect(segment.steps).toBe(0)
+  })
+
+  it('does not invent a segment for a missed cloud-base sphere', () => {
+    const segment = rainShaftSegmentCPU(
+      BOTTOM_RADIUS + 5000,
+      -100,
+      shell,
+      200_000,
+      0,
+      BOTTOM_RADIUS
+    )
+    log('rain shell miss', segment)
+    expect(segment.steps).toBe(0)
+  })
+
+  it('honours scene occlusion and the march limit independently', () => {
+    const args = [BOTTOM_RADIUS + 100, -(BOTTOM_RADIUS + 100), shell] as const
+    const foreground = rainShaftSegmentCPU(...args, 200_000, 20, BOTTOM_RADIUS)
+    const capped = rainShaftSegmentCPU(...args, 10, 20, BOTTOM_RADIUS)
+    log('rain foreground bounds', { foreground, capped })
+    expect(foreground.far).toBeCloseTo(20, 6)
+    expect(capped.far).toBeCloseTo(10, 6)
   })
 
   it('bounds a near-horizontal ray by the march limit, not by infinity', () => {
@@ -122,7 +189,8 @@ describe('the shaft segment', () => {
       0,
       shell,
       200_000,
-      0
+      0,
+      BOTTOM_RADIUS
     )
     log('shaft segment, ray along the ground', { ...horizontal })
     expect(horizontal.far).toBeGreaterThan(0)
@@ -201,6 +269,8 @@ describe('the shaft integration', () => {
       textureSample: wgsl.includes('textureSample')
     })
     expect(wgsl).toContain('for')
+    expect(wgsl).toContain('rainGroundBound')
+    expect(wgsl).toMatch(/rainFar = max\([\s\S]*?min\( rainGroundBound,/)
     // Pure ALU plus the irradiance struct: a texture fetch here would be an
     // implicit-LOD sample inside a loop, which returns zeros on Dawn
     expect(wgsl).not.toContain('textureSample')

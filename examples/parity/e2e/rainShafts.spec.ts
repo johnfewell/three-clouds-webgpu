@@ -188,3 +188,86 @@ test('rain shafts cost one closed march of four steps', async ({ page }) => {
   // more than the docs claim
   expect(delta).toBeLessThan(0.5)
 })
+
+test('rain shafts stop at bare ground without scene depth', async ({
+  page
+}) => {
+  test.setTimeout(300_000)
+  await page.goto(`/?case=${CASE}&e2e=1&w=321&h=181`)
+  await page.waitForFunction(
+    () => (window as ParityWindow).__parity?.sideBHandle != null
+  )
+  const result = await page.evaluate(async () => {
+    const p = (window as ParityWindow).__parity
+    const handle = p.sideBHandle!
+    const ctx = handle.cloudsContext
+    handle.sceneResult.ground.visible = false
+    handle.sceneResult.sphere.visible = false
+    handle.sceneResult.plane.visible = false
+    handle.cloudsPass.sceneDepth = null
+    handle.camera.position.set(6_378_237, 0, 0)
+    handle.camera.up.set(0, 0, 1)
+    handle.camera.lookAt(0, 0, 0)
+    handle.camera.updateMatrixWorld()
+    ctx.haze = false
+    ctx.lightShafts = false
+    ctx.temporalUpscale = false
+    ctx.resolutionScale = 1
+    for (const layer of ctx.cloudLayers) layer.densityScale = 0
+    ctx.cloudLayers[0]!.altitude = 1600
+    ctx.cloudLayers[0]!.height = 1200
+    // A full cell makes the bound observable at every sampled pixel
+    ctx.convectiveProfile.cellThreshold = -2
+    ctx.convectiveProfile.cellSoftness = 0.1
+    const capture = async (enabled: boolean, limit: number) => {
+      ctx.experimental = { rainShafts: enabled, convectiveProfile: false }
+      ctx.clouds.maxRayDistance = limit
+      await p.renderOnce('B', {
+        time: 0,
+        frame: 0,
+        warmup: 16,
+        resetHistory: true
+      })
+      const { width, height, data } = await p.readLayer()
+      const opacity: number[] = []
+      for (let y = Math.floor(height / 4); y < (height * 3) / 4; y++) {
+        for (let x = Math.floor(width / 4); x < (width * 3) / 4; x++) {
+          opacity.push(data[(y * width + x) * 4 + 3]!)
+        }
+      }
+      return opacity
+    }
+    const off = await capture(false, 200_000)
+    const short = await capture(true, 50_000)
+    const long = await capture(true, 200_000)
+    // An upward ray must still integrate a real above-ground rain column
+    handle.camera.lookAt(6_379_237, 0, 0)
+    handle.camera.updateMatrixWorld()
+    const up = await capture(true, 200_000)
+    const mean = (a: number[]) => a.reduce((sum, v) => sum + v, 0) / a.length
+    return {
+      count: long.length,
+      offMax: Math.max(...off),
+      downMax: Math.max(...long),
+      downMean: mean(long),
+      upMean: mean(up),
+      limitDelta: Math.max(...long.map((v, i) => Math.abs(v - short[i]!))),
+      finite: [...off, ...short, ...long, ...up].every(Number.isFinite),
+      sceneDepth: handle.cloudsPass.sceneDepth === null,
+      errors: p.errors
+    }
+  })
+  console.log('[rain-ground-boundary]', JSON.stringify(result))
+  expect(result.count).toBeGreaterThan(0)
+  expect(result.sceneDepth).toBe(true)
+  expect(result.finite).toBe(true)
+  expect(result.offMax).toBe(0)
+  expect(result.downMean).toBeGreaterThan(1e-4)
+  expect(result.downMax).toBeLessThan(0.03)
+  expect(result.limitDelta).toBeLessThan(1e-4)
+  expect(result.upMean).toBeGreaterThan(result.downMean * 5)
+  expect(result.errors).toEqual([])
+  await page.screenshot({
+    path: test.info().outputPath('rain-above-ground.png')
+  })
+})

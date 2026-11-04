@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "c432bd8a07650e2a226dd03568a04477f78099433b099ef909a57de481f84286",
+  "sourceFingerprint": "98b5c2f8f84980b856577eb6f362633c3bbf8de77e38017d5e2415409292ea7e",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -304,7 +304,7 @@
     },
     "docs/API.md": {
       "mode": "100644",
-      "sha256": "a3f6dfd7213a212aa80096817f817669a5750d59c74dfca15c69267afe256117"
+      "sha256": "69f7e2a329620ddacca28af29d3bdbdf0d7b24e811191e133db8b69143ceaaa8"
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
@@ -316,7 +316,7 @@
     },
     "docs/EXPERIMENTAL.md": {
       "mode": "100644",
-      "sha256": "6d890225cab1382970f84f886202d23f1b611f52e4b89b9a9d4940e8803456d4"
+      "sha256": "6aaf149e5cbdc5c3a1548c5841dc7c24e7c111a60f8d9eb1b6f377981a1bf204"
     },
     "docs/MIGRATION.md": {
       "mode": "100644",
@@ -488,7 +488,7 @@
     },
     "examples/demo/src/App.tsx": {
       "mode": "100644",
-      "sha256": "aa8f6496fa449e3cc43e1254dab98ce08cbcb64c613333c4d475630cba376ac7"
+      "sha256": "8b408a332873192de74d64ae4946effd2d1450f7e683e04b84ca08cc1fd8ce9f"
     },
     "examples/demo/src/CloudsPostProcessing.tsx": {
       "mode": "100644",
@@ -800,7 +800,7 @@
     },
     "examples/parity/e2e/rainShafts.spec.ts": {
       "mode": "100644",
-      "sha256": "87c62426ffbd4a4780aca3dc8b3e7fb5f5e1beaae43f4bb53417707bb8166127"
+      "sha256": "022c5cafc26f48c335b3f3219e02e292ec8411a6224a2e1df7725f801c5d9e1f"
     },
     "examples/parity/e2e/receiptReporter.ts": {
       "mode": "100644",
@@ -1620,7 +1620,7 @@
     },
     "examples/storybook/.storybook/showcase.ts": {
       "mode": "100644",
-      "sha256": "ab8caa9e7ba494325d86b85656b52f10165ebc5373a11797ad912084e35da76d"
+      "sha256": "6ccbef6f3d19ddf248a72fb2553be5233a132bf252d3f3210145ffcf9d8e405b"
     },
     "examples/storybook/.storybook/style.css": {
       "mode": "100644",
@@ -4064,7 +4064,7 @@
     },
     "scripts/release/public-manifest.mjs": {
       "mode": "100644",
-      "sha256": "88f57774eec838de6cc2b609bf23d04fd8b52143742a105d48827f0508494e21"
+      "sha256": "293b67a097fbcf1c67813c989d06f38cf926d3af91ebeda455655c6a5e55dd98"
     },
     "scripts/release/public-scan.d.mts": {
       "mode": "100644",
@@ -4468,11 +4468,11 @@
     },
     "src/experimental/rainShafts.test.ts": {
       "mode": "100644",
-      "sha256": "02678e746de1ddabec314849f187d69b54969ff0a655b3deac9af97b9da73feb"
+      "sha256": "a4deb14b5939b0791ca5336a41475d6339ba4de50d7d9fe011503af125cd6980"
     },
     "src/experimental/rainShafts.ts": {
       "mode": "100644",
-      "sha256": "88fad1544fab0c6168f5022076771949119d8d3c9f5c45fe7dcd5e3e4a1e9c21"
+      "sha256": "f60335b80351c1878344cc635ad13e09335f3d9bb42a68dc6f3c3849f7bfea8a"
     },
     "src/experimental/scenePresets.test.ts": {
       "mode": "100644",
@@ -4680,11 +4680,11 @@
     },
     "src/march/rainShaftMarch.test.ts": {
       "mode": "100644",
-      "sha256": "a3ee9d15e618c06cc91b6b72798a4fb8f85fbce188d9b2898bfbccf90265dd3f"
+      "sha256": "840f6cd8ba89b5479067f2db7d6abfaea773bff7bdf9e7811417686428cd5228"
     },
     "src/march/rainShaftMarch.ts": {
       "mode": "100644",
-      "sha256": "47fe2b107addd06cd4599cb45cc091ff6f406edf805fc5b406b87715955f1f85"
+      "sha256": "cb7bfa07d1121cbbdcd25418b3850216d0c1afe9867e4e47a153396abb81a673"
     },
     "src/march/sceneDepth.test.ts": {
       "mode": "100644",
@@ -4776,7 +4776,7 @@
     },
     "src/pass/graphVariantDigest.baseline.json": {
       "mode": "100644",
-      "sha256": "641415ebfc74106a2a1222e301ed6b5d8e29f9257b0a52c7bbb489a2956ef30f"
+      "sha256": "ba763437568201233ca80396682bbc070afa148775a6ac7f7c2422f8d1113ba3"
     },
     "src/pass/graphVariantDigest.test.ts": {
       "mode": "100644",

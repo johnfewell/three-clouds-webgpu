@@ -17,6 +17,7 @@ import {
 import {
   Color,
   DefaultLoadingManager,
+  MathUtils,
   Matrix4,
   NoToneMapping,
   Quaternion,
@@ -35,7 +36,11 @@ import {
 } from 'three-clouds-webgpu'
 import { Clouds, useClouds } from 'three-clouds-webgpu/r3f'
 import { context, mrt, normalView, output, pass } from 'three/tsl'
-import { WebGPURenderer, type Node as ThreeNode } from 'three/webgpu'
+import {
+  WebGPURenderer,
+  type Node as ThreeNode,
+  type WebGPURendererParameters
+} from 'three/webgpu'
 
 import {
   DEFAULT_STARS_DATA_URL,
@@ -237,6 +242,9 @@ const atmosphereContext = createAtmosphereContext()
 const cloudsHolder: { current: CloudsContext | null } = { current: null }
 
 const scratchMat = /*#__PURE__*/ new Matrix4()
+const ecefScratch = /*#__PURE__*/ new Vector3()
+const EARTH_MEAN_RADIUS = 6_371_000
+const SHADOW_MAX_FAR = 1e5
 const scratchQuat = /*#__PURE__*/ new Quaternion()
 
 interface SceneControllerProps {
@@ -277,6 +285,21 @@ const SceneController: FC<SceneControllerProps> = ({
     }
   }, [cloudsContext])
 
+  // Cloud shadows reach 100 km, and further once the camera is high enough to
+  // see past that: from 150 km up a fixed 100 km ended in a hard wedge on the
+  // ocean. Below about 20 km nothing changes
+  useFrame(() => {
+    ecefScratch
+      .copy(camera.position)
+      .applyMatrix4(cloudsContext.worldToECEFMatrix)
+    const altitude = ecefScratch.length() - EARTH_MEAN_RADIUS
+    cloudsContext.shadow.maxFar = MathUtils.clamp(
+      4 * altitude,
+      SHADOW_MAX_FAR,
+      Math.max(camera.far, SHADOW_MAX_FAR)
+    )
+  })
+
   // Dev-only handle so a capture script can A/B context knobs at one pose
   useEffect(() => {
     if (!import.meta.env.DEV) return
@@ -290,7 +313,6 @@ const SceneController: FC<SceneControllerProps> = ({
   useLayoutEffect(() => {
     cloudsContext.qualityPreset = quality
     cloudsContext.lightShaftsHalfResolution = false
-    cloudsContext.shadow.maxFar = 1e5
     // March tuning to eliminate grazing horizon step banding and Mie forward blowout
     cloudsContext.clouds.perspectiveStepScale = 1.0005
     cloudsContext.clouds.minStepSize = 35
@@ -334,7 +356,6 @@ const SceneController: FC<SceneControllerProps> = ({
       ...cloudsContext.experimental,
       cloudEnvironment: ground.ocean
     }
-    cloudsContext.shadow.maxFar = 1e5
     appliedPresetRef.current = preset
   }, [cloudsContext, preset, location, ground.ocean])
 
@@ -772,7 +793,13 @@ export const App: FC = () => {
         frameloop={filmShot != null ? 'never' : 'always'}
         camera={{ fov: 55, near: 1, far: 4e5 }}
         gl={async props => {
-          const renderer = new WebGPURenderer(props as never)
+          // Reversed float depth keeps the ocean's depth exact from orbit. With
+          // standard depth and a 1 m near plane it was ~1 km coarse at 150 km,
+          // so whole ocean triangles cut the cloud march short
+          const renderer = new WebGPURenderer({
+            ...(props as WebGPURendererParameters),
+            reversedDepthBuffer: true
+          })
           renderer.highPrecision = true
           renderer.toneMapping = NoToneMapping
           renderer.contextNode = context({

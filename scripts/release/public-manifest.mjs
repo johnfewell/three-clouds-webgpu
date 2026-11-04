@@ -262,10 +262,10 @@ export function decide(path) {
     path === '.github/workflows/public-sync.yml' ||
     path === '.github/workflows/publish-release.yml' ||
     path === 'scripts/release/public-sync-policy.json' ||
-    /^scripts\/release\/(?:export-public|export-verify|bead-refs|audit-remotes|public-sync|release-candidate|publish-release)\./.test(
+    /^scripts\/release\/(?:export-public|export-verify|bead-refs|audit-remotes|public-sync|release-candidate|publish-release|release)\./.test(
       path
     ) ||
-    /^scripts\/release\/(?:exportPublic|exportVerify|auditRemotes|publicSync|publishRelease)\.test\.ts$/.test(
+    /^scripts\/release\/(?:exportPublic|exportVerify|auditRemotes|publicSync|publishRelease|release)\.test\.ts$/.test(
       path
     )
   ) {

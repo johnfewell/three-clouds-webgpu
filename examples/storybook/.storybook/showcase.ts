@@ -47,16 +47,10 @@ export const SHOWCASE_FILES = [
 export const isShowcase = (surface: string | undefined): boolean =>
   surface === 'showcase'
 
-// The controls a visitor sees. The rest keep their defaults and stay hidden,
-// so the render is unchanged. Uncategorised args (the Maps key) stay
-const SHOWCASE_CATEGORIES = new Set([
-  'clouds',
-  'local date',
-  'tone mapping',
-  'evolving weather'
-])
-// In the clouds category, but an experiment
-const SHOWCASE_HIDDEN = new Set(['cloudMotion'])
+// The controls a visitor sees: every category but the debug views, which
+// look broken out of context. Hidden ones keep their defaults, so the render
+// is unchanged
+const SHOWCASE_HIDDEN_CATEGORIES = new Set(['clouds debug'])
 
 interface ArgTypeLike {
   table?: { category?: string; disable?: boolean }
@@ -68,9 +62,7 @@ export function showcaseArgTypes<T extends Record<string, ArgTypeLike>>(
   const result: Record<string, ArgTypeLike> = {}
   for (const [key, argType] of Object.entries(argTypes)) {
     const category = argType.table?.category
-    const shown =
-      !SHOWCASE_HIDDEN.has(key) &&
-      (category == null || SHOWCASE_CATEGORIES.has(category))
+    const shown = category == null || !SHOWCASE_HIDDEN_CATEGORIES.has(category)
     result[key] = shown
       ? argType
       : { ...argType, table: { ...argType.table, disable: true } }

@@ -277,17 +277,17 @@ describe('rain shaft density', () => {
       { field: 'at the base', expected: 'thickest', actual: base },
       {
         field: 'above the base',
-        expected: base,
-        actual: above,
-        delta: Math.abs(above - base)
+        expected: 0,
+        actual: above
       }
     ])
 
     expect(ground).toBeGreaterThan(0)
     expect(ramp).toBeGreaterThan(ground)
     expect(base).toBeGreaterThan(ramp)
-    // Clamped, so a sample above the band cannot brighten the shaft
-    expect(above).toBeCloseTo(base, 12)
+    expect(above).toBe(0)
+    expect(at(0.9, -0.01)).toBe(0)
+    expect(at(0.9, -100)).toBe(0)
   })
 
   it('gives the ground exactly the documented fraction of the base', () => {

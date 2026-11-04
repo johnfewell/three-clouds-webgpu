@@ -880,9 +880,9 @@ Existing objects to inspect, never a second configuration store
 | [`ProceduralWeather`](../src/experimental/proceduralWeather.ts#L414) | `class ProceduralWeather` | See source declaration |
 | [`ProceduralWeatherGenerator`](../src/experimental/proceduralWeather.ts#L364) | `type ProceduralWeatherGenerator = (uv: Node<'vec2'>) => Node<'vec4'>` | See source declaration |
 | [`ProceduralWeatherParameters`](../src/experimental/proceduralWeather.ts#L54) | `interface ProceduralWeatherParameters` | See source declaration |
-| [`rainShaftDefaults`](../src/experimental/rainShafts.ts#L31) | `rainShaftDefaults: Readonly<RainShaftParams>` | See source declaration |
-| [`RainShaftParams`](../src/experimental/rainShafts.ts#L20) | `interface RainShaftParams` | See source declaration |
-| [`RainShaftUniforms`](../src/experimental/rainShafts.ts#L201) | `interface RainShaftUniforms` | See source declaration |
+| [`rainShaftDefaults`](../src/experimental/rainShafts.ts#L32) | `rainShaftDefaults: Readonly<RainShaftParams>` | See source declaration |
+| [`RainShaftParams`](../src/experimental/rainShafts.ts#L21) | `interface RainShaftParams` | See source declaration |
+| [`RainShaftUniforms`](../src/experimental/rainShafts.ts#L206) | `interface RainShaftUniforms` | See source declaration |
 | [`resolveTimeOfDay`](../src/experimental/timeOfDay.ts#L90) | `resolveTimeOfDay(date: Date \| number, timeOfDay: number, location: TimeOfDayLocation): Date` | The instant a local solar time of day names, on a date already in some<br>timezone. `timeOfDay` is a fraction of a day in LOCAL SOLAR time: 0 is local<br>midnight, 0.5 local noon. Longitude is the only thing that converts it, at 15<br>degrees per hour, so the result wraps across UTC midnight instead of<br>clamping. |
 | [`ScenePreset`](../src/experimental/scenePresets.ts#L47) | `interface ScenePreset` | A sky, assembled from existing knobs. `timeOfDay` is local solar time as a<br>fraction of a day, so 0.5 is local noon for every longitude, and what the sun<br>does with it depends on the observer's latitude and the date: 0.75 is sunset<br>at any latitude on an equinox, and earlier or later by up to an hour either<br>side of it. |
 | [`ScenePresetName`](../src/experimental/scenePresets.ts#L38) | `type ScenePresetName = (typeof scenePresetNames)[number]` | See source declaration |
