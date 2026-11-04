@@ -24,7 +24,7 @@ afterEach(() => {
 describe('the march on a geospatial build without four masked lanes', () => {
   it('throws at load when the build has no marker', async () => {
     await expect(loadWithMarker(undefined)).rejects.toThrow(
-      /fork build 0\.9\.1\+fork\.7/
+      /fork build 0\.9\.1\+fork\.8/
     )
   })
 
@@ -101,7 +101,7 @@ describe('the r186 kernel markers', () => {
 
   it('names the package whose marker is missing', () => {
     expect(() => assertR186Kernels(undefined, geo7, '186')).toThrow(
-      /@takram\/three-atmosphere has no forkBuild marker\. Install both fork builds from one release, 0\.19\.1\+fork\.7 \/ 0\.9\.1\+fork\.7/
+      /@takram\/three-atmosphere has no forkBuild marker\. Install both fork builds from one release, 0\.19\.1\+fork\.8 \/ 0\.9\.1\+fork\.8/
     )
     expect(() => assertR186Kernels(atm7, geo5, '186')).toThrow(
       /^On three r186 .*: @takram\/three-geospatial is fork release 5 without r186Kernels\./

@@ -10,6 +10,7 @@ import { table } from '../../test/helpers/cpuTwin'
 import { log } from '../../test/helpers/log'
 import { clouds } from '../CloudsPassNode'
 import { createLayerUniforms, updateLayerUniforms } from '../layerUniforms'
+import { composeThroughShaftCPU } from '../march/rainShaftMarch'
 import {
   createParameterUniforms,
   updateParameterUniforms
@@ -456,5 +457,43 @@ describe('rain shaft density', () => {
     })
 
     expect(deps.uniforms.slant.value).toBe(0.9)
+  })
+})
+
+// The screen composite, compositeNodes.ts: dst * (1 - a) + clouds
+function screenComposite(dst: number, layer: readonly number[]): number {
+  return dst * (1 - layer[3]!) + layer[0]!
+}
+
+describe('a shaft in front of the layer', () => {
+  it('dims the scene behind a curtain by the curtain transmittance', () => {
+    const rows = []
+    for (const a of [0, 0.3, 1]) {
+      for (const s of [1, 0.74, 0.2]) {
+        const composed = composeThroughShaftCPU(
+          [0.1 * a, 0, 0, a],
+          [0.02, 0, 0, s]
+        )
+        // The scene's share of the final pixel, from a unit background
+        const sceneShare =
+          screenComposite(1, composed) - screenComposite(0, composed)
+        rows.push({ opacity: a, shaftT: s, sceneShare: sceneShare.toFixed(4) })
+        expect(sceneShare).toBeCloseTo((1 - a) * s, 12)
+      }
+    }
+    log('shaft-scene-share', { rows: JSON.stringify(rows) })
+  })
+
+  it('is the identity where no shaft is marched', () => {
+    const color = [0.3, 0.2, 0.1, 0.6] as const
+    expect(composeThroughShaftCPU(color, [0, 0, 0, 1])).toEqual([...color])
+  })
+
+  it('keeps the layer radiance behind the shaft attenuated, then adds the shaft', () => {
+    const composed = composeThroughShaftCPU(
+      [0.5, 0.5, 0.5, 1],
+      [0.1, 0.1, 0.1, 0.5]
+    )
+    expect(composed).toEqual([0.35, 0.35, 0.35, 1])
   })
 })

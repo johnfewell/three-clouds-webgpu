@@ -5,6 +5,31 @@ Notable changes to `three-clouds-webgpu`, the WebGPU/TSL port of
 describe candidate tarballs; earlier entries describe historical or unreleased
 work.
 
+## 0.1.0-alpha.8
+
+- Fix the experimental `cloudEnvironment` bake weighting the sky behind the
+  clouds by their opacity instead of their transmittance. A cloud-free direction
+  baked black, so reflections and image-based lighting lost the sky, and the sky
+  showed through clouds. The bake now composes the sky behind the layer the same
+  way the screen composite does. At coverage 0 it equals a sky-only environment
+  bake. Reflections under cloud are darker than before, because the clouds no
+  longer let the full sky through.
+- Fix experimental rain shafts lowering the layer's opacity, so a rain curtain
+  let more of the scene behind it through instead of dimming it.
+- Name fork release 8 (`0.19.1+fork.8` / `0.9.1+fork.8`) in the install hints
+  of the fork-marker errors.
+
+## 0.1.0-alpha.7
+
+- Target stock **Three.js 0.187.0**, with matching `@types/three` 0.187.0. The
+  `three` peer range is now `>=0.187.0 <0.188.0`.
+- Update the cloud nodes and light registration for r187, with no intended
+  change to cloud rendering math.
+- Update the vendored atmosphere and geospatial forks to `0.19.1+fork.8` /
+  `0.9.1+fork.8` for r187 type compatibility.
+- Update the plain Three.js, explicit render-graph and React Three Fiber
+  consumer recipes.
+
 ## 0.1.0-alpha.6
 
 - Fix cloud-shadow cascade fitting for cameras with reversed depth. Near/far

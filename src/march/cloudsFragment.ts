@@ -37,6 +37,7 @@ import {
   getRayNearFar,
   getShadowRayNearFar
 } from './intersections'
+import { composeThroughShaft } from './rainShaftMarch'
 import {
   enableSubgroups,
   quadLane,
@@ -909,12 +910,7 @@ function createFragmentComposite(deps: CloudsFragmentDeps) {
             sceneRayDistance
           )
           .toVar()
-        // Alpha is the transmittance the composite hands the scene, so the
-        // shafts must attenuate it too or the sky behind a curtain would not
-        // dim at all
-        color.assign(
-          vec4(color.xyz.mul(shaft.w).add(shaft.xyz), color.a.mul(shaft.w))
-        )
+        color.assign(composeThroughShaft(color, shaft))
       }
 
       // Cite: clouds.frag:986–996, haze blend

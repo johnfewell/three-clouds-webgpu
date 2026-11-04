@@ -125,6 +125,31 @@ export function createRainShaftMarch(deps: RainShaftMarchDeps) {
   )
 }
 
+// The layer seen through a shaft in front of it. Alpha is opacity, as in
+// blendHaze, so the scene behind keeps (1 - a) * shaft.w and a curtain dims it
+export function composeThroughShaft(
+  color: Node<'vec4'>,
+  shaft: Node<'vec4'>
+): Node<'vec4'> {
+  return vec4(
+    color.xyz.mul(shaft.w).add(shaft.xyz),
+    color.a.oneMinus().mul(shaft.w).oneMinus()
+  )
+}
+
+export function composeThroughShaftCPU(
+  color: readonly [number, number, number, number],
+  shaft: readonly [number, number, number, number]
+): [number, number, number, number] {
+  const s = shaft[3]
+  return [
+    color[0] * s + shaft[0],
+    color[1] * s + shaft[1],
+    color[2] * s + shaft[2],
+    1 - (1 - color[3]) * s
+  ]
+}
+
 // The segment the march integrates, in metres, from the same near and far the
 // shader reads, so a test can pin which pixels march and which are a no-op
 export function rainShaftSegmentCPU(

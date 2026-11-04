@@ -1,7 +1,7 @@
 # Release procedure: three-clouds-webgpu
 
 A release is an exact source tree, package archive and set of verification
-receipts. The working version is `0.1.0-alpha.6`. Check `package.json` and the
+receipts. The working version is `0.1.0-alpha.8`. Check `package.json` and the
 matching changelog entry before preparing a candidate; an older tag does not
 establish the version or verification state of the current tree.
 
@@ -20,7 +20,7 @@ pnpm check
 pnpm format:check
 pnpm build
 pnpm pack --pack-destination <output-directory>
-pnpm pack:verify <output-directory>/three-clouds-webgpu-0.1.0-alpha.6.tgz
+pnpm pack:verify <output-directory>/three-clouds-webgpu-0.1.0-alpha.8.tgz
 ```
 
 The final build occurs after the test suite, so the archive is made from the
@@ -50,24 +50,22 @@ private development material must not enter the package.
 
 ## Qualify real consumers
 
-Use the verified archive to create independent consumer projects. Run both
-supported release configurations and retain separate receipts and projects:
+Use the verified archive to create independent consumer projects for the
+supported Three.js version and retain the receipt and projects:
 
 ```sh
-pnpm pack:qualify <archive> --three 0.185.1 --keep-projects --receipt <cpu-r185.json>
-pnpm pack:qualify <archive> --three 0.186.1 --keep-projects --receipt <cpu-r186.json>
+pnpm pack:qualify <archive> --three 0.187.0 --keep-projects --receipt <cpu-r187.json>
 ```
 
 These checks cover complete recipes, real installed dependencies, asset paths,
 strict application typechecks and production builds. A CPU receipt explicitly
 leaves graph execution and visible frames unobserved.
 
-Run the native harness against each retained CPU receipt on an available real
+Run the native harness against the retained CPU receipt on an available real
 GPU:
 
 ```sh
-node examples/parity/scripts/consumer-native/run.mjs <cpu-r185.json> <native-r185-directory>
-node examples/parity/scripts/consumer-native/run.mjs <cpu-r186.json> <native-r186-directory>
+node examples/parity/scripts/consumer-native/run.mjs <cpu-r187.json> <native-r187-directory>
 ```
 
 The harness checks actual cloud contribution, updates, resize, remount and
@@ -88,12 +86,12 @@ Restate the supported configuration and limitations from
 [the consumer contract](CONSUMER_CONTRACT.md), [integration guide](../INTEGRATION.md)
 and [experimental reference](EXPERIMENTAL.md):
 
-- The recommended consumer uses stock Three.js 0.185.1 and the pinned fork
-  atmosphere/geospatial packages. Stock 0.186.1 uses fork release 7. The recipes
+- The supported consumer uses stock Three.js 0.187.0 and the pinned fork
+  atmosphere/geospatial packages, release 8. The recipes
   provide the exact dependency overrides; two atmosphere copies break context
   identity checks. Ordinary npm builds of the upstream packages are not a
   substitute for the qualified fork builds.
-- The development pin remains 0.185.1. Compatibility claims for another version
+- The development pin is 0.187.0. Compatibility claims for another version
   require its own installed-consumer evidence, not only a permissive peer range.
 - `skipLibCheck: true` is the documented safe default. Application typechecking
   still runs; upstream declaration compatibility is a separate limitation.

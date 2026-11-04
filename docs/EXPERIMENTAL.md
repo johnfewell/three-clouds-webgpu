@@ -618,8 +618,8 @@ shaft in them.
 length.** The direct term is multiplied by `exp(-0.01 * shadowLength)`, where
 `shadowLength` is the cloud path the light-shaft march already measured along
 the sun ray for this pixel, so a shaft under a storm cell is dark and one under
-a thin edge is not. Alpha is attenuated with the same transmittance, otherwise
-the sky behind a curtain would not dim at all.
+a thin edge is not. The scene behind the curtain is attenuated by the same
+transmittance: alpha is opacity, so it becomes `1 - (1 - a) * transmittance`.
 
 Three knobs, all uniforms: `strength` scales both the extinction and the
 in-scatter, `density` is the extinction per metre at full strength inside a

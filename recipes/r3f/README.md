@@ -14,7 +14,7 @@ Use Node 24 and pnpm 11.8.0. From your copied folder:
 
 ```sh
 mkdir -p vendor
-cp /absolute/path/to/three-clouds-webgpu-0.1.0-alpha.7.tgz vendor/three-clouds-webgpu.tgz
+cp /absolute/path/to/three-clouds-webgpu-0.1.0-alpha.8.tgz vendor/three-clouds-webgpu.tgz
 cp /absolute/path/to/checkout/vendor/takram-three-atmosphere-0.19.1+fork.8.tgz vendor/
 cp /absolute/path/to/checkout/vendor/takram-three-geospatial-0.9.1+fork.8.tgz vendor/
 shasum -a 256 vendor/takram-*.tgz

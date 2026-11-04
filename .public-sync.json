@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "33d9eaec661623e7ab0f45a47cf80bd630a1209ed924c9c9ede6c3b782a2f026",
+  "sourceFingerprint": "c432bd8a07650e2a226dd03568a04477f78099433b099ef909a57de481f84286",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -20,7 +20,7 @@
     },
     "CHANGELOG.md": {
       "mode": "100644",
-      "sha256": "84de4a72f06b7c963bfecabd830a63b51bba1060c0c76876040e37efbea070c0"
+      "sha256": "4dc95c2c99dd95908a8b00f969a8efd42dad85551e3db74e48b1de324a51da6a"
     },
     "CONTRIBUTING.md": {
       "mode": "100644",
@@ -36,7 +36,7 @@
     },
     "README.md": {
       "mode": "100644",
-      "sha256": "7f7d49da43f90a47d9483a03b42cfb30140396c713fc95a85a1e40aca780447a"
+      "sha256": "9f6ae16b8f8f06a5bb8ec189bfee5ae64b2ab1cca3ebf4b5289aaa7274f70fe2"
     },
     "THIRD_PARTY_NOTICES.md": {
       "mode": "100644",
@@ -304,7 +304,7 @@
     },
     "docs/API.md": {
       "mode": "100644",
-      "sha256": "9d9acdce953acf1d42e957d28c190c649ca46a175c2eadeaea187db8ce319e10"
+      "sha256": "a3f6dfd7213a212aa80096817f817669a5750d59c74dfca15c69267afe256117"
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
@@ -316,7 +316,7 @@
     },
     "docs/EXPERIMENTAL.md": {
       "mode": "100644",
-      "sha256": "aee1f0d6906ab504fb211e44dc1532b928ad43363bfeea99a4aa7b23e852850f"
+      "sha256": "6d890225cab1382970f84f886202d23f1b611f52e4b89b9a9d4940e8803456d4"
     },
     "docs/MIGRATION.md": {
       "mode": "100644",
@@ -324,7 +324,7 @@
     },
     "docs/RELEASE.md": {
       "mode": "100644",
-      "sha256": "0087a595cb868a76a6fb2161b8445ed3292d175b02ba9ba51be960cebf6a795f"
+      "sha256": "9de785fa44d5effbe6dd8404186395945489c0b08ac5cb82f582ca9cd6c7611f"
     },
     "docs/adr/001-render-graph.md": {
       "mode": "100644",
@@ -2208,7 +2208,7 @@
     },
     "package.json": {
       "mode": "100644",
-      "sha256": "3af6a32be4af1de0038c049c1f43b7f6c5d1b1979dd0e51e867798ede0e305da"
+      "sha256": "77c15e3507514f834f1f71091fed1f028869274ad415d0bba5ab51d12ef8931b"
     },
     "parity/results/0/README.md": {
       "mode": "100644",
@@ -2992,7 +2992,7 @@
     },
     "recipes/r3f/README.md": {
       "mode": "100644",
-      "sha256": "7f7d4c35ababb0b0004ffc29f01adf67eb664e421de28aedaebfcda56281875b"
+      "sha256": "fa27a63d16ab2a0e1fddd16eb31bd7c8cba953dfeb63db2b3c13874c8579fef5"
     },
     "recipes/r3f/index.html": {
       "mode": "100644",
@@ -3028,7 +3028,7 @@
     },
     "recipes/vanilla/README.md": {
       "mode": "100644",
-      "sha256": "1869e51ad08352e83689fbaffba8376b1cb51adbe8567d643d8f09acb5d0b6e7"
+      "sha256": "ca2c6861fcb012b9684ab71dd5275610fb10d07579684a765521c93014d030bf"
     },
     "recipes/vanilla/index.html": {
       "mode": "100644",
@@ -3068,7 +3068,7 @@
     },
     "recipes/webgl-fallback/README.md": {
       "mode": "100644",
-      "sha256": "a176b822028d483131c3558309078ee4ba277a147dc97d967077725747be60d5"
+      "sha256": "440b0a97e5f9cbac451d3bcd5df5c62787f4b889a3b05e53f2cff2d4cdef8ef0"
     },
     "recipes/webgl-fallback/index.html": {
       "mode": "100644",
@@ -4064,7 +4064,7 @@
     },
     "scripts/release/public-manifest.mjs": {
       "mode": "100644",
-      "sha256": "430d461366d3eb1e2c6f14ca84292ec9b2247806c8ff86084c75c223e9ed11a2"
+      "sha256": "88f57774eec838de6cc2b609bf23d04fd8b52143742a105d48827f0508494e21"
     },
     "scripts/release/public-scan.d.mts": {
       "mode": "100644",
@@ -4312,11 +4312,11 @@
     },
     "src/experimental/cloudEnvironment.test.ts": {
       "mode": "100644",
-      "sha256": "99f1cdab5cf390e7a0bb55ee473ad76fec738e3dd2484408b1c0406ad9b8829c"
+      "sha256": "7f7d223a99cbfec65c5896e438a6bd445ee1b87b2ddbb3c7ee988d0b5a266601"
     },
     "src/experimental/cloudEnvironment.ts": {
       "mode": "100644",
-      "sha256": "47ebf2401d19a2fc6337088ceeddec3f19a0bc8037c1b416c0299f23c2aca5be"
+      "sha256": "87d46fae71841726e571ef9089a0f095f7b6c95b76c4744fa6036c00798c591e"
     },
     "src/experimental/cloudShape.digest.test.ts": {
       "mode": "100644",
@@ -4468,7 +4468,7 @@
     },
     "src/experimental/rainShafts.test.ts": {
       "mode": "100644",
-      "sha256": "92b2f9faac9ded9f49c5009b656a5e1fbd97a330e9029d929d80695c4601d820"
+      "sha256": "02678e746de1ddabec314849f187d69b54969ff0a655b3deac9af97b9da73feb"
     },
     "src/experimental/rainShafts.ts": {
       "mode": "100644",
@@ -4604,7 +4604,7 @@
     },
     "src/march/cloudsFragment.ts": {
       "mode": "100644",
-      "sha256": "a14e3e5059e12f12870b0518fae35e0c8ae9a33b604f8bdaafa6f10cff018c5c"
+      "sha256": "a3cc7ff9d4f0781b10105f7d6f362052e1516674389b45461c8509f23693608d"
     },
     "src/march/debugCascadeColor.test.ts": {
       "mode": "100644",
@@ -4640,7 +4640,7 @@
     },
     "src/march/intersections.npmBuild.test.ts": {
       "mode": "100644",
-      "sha256": "4d3db6ed20958bbd41371a5d57e6b4c384dbb344374257897f4672ee750e29e7"
+      "sha256": "1039798f32ec05f3d5ca5a20cd036206197d79866247abac8281d6c6918d281f"
     },
     "src/march/intersections.test.ts": {
       "mode": "100644",
@@ -4648,7 +4648,7 @@
     },
     "src/march/intersections.ts": {
       "mode": "100644",
-      "sha256": "b71f03907845e83a5ad1a23c51770bab01dec641d9967ff211e9a2ed89a3eff0"
+      "sha256": "61a702c2202b1453484151637ca0bcffad8e1241307ad0c2f6a0a90d36dd1fc6"
     },
     "src/march/intersections.twins.test.ts": {
       "mode": "100644",
@@ -4684,7 +4684,7 @@
     },
     "src/march/rainShaftMarch.ts": {
       "mode": "100644",
-      "sha256": "8b3393f7cf9fbb3077fdae546d35ddd3b05a3e6667ca0d80979e739ad458f12d"
+      "sha256": "47fe2b107addd06cd4599cb45cc091ff6f406edf805fc5b406b87715955f1f85"
     },
     "src/march/sceneDepth.test.ts": {
       "mode": "100644",
@@ -4776,7 +4776,7 @@
     },
     "src/pass/graphVariantDigest.baseline.json": {
       "mode": "100644",
-      "sha256": "894cb683d3d72a75b5bf0b3693fbf1eb65ffc5b9c26c2ed6909e9b64b3136585"
+      "sha256": "641415ebfc74106a2a1222e301ed6b5d8e29f9257b0a52c7bbb489a2956ef30f"
     },
     "src/pass/graphVariantDigest.test.ts": {
       "mode": "100644",
@@ -4928,7 +4928,7 @@
     },
     "src/shadow/aerialShadowAdapter.npmBuild.test.ts": {
       "mode": "100644",
-      "sha256": "7c56a1283d652dd38b66c4b1a21b26c5f345c1518872807d58517eae7aa32609"
+      "sha256": "c6196de93db65881cf62e9824c2695ee7e749845dd76341574e12acbf61ebb92"
     },
     "src/shadow/aerialShadowAdapter.test.ts": {
       "mode": "100644",
@@ -4936,7 +4936,7 @@
     },
     "src/shadow/aerialShadowAdapter.ts": {
       "mode": "100644",
-      "sha256": "bb992279ebbbecfdbb14877cb70c9cbc0daf78eb794d755af837fdb451d1a4b6"
+      "sha256": "820bc28cb4d29f51b8e081a77c62693825df039bc176a747161abca50d914a4e"
     },
     "src/shadow/cloudShadowLengthLive.test.ts": {
       "mode": "100644",

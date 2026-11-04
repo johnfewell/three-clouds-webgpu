@@ -21,7 +21,6 @@ import {
   positionGeometry,
   uv,
   vec2,
-  vec3,
   vec4
 } from 'three/tsl'
 import { Node, NodeMaterial } from 'three/webgpu'
@@ -296,7 +295,8 @@ export class CloudEnvironmentNode extends Node {
         // so there is no finer filter here to ask for
         float(1)
       )
-      // .a is transmittance, so the sky behind the clouds is what survives them
+      // .a is opacity (writeLayer.ts, clouds.frag:617), so the sky behind the
+      // clouds survives as 1 - a
       const layer = marched.get('layer') as Node<'vec4'>
       // Cite: cloudsFragment.ts:512-513, the front depth is stored from the
       // layer entry in unit space, and the aerial ray starts at the camera
@@ -311,9 +311,8 @@ export class CloudEnvironmentNode extends Node {
         float(0),
         layer
       )
-      const transmittance = reachesLayer.select(lit.a, float(1))
-      const radiance = reachesLayer.select(lit.xyz, vec3(0))
-      return vec4(skyRadiance.mul(transmittance).add(radiance), 1)
+      const behind = skyBehindLayer(skyRadiance, lit)
+      return vec4(reachesLayer.select(behind, skyRadiance), 1)
     })
 
     this.material.vertexNode = vec4(positionGeometry.xy, 0, 1)
@@ -394,6 +393,27 @@ export class CloudEnvironmentNode extends Node {
     this.mesh.geometry.dispose()
     super.dispose()
   }
+}
+
+// The sky seen through the aerial-lit layer, composed as the screen composite
+// composes the scene (compositeNodes.ts): .a is opacity, so the sky keeps 1 - a
+export function skyBehindLayer(
+  sky: Node<'vec3'>,
+  layer: Node<'vec4'>
+): Node<'vec3'> {
+  return sky.mul(layer.a.oneMinus()).add(layer.xyz)
+}
+
+export function skyBehindLayerCPU(
+  sky: readonly [number, number, number],
+  layer: readonly [number, number, number, number]
+): [number, number, number] {
+  const keep = 1 - layer[3]
+  return [
+    sky[0] * keep + layer[0],
+    sky[1] * keep + layer[1],
+    sky[2] * keep + layer[2]
+  ]
 }
 
 // Metres one environment-map texel covers at its far end, the aliasing an

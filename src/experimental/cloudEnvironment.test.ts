@@ -7,6 +7,7 @@ import {
   cloudEnvironmentRefreshDue,
   DEFAULT_CLOUD_ENVIRONMENT,
   environmentTexelFootprint,
+  skyBehindLayerCPU,
   type CloudEnvironmentBakeInput,
   type CloudEnvironmentDueInput
 } from './cloudEnvironment'
@@ -248,5 +249,48 @@ describe('the aliasing an environment map costs', () => {
     })
     expect(environmentTexelFootprint(64, 0)).toBe(0)
     expect(environmentTexelFootprint(-64, 60000)).toBeLessThan(0)
+  })
+})
+
+// The screen composite, compositeNodes.ts: dst * (1 - a) + clouds
+function screenComposite(
+  dst: readonly [number, number, number],
+  layer: readonly [number, number, number, number]
+): number[] {
+  return dst.map((d, i) => d * (1 - layer[3]) + layer[i]!)
+}
+
+describe('the sky behind the layer', () => {
+  const sky = [0.0226, 0.0331, 0.0526] as const
+
+  it('bakes the sky itself where the march found no cloud', () => {
+    const empty = [0, 0, 0, 0] as const
+    const baked = skyBehindLayerCPU(sky, empty)
+    log('environment-empty-layer', {
+      sky: sky.join('/'),
+      baked: baked.join('/')
+    })
+    expect(baked).toEqual([...sky])
+  })
+
+  it('hides the sky behind an opaque layer', () => {
+    const opaque = [0.5, 0.4, 0.3, 1] as const
+    expect(skyBehindLayerCPU(sky, opaque)).toEqual([0.5, 0.4, 0.3])
+  })
+
+  it('composes as the screen composite does, so the map and the screen agree', () => {
+    const rows = []
+    for (const a of [0, 0.25, 0.5, 0.9, 1]) {
+      const layer = [0.01 * a, 0.02 * a, 0.03 * a, a] as const
+      const baked = skyBehindLayerCPU(sky, layer)
+      const screen = screenComposite(sky, layer)
+      rows.push({
+        opacity: a,
+        baked: baked[2].toFixed(5),
+        screen: screen[2]!.toFixed(5)
+      })
+      baked.forEach((v, i) => expect(v).toBeCloseTo(screen[i]!, 12))
+    }
+    log('environment-vs-screen', { rows: JSON.stringify(rows) })
   })
 })

@@ -1,6 +1,6 @@
 {
   "name": "three-clouds-webgpu",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "description": "Unofficial WebGPU/TSL volumetric clouds for Three.js, with explicit composition, baked assets and optional React bindings",
   "keywords": [
     "three",

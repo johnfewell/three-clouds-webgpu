@@ -13,7 +13,7 @@ export function assertAerialShadowInputs(node: object): void {
     throw new Error(
       'AerialPerspectiveNode has no shadowNode / lightingMaskNode input, so ' +
         'cloud shadows on surfaces would not render. Install the ' +
-        '@takram/three-atmosphere fork build 0.19.1+fork.7 (see the README)'
+        '@takram/three-atmosphere fork build 0.19.1+fork.8 (see the README)'
     )
   }
 }

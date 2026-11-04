@@ -24,7 +24,7 @@ describe('the adapter on an atmosphere build without the hook inputs', () => {
     const shadow = { type: 'float' } as unknown as Node<'float'>
     expect(() =>
       aerialPerspectiveWithCloudShadow(NONE, NO_DEPTH, null, shadow)
-    ).toThrow(/fork build 0\.19\.1\+fork\.7/)
+    ).toThrow(/fork build 0\.19\.1\+fork\.8/)
   })
 
   it('throws when only a lighting mask is requested', () => {

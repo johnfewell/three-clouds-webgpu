@@ -19,7 +19,7 @@ export function assertFourLaneIntersections(marker: unknown): void {
       '@takram/three-geospatial does not mask every lane of ' +
         'raySpheresIntersections, so the cloud march would read wrong shell ' +
         'intersections. Install the @takram/three-geospatial fork build ' +
-        '0.9.1+fork.7 (see the README)'
+        '0.9.1+fork.8 (see the README)'
     )
   }
 }
@@ -30,7 +30,7 @@ interface ForkMarker {
 }
 
 const INSTALL_R186 =
-  'Install both fork builds from one release, 0.19.1+fork.7 / 0.9.1+fork.7 ' +
+  'Install both fork builds from one release, 0.19.1+fork.8 / 0.9.1+fork.8 ' +
   '(see the README)'
 
 function describeMarker(name: string, marker: ForkMarker | null | undefined) {

@@ -46,27 +46,27 @@ the tarball and its public peers, not this repository's workspace.
 
 ## Install
 
-[**0.1.0-alpha.7 is published**](https://github.com/johnfewell/three-clouds-webgpu/releases/tag/v0.1.0-alpha.7)
+[**0.1.0-alpha.8 is published**](https://github.com/johnfewell/three-clouds-webgpu/releases/tag/v0.1.0-alpha.8)
 and targets **Three.js 0.187.0**. Install the GitHub Release archive below;
 the package is not published on npm. The older alpha.6 archive retains its
 original r185/r186 dependency contract.
 
 Download these three archives into your application's `vendor/` directory:
 
-- [three-clouds-webgpu-0.1.0-alpha.7.tgz](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.7/three-clouds-webgpu-0.1.0-alpha.7.tgz)
-- [takram-three-atmosphere-0.19.1+fork.8.tgz](https://raw.githubusercontent.com/johnfewell/three-clouds-webgpu/v0.1.0-alpha.7/vendor/takram-three-atmosphere-0.19.1%2Bfork.8.tgz)
-- [takram-three-geospatial-0.9.1+fork.8.tgz](https://raw.githubusercontent.com/johnfewell/three-clouds-webgpu/v0.1.0-alpha.7/vendor/takram-three-geospatial-0.9.1%2Bfork.8.tgz)
+- [three-clouds-webgpu-0.1.0-alpha.8.tgz](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.8/three-clouds-webgpu-0.1.0-alpha.8.tgz)
+- [takram-three-atmosphere-0.19.1+fork.8.tgz](https://raw.githubusercontent.com/johnfewell/three-clouds-webgpu/v0.1.0-alpha.8/vendor/takram-three-atmosphere-0.19.1%2Bfork.8.tgz)
+- [takram-three-geospatial-0.9.1+fork.8.tgz](https://raw.githubusercontent.com/johnfewell/three-clouds-webgpu/v0.1.0-alpha.8/vendor/takram-three-geospatial-0.9.1%2Bfork.8.tgz)
 
 The fork archives are pinned to the same release tag. No source checkout or
 local package build is needed. Save the release's
-[SHA256SUMS](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.7/SHA256SUMS)
+[SHA256SUMS](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.8/SHA256SUMS)
 in `vendor/` and verify the clouds archive:
 
 ```sh
 (cd vendor && shasum -a 256 -c SHA256SUMS)
 ```
 
-The [release record](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.7/public-candidate-record.json)
+The [release record](https://github.com/johnfewell/three-clouds-webgpu/releases/download/v0.1.0-alpha.8/public-candidate-record.json)
 also lists the SHA-256 checksums for both fork archives.
 
 Pin both fork builds in `pnpm-workspace.yaml`. They carry the required runtime
@@ -81,7 +81,7 @@ overrides:
 Then install the known consumer dependency set:
 
 ```sh
-pnpm add ./vendor/three-clouds-webgpu-0.1.0-alpha.7.tgz three@0.187.0 @takram/three-atmosphere@0.19.1 @takram/three-geospatial@0.9.1 postprocessing@6.39.4
+pnpm add ./vendor/three-clouds-webgpu-0.1.0-alpha.8.tgz three@0.187.0 @takram/three-atmosphere@0.19.1 @takram/three-geospatial@0.9.1 postprocessing@6.39.4
 pnpm add -D typescript@5.9.2 @types/three@0.187.0
 ```
 
@@ -126,8 +126,8 @@ corepack enable
 pnpm install --frozen-lockfile
 pnpm build
 pnpm pack
-pnpm pack:verify ./three-clouds-webgpu-0.1.0-alpha.7.tgz
-pnpm pack:qualify ./three-clouds-webgpu-0.1.0-alpha.7.tgz --keep-projects
+pnpm pack:verify ./three-clouds-webgpu-0.1.0-alpha.8.tgz
+pnpm pack:qualify ./three-clouds-webgpu-0.1.0-alpha.8.tgz --keep-projects
 ```
 
 Building requires Node 24 and the repository's pinned pnpm. Packing refuses

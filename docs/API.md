@@ -1,4 +1,4 @@
-# API reference: three-clouds-webgpu 0.1.0-alpha.7
+# API reference: three-clouds-webgpu 0.1.0-alpha.8
 
 Generated from this version’s public TypeScript surface, JSDoc and runtime defaults. Start with recommended integration; the advanced and reference groups remain exported for compatibility, not as required setup steps.
 
@@ -829,7 +829,7 @@ Existing objects to inspect, never a second configuration store
 | [`CirrusDeckParams`](../src/experimental/cirrusDeck.ts#L30) | `interface CirrusDeckParams` | See source declaration |
 | [`CLOUD_TYPE_PARAMS`](../src/experimental/cloudTypeMap.ts#L53) | `CLOUD_TYPE_PARAMS: readonly ["shapeAmount", "shapeDetailAmount", "shapeAlteringBias", "densityScale", "expTerm", "exponent", "linearTerm", "constantTerm"]` | See source declaration |
 | [`CLOUD_TYPE_TENT_SCOPES`](../src/experimental/cloudTypeMap.ts#L138) | `CLOUD_TYPE_TENT_SCOPES: readonly ["weather", "media"]` | See source declaration |
-| [`CloudEnvironmentSettings`](../src/experimental/cloudEnvironment.ts#L47) | `interface CloudEnvironmentSettings` | See source declaration |
+| [`CloudEnvironmentSettings`](../src/experimental/cloudEnvironment.ts#L46) | `interface CloudEnvironmentSettings` | See source declaration |
 | [`cloudShapeDefaults`](../src/experimental/cloudShape.ts#L36) | `cloudShapeDefaults: Readonly<CloudShapeParams>` | See source declaration |
 | [`CloudShapeDeps`](../src/experimental/cloudShape.ts#L209) | `interface CloudShapeDeps` | See source declaration |
 | [`CloudShapeParams`](../src/experimental/cloudShape.ts#L11) | `interface CloudShapeParams` | See source declaration |
