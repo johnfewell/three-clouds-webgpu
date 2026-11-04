@@ -1,5 +1,23 @@
 # three-clouds-webgpu
 
+<p align="center">
+  <a href="https://three-clouds-webgpu.cloud6711.workers.dev/"><img alt="Open the live demo" src="https://img.shields.io/badge/%E2%96%B6%20LIVE%20DEMO-open-f5a646?style=for-the-badge"></a>
+  &nbsp;
+  <a href="https://three-clouds-webgpu.cloud6711.workers.dev/storybook/"><img alt="Open the Storybook" src="https://img.shields.io/badge/STORYBOOK-interactive%20stories-ff4785?style=for-the-badge&logo=storybook&logoColor=white"></a>
+</p>
+
+<p align="center">
+  <a href="https://three-clouds-webgpu.cloud6711.workers.dev/"><img alt="The live demo: volumetric clouds over the ocean at golden hour" src="docs/images/demo.webp" width="100%"></a>
+</p>
+
+<p align="center">
+  <b>Live demo:</b> <a href="https://three-clouds-webgpu.cloud6711.workers.dev/">three-clouds-webgpu.cloud6711.workers.dev</a>
+  &nbsp;·&nbsp;
+  <b>Storybook:</b> <a href="https://three-clouds-webgpu.cloud6711.workers.dev/storybook/">three-clouds-webgpu.cloud6711.workers.dev/storybook</a>
+  <br>
+  Needs a browser with WebGPU. Tested in Chrome.
+</p>
+
 Geospatial volumetric clouds, cloud shadows, light shafts and haze for Three.js
 `WebGPURenderer`, with baked assets and an optional React Three Fiber adapter.
 
@@ -254,7 +272,7 @@ These larger examples live in the repository, not in the tarball:
 - [Basic](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/basic/src/main.ts): minimal plain Three.js consumer.
 - [3D Tiles](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/tiles/README.md): Google Photorealistic 3D Tiles with clouds, atmosphere and cloud shadows on tiles.
 - [React Three Fiber](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/r3f/README.md): consumer with `<Clouds>`.
-- [Storybook](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/storybook/README.md): interactive stories.
+- **[Storybook, live](https://three-clouds-webgpu.cloud6711.workers.dev/storybook/)**: interactive stories ([source](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/storybook/README.md)).
 - [Parity](https://github.com/johnfewell/three-clouds-webgpu/blob/main/examples/parity/README.md): the 63-case A/B visual comparison ladder.
 
 ## Known differences

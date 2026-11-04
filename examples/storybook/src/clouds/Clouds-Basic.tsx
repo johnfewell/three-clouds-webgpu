@@ -133,7 +133,7 @@ const Content: FC<StoryProps> = storyPov => {
   // Awaited, not lazily loaded by <Clouds>: see useBakedCloudTextures
   const textures = useBakedCloudTextures()
 
-  // null in every story but the procedural-weather one, so the baked
+  // Null in every story but the procedural-weather one, so the baked
   // PNG stays the default here
   const proceduralWeather = useAtomValue(weatherTextureAtom)
 

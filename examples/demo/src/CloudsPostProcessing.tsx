@@ -64,8 +64,9 @@ export interface CloudsPostProcessingProps {
   albedoScale?: number
   lightingMask?: boolean
   nightSky?: boolean
-  exposure: number
-  weatherTime: number
+  // A ref lets a frame-locked driver set the value without a React render
+  exposure: number | { current: number }
+  weatherTime: number | { current: number }
   onFrameStats?: (stats: FrameStats) => void
 }
 
@@ -238,10 +239,12 @@ export const CloudsPostProcessing: FC<CloudsPostProcessingProps> = ({
     }
   }, [renderPipeline])
 
-  const weatherTimeRef = useRef(weatherTime)
-  weatherTimeRef.current = weatherTime
-  const exposureRef = useRef(exposure)
-  exposureRef.current = exposure
+  const weatherTimeRef = useRef({ current: 0 })
+  weatherTimeRef.current =
+    typeof weatherTime === 'number' ? { current: weatherTime } : weatherTime
+  const exposureRef = useRef({ current: 10 })
+  exposureRef.current =
+    typeof exposure === 'number' ? { current: exposure } : exposure
 
   const statsRef = useRef({
     lastNow: 0,
@@ -261,7 +264,7 @@ export const CloudsPostProcessing: FC<CloudsPostProcessingProps> = ({
     st.lastNow = now
 
     atmosphereContext.camera = camera
-    cloudsContext.time = weatherTimeRef.current
+    cloudsContext.time = weatherTimeRef.current.current
     cloudsContext.frame += 1
 
     cloudsContext.sunDirection.copy(atmosphereContext.sunDirectionECEF.value)
@@ -282,7 +285,7 @@ export const CloudsPostProcessing: FC<CloudsPostProcessingProps> = ({
     u.cameraNear.value = camera.near
     renderer.getSize(u.screenResolution.value)
     u.shadowFrame.value = cloudsContext.frame
-    u.exposure.value = exposureRef.current
+    u.exposure.value = exposureRef.current.current
     u.stbn.value = cloudsContext.stbnTexture
     u.sunDirection.value.copy(cloudsContext.sunDirection)
     u.ecefToWorldMatrix.value.copy(cloudsContext.ecefToWorldMatrix)

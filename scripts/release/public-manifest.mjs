@@ -188,6 +188,10 @@ export const DOCS_KEEP = [
     reason: 'illustrations and notes the experimental options guide links to'
   },
   {
+    path: 'docs/images',
+    reason: 'the README hero screenshot that links to the live demo'
+  },
+  {
     path: 'docs/MIGRATION.md',
     reason:
       'the key audit table, read verbatim by ' +

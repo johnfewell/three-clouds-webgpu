@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "9aa7207baf5ad8fe4b98405c34550577fd50a3647c25e23eb56b08492403221f",
+  "sourceFingerprint": "33d9eaec661623e7ab0f45a47cf80bd630a1209ed924c9c9ede6c3b782a2f026",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -36,7 +36,7 @@
     },
     "README.md": {
       "mode": "100644",
-      "sha256": "b0773a02e23a956cc16e29fd2a2c03e265900784a64da063a8d682619c8fb482"
+      "sha256": "7f7d49da43f90a47d9483a03b42cfb30140396c713fc95a85a1e40aca780447a"
     },
     "THIRD_PARTY_NOTICES.md": {
       "mode": "100644",
@@ -434,6 +434,10 @@
       "mode": "100644",
       "sha256": "3a14333fc7d261f82f3d3ddd073939491278c4a4417740045f5e1ca78f09ae83"
     },
+    "docs/images/demo.webp": {
+      "mode": "100644",
+      "sha256": "bfd72c1a086f4822838574f25649e28b8b4cabd85ac017038f85616938805d7b"
+    },
     "docs/night-sky.md": {
       "mode": "100644",
       "sha256": "dff1acd016c221e87d7470d3a6987e685a8b099e380167a20679f56151b2e076"
@@ -474,17 +478,21 @@
       "mode": "100644",
       "sha256": "df37e338e0c5713cc7ef79f7d300dce84064cc5f05d6fb594ade00c735db26a6"
     },
+    "examples/demo/scripts/film.mjs": {
+      "mode": "100644",
+      "sha256": "0d5ea4789beb30825f43e622020f4c3e51d37edf030566c1057c10135ff99710"
+    },
     "examples/demo/scripts/setup-assets.mjs": {
       "mode": "100644",
       "sha256": "58ebd5a35cad5baf89bd8d22defc14125ebce755ce7dbb92d19cb06e3e13b1c1"
     },
     "examples/demo/src/App.tsx": {
       "mode": "100644",
-      "sha256": "9b4605967239fb511418bd5d1faa6dedcabbc143323b00f46d3c3d3e1272d688"
+      "sha256": "aa8f6496fa449e3cc43e1254dab98ce08cbcb64c613333c4d475630cba376ac7"
     },
     "examples/demo/src/CloudsPostProcessing.tsx": {
       "mode": "100644",
-      "sha256": "0f931c9ebbb7cf14b918bc51bdf5135d85a545c99face907f60a01d8252670f5"
+      "sha256": "494275e520f27583056153ef0537652b07a752a67fcb519d8c7e0473d1274cff"
     },
     "examples/demo/src/FlyControls.tsx": {
       "mode": "100644",
@@ -498,9 +506,33 @@
       "mode": "100644",
       "sha256": "bc1a3b4c7d6e92ec1fd327c40224bacec4110e7a61d50cbf87b90bb2635d3fa1"
     },
+    "examples/demo/src/film/FilmDriver.tsx": {
+      "mode": "100644",
+      "sha256": "171ec2251aa43e7ee4715ed4ca7b8fe2b76310c62c4a0d3371926ac57f94943f"
+    },
+    "examples/demo/src/film/LiveDriver.tsx": {
+      "mode": "100644",
+      "sha256": "8ce7381c7f3b419e2dd5c313ab63c6c0e28cf06db2672d0f3c65a6140ac1627d"
+    },
+    "examples/demo/src/film/README.md": {
+      "mode": "100644",
+      "sha256": "f2806c9fef152c730229139916564a8cdc051a54c325e35b93bc3eb31d3c4a01"
+    },
+    "examples/demo/src/film/path.ts": {
+      "mode": "100644",
+      "sha256": "88f658d820b996ee1f9fa9178009331cae31999fe5fc1297f94a3e44821a3088"
+    },
+    "examples/demo/src/film/shots.ts": {
+      "mode": "100644",
+      "sha256": "23076c04dae103d6aa94e94f6d2583829493e93ba6003ea7ee08f3ca08c30011"
+    },
+    "examples/demo/src/film/steering.ts": {
+      "mode": "100644",
+      "sha256": "fe96e23b3a2afd95d3cceacbc0c33452dce3445e6c8e8e5df90a89c442e56bef"
+    },
     "examples/demo/src/ground.tsx": {
       "mode": "100644",
-      "sha256": "aa5dfce1d3be4c28aded2a3ef8278e0bb124810b1433b09acd3749b90141cc87"
+      "sha256": "2d7516159373c98f2d58e89adf8943a62231235f93e61ae444889368f14fe523"
     },
     "examples/demo/src/lensFlare.ts": {
       "mode": "100644",
@@ -524,7 +556,7 @@
     },
     "examples/demo/src/styles.css": {
       "mode": "100644",
-      "sha256": "b35f629ead95628f1600af408f0e5bd3ae8089dbf84ea445eaf098220b106aca"
+      "sha256": "35dd35fa03b45fbd06a6063389453971e5397f3d214fada72cac35224dc3d49d"
     },
     "examples/demo/src/useBakedCloudTextures.ts": {
       "mode": "100644",
@@ -1652,7 +1684,7 @@
     },
     "examples/storybook/src/clouds/Clouds-Basic.tsx": {
       "mode": "100644",
-      "sha256": "d455c49942d2889df4ba30f1a93d5371f3f6436b74799060766940cb4db036de"
+      "sha256": "44634afd61e0b55bd2cb02a9b91c02285f6005ae99bf46ab4241ebca329ef133"
     },
     "examples/storybook/src/clouds/Clouds-CloudTypes.tsx": {
       "mode": "100644",
@@ -2176,7 +2208,7 @@
     },
     "package.json": {
       "mode": "100644",
-      "sha256": "b79886582d7edf6386885218a0eda2e6352e9778c2c5604f01d2c00e6069be6d"
+      "sha256": "3af6a32be4af1de0038c049c1f43b7f6c5d1b1979dd0e51e867798ede0e305da"
     },
     "parity/results/0/README.md": {
       "mode": "100644",
@@ -4032,7 +4064,7 @@
     },
     "scripts/release/public-manifest.mjs": {
       "mode": "100644",
-      "sha256": "27372cea8e65e9f7ad39e3fafe0be813140cba718f4ddee8a775eaf6d95c9c1a"
+      "sha256": "430d461366d3eb1e2c6f14ca84292ec9b2247806c8ff86084c75c223e9ed11a2"
     },
     "scripts/release/public-scan.d.mts": {
       "mode": "100644",
@@ -5309,6 +5341,10 @@
     "test/helpers/weatherTextureReference.ts": {
       "mode": "100644",
       "sha256": "483e0983753ec574f64c8352c6f0a37b24674344bbaf824bc87758f218c5000c"
+    },
+    "test/hevenSteering.dom.test.ts": {
+      "mode": "100644",
+      "sha256": "2038e05ef61172dfeed9fea36b3532b6982c78a4049184992cfabd80fef5ea69"
     },
     "test/jitterFixture.test.ts": {
       "mode": "100644",

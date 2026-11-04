@@ -70,6 +70,7 @@
     "docs/experimental/cloudTypeMap/README.md",
     "docs/experimental/cirrusDeck/*.webp",
     "docs/experimental/cirrusDeck/README.md",
+    "docs/images/demo.webp",
     "recipes/*/README.md",
     "recipes/*/package.json",
     "recipes/*/pnpm-workspace.yaml",

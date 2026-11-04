@@ -188,13 +188,27 @@ class TileMaterialReplacementPlugin {
   }
 }
 
+// The mounted tiles renderer, so the film driver can wait for tiles to settle
+export const tilesHolder: { current: TilesRendererImpl | null } = {
+  current: null
+}
+
 const dracoLoader = new DRACOLoader()
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/')
 
-export const GroundTiles: FC<{ ground: GroundState }> = ({ ground }) => {
+export const GroundTiles: FC<{ ground: GroundState; errorTarget?: number }> = ({
+  ground,
+  errorTarget = 12
+}) => {
   if (!ground.tiles || !hasIonToken) return null
   return (
-    <TilesRenderer key={ionToken} errorTarget={12}>
+    <TilesRenderer
+      key={ionToken}
+      ref={(tiles: TilesRendererImpl | null) => {
+        tilesHolder.current = tiles
+      }}
+      errorTarget={errorTarget}
+    >
       <TilesPlugin
         plugin={CesiumIonAuthPlugin}
         args={[

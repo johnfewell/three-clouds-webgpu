@@ -51,6 +51,9 @@ import { highpVelocity } from '@takram/three-geospatial/webgpu'
 
 import { createAtmosphereContext } from './atmosphereContext'
 import { CloudsPostProcessing, type FrameStats } from './CloudsPostProcessing'
+import { FilmDriver, type FilmRefs } from './film/FilmDriver'
+import { LiveDriver, liveOptionsFromParams } from './film/LiveDriver'
+import { findFilmShot, type FilmShot } from './film/shots'
 import { FlyControls } from './FlyControls'
 import { FlyEntry } from './FlyEntry'
 import {
@@ -93,6 +96,13 @@ export const OCEAN_OPENING_POV: PointOfViewProps = {
   distance: 20
 }
 
+// The ocean world frame is the north-up-east frame at sea level under the POV
+const OCEAN_ANCHOR = {
+  longitude: OCEAN_OPENING_POV.longitude,
+  latitude: OCEAN_OPENING_POV.latitude,
+  height: 0
+}
+
 export const PRESET_LABELS: Record<ScenePresetName, string> = {
   partlyCloudy: 'Partly Cloudy',
   fluffy: 'Fluffy Cumulus',
@@ -120,6 +130,39 @@ export const SPEED_OPTIONS = [
 ] as const
 
 const DEFAULT_EXPOSURE = 10
+
+// ?film=<shot id> renders that shot frame-locked for recording, with no UI
+const filmParams =
+  typeof window === 'undefined'
+    ? null
+    : new URLSearchParams(window.location.search)
+const filmShot: FilmShot | undefined = findFilmShot(
+  filmParams?.get('film') ?? null,
+  filmParams ?? undefined
+)
+const filmFps = Number(filmParams?.get('fps') ?? 60) || 60
+const filmRefs: FilmRefs = {
+  weatherTime: { current: 0 },
+  exposure: { current: DEFAULT_EXPOSURE }
+}
+
+// ?live=<shot id>, or the build's VITE_LIVE_SHOT, runs that shot endlessly in
+// real time with no UI: the launch page
+const liveShot: FilmShot | undefined =
+  filmShot == null
+    ? findFilmShot(
+        filmParams?.get('live') ??
+          (import.meta.env.VITE_LIVE_SHOT as string | undefined) ??
+          null,
+        filmParams ?? undefined
+      )
+    : undefined
+const liveOptions =
+  liveShot != null
+    ? liveOptionsFromParams(liveShot, filmParams ?? new URLSearchParams())
+    : null
+// Either mode takes the UI away and fixes the scene to the shot
+const showcaseShot = filmShot ?? liveShot
 
 function wrapTimeOfDay(value: number): number {
   const wrapped = ((value % 1) + 1) % 1
@@ -425,6 +468,8 @@ interface DemoSceneProps {
   onAltitudeChange: (alt: number, dirY: number) => void
   poseSetterRef: { current: ((pose: CameraPoseRequest) => void) | null }
   resetCameraRef: { current: (() => void) | null }
+  film?: FilmShot
+  live?: FilmShot
 }
 
 const DemoScene: FC<DemoSceneProps> = ({
@@ -444,7 +489,9 @@ const DemoScene: FC<DemoSceneProps> = ({
   onTexturesReady,
   onAltitudeChange,
   poseSetterRef,
-  resetCameraRef
+  resetCameraRef,
+  film,
+  live
 }) => {
   const scene = useThree(({ scene }) => scene)
   const camera = useThree(({ camera }) => camera)
@@ -485,21 +532,25 @@ const DemoScene: FC<DemoSceneProps> = ({
 
   return (
     <>
-      <GroundTiles ground={ground} />
-      <OrbitControls
-        makeDefault
-        target={target}
-        minDistance={10}
-        maxDistance={150000}
-        enableDamping
-        dampingFactor={0.08}
-      />
-      <FlyControls
-        key={ground.value}
-        enabled={flyMode}
-        worldToECEF={atmosphereContext.matrixWorldToECEF.value}
-        onAltitudeChange={onAltitudeChange}
-      />
+      <GroundTiles ground={ground} errorTarget={film != null ? 8 : 12} />
+      {film == null && live == null && (
+        <>
+          <OrbitControls
+            makeDefault
+            target={target}
+            minDistance={10}
+            maxDistance={150000}
+            enableDamping
+            dampingFactor={0.08}
+          />
+          <FlyControls
+            key={ground.value}
+            enabled={flyMode}
+            worldToECEF={atmosphereContext.matrixWorldToECEF.value}
+            onAltitudeChange={onAltitudeChange}
+          />
+        </>
+      )}
       <Clouds
         sceneDepth={scenePass.getTextureNode('depth')}
         localWeatherTexture={textures.localWeatherTexture}
@@ -525,14 +576,36 @@ const DemoScene: FC<DemoSceneProps> = ({
           resetCameraRef={resetCameraRef}
         />
         {ground.ocean && <GroundOcean onReady={onOceanReady} />}
+        {film != null && (
+          <FilmDriver
+            shot={film}
+            fps={filmFps}
+            baseDate={BASE_DATE}
+            oceanAnchor={OCEAN_ANCHOR}
+            atmosphereContext={atmosphereContext}
+            refs={filmRefs}
+          />
+        )}
+        {live != null && liveOptions != null && (
+          <LiveDriver
+            shot={live}
+            options={liveOptions}
+            baseDate={BASE_DATE}
+            oceanAnchor={OCEAN_ANCHOR}
+            atmosphereContext={atmosphereContext}
+            refs={filmRefs}
+          />
+        )}
         <CloudsPostProcessing
           albedoScale={ground.albedoScale}
           lightingMask={ground.ocean}
           scenePass={scenePass}
           atmosphereContext={atmosphereContext}
           nightSky
-          exposure={exposure}
-          weatherTime={weatherTime}
+          exposure={(film ?? live) != null ? filmRefs.exposure : exposure}
+          weatherTime={
+            (film ?? live) != null ? filmRefs.weatherTime : weatherTime
+          }
           onFrameStats={onFrameStats}
         />
       </Clouds>
@@ -541,6 +614,7 @@ const DemoScene: FC<DemoSceneProps> = ({
 }
 
 function initialPresetFromUrl(): ScenePresetName {
+  if (showcaseShot != null) return showcaseShot.preset
   if (typeof window === 'undefined') return 'stunningSunset'
   const param = new URLSearchParams(window.location.search).get('preset')
   return isScenePresetName(param) ? param : 'stunningSunset'
@@ -549,20 +623,32 @@ function initialPresetFromUrl(): ScenePresetName {
 export const App: FC = () => {
   const [preset, setPresetState] =
     useState<ScenePresetName>(initialPresetFromUrl)
-  const [quality, setQuality] = useState<QualityPreset>('high')
+  const [quality, setQuality] = useState<QualityPreset>(
+    filmShot != null
+      ? (filmShot.quality ?? 'ultra')
+      : liveShot != null
+        ? (QUALITY_OPTIONS.find(q => q === filmParams?.get('q')) ??
+          liveShot.quality ??
+          'high')
+        : 'high'
+  )
   const [exposure, setExposure] = useState<number>(DEFAULT_EXPOSURE)
   const [coverage, setCoverage] = useState<number>(
-    () => scenePresets[initialPresetFromUrl()].coverage
+    () =>
+      showcaseShot?.coverage ?? scenePresets[initialPresetFromUrl()].coverage
   )
   const [groundValue, setGroundValue] = useState<GroundValue>(
-    hasOcean ? 'ocean' : 'bare'
+    showcaseShot?.ground ?? (hasOcean ? 'ocean' : 'bare')
   )
   const [flyMode, setFlyMode] = useState<boolean>(false)
   const [collapsed, setCollapsed] = useState<boolean>(false)
 
-  const [timeOfDay, setTimeOfDayState] = useState<number>(
-    () => scenePresets[initialPresetFromUrl()].timeOfDay
-  )
+  const [timeOfDay, setTimeOfDayState] = useState<number>(() => {
+    const filmTime = showcaseShot?.timeOfDay
+    if (typeof filmTime === 'number') return filmTime
+    if (filmTime != null) return filmTime[0]
+    return scenePresets[initialPresetFromUrl()].timeOfDay
+  })
   const [playing, setPlaying] = useState<boolean>(false)
   const [secondsPerDay, setSecondsPerDay] = useState<number>(600)
   const [weatherElapsed, setWeatherElapsed] = useState<number>(0)
@@ -683,6 +769,7 @@ export const App: FC = () => {
   return (
     <div className='demo-root'>
       <Canvas
+        frameloop={filmShot != null ? 'never' : 'always'}
         camera={{ fov: 55, near: 1, far: 4e5 }}
         gl={async props => {
           const renderer = new WebGPURenderer(props as never)
@@ -721,279 +808,308 @@ export const App: FC = () => {
           onAltitudeChange={handleAltitudeChange}
           poseSetterRef={poseSetterRef}
           resetCameraRef={resetCameraRef}
+          film={filmShot}
+          live={liveShot}
         />
       </Canvas>
 
-      <header className='demo-brand'>
-        <div className='demo-brand-row'>
-          <span className='demo-brand-title'>three-clouds-webgpu</span>
-          <span className='demo-brand-badge'>WebGPU · TSL</span>
-        </div>
-        <div className='demo-brand-meta'>
-          <span className='demo-brand-dot' />
-          <span data-testid='fps-readout'>
-            {frameStats.fps} FPS · {frameStats.frameMs.toFixed(1)} ms
-          </span>
-          <span>·</span>
-          <span>{PRESET_LABELS[preset]}</span>
-        </div>
-      </header>
-
-      <aside
-        className={`demo-panel ${collapsed ? 'is-collapsed' : ''}`}
-        aria-label='Scene Controls'
-      >
-        <button
-          type='button'
-          className='demo-panel-header'
-          onClick={() => setCollapsed(prev => !prev)}
-          aria-expanded={!collapsed}
-          data-testid='panel-toggle'
-        >
-          <span className='demo-panel-header-title'>Controls</span>
-          <span className='demo-panel-chevron'>▼</span>
-        </button>
-
-        {!collapsed && (
-          <div className='demo-panel-body'>
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <label htmlFor='demo-preset-select'>Preset</label>
-                <span className='demo-field-value'>{preset}</span>
-              </div>
-              <select
-                id='demo-preset-select'
-                className='demo-select'
-                value={preset}
-                onChange={e => selectPreset(e.target.value as ScenePresetName)}
-                data-testid='preset-select'
+      {showcaseShot == null && (
+        <>
+          <header className='demo-brand'>
+            <div className='demo-brand-row'>
+              <span className='demo-brand-title'>three-clouds-webgpu</span>
+              <span className='demo-brand-badge'>WebGPU · TSL</span>
+            </div>
+            <div className='demo-brand-meta'>
+              <span className='demo-brand-dot' />
+              <span data-testid='fps-readout'>
+                {frameStats.fps} FPS · {frameStats.frameMs.toFixed(1)} ms
+              </span>
+              <span>·</span>
+              <span>{PRESET_LABELS[preset]}</span>
+            </div>
+            <nav className='demo-brand-links' aria-label='Project links'>
+              <a className='demo-brand-link is-storybook' href='storybook/'>
+                Storybook ↗
+              </a>
+              <a
+                className='demo-brand-link'
+                href='https://github.com/johnfewell/three-clouds-webgpu'
               >
-                {scenePresetNames.map(name => (
-                  <option key={name} value={name}>
-                    {PRESET_LABELS[name]}
+                GitHub ↗
+              </a>
+            </nav>
+          </header>
+
+          <aside
+            className={`demo-panel ${collapsed ? 'is-collapsed' : ''}`}
+            aria-label='Scene Controls'
+          >
+            <button
+              type='button'
+              className='demo-panel-header'
+              onClick={() => setCollapsed(prev => !prev)}
+              aria-expanded={!collapsed}
+              data-testid='panel-toggle'
+            >
+              <span className='demo-panel-header-title'>Controls</span>
+              <span className='demo-panel-chevron'>▼</span>
+            </button>
+
+            {!collapsed && (
+              <div className='demo-panel-body'>
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <label htmlFor='demo-preset-select'>Preset</label>
+                    <span className='demo-field-value'>{preset}</span>
+                  </div>
+                  <select
+                    id='demo-preset-select'
+                    className='demo-select'
+                    value={preset}
+                    onChange={e =>
+                      selectPreset(e.target.value as ScenePresetName)
+                    }
+                    data-testid='preset-select'
+                  >
+                    {scenePresetNames.map(name => (
+                      <option key={name} value={name}>
+                        {PRESET_LABELS[name]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <span>Quality</span>
+                    <span className='demo-field-value'>{quality}</span>
+                  </div>
+                  <div
+                    className='demo-segmented'
+                    role='group'
+                    aria-label='Cloud quality preset'
+                    data-testid='quality-select'
+                  >
+                    {QUALITY_OPTIONS.map(q => (
+                      <button
+                        key={q}
+                        type='button'
+                        className={`demo-segment-btn ${quality === q ? 'is-active' : ''}`}
+                        onClick={() => setQuality(q)}
+                        data-testid={`quality-${q}`}
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <label htmlFor='demo-exposure-slider'>Exposure</label>
+                    <span
+                      className='demo-field-value'
+                      data-testid='exposure-value'
+                    >
+                      {exposureMultiplier}× ({exposure.toFixed(1)})
+                    </span>
+                  </div>
+                  <input
+                    id='demo-exposure-slider'
+                    type='range'
+                    className='demo-slider'
+                    min={2}
+                    max={25}
+                    step={0.25}
+                    value={exposure}
+                    style={
+                      {
+                        '--progress': `${exposurePercent}%`
+                      } as CSSProperties
+                    }
+                    onChange={e => setExposure(Number(e.target.value))}
+                    data-testid='exposure-slider'
+                  />
+                </div>
+
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <label htmlFor='demo-coverage-slider'>Cloud coverage</label>
+                    <span
+                      className='demo-field-value'
+                      data-testid='coverage-value'
+                    >
+                      {Math.round(coveragePercent)}%
+                    </span>
+                  </div>
+                  <input
+                    id='demo-coverage-slider'
+                    type='range'
+                    className='demo-slider'
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    value={coverage}
+                    style={
+                      {
+                        '--progress': `${coveragePercent}%`
+                      } as CSSProperties
+                    }
+                    onChange={e => setCoverage(Number(e.target.value))}
+                    data-testid='coverage-slider'
+                  />
+                </div>
+
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <label htmlFor='demo-ground-select'>Ground</label>
+                    <span className='demo-field-value'>
+                      {groundLabel(ground)}
+                    </span>
+                  </div>
+                  <select
+                    id='demo-ground-select'
+                    className='demo-select'
+                    value={ground.value}
+                    onChange={e =>
+                      setGroundValue(e.target.value as GroundValue)
+                    }
+                    data-testid='ground-select'
+                  >
+                    <option value='bare'>Bare ground</option>
+                    {hasOcean && <option value='ocean'>Ocean</option>}
+                    {hasIonToken &&
+                      (
+                        Object.keys(GROUND_LOCATIONS) as GroundLocationKey[]
+                      ).map(key => (
+                        <option key={key} value={key}>
+                          3D Tiles: {GROUND_LOCATIONS[key].title}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                <div className='demo-field'>
+                  <div className='demo-field-header'>
+                    <span>Camera Mode</span>
+                    <span className='demo-field-value'>
+                      {flyMode ? 'Fly' : 'Explore'}
+                    </span>
+                  </div>
+                  <div
+                    className='demo-segmented demo-segmented-2'
+                    role='group'
+                    aria-label='Camera mode'
+                  >
+                    <button
+                      type='button'
+                      className={`demo-segment-btn ${!flyMode ? 'is-active' : ''}`}
+                      onClick={() => setFlyMode(false)}
+                      data-testid='mode-explore'
+                    >
+                      Explore
+                    </button>
+                    <button
+                      type='button'
+                      className={`demo-segment-btn ${flyMode ? 'is-active' : ''}`}
+                      onClick={() => setFlyMode(true)}
+                      data-testid='mode-fly'
+                    >
+                      Fly
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </aside>
+
+          {flyMode && (
+            <div className='demo-fly-hint' data-testid='fly-hint'>
+              <span className='demo-fly-badge'>FLY</span>
+              <span className='demo-fly-key-group'>
+                <kbd className='demo-kbd'>WASD</kbd> Move
+              </span>
+              <span className='demo-fly-key-group'>
+                <kbd className='demo-kbd'>E</kbd>
+                <kbd className='demo-kbd'>Space</kbd> Climb
+              </span>
+              <span className='demo-fly-key-group'>
+                <kbd className='demo-kbd'>Q</kbd>
+                <kbd className='demo-kbd'>C</kbd> Descend
+              </span>
+              <span className='demo-fly-key-group'>
+                <kbd className='demo-kbd'>Shift</kbd> 5× Boost
+              </span>
+              <span className='demo-fly-key-group'>Drag to Look</span>
+              <span className='demo-fly-alt' data-testid='fly-altitude'>
+                ALT {Math.round(altitudeMeters).toLocaleString()} m
+              </span>
+            </div>
+          )}
+
+          <footer className='demo-timeline' aria-label='Solar Day Timeline'>
+            <button
+              type='button'
+              className={`demo-play-btn ${playing ? 'is-playing' : ''}`}
+              onClick={() => setPlaying(prev => !prev)}
+              aria-label={playing ? 'Pause timeline' : 'Play timeline'}
+              data-testid='timeline-play'
+            >
+              {playing ? '❚❚' : '▶'}
+            </button>
+
+            <div className='demo-time-readout'>
+              <span className='demo-time-clock' data-testid='timeline-clock'>
+                {formatSolarClock(timeOfDay)}
+              </span>
+              <span className='demo-time-phase' data-testid='timeline-phase'>
+                {solarPhaseLabel(timeOfDay)}
+              </span>
+            </div>
+
+            <div className='demo-scrubber-wrap'>
+              <input
+                type='range'
+                className='demo-scrubber'
+                min={0}
+                max={0.999}
+                step={0.001}
+                value={wrapTimeOfDay(timeOfDay)}
+                aria-label='Local solar time'
+                onChange={e => setTimeOfDay(Number(e.target.value))}
+                data-testid='timeline-scrubber'
+              />
+              <div className='demo-scrubber-ticks'>
+                <span>00:00</span>
+                <span>06:00</span>
+                <span>12:00</span>
+                <span>18:00</span>
+                <span>24:00</span>
+              </div>
+            </div>
+
+            <div className='demo-speed-box'>
+              <label htmlFor='demo-speed-select' className='demo-speed-label'>
+                Speed
+              </label>
+              <select
+                id='demo-speed-select'
+                className='demo-select demo-speed-select'
+                value={secondsPerDay}
+                onChange={e => setSecondsPerDay(Number(e.target.value))}
+                data-testid='timeline-speed'
+              >
+                {SPEED_OPTIONS.map(opt => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
                   </option>
                 ))}
               </select>
             </div>
-
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <span>Quality</span>
-                <span className='demo-field-value'>{quality}</span>
-              </div>
-              <div
-                className='demo-segmented'
-                role='group'
-                aria-label='Cloud quality preset'
-                data-testid='quality-select'
-              >
-                {QUALITY_OPTIONS.map(q => (
-                  <button
-                    key={q}
-                    type='button'
-                    className={`demo-segment-btn ${quality === q ? 'is-active' : ''}`}
-                    onClick={() => setQuality(q)}
-                    data-testid={`quality-${q}`}
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <label htmlFor='demo-exposure-slider'>Exposure</label>
-                <span className='demo-field-value' data-testid='exposure-value'>
-                  {exposureMultiplier}× ({exposure.toFixed(1)})
-                </span>
-              </div>
-              <input
-                id='demo-exposure-slider'
-                type='range'
-                className='demo-slider'
-                min={2}
-                max={25}
-                step={0.25}
-                value={exposure}
-                style={
-                  {
-                    '--progress': `${exposurePercent}%`
-                  } as CSSProperties
-                }
-                onChange={e => setExposure(Number(e.target.value))}
-                data-testid='exposure-slider'
-              />
-            </div>
-
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <label htmlFor='demo-coverage-slider'>Cloud coverage</label>
-                <span className='demo-field-value' data-testid='coverage-value'>
-                  {Math.round(coveragePercent)}%
-                </span>
-              </div>
-              <input
-                id='demo-coverage-slider'
-                type='range'
-                className='demo-slider'
-                min={0}
-                max={1}
-                step={0.01}
-                value={coverage}
-                style={
-                  {
-                    '--progress': `${coveragePercent}%`
-                  } as CSSProperties
-                }
-                onChange={e => setCoverage(Number(e.target.value))}
-                data-testid='coverage-slider'
-              />
-            </div>
-
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <label htmlFor='demo-ground-select'>Ground</label>
-                <span className='demo-field-value'>{groundLabel(ground)}</span>
-              </div>
-              <select
-                id='demo-ground-select'
-                className='demo-select'
-                value={ground.value}
-                onChange={e => setGroundValue(e.target.value as GroundValue)}
-                data-testid='ground-select'
-              >
-                <option value='bare'>Bare ground</option>
-                {hasOcean && <option value='ocean'>Ocean</option>}
-                {hasIonToken &&
-                  (Object.keys(GROUND_LOCATIONS) as GroundLocationKey[]).map(
-                    key => (
-                      <option key={key} value={key}>
-                        3D Tiles: {GROUND_LOCATIONS[key].title}
-                      </option>
-                    )
-                  )}
-              </select>
-            </div>
-
-            <div className='demo-field'>
-              <div className='demo-field-header'>
-                <span>Camera Mode</span>
-                <span className='demo-field-value'>
-                  {flyMode ? 'Fly' : 'Explore'}
-                </span>
-              </div>
-              <div
-                className='demo-segmented demo-segmented-2'
-                role='group'
-                aria-label='Camera mode'
-              >
-                <button
-                  type='button'
-                  className={`demo-segment-btn ${!flyMode ? 'is-active' : ''}`}
-                  onClick={() => setFlyMode(false)}
-                  data-testid='mode-explore'
-                >
-                  Explore
-                </button>
-                <button
-                  type='button'
-                  className={`demo-segment-btn ${flyMode ? 'is-active' : ''}`}
-                  onClick={() => setFlyMode(true)}
-                  data-testid='mode-fly'
-                >
-                  Fly
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </aside>
-
-      {flyMode && (
-        <div className='demo-fly-hint' data-testid='fly-hint'>
-          <span className='demo-fly-badge'>FLY</span>
-          <span className='demo-fly-key-group'>
-            <kbd className='demo-kbd'>WASD</kbd> Move
-          </span>
-          <span className='demo-fly-key-group'>
-            <kbd className='demo-kbd'>E</kbd>
-            <kbd className='demo-kbd'>Space</kbd> Climb
-          </span>
-          <span className='demo-fly-key-group'>
-            <kbd className='demo-kbd'>Q</kbd>
-            <kbd className='demo-kbd'>C</kbd> Descend
-          </span>
-          <span className='demo-fly-key-group'>
-            <kbd className='demo-kbd'>Shift</kbd> 5× Boost
-          </span>
-          <span className='demo-fly-key-group'>Drag to Look</span>
-          <span className='demo-fly-alt' data-testid='fly-altitude'>
-            ALT {Math.round(altitudeMeters).toLocaleString()} m
-          </span>
-        </div>
+          </footer>
+        </>
       )}
-
-      <footer className='demo-timeline' aria-label='Solar Day Timeline'>
-        <button
-          type='button'
-          className={`demo-play-btn ${playing ? 'is-playing' : ''}`}
-          onClick={() => setPlaying(prev => !prev)}
-          aria-label={playing ? 'Pause timeline' : 'Play timeline'}
-          data-testid='timeline-play'
-        >
-          {playing ? '❚❚' : '▶'}
-        </button>
-
-        <div className='demo-time-readout'>
-          <span className='demo-time-clock' data-testid='timeline-clock'>
-            {formatSolarClock(timeOfDay)}
-          </span>
-          <span className='demo-time-phase' data-testid='timeline-phase'>
-            {solarPhaseLabel(timeOfDay)}
-          </span>
-        </div>
-
-        <div className='demo-scrubber-wrap'>
-          <input
-            type='range'
-            className='demo-scrubber'
-            min={0}
-            max={0.999}
-            step={0.001}
-            value={wrapTimeOfDay(timeOfDay)}
-            aria-label='Local solar time'
-            onChange={e => setTimeOfDay(Number(e.target.value))}
-            data-testid='timeline-scrubber'
-          />
-          <div className='demo-scrubber-ticks'>
-            <span>00:00</span>
-            <span>06:00</span>
-            <span>12:00</span>
-            <span>18:00</span>
-            <span>24:00</span>
-          </div>
-        </div>
-
-        <div className='demo-speed-box'>
-          <label htmlFor='demo-speed-select' className='demo-speed-label'>
-            Speed
-          </label>
-          <select
-            id='demo-speed-select'
-            className='demo-select demo-speed-select'
-            value={secondsPerDay}
-            onChange={e => setSecondsPerDay(Number(e.target.value))}
-            data-testid='timeline-speed'
-          >
-            {SPEED_OPTIONS.map(opt => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </footer>
     </div>
   )
 }
