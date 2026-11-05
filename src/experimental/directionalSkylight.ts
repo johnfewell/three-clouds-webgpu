@@ -46,7 +46,11 @@ export function createDirectionalSkylight(
   cameraPosition: Node<'vec3'>,
   sunDirection: Node<'vec3'>,
   bottomRadius: Node<'float'>,
-  height: Node<'float'>
+  height: Node<'float'>,
+  incidentSky?: (
+    position: Node<'vec3'>,
+    direction: Node<'vec3'>
+  ) => Node<'vec3'>
 ) {
   const up = normalize(cameraPosition)
   const axis = Fn(() => {
@@ -69,13 +73,13 @@ export function createDirectionalSkylight(
   const towardDirection = axis.mul(horizontal).add(up.mul(horizon))
   const awayDirection = axis.mul(horizontal.negate()).add(up.mul(horizon))
   const sampleSky = createIndirectLuminance(sunDirection)
+  const readSky =
+    incidentSky ??
+    ((position: Node<'vec3'>, direction: Node<'vec3'>) =>
+      sampleSky(position, direction).get('luminance') as Node<'vec3'>)
   const point = up.mul(radius)
-  const toward = varying(
-    sampleSky(point, towardDirection).get('luminance') as Node<'vec3'>
-  )
-  const away = varying(
-    sampleSky(point, awayDirection).get('luminance') as Node<'vec3'>
-  )
+  const toward = varying(readSky(point, towardDirection))
+  const away = varying(readSky(point, awayDirection))
   const towardAxis = varying(towardDirection)
   const awayAxis = varying(awayDirection)
   let factor: Node<'vec3'> = vec3(1)

@@ -56,6 +56,9 @@ const TYPE_AWARE_IGNORES = [
   // checks them through the .d.mts siblings
   'scripts/release/*.mjs',
   'scripts/docs/*.mjs',
+  // CPU experiment CLIs have typed declarations and executable regression tests
+  'scripts/lighting-reference/*.mjs',
+  'scripts/lighting-experiments/*.mjs',
   // the threshold schema is plain .mjs so the two node CLIs and
   // the TS evaluator share ONE implementation instead of a fourth copy of
   // the rule, the same arrangement as verify-results.mjs above

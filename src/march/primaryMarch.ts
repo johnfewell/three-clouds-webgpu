@@ -114,6 +114,7 @@ export interface MarchCloudsDeps {
   sampleDistantShadow?: MarchCloudsDeps['sampleShadowOpticalDepth']
   prepareSkylight?: (direction: Node<'vec3'>) => void
   skyLightModulation?: () => Node<'vec3'>
+  skySource?: (position: Node<'vec3'>, baseline: Node<'vec3'>) => Node<'vec3'>
   // The four opt-in shape controls. Null seams throughout, so an untouched
   // context emits none of the maths (docs/EXPERIMENTAL.md, cloud shape)
   cloudShape?: CloudShapeDeps
@@ -320,13 +321,15 @@ function createShadeSample(deps: MarchCloudsDeps) {
         weatherHeightFraction.mul(0.5).add(0.5),
         mediaWeight
       )
-      radiance.addAssign(
-        skyIrradiance
-          .mul(skyLightModulation())
-          .mul(RECIPROCAL_PI4)
-          .mul(skyGradient)
-          .mul(skyLightScale)
-      )
+      const baselineSky = skyIrradiance
+        .mul(skyLightModulation())
+        .mul(RECIPROCAL_PI4)
+        .mul(skyGradient)
+      const sky =
+        deps.skySource == null
+          ? baselineSky
+          : deps.skySource(position, baselineSky)
+      radiance.addAssign(sky.mul(skyLightScale))
 
       // A flash inside the volume, scattered by the same medium as the sun and
       // sky terms above. Guarded on a uniform, so an idle storm skips the march

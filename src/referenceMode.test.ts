@@ -27,6 +27,7 @@ interface Written {
 
 function recordingContext(written: Written): CloudsContext {
   const ctx = new CloudsContext()
+  Object.defineProperty(ctx, 'lightingStudy', { value: {}, writable: true })
   const originalShadow = ctx.shadow
   let shadow: { updateInterval: number } = { updateInterval: 0 }
   const proxyShadow = new Proxy(originalShadow, {
@@ -54,6 +55,7 @@ function recordingContext(written: Written): CloudsContext {
         written.paths.push('lightShaftsHalfResolution')
         return Reflect.set(target, key, value, receiver)
       }
+      if (key === 'lightingStudy') written.paths.push('lightingStudy')
       if (key === 'cloudShape') {
         written.paths.push('cloudShape')
       }
@@ -170,6 +172,7 @@ describe('reference mode pins', () => {
     ctx.cloudShape = { ...cloudShapeDefaults, baseShadowStrength: 1.2 }
     expect(applyReferenceMode(ctx)).toBe(true)
     expect(referenceModePins(ctx)).toEqual({
+      lightingStudy: null,
       shadowUpdateInterval: REFERENCE_MODE.shadowUpdateInterval,
       lightShaftsHalfResolution: REFERENCE_MODE.lightShaftsHalfResolution,
       experimental: { ...REFERENCE_MODE.experimental },

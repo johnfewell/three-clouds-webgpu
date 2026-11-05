@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "f08f7935d42198a5344c20ec1ee563737a5544437cdbf791a1f88fd736dc9afe",
+  "sourceFingerprint": "fec19be1f028afbb5a237f7536d76497a4aece34cbcf318b4fcbaa577b070f8c",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -304,7 +304,7 @@
     },
     "docs/API.md": {
       "mode": "100644",
-      "sha256": "651eaefeeae8c301e4be03637fb6ad555cf07d4b1a7193b982963db7737b7bbe"
+      "sha256": "a5cb7a05a52964778b11bc8ee63060653b1cdf61f2b512fbada951e5b7e3f998"
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
@@ -444,7 +444,7 @@
     },
     "eslint.config.mjs": {
       "mode": "100644",
-      "sha256": "ba12e59026a738bb04c7145b35dd936e289a35adcf5475b126e8b65fbc27f882"
+      "sha256": "8cb65cec43536b875c895216ddf25bbf18f75412a50ad9e157c3497bf0870c6f"
     },
     "examples/basic/.gitignore": {
       "mode": "100644",
@@ -1197,6 +1197,10 @@
     "examples/parity/src/e2eSupport/e2ePorts.ts": {
       "mode": "100644",
       "sha256": "e129cb139673f8f00f6ee8e740ad910639d5ff4cc65a1751a0afce76c9d504df"
+    },
+    "examples/parity/src/e2eSupport/lightingStudyLifecycle.ts": {
+      "mode": "100644",
+      "sha256": "5840e0600760e87be51a875ce36a7f228ace2547986602d714c3dfeb7713642d"
     },
     "examples/parity/src/e2eSupport/pageLoadSummary.test.ts": {
       "mode": "100644",
@@ -3754,6 +3758,86 @@
       "mode": "100644",
       "sha256": "f61d9f158d33de82b55ef41a9c161259fa5604c263c96787de6164b3d6289241"
     },
+    "scripts/lighting-experiments/captureStudy.mjs": {
+      "mode": "100644",
+      "sha256": "4cbd5819e6616088e7158702e30468046901d4c2f0247baa3390bd93434951e6"
+    },
+    "scripts/lighting-experiments/fixtures.d.mts": {
+      "mode": "100644",
+      "sha256": "afeb10fa3218b166c6c3d5d5b5f1d2f1ec0a7a14e3786c6d8d99a0a0c0c3d580"
+    },
+    "scripts/lighting-experiments/fixtures.mjs": {
+      "mode": "100644",
+      "sha256": "6f62d3a7cf373551ed0406112882914f4c581def98b553bd2a2ff214ca4f0f0f"
+    },
+    "scripts/lighting-experiments/preflight.mjs": {
+      "mode": "100644",
+      "sha256": "12fa71ebfbce1ff5bda34400c422646aa22687f46d13882bd7ce6e1baa44dea6"
+    },
+    "scripts/lighting-experiments/quadrature.d.mts": {
+      "mode": "100644",
+      "sha256": "b8f92785f5dd13793e900749b4f2516c1dc36868032e863593db8e31e3fa2c97"
+    },
+    "scripts/lighting-experiments/quadrature.mjs": {
+      "mode": "100644",
+      "sha256": "fa6d3bfd7aa79427d4da4cc2c8908b318e47c5e80f6ecf5e1ea0537a40e30d64"
+    },
+    "scripts/lighting-experiments/referenceStudy.mjs": {
+      "mode": "100644",
+      "sha256": "d7ccdcb4d03402a29e01fd3fcd5a94e33cbb81268d7bac06fc54cc866d8a542a"
+    },
+    "scripts/lighting-experiments/scoreStudy.mjs": {
+      "mode": "100644",
+      "sha256": "010eab3fcfd66ca35529553084fb500c08bdebf0d15c228e95a801fa1c16a0e6"
+    },
+    "scripts/lighting-experiments/skyCache.d.mts": {
+      "mode": "100644",
+      "sha256": "94533350f296d87cc794887e1b2222a51a9091f2a2e2ee02a17838f0c30bbf9d"
+    },
+    "scripts/lighting-experiments/skyCache.mjs": {
+      "mode": "100644",
+      "sha256": "e29d4d8d5bb591975235bcddbd732f3605653a1bb2cfcb19046fe6bae958cca1"
+    },
+    "scripts/lighting-reference/assets.d.mts": {
+      "mode": "100644",
+      "sha256": "d890acb436bed1070bf110b6d191b1498bfc8727bc98da824b1da90a6e9220bd"
+    },
+    "scripts/lighting-reference/assets.mjs": {
+      "mode": "100644",
+      "sha256": "47b3dd770c7c070460dc8c4590c45e70d60f455708e242864c7458d06ed0342f"
+    },
+    "scripts/lighting-reference/density.d.mts": {
+      "mode": "100644",
+      "sha256": "26b4a4398e8a070426e14c011480148bb484299bca4972fa5d46a43bf77df8c2"
+    },
+    "scripts/lighting-reference/density.mjs": {
+      "mode": "100644",
+      "sha256": "d3e728a2058899a6f5d5dc8ff5db0c8d2217e2b2d3a0840890bafc72fa9e5ef7"
+    },
+    "scripts/lighting-reference/medium.d.mts": {
+      "mode": "100644",
+      "sha256": "1f00218ac34592c7911e4dbc8c756c204c6ecd0875830fed689e11f21297332f"
+    },
+    "scripts/lighting-reference/medium.mjs": {
+      "mode": "100644",
+      "sha256": "041883c01ea1d813a51d8396c71a2a86764b7291f6fbe3b03c0e8ed00d9d70a7"
+    },
+    "scripts/lighting-reference/reference.mjs": {
+      "mode": "100644",
+      "sha256": "4430f731c5c00ef7e3716eee8e5c3303f3df5d86b7e27c2185826bd486c19e1b"
+    },
+    "scripts/lighting-reference/scene.d.mts": {
+      "mode": "100644",
+      "sha256": "10a8dc4fe8b7c527e0e8cc721429bf128a3663ebe698570aa469dfea43cd8497"
+    },
+    "scripts/lighting-reference/scene.mjs": {
+      "mode": "100644",
+      "sha256": "3845553e323288bd6ad9a2591ef6122c6aacfec7a871a81bf9e4a73285cce51f"
+    },
+    "scripts/lighting-reference/textures.mjs": {
+      "mode": "100644",
+      "sha256": "404ac0878c641636d426b75a75551fc6147fa8a4958a0d79e1e671b8df4cae4b"
+    },
     "scripts/merge-check.d.mts": {
       "mode": "100644",
       "sha256": "c6cc15132e648a2742ac2400de5a42dbe1f10faf7d56a3d5932c11cda2ed7d54"
@@ -4192,7 +4276,7 @@
     },
     "src/CloudsContext.ts": {
       "mode": "100644",
-      "sha256": "b05b4c5cc4a1c48372ce2780005797ca0696767922e71302c043bda838c2d8d1"
+      "sha256": "1f98aa0d5e2ea850f0f49817583e335ac6027c7898d4953fed98f2806d0f511c"
     },
     "src/CloudsPassNode.compositeTypes.test.ts": {
       "mode": "100644",
@@ -4404,7 +4488,7 @@
     },
     "src/experimental/directionalSkylight.ts": {
       "mode": "100644",
-      "sha256": "45faf342e47678869846860102bd8d99a0e1855cdf0e93cc0a2e2e807d5521d1"
+      "sha256": "b7cb917d14fb98aa8058de66cf8243c3e98afa16da292f9db2e344fb72803a06"
     },
     "src/experimental/distantShadows.test.ts": {
       "mode": "100644",
@@ -4425,6 +4509,22 @@
     "src/experimental/evolvingWeatherDigest.test.ts": {
       "mode": "100644",
       "sha256": "9f10df981abc3ccaf0b084c366b429ce96bb8bb63efc53691cb813936119045d"
+    },
+    "src/experimental/lightingStudy.test.ts": {
+      "mode": "100644",
+      "sha256": "d75057c607889588bb7c0b8497a6cecde5f8c6c1e40f250c73184df0ba9af744"
+    },
+    "src/experimental/lightingStudy.ts": {
+      "mode": "100644",
+      "sha256": "14aee7e169a2e20a466184910e789c6b1439532885793636302bc6ad47412fd2"
+    },
+    "src/experimental/lightingStudyDiffusion.ts": {
+      "mode": "100644",
+      "sha256": "72e4b045c670910b086a9ff709f12af145b581e1e149b7afa50d908153fe6f51"
+    },
+    "src/experimental/lightingStudySky.ts": {
+      "mode": "100644",
+      "sha256": "09ae11d6b5a4e7dc8c22bbe7553f94d5eeb8c152045ee818b391a278d3dbbf92"
     },
     "src/experimental/lightning.digest.test.ts": {
       "mode": "100644",
@@ -4684,7 +4784,7 @@
     },
     "src/march/primaryMarch.ts": {
       "mode": "100644",
-      "sha256": "8b9854e6cc2484e5be46a7ad91d7dab6cb4837bbc57c77a0c20634ceea770244"
+      "sha256": "c0fd13179cbcd6181edd904c59ed09b42ad30398614621bb371598ac06976c9b"
     },
     "src/march/rainShaftMarch.test.ts": {
       "mode": "100644",
@@ -4792,7 +4892,7 @@
     },
     "src/pass/marchGraph.ts": {
       "mode": "100644",
-      "sha256": "b834834c14c89d780ccb8f85cf801df11817c5e21c24d4276f329a6aeafa34ab"
+      "sha256": "272e606c927765b7b2d9561955bc731e1ae175564422e187a88128886905257c"
     },
     "src/pass/shadowGraph.ts": {
       "mode": "100644",
@@ -4860,11 +4960,11 @@
     },
     "src/referenceMode.test.ts": {
       "mode": "100644",
-      "sha256": "eccb933175500ae43f9205079d8101479c5c7f71787d012564159d91592f691f"
+      "sha256": "12f1ccd4354e975a9e1711d8dd5bb9cb126dd10bb46ea654070c8e0b35b1adb4"
     },
     "src/referenceMode.ts": {
       "mode": "100644",
-      "sha256": "168643fa77efc134f627e19c45378869776bef40c6403e3df06a64f5b87b1687"
+      "sha256": "b74c7b40fe6922b586bac6d14f0219bc9d7269c134ba37a49f77ecb496f91941"
     },
     "src/resetHistoryCoverage.test.ts": {
       "mode": "100644",
@@ -5361,6 +5461,22 @@
     "test/lifecycleResources.test.ts": {
       "mode": "100644",
       "sha256": "11ce988107954e8615cfb126a79679fe8e9b51a13942581839cbaf03ad3210b4"
+    },
+    "test/lighting-experiments/quadrature.test.ts": {
+      "mode": "100644",
+      "sha256": "5573c4df217391862e5e9717c29e007493ec74e7f3b0563bb12fcf147b506870"
+    },
+    "test/lighting-reference/densityParity.test.ts": {
+      "mode": "100644",
+      "sha256": "259ca8b412331b457e1c2beccae2a6fda4d3112758b1e69ea9fe609a2126dfac"
+    },
+    "test/lighting-reference/referenceQualification.test.ts": {
+      "mode": "100644",
+      "sha256": "65f1923d4b074240e5e28f5a08d9ecea16abc45fc790c13ca85eeeeba2bd3448"
+    },
+    "test/lighting-reference/voxelTracking.test.ts": {
+      "mode": "100644",
+      "sha256": "0c699b385aa6cabf9b653197bc2ce7a54f13ee45cd0c0deea25a07a7ffe930d2"
     },
     "test/lockfileManifests.test.ts": {
       "mode": "100644",

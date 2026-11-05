@@ -140,7 +140,7 @@ Ownership: the caller must release the pass and its context separately
 
 ### CloudsContext
 
-[Source](../src/CloudsContext.ts#L120)
+[Source](../src/CloudsContext.ts#L124)
 
 ```ts
 class CloudsContext
@@ -208,6 +208,7 @@ Detach borrowed slots before disposal and release the pass separately
 | `evolvingWeather` | `EvolvingWeatherParams` | `{<br>    ...evolvingWeatherDefaults<br>  }` | No additional contract documented; see source |
 | `cloudShape` | `CloudShapeParams` | `{ ...cloudShapeDefaults }` | The opt-in shape controls: a darker base, a horizon coverage bank, a wind<br>shear and one rounded-to-wispy edge knob. A plain field, like<br>`convectiveProfile`, because every magnitude is a graph-time literal<br>(src/experimental/cloudShape.ts). Neutral is all zeros, so an untouched<br>context reads as the reference.<br><br>`checkCloudShape` polls it, which the pass calls each frame itself |
 | `lightning` | `LightningState \| null` | `null` | The lightning flash lighting the cloud from inside, or `null` for none. A<br>plain field, not a setter: its parts feed uniforms written every frame, so a<br>flash costs no graph rebuild. Read it only when experimental.lightning is on.<br><br>`position` is ECEF metres and belongs inside the cloud volume. `intensity`<br>is 0 whenever no flash is lit. Never reads a clock: the consumer decides<br>when a flash is, and when its envelope has decayed. |
+| `lightingStudy` | `LightingStudy \| null` | `null` | Controlled lighting research fixture, disabled by default and reference mode.<br>Assigned textures are borrowed and must be disposed by their caller.<br>Static fixtures only: rebuild caches and reassign after changing any inputs.<br>Requires dual HG phase. Rejected prototypes are not production lighting. |
 | `cloudTypes` | `CloudTypes` | `new CloudTypes()` | Regional cloud-type controls, used when `experimental.cloudTypeMap` is on |
 | `experimental` | `Readonly<ExperimentalCloudOptions>` | `experimentalDefaults` | Renderer experiments. `cloudFrontRefinement` and `distantShapeDetailFade`<br>default to true, all others to false. See docs/EXPERIMENTAL.md<br><br>Assign a partial object to preserve other options. Unknown keys and<br>non-boolean values throw. Changes rebuild the graph and reset history |
 | `proceduralWeather` | `ProceduralWeather \| null` | `null` | The generator the flag installed, or null. Read-only on purpose: the<br>pattern and octave counts are graph time, so changing them means building<br>your own and assigning it to `localWeatherTexture` |
@@ -779,14 +780,14 @@ Existing objects to inspect, never a second configuration store
 | [`createGetShadowRadius`](../src/shadow/shadowRadius.ts#L39) | `createGetShadowRadius(deps: ShadowRadiusDeps): FnNode<[Node<"vec3"> \| Vector3], Node<"float">>` | See source declaration |
 | [`createQualityGovernor`](../src/QualityGovernor.ts#L375) | `createQualityGovernor(target: QualityGovernorTarget, options?: QualityGovernorOptions): QualityGovernor` | Create a governor for a target and register it as the target's<br>`qualityGovernor`, which is what `applyReferenceMode` disarms. The governor<br>starts disarmed: call `arm()` to begin, and feed `update(frameMs)` per frame. |
 | [`createSampleCloudShadowOpticalDepth`](../src/shadow/sampleCloudShadowOpticalDepth.ts#L53) | `createSampleCloudShadowOpticalDepth(descriptor: CloudShadowDescriptor, deps: GroundShadowExtraDeps, options?: { shadowSampleCount?: number; }): FnNode<[Node<"vec3"> \| Vector3, number \| Node<"float"> \| Node<"uint">, number \| Node<"float"> \| Node<"uint">], VarNode<"float", ConstNode<"float", number>>>` | See source declaration |
-| [`DebugView`](../src/CloudsContext.ts#L89) | `type DebugView =<br>  \| 'none'<br>  \| 'cascades'<br>  \| 'shadowMap'<br>  \| 'uv'<br>  \| 'sampleCount'<br>  \| 'frontDepth'<br>  \| 'shadowLength'<br>  \| 'velocity'<br>  \| 'marchIntervals'` | Which diagnostic view the resolve pass writes, or `'none'` for the shaded<br>image. A change rebuilds the graph. |
+| [`DebugView`](../src/CloudsContext.ts#L93) | `type DebugView =<br>  \| 'none'<br>  \| 'cascades'<br>  \| 'shadowMap'<br>  \| 'uv'<br>  \| 'sampleCount'<br>  \| 'frontDepth'<br>  \| 'shadowLength'<br>  \| 'velocity'<br>  \| 'marchIntervals'` | Which diagnostic view the resolve pass writes, or `'none'` for the shaded<br>image. A change rebuilds the graph. |
 | [`DEFAULT_LOCAL_WEATHER_URL`](../src/constants.ts#L6) | `DEFAULT_LOCAL_WEATHER_URL: "assets/local_weather.png"` | See source declaration |
 | [`DEFAULT_SHADOW_RADIUS`](../src/shadow/shadowRadius.ts#L20) | `DEFAULT_SHADOW_RADIUS: 3` | See source declaration |
 | [`DEFAULT_SHAPE_DETAIL_URL`](../src/constants.ts#L8) | `DEFAULT_SHAPE_DETAIL_URL: "assets/shape_detail.bin"` | See source declaration |
 | [`DEFAULT_SHAPE_URL`](../src/constants.ts#L7) | `DEFAULT_SHAPE_URL: "assets/shape.bin"` | See source declaration |
 | [`DEFAULT_TURBULENCE_URL`](../src/constants.ts#L9) | `DEFAULT_TURBULENCE_URL: "assets/turbulence.png"` | See source declaration |
 | [`DensityProfileLike`](../src/DensityProfile.ts#L4) | `interface DensityProfileLike` | See source declaration |
-| [`getCloudsContext`](../src/CloudsContext.ts#L1321) | `getCloudsContext(ctx: Record<string, unknown>): CloudsContext` | Read the `CloudsContext` out of a TSL context, for a node that needs<br>the knobs without holding the pass. Throws when the pass is not in the graph,<br>and when two copies of this package are loaded, which is the usual cause of<br>the second message. |
+| [`getCloudsContext`](../src/CloudsContext.ts#L1345) | `getCloudsContext(ctx: Record<string, unknown>): CloudsContext` | Read the `CloudsContext` out of a TSL context, for a node that needs<br>the knobs without holding the pass. Throws when the pass is not in the graph,<br>and when two copies of this package are loaded, which is the usual cause of<br>the second message. |
 | [`GroundShadowExtraDeps`](../src/shadow/sampleCloudShadowOpticalDepth.ts#L41) | `interface GroundShadowExtraDeps` | See source declaration |
 | [`LOCAL_WEATHER_SIZE`](../src/textures/generators.ts#L25) | `LOCAL_WEATHER_SIZE: 512` | See source declaration |
 | [`LocalWeather`](../src/textures/generators.ts#L55) | `class LocalWeather` | See source declaration |
@@ -905,8 +906,8 @@ Existing objects to inspect, never a second configuration store
 
 | Export | Signature | Description |
 | --- | --- | --- |
-| [`applyPortDefaults`](../src/referenceMode.ts#L130) | `applyPortDefaults(ctx: CloudsContext): boolean` | See source declaration |
-| [`applyReferenceMode`](../src/referenceMode.ts#L101) | `applyReferenceMode(ctx: CloudsContext): boolean` | See source declaration |
+| [`applyPortDefaults`](../src/referenceMode.ts#L139) | `applyPortDefaults(ctx: CloudsContext): boolean` | See source declaration |
+| [`applyReferenceMode`](../src/referenceMode.ts#L106) | `applyReferenceMode(ctx: CloudsContext): boolean` | See source declaration |
 | [`CameraUniforms`](../src/CameraUniforms.ts#L20) | `class CameraUniforms` | See source declaration |
 | [`cpuBlendCloudTypeParameter`](../src/experimental/cloudTypeMap.ts#L390) | `cpuBlendCloudTypeParameter(base: [number, number, number, number], morph: number, param: CloudTypeParam, anchors: readonly CloudTypeArchetype[]): [number, number, number, number]` | See source declaration |
 | [`cpuCloudShadowTransmittance`](../src/shadow/cloudShadowNode.ts#L88) | `cpuCloudShadowTransmittance(opticalDepth: number): number` | See source declaration |
@@ -919,12 +920,12 @@ Existing objects to inspect, never a second configuration store
 | [`illuminatedFractionCPU`](../src/experimental/moonlight.ts#L33) | `illuminatedFractionCPU(sunDirection: Vector3, moonDirection: Vector3): number` | See source declaration |
 | [`LayerUniforms`](../src/layerUniforms.ts#L13) | `interface LayerUniforms` | See source declaration |
 | [`moonlightCPU`](../src/experimental/moonlight.ts#L47) | `moonlightCPU(sunDirection: Vector3, moonDirection: Vector3, cameraPositionECEF: Vector3, gain: number, color: Vector3, out: { lightDirection: Vector3; irradianceRatio: Vector3; }): { blend: number; illuminated: number; }` | See source declaration |
-| [`PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION`](../src/referenceMode.ts#L18) | `PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION: true` | See source declaration |
-| [`REFERENCE_MODE`](../src/referenceMode.ts#L69) | `REFERENCE_MODE: ReferenceModePins` | See source declaration |
-| [`REFERENCE_MODE_PORT_ONLY_PATHS`](../src/referenceMode.ts#L79) | `REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[]` | See source declaration |
-| [`REFERENCE_SHADOW_UPDATE_INTERVAL`](../src/referenceMode.ts#L23) | `REFERENCE_SHADOW_UPDATE_INTERVAL: 1` | See source declaration |
-| [`referenceModePins`](../src/referenceMode.ts#L89) | `referenceModePins(ctx: CloudsContext): ReferenceModePins` | See source declaration |
-| [`ReferenceModePins`](../src/referenceMode.ts#L62) | `interface ReferenceModePins` | See source declaration |
+| [`PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION`](../src/referenceMode.ts#L19) | `PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION: true` | See source declaration |
+| [`REFERENCE_MODE`](../src/referenceMode.ts#L71) | `REFERENCE_MODE: ReferenceModePins` | See source declaration |
+| [`REFERENCE_MODE_PORT_ONLY_PATHS`](../src/referenceMode.ts#L82) | `REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[]` | See source declaration |
+| [`REFERENCE_SHADOW_UPDATE_INTERVAL`](../src/referenceMode.ts#L24) | `REFERENCE_SHADOW_UPDATE_INTERVAL: 1` | See source declaration |
+| [`referenceModePins`](../src/referenceMode.ts#L93) | `referenceModePins(ctx: CloudsContext): ReferenceModePins` | See source declaration |
+| [`ReferenceModePins`](../src/referenceMode.ts#L63) | `interface ReferenceModePins` | See source declaration |
 | [`shadowRadiusFromFootprintCPU`](../src/shadow/shadowRadius.ts#L111) | `shadowRadiusFromFootprintCPU(sizePx: number, shadowRadius?: number): number` | See source declaration |
 | [`twilightBlendCPU`](../src/experimental/moonlight.ts#L25) | `twilightBlendCPU(sunElevation: number): number` | See source declaration |
 | [`updateLayerUniforms`](../src/layerUniforms.ts#L156) | `updateLayerUniforms(uniforms: LayerUniforms, ctx: CloudsContext): void` | See source declaration |

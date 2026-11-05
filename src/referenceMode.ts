@@ -6,6 +6,7 @@
 
 import type { CloudsContext } from './CloudsContext'
 import { cloudShapeKey, type CloudShapeParams } from './experimental/cloudShape'
+import type { LightingStudy } from './experimental/lightingStudy'
 import {
   experimentalDefaults,
   type ExperimentalCloudOptions
@@ -60,6 +61,7 @@ export const REFERENCE_CLOUD_SHAPE: Readonly<CloudShapeParams> = Object.freeze({
 })
 
 export interface ReferenceModePins {
+  readonly lightingStudy: LightingStudy | null
   readonly shadowUpdateInterval: number
   readonly lightShaftsHalfResolution: boolean
   readonly experimental: ExperimentalCloudOptions
@@ -67,6 +69,7 @@ export interface ReferenceModePins {
 }
 
 export const REFERENCE_MODE: ReferenceModePins = Object.freeze({
+  lightingStudy: null,
   shadowUpdateInterval: REFERENCE_SHADOW_UPDATE_INTERVAL,
   lightShaftsHalfResolution: false,
   experimental: REFERENCE_EXPERIMENTAL,
@@ -81,6 +84,7 @@ export const REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[] = Object.freeze([
   'lightShaftsHalfResolution',
   // One write, so one path: the knobs are a plain object a caller assigns
   'cloudShape',
+  'lightingStudy',
   ...Object.keys(experimentalDefaults).map(key => `experimental.${key}`)
 ])
 
@@ -88,6 +92,7 @@ export const REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[] = Object.freeze([
 // REFERENCE_MODE, so a caller can compare the two field by field
 export function referenceModePins(ctx: CloudsContext): ReferenceModePins {
   return {
+    lightingStudy: ctx.lightingStudy,
     shadowUpdateInterval: ctx.shadow.updateInterval,
     lightShaftsHalfResolution: ctx.lightShaftsHalfResolution,
     experimental: { ...ctx.experimental },
@@ -113,6 +118,10 @@ export function applyReferenceMode(ctx: CloudsContext): boolean {
     ctx.lightShaftsHalfResolution !== REFERENCE_MODE.lightShaftsHalfResolution
   ) {
     ctx.lightShaftsHalfResolution = REFERENCE_MODE.lightShaftsHalfResolution
+    changed = true
+  }
+  if (ctx.lightingStudy != null) {
+    ctx.lightingStudy = null
     changed = true
   }
   // Assigned unconditionally: the setter merges, so it is already idempotent

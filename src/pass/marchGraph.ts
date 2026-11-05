@@ -22,6 +22,7 @@ import type { CloudTypeBlendNodes } from '../experimental/cloudTypeMap'
 import type { ConvectiveDeps } from '../experimental/convectiveProfile'
 import { createDirectionalSkylight } from '../experimental/directionalSkylight'
 import type { EvolvingWeather } from '../experimental/evolvingWeather'
+import { createLightingStudyNodes } from '../experimental/lightingStudy'
 import {
   buildLightningDeps,
   lightningParamsDefault,
@@ -167,14 +168,18 @@ export function buildLightningExperiment(
 export function buildSkylightExperiment(
   ctx: CloudsContext,
   marchU: MarchUniforms,
-  layerU: LayerUniforms
+  layerU: LayerUniforms,
+  study: ReturnType<typeof createLightingStudyNodes> = null
 ): Pick<MarchCloudsDeps, 'prepareSkylight' | 'skyLightModulation'> {
   if (!ctx.experimental.directionalSkylight) return {}
   const sky = createDirectionalSkylight(
     ctx.cameraUniforms.cameraPositionECEF,
     marchU.sunDirection,
     marchU.bottomRadius,
-    layerU.minHeight.add(layerU.maxHeight).mul(0.5)
+    layerU.minHeight.add(layerU.maxHeight).mul(0.5),
+    study == null
+      ? undefined
+      : (_point, direction) => study.skyRadiance(direction)
   )
   return { prepareSkylight: sky.prepare, skyLightModulation: sky.evaluate }
 }
@@ -374,7 +379,7 @@ function buildCirrusDeckFactory(
   ctx: CloudsContext,
   marchU: MarchUniforms,
   host: MarchGraphHost,
-  applyAerialPerspective: ReturnType<typeof createApplyAerialPerspective>
+  applyAerialPerspective: CloudsFragmentDeps['applyAerialPerspective']
 ): CloudsFragmentDeps['compositeCirrusDeck'] {
   const uniforms = host.cirrusDeckUniforms(ctx)
   if (uniforms == null) return undefined
@@ -390,6 +395,111 @@ function buildCirrusDeckFactory(
   })
 }
 
+function buildDensityFactories(
+  ctx: CloudsContext,
+  marchU: MarchUniforms,
+  layerU: LayerUniforms,
+  paramU: ParameterUniforms,
+  host: MarchGraphHost,
+  study: ReturnType<typeof createLightingStudyNodes>
+) {
+  // The shadow cascades read the same blend, so a cumulus casts a cumulus
+  // shadow rather than the deck's
+  const cloudTypes = cloudTypeBlend(ctx, paramU)
+  const cloudShapeDeps = host.cloudShapeDeps(ctx)
+  const sampleWeather =
+    study?.sampleWeather ??
+    createSampleWeather(
+      paramU.localWeatherTexture,
+      paramU.localWeatherRepeat,
+      paramU.localWeatherOffset,
+      layerU.minLayerHeights,
+      layerU.maxLayerHeights,
+      layerU.weatherExponents,
+      layerU.shapeAlteringBiases,
+      paramU.coverage,
+      layerU.coverageFilterWidths,
+      layerU.shadowLayerMask,
+      ctx.cloudLayers.localWeatherChannels,
+      false,
+      ctx.cloudLayers.structure,
+      host.weatherEvolution.build(ctx, paramU.localWeatherTexture),
+      host.convectiveDeps(ctx, layerU, paramU),
+      cloudTypes
+    )
+
+  const sampleMedia =
+    study?.sampleMedia ??
+    createSampleMedia(
+      paramU.shapeTexture,
+      paramU.shapeRepeat,
+      paramU.shapeOffset,
+      layerU.shapeAmounts,
+      paramU.shapeDetailTexture,
+      paramU.shapeDetailRepeat,
+      paramU.shapeDetailOffset,
+      layerU.shapeDetailAmounts,
+      paramU.turbulenceTexture,
+      paramU.turbulenceRepeat,
+      paramU.turbulenceDisplacement,
+      paramU.localWeatherRepeat,
+      paramU.localWeatherOffset,
+      layerU.densityScales,
+      layerU.densityProfileExpTerms,
+      layerU.densityProfileExponents,
+      layerU.densityProfileLinearTerms,
+      layerU.densityProfileConstantTerms,
+      ctx.turbulence,
+      ctx.shapeDetail,
+      ctx.experimental.distantShapeDetailFade,
+      ctx.cloudLayers.structure,
+      host.convectiveDeps(ctx, layerU, paramU),
+      cloudTypes,
+      cloudShapeDeps
+    )
+
+  const marchOpticalDepth =
+    study?.opticalDepth ??
+    createMarchOpticalDepth({
+      sampleWeather,
+      sampleMedia,
+      bottomRadius: marchU.bottomRadius,
+      minSecondaryStepSize: marchU.minSecondaryStepSize,
+      secondaryStepScale: marchU.secondaryStepScale,
+      minLayerHeights: layerU.minLayerHeights,
+      maxLayerHeights: layerU.maxLayerHeights,
+      scatteringCoefficient: paramU.scatteringCoefficient,
+      absorptionCoefficient: paramU.absorptionCoefficient
+    })
+
+  return { sampleWeather, sampleMedia, marchOpticalDepth, cloudShapeDeps }
+}
+
+function studySun(
+  study: ReturnType<typeof createLightingStudyNodes>,
+  fallback: MarchCloudsDeps['approxMultiScatter']
+): MarchCloudsDeps['approxMultiScatter'] {
+  return study?.diffusion ?? fallback
+}
+
+function studyIrradiance(
+  study: ReturnType<typeof createLightingStudyNodes>,
+  fallback: MarchCloudsDeps['getCloudsSunSkyIrradiance']
+): MarchCloudsDeps['getCloudsSunSkyIrradiance'] {
+  return study?.irradiance ?? fallback
+}
+
+function studyAerial(
+  study: ReturnType<typeof createLightingStudyNodes>,
+  fallback: CloudsFragmentDeps['applyAerialPerspective']
+): CloudsFragmentDeps['applyAerialPerspective'] {
+  return study?.applyAerialPerspective ?? fallback
+}
+
+function studySky(study: ReturnType<typeof createLightingStudyNodes>) {
+  return study?.skyLighting ?? {}
+}
+
 export function buildMarchFactories(
   ctx: CloudsContext,
   marchU: MarchUniforms,
@@ -399,68 +509,15 @@ export function buildMarchFactories(
   host: MarchGraphHost,
   overrides?: MarchFactoryOverrides
 ) {
-  // The shadow cascades read the same blend, so a cumulus casts a cumulus
-  // shadow rather than the deck's
-  const cloudTypes = cloudTypeBlend(ctx, paramU)
-  const cloudShapeDeps = host.cloudShapeDeps(ctx)
-  const sampleWeather = createSampleWeather(
-    paramU.localWeatherTexture,
-    paramU.localWeatherRepeat,
-    paramU.localWeatherOffset,
-    layerU.minLayerHeights,
-    layerU.maxLayerHeights,
-    layerU.weatherExponents,
-    layerU.shapeAlteringBiases,
-    paramU.coverage,
-    layerU.coverageFilterWidths,
-    layerU.shadowLayerMask,
-    ctx.cloudLayers.localWeatherChannels,
-    false,
-    ctx.cloudLayers.structure,
-    host.weatherEvolution.build(ctx, paramU.localWeatherTexture),
-    host.convectiveDeps(ctx, layerU, paramU),
-    cloudTypes
+  const study = createLightingStudyNodes(
+    ctx.lightingStudy,
+    paramU.scatteringCoefficient,
+    paramU.absorptionCoefficient,
+    [ctx.scatterAnisotropy1, ctx.scatterAnisotropy2, ctx.scatterAnisotropyMix],
+    ctx.accuratePhaseFunction
   )
-
-  const sampleMedia = createSampleMedia(
-    paramU.shapeTexture,
-    paramU.shapeRepeat,
-    paramU.shapeOffset,
-    layerU.shapeAmounts,
-    paramU.shapeDetailTexture,
-    paramU.shapeDetailRepeat,
-    paramU.shapeDetailOffset,
-    layerU.shapeDetailAmounts,
-    paramU.turbulenceTexture,
-    paramU.turbulenceRepeat,
-    paramU.turbulenceDisplacement,
-    paramU.localWeatherRepeat,
-    paramU.localWeatherOffset,
-    layerU.densityScales,
-    layerU.densityProfileExpTerms,
-    layerU.densityProfileExponents,
-    layerU.densityProfileLinearTerms,
-    layerU.densityProfileConstantTerms,
-    ctx.turbulence,
-    ctx.shapeDetail,
-    ctx.experimental.distantShapeDetailFade,
-    ctx.cloudLayers.structure,
-    host.convectiveDeps(ctx, layerU, paramU),
-    cloudTypes,
-    cloudShapeDeps
-  )
-
-  const marchOpticalDepth = createMarchOpticalDepth({
-    sampleWeather,
-    sampleMedia,
-    bottomRadius: marchU.bottomRadius,
-    minSecondaryStepSize: marchU.minSecondaryStepSize,
-    secondaryStepScale: marchU.secondaryStepScale,
-    minLayerHeights: layerU.minLayerHeights,
-    maxLayerHeights: layerU.maxLayerHeights,
-    scatteringCoefficient: paramU.scatteringCoefficient,
-    absorptionCoefficient: paramU.absorptionCoefficient
-  })
+  const { sampleWeather, sampleMedia, marchOpticalDepth, cloudShapeDeps } =
+    buildDensityFactories(ctx, marchU, layerU, paramU, host, study)
 
   // Literal nodes, not uniforms: graph-time constants like the reference's
   // SCATTER_ANISOTROPY_* defines (see CloudsContext.scatterAnisotropy1)
@@ -471,7 +528,7 @@ export function buildMarchFactories(
     float(ctx.scatterAnisotropyMix),
     ctx.accuratePhaseFunction
   )
-  const approxMultiScatter = multiScatter.evaluate
+  const approxMultiScatter = studySun(study, multiScatter.evaluate)
 
   const camU = ctx.cameraUniforms
 
@@ -509,9 +566,9 @@ export function buildMarchFactories(
   // irradiance. With the option off this is the sun and the atmosphere's
   const moonlight = buildMoonlight(ctx, marchU)
   const lightDirection = moonlight?.direction ?? marchU.sunDirection
-  getCloudsSunSkyIrradiance = withMoonlight(
-    getCloudsSunSkyIrradiance,
-    moonlight
+  getCloudsSunSkyIrradiance = studyIrradiance(
+    study,
+    withMoonlight(getCloudsSunSkyIrradiance, moonlight)
   )
 
   // Cite: clouds.frag:449–470 (ground bounce)
@@ -592,7 +649,8 @@ export function buildMarchFactories(
   }
 
   const marchClouds = createMarchClouds({
-    ...buildSkylightExperiment(ctx, marchU, layerU),
+    ...buildSkylightExperiment(ctx, marchU, layerU, study),
+    ...studySky(study),
     ...buildLightningExperiment(ctx, marchOpticalDepth, host.lightningUniforms),
     cloudFrontRefinement: override(
       overrides,
@@ -666,8 +724,9 @@ export function buildMarchFactories(
   const getIndirectLuminanceToPoint = createIndirectLuminanceToPoint(
     marchU.sunDirection
   )
-  const applyAerialPerspective = createApplyAerialPerspective(
-    getIndirectLuminanceToPoint
+  const applyAerialPerspective = studyAerial(
+    study,
+    createApplyAerialPerspective(getIndirectLuminanceToPoint)
   )
 
   // Screen-space march: index the noise like the reference's gl_FragCoord

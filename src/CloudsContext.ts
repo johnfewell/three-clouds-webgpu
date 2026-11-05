@@ -36,6 +36,10 @@ import {
   evolvingWeatherDefaults,
   type EvolvingWeatherParams
 } from './experimental/evolvingWeather'
+import {
+  validateLightingStudy,
+  type LightingStudy
+} from './experimental/lightingStudy'
 import type { LightningState } from './experimental/lightning'
 import { moonlightCPU } from './experimental/moonlight'
 import {
@@ -482,6 +486,26 @@ export class CloudsContext implements QualityPresetTarget {
    * when a flash is, and when its envelope has decayed.
    */
   lightning: LightningState | null = null
+
+  private _lightingStudy: LightingStudy | null = null
+
+  /**
+   * Controlled lighting research fixture, disabled by default and reference mode.
+   * Assigned textures are borrowed and must be disposed by their caller.
+   * Static fixtures only: rebuild caches and reassign after changing any inputs.
+   * Requires dual HG phase. Rejected prototypes are not production lighting.
+   */
+  get lightingStudy(): LightingStudy | null {
+    return this._lightingStudy
+  }
+
+  set lightingStudy(study: LightingStudy | null) {
+    if (study === this._lightingStudy) return
+    if (study != null) validateLightingStudy(study)
+    this._lightingStudy = study
+    this._graphVersion++
+    this.resetHistory()
+  }
 
   private _experimental = experimentalDefaults
 
