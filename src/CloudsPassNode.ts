@@ -433,6 +433,7 @@ export class CloudsPassNode extends Node {
   private shadowRT: RenderTarget | null = null
   private _shadowUniforms: ShadowPassUniforms | null = null
   private _cloudShadow: CloudShadowDescriptor | null = null
+  private _shadowAtlasPlaceholder: DataArrayTexture | null = null
   // The atlas every shadow consumer reads while the pass is disabled
   private _litShadowAtlas: DataArrayTexture | null = null
   // shadowMatrices[i] and viewMatrix's view-Z row, each times ecefToWorld *
@@ -498,7 +499,9 @@ export class CloudsPassNode extends Node {
       // and a bare sample can return ~zero. Cite: createShadowAtlasTexture
       const initialMap =
         (this.shadowRT?.texture as DataArrayTexture) ??
-        createShadowAtlasTexture(1, 1, n, { renderTarget: false })
+        (this._shadowAtlasPlaceholder ??= createShadowAtlasTexture(1, 1, n, {
+          renderTarget: false
+        }))
       this._cloudShadow = {
         map: initialMap,
         mapNode: tslTexture(initialMap),
@@ -2107,6 +2110,9 @@ export class CloudsPassNode extends Node {
     this.historyRT?.dispose()
     this.shadowLengthPlaceholder.dispose()
     this._cirrusStreaks?.dispose()
+    // The descriptor now borrows a target texture, so retain the initial owner
+    this._shadowAtlasPlaceholder?.dispose()
+    this._shadowAtlasPlaceholder = null
     this._litShadowAtlas?.dispose()
     this.weatherEvolution.dispose()
     this.environment.dispose()

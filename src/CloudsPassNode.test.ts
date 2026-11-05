@@ -1580,6 +1580,45 @@ describe('CloudShadowDescriptor', () => {
     })
   })
 
+  test.each([false, true])(
+    'disposes the initial shadow placeholder once (target created: %s)',
+    replace => {
+      for (let cycle = 0; cycle < 5; cycle++) {
+        const pass = makePassNode()
+        const desc = pass.cloudShadow
+        const placeholder = desc.map
+        const dispose = vi.spyOn(placeholder, 'dispose')
+        const targetDisposals = []
+        if (replace) {
+          const state = internals(pass)
+          for (const size of [16, 32]) {
+            state.ensureShadowRT(size, size, 2)
+            state.updateCloudShadowDescriptor(pass.cloudsContext)
+            targetDisposals.push(vi.spyOn(desc.map, 'dispose'))
+            pass.resetHistory()
+          }
+          expect(desc.map).not.toBe(placeholder)
+          expect(desc.mapNode.value).toBe(desc.map)
+        }
+        pass.dispose()
+        pass.dispose()
+        expect(dispose).toHaveBeenCalledOnce()
+        for (const targetDispose of targetDisposals) {
+          expect(targetDispose).not.toHaveBeenCalled()
+        }
+        log('shadow-placeholder-dispose', { cycle, replace, disposals: 1 })
+      }
+    }
+  )
+
+  test('a descriptor created after its target does not own that texture', () => {
+    const pass = makePassNode()
+    internals(pass).ensureShadowRT(16, 16, 2)
+    const dispose = vi.spyOn(pass.cloudShadow.map, 'dispose')
+    pass.dispose()
+    expect(dispose).not.toHaveBeenCalled()
+  })
+
   test('cloudShadow getter is idempotent (same reference)', () => {
     const pass = makePassNode()
     const a = pass.cloudShadow

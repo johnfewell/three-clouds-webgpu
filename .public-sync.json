@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "98b5c2f8f84980b856577eb6f362633c3bbf8de77e38017d5e2415409292ea7e",
+  "sourceFingerprint": "f08f7935d42198a5344c20ec1ee563737a5544437cdbf791a1f88fd736dc9afe",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -304,7 +304,7 @@
     },
     "docs/API.md": {
       "mode": "100644",
-      "sha256": "69f7e2a329620ddacca28af29d3bdbdf0d7b24e811191e133db8b69143ceaaa8"
+      "sha256": "651eaefeeae8c301e4be03637fb6ad555cf07d4b1a7193b982963db7737b7bbe"
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
@@ -822,6 +822,10 @@
       "mode": "100644",
       "sha256": "e3c2916e3c3202845a8be1340c82dcf95f87395cb525d50330b82747bf427b17"
     },
+    "examples/parity/e2e/shadowPlaceholderLifecycle.spec.ts": {
+      "mode": "100644",
+      "sha256": "06bf186128d37e09eb9aed9da5ac7b1f614572b3e1a0ac5cb3c829c34fc7b63e"
+    },
     "examples/parity/e2e/site.spec.ts": {
       "mode": "100644",
       "sha256": "c99ff36dd7445ca0dccbadf8a759d9ec33bf81ccba3de383efba36ac5421eb91"
@@ -1217,6 +1221,10 @@
     "examples/parity/src/e2eSupport/servedRootGate.ts": {
       "mode": "100644",
       "sha256": "8379e9f05dfa86917583bc56f52a7ded49e6e9920a8a5aecae67687c445e1963"
+    },
+    "examples/parity/src/e2eSupport/shadowPlaceholderLifecycle.ts": {
+      "mode": "100644",
+      "sha256": "b3d520f53caab2cb27cf5eb511b3cd95436d56b12ab681623e02c466ab16440d"
     },
     "examples/parity/src/errorCapture.test.ts": {
       "mode": "100644",
@@ -4200,11 +4208,11 @@
     },
     "src/CloudsPassNode.test.ts": {
       "mode": "100644",
-      "sha256": "a9f1e884cf5626bac753961fab7886255d665b9420890309f1cb29c7b29bb05c"
+      "sha256": "cf7770d13abf47548321c8becb908483cd7db185e39cbf0fd8bb9df964b1870a"
     },
     "src/CloudsPassNode.ts": {
       "mode": "100644",
-      "sha256": "46f058e93cec10b53aa0350368c3e6c9d274a204758396acc7a2674274c52790"
+      "sha256": "5b376f8ec4e985e127b8d36cc40e656884a38a5ca22a5726b346b3b5ae6abfe7"
     },
     "src/DensityProfile.test.ts": {
       "mode": "100644",

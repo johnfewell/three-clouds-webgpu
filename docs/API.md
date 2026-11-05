@@ -117,7 +117,7 @@ Caller-owned seconds and sample index, with optional authoritative inputs
 
 ### clouds
 
-[Source](../src/CloudsPassNode.ts#L2142)
+[Source](../src/CloudsPassNode.ts#L2148)
 
 ```ts
 clouds(options: CloudsOptions): CloudsPassNode
