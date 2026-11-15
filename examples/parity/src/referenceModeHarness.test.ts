@@ -171,7 +171,8 @@ describe('the harness carries reference mode on every case', () => {
       cloudEnvironment: false,
       staticMode: false,
       cirrusDeck: false,
-      shadowRoundRobin: false
+      shadowRoundRobin: false,
+      freshTexelBlend: false
     }
     const fresh = new CloudsContext()
     // the premise, so the assertions below are not passing over nothing: the

@@ -1,0 +1,13 @@
+[capture][retina-shadow-plane] starting (phase 3, #64)
+[capture][retina-shadow-plane] screenshots: A=9638678b B=9632214b
+[capture][retina-shadow-plane] metrics: ssim=0.9958 deMean=0.36 deP95=0.69 histDist=0.0271 maxDelta=0.0748
+[capture][retina-shadow-plane] dual-L: measuredL=0.0309 ssim@measuredL=0.9954 (gated ssim is @refL=0.09) stabiliserShare=9.1% sigmaA=4.09e-3 sigmaB=4.08e-3 sigmaD=3.21e-4
+[capture][retina-shadow-plane] plate: A mean=0.0381 std=0.0061 B mean=0.0370 std=0.0057 cloudFraction=16.179%
+[capture][retina-shadow-plane] gpuMs: A=44.29ms (32 samples) B=177.13ms (32 samples)
+[capture][retina-shadow-plane] shaded: A=99.88% B=99.96% ratio=1.001 plate rise A=49.0% B=50.0% flags off {"A":[false,false,false,false],"B":[false,false,false,false]} restored {"A":[true,true,true,true],"B":[true,true,true,true]} → receipt ok
+[capture][retina-shadow-plane] shadowRadius: min=3.0000 median=3.0000 p95=3.0000 max=3.0000 armed=100.00% ceiling=100.00% classified=5184000/5184000
+[capture][retina-shadow-plane] eval: pass
+[capture][retina-shadow-plane] temporalUpscale: A=false B=false
+[capture][retina-shadow-plane] subgroups: true
+[capture][retina-shadow-plane] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][retina-shadow-plane] provenance: commit (private history) branch (private) dirty 123 key 65106d60b609 e2e green skips(build=false typecheck=false) served 9f4f3d5c1da4 built 9f4f3d5c1da4 servedIsBuilt true servedTree <worktree>

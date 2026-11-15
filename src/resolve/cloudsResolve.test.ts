@@ -62,7 +62,9 @@ describe('cloudsResolve CPU twins', () => {
           'utf8'
         )
       )
-      expect(source).toContain('referenceBayerRow(coordY, deps.resolveHeight)')
+      // task 18: the row phase takes the cell shift, derived from the buffer
+      expect(source).toContain('const shift = resolveCellShift(')
+      expect(source).toContain('referenceBayerRow(coordY, shift)')
     })
 
     test('exactly 1/16 of each 4×4 block is selected per frame', () => {
@@ -270,4 +272,56 @@ describe('cloudsResolve CPU twins', () => {
       expect(explicit).toBeGreaterThan(0)
     }
   )
+})
+
+// task 18: the resolve owns row y with the low-res row (y + shift) / 4, where
+// shift = 4*ceil(H/4) - H, so the partial cell sits at the top like WebGL's
+describe('odd-size cell ownership (task 18)', () => {
+  test('the emitted resolve reads the shifted low-res row', async () => {
+    const { compileWGSL } = await import('../../test/helpers/compileWGSL')
+    const { DataTexture, HalfFloatType, LinearFilter, RGBAFormat } =
+      await import('three')
+    const { float, texture, uniform } = await import('three/tsl')
+    const { buildTemporalUpscale } = await import('./cloudsResolve')
+
+    const make = () => {
+      const t = new DataTexture(
+        new Uint16Array(4 * 4 * 4),
+        4,
+        4,
+        RGBAFormat,
+        HalfFloatType
+      )
+      t.minFilter = LinearFilter
+      t.magFilter = LinearFilter
+      t.needsUpdate = true
+      return t
+    }
+    const height = uniform(16, 'float')
+    height.name = 'resolveHeightMarker'
+    const fragment = compileWGSL(
+      buildTemporalUpscale({
+        colorBuffer: make(),
+        depthVelocityBuffer: make(),
+        colorHistoryNode: texture(make()),
+        resolveWidth: float(16),
+        resolveHeight: height,
+        frame: float(0),
+        varianceGamma: float(1),
+        temporalAlpha: float(0.1)
+      })
+    ).fragment
+    // The emitted coordinate is (x / 4, (y + shift) / 4). Asserting the shape
+    // is what fails on the pre-fix code, where the uniform is still in the text
+    const shiftedRow =
+      /vec2<i32>\( \( \w+ \/ 4 \), \( \( \w+ \+ \w+ \) \/ 4 \) \)/.test(
+        fragment
+      )
+    log('task 18 resolve emission', {
+      shiftDerived: fragment.includes('resolveHeightMarker'),
+      shiftedRow,
+      length: fragment.length
+    })
+    expect(shiftedRow).toBe(true)
+  })
 })

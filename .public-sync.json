@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceFingerprint": "fec19be1f028afbb5a237f7536d76497a4aece34cbcf318b4fcbaa577b070f8c",
+  "sourceFingerprint": "cb775dbb5fe328516d5e300dd39247ac6d90b3a2ba0bdf54969b57fe6b68c346",
   "files": {
     ".github/workflows/ci.yml": {
       "mode": "100644",
@@ -12,7 +12,7 @@
     },
     ".prettierignore": {
       "mode": "100644",
-      "sha256": "72056c5c997754ff6d7ab8d307c0361d62d3deee8632fc0c900a294da889840f"
+      "sha256": "c3cebc8de46da330d40f18362b028e6c2c03d524b6e09a8e78d3adcc0d795367"
     },
     ".prettierrc": {
       "mode": "100644",
@@ -20,7 +20,7 @@
     },
     "CHANGELOG.md": {
       "mode": "100644",
-      "sha256": "4dc95c2c99dd95908a8b00f969a8efd42dad85551e3db74e48b1de324a51da6a"
+      "sha256": "0ccbfa242b09790f420ad14b0d6bf9da123ce2cbbee9aad33be9a38f120cbe8d"
     },
     "CONTRIBUTING.md": {
       "mode": "100644",
@@ -36,7 +36,7 @@
     },
     "README.md": {
       "mode": "100644",
-      "sha256": "9f6ae16b8f8f06a5bb8ec189bfee5ae64b2ab1cca3ebf4b5289aaa7274f70fe2"
+      "sha256": "65653426b60c3682e5d616fc96fa0eb1253819d59f04ab30d4e1df3ed98f7261"
     },
     "THIRD_PARTY_NOTICES.md": {
       "mode": "100644",
@@ -174,6 +174,66 @@
       "mode": "100644",
       "sha256": "8024b0a4e6755fcfe70690c9d581c662327e6e8190ee9f02ffe2d63325b41b39"
     },
+    "core/scripts/speed/README.md": {
+      "mode": "100644",
+      "sha256": "149662a3d17c8e3dfe3f950316ffb7fec866d90f49be3b56c1ea254405d13f3c"
+    },
+    "core/scripts/speed/combos.json": {
+      "mode": "100644",
+      "sha256": "535fb24c8e930e99040def6b22de8e6b827a615c9fb7500337a8461efd581c22"
+    },
+    "core/scripts/speed/corePage.ts": {
+      "mode": "100644",
+      "sha256": "2bb7f46748cae0d47fffead888311df284392f1451653578f4ea610d995d8a28"
+    },
+    "core/scripts/speed/gpu-window.sh": {
+      "mode": "100755",
+      "sha256": "4ebfc93734a5ed86993810b70809a0a0e48eeb13cda16d99b205d192a38b00b7"
+    },
+    "core/scripts/speed/instrument.js": {
+      "mode": "100644",
+      "sha256": "3d1685ad960bb2737201f6135d065344c5c4b1126e9050a6639523bae69afdf8"
+    },
+    "core/scripts/speed/measure.js": {
+      "mode": "100644",
+      "sha256": "a451d21d9b3b96abad97a35b012f8d83735823915300bc486cd89d388b0b5f06"
+    },
+    "core/scripts/speed/sweep-combos.sh": {
+      "mode": "100755",
+      "sha256": "bb508f31d9d25bc50c21405bed1d0b15efb77b5548aa2fa501435647e25446f6"
+    },
+    "core/scripts/speed/sweep-groups.sh": {
+      "mode": "100755",
+      "sha256": "34cc97e82764660ae3a7b43b063b2a1d16467483901bb6c37583e1dd6353ab86"
+    },
+    "core/scripts/speed/sweep-report.d.mts": {
+      "mode": "100644",
+      "sha256": "549b9f003fabf651fce7949f1ed4160106735ad49be2a6e2f0fff5290938ab09"
+    },
+    "core/scripts/speed/sweep-report.mjs": {
+      "mode": "100644",
+      "sha256": "0dfa90d59773bb097dbc9147c09fa6f0289269b189c57b17ad9864f532edd0b2"
+    },
+    "core/scripts/speed/sweep-vsync.sh": {
+      "mode": "100755",
+      "sha256": "e5b2052dd8604ed935911812dabf32a6a8115d7d7baf0eacff98529e7c68931b"
+    },
+    "core/scripts/speed/sweep.mjs": {
+      "mode": "100644",
+      "sha256": "8094783152fef1de52e0cf3e9a57105dbf94a1780dc116afe7cc0aff50332c30"
+    },
+    "core/scripts/speed/sweepArgs.d.mts": {
+      "mode": "100644",
+      "sha256": "13457bada78fdddd1a3e77c263f118ffb36b5ed785397aa6ce616d2f7b4ce995"
+    },
+    "core/scripts/speed/sweepArgs.mjs": {
+      "mode": "100644",
+      "sha256": "53fafa12e065a4e471fc1fae8b80a63fa8b41fd553489940d63bca7099f8a136"
+    },
+    "core/scripts/speed/threePage.ts": {
+      "mode": "100644",
+      "sha256": "6c59213ce54e3d2c183c2b3733337702755a27cee63a077b12eae1fd153ed3f4"
+    },
     "core/src/cpu/atmosphere.test.ts": {
       "mode": "100644",
       "sha256": "0d07f1a1138cc0b35cae81cd35103056a9b497d933231108832ac518011d88c2"
@@ -304,11 +364,11 @@
     },
     "docs/API.md": {
       "mode": "100644",
-      "sha256": "a5cb7a05a52964778b11bc8ee63060653b1cdf61f2b512fbada951e5b7e3f998"
+      "sha256": "914a60bc6c4e3f996d25f722327529bbd5302eb86d359effd321de26654cbe06"
     },
     "docs/BENCHMARKS.md": {
       "mode": "100644",
-      "sha256": "2a3c1460be73265f1b041a5eabf56ec4b65e550945bcd9adcbac82573142362e"
+      "sha256": "98dc62cd4fb68a17b6c8b88c5b95e13a251fe4d364df1aca7caccdef274a9b25"
     },
     "docs/CONSUMER_CONTRACT.md": {
       "mode": "100644",
@@ -316,7 +376,7 @@
     },
     "docs/EXPERIMENTAL.md": {
       "mode": "100644",
-      "sha256": "6aaf149e5cbdc5c3a1548c5841dc7c24e7c111a60f8d9eb1b6f377981a1bf204"
+      "sha256": "dcb24dcdc196fad7f18bf3c72c23c3380c23546ad3312f130fd1165b08e562eb"
     },
     "docs/MIGRATION.md": {
       "mode": "100644",
@@ -324,7 +384,7 @@
     },
     "docs/RELEASE.md": {
       "mode": "100644",
-      "sha256": "9de785fa44d5effbe6dd8404186395945489c0b08ac5cb82f582ca9cd6c7611f"
+      "sha256": "021314f6682325a45486cf4134963773bb21be83218e5bebef708d61ec3d7cab"
     },
     "docs/adr/001-render-graph.md": {
       "mode": "100644",
@@ -444,7 +504,7 @@
     },
     "eslint.config.mjs": {
       "mode": "100644",
-      "sha256": "8cb65cec43536b875c895216ddf25bbf18f75412a50ad9e157c3497bf0870c6f"
+      "sha256": "a2ae1ef3acc8bc6a26e7f007e3224624fe6265bb815fce82d2dd05a58b840467"
     },
     "examples/basic/.gitignore": {
       "mode": "100644",
@@ -588,7 +648,7 @@
     },
     "examples/parity/cases/acceptedRegister.test.ts": {
       "mode": "100644",
-      "sha256": "9937a415517f52f69f069414e232f398968206c785a5cb603e6f48aceda7cc61"
+      "sha256": "e39d1b4acf7f5803cf6494afe504c7405b9044036656a31fde6cb89a7e5c9692"
     },
     "examples/parity/cases/captureBrokenGate.test.ts": {
       "mode": "100644",
@@ -600,7 +660,7 @@
     },
     "examples/parity/cases/cases.test.ts": {
       "mode": "100644",
-      "sha256": "96a8f4c417d762fbb2e43170c4db3e2dd28d0419a7cd281660a37fabcaf3cbad"
+      "sha256": "0201c9bdb5f78d456a6d2c30f7e418b8237e0f919fd2f9b85e4986656dab84bc"
     },
     "examples/parity/cases/ciE2eVerdict.test.ts": {
       "mode": "100644",
@@ -608,7 +668,7 @@
     },
     "examples/parity/cases/index.ts": {
       "mode": "100644",
-      "sha256": "006ea7b3c800a6ab05184f2589a485d36a5df769c537b17e7bb6472312d325b1"
+      "sha256": "46c9a4ceefdefe486507a22ec5e334d08b85da27df5b79b47c65381afd0d5b3b"
     },
     "examples/parity/cases/pcfBand.test.ts": {
       "mode": "100644",
@@ -632,11 +692,11 @@
     },
     "examples/parity/cases/thresholdSchema.test.ts": {
       "mode": "100644",
-      "sha256": "5423a80412bad3069ac9e24efcbb9ee265823d2b90ec99c5b579e7814f94b8ce"
+      "sha256": "cdc8d0048422740cb5afd31fa270db9f860d5dd146d330c1ce7e3323ceb206f5"
     },
     "examples/parity/cases/thresholds.json": {
       "mode": "100644",
-      "sha256": "fa5a41bcf007ca2f95a00f004fbd7201706dc8aae371b5a928760b804cdca2b1"
+      "sha256": "ce694277f35eb9cb013a54d9c4781edf9c45bda5ce72603314c2b950929e2e69"
     },
     "examples/parity/cases/thresholds.test.ts": {
       "mode": "100644",
@@ -644,7 +704,7 @@
     },
     "examples/parity/cases/vacuousCases.test.ts": {
       "mode": "100644",
-      "sha256": "08bc12c68aa655499b7ef780492806cc0c0bb116c4fdbad2b7bc9495dda07b6a"
+      "sha256": "85834b2c0efdeb6c78faf570e4c7c60351e6bf3c42ba193477ac57f71f541163"
     },
     "examples/parity/e2e/README.md": {
       "mode": "100644",
@@ -784,7 +844,7 @@
     },
     "examples/parity/e2e/p4.spec.ts": {
       "mode": "100644",
-      "sha256": "9663bc748291d80f367c3d336456450ddb10a11b6cfbd3d70808ce82096ca76b"
+      "sha256": "6bd22ad0726add84fff02e6d20ac2da2b381a7c66137ac226ce01b2186ec4b13"
     },
     "examples/parity/e2e/pageLoad.ts": {
       "mode": "100644",
@@ -936,7 +996,7 @@
     },
     "examples/parity/scripts/capture.mjs": {
       "mode": "100644",
-      "sha256": "77ace9eb9bd87a1bafb76d7d6248d42be6aaa3dc87c6467b78a97918a37e6199"
+      "sha256": "94b05e03c567a461b030491f4623c9440961d488ccdd40c0e0bc37fbc839c715"
     },
     "examples/parity/scripts/captureLinear.d.mts": {
       "mode": "100644",
@@ -1124,7 +1184,7 @@
     },
     "examples/parity/src/capture/metricsWriter.ts": {
       "mode": "100644",
-      "sha256": "d566f69d8b1e353b226219953cb05befea2c39d1cc92afaaad7537588afb5061"
+      "sha256": "fadd085b25d9d5ac1b8cffc8f4e1c691b2c36953d12bcab5f459ad46d54abf72"
     },
     "examples/parity/src/capture/turbo.ts": {
       "mode": "100644",
@@ -1276,15 +1336,15 @@
     },
     "examples/parity/src/main.ts": {
       "mode": "100644",
-      "sha256": "f7f08fdb0d234d6df301ccd83481fb17539ed928c80ca89f68f3273fc83b1d0c"
+      "sha256": "ca9199e69642d10f3709a3bc2518229f88a05e49dd22249a9d08eb943845563c"
     },
     "examples/parity/src/metrics/atlasChannels.test.ts": {
       "mode": "100644",
-      "sha256": "ac86641bd20f3c17037b93388b36ef2d8e7fb81e5268efe22a7215a3d41a0024"
+      "sha256": "0c40949e84857705d6d90ecedc413991279788b2af3eea81e6f3e9029bf33fc4"
     },
     "examples/parity/src/metrics/atlasChannels.ts": {
       "mode": "100644",
-      "sha256": "61de1128082933de819a44c7859345212ddf2ec17c78050a98a9583fe5dfa203"
+      "sha256": "3b7de93e7dfcc93fc404cf07874b68ba96aed5a2c623bf8b43a9590209380ebd"
     },
     "examples/parity/src/metrics/blur.ts": {
       "mode": "100644",
@@ -1297,6 +1357,18 @@
     "examples/parity/src/metrics/color.ts": {
       "mode": "100644",
       "sha256": "0ff99010e647ef41028bdbfd98dfcf271f4c9bd4b918b152b703067b5e6ba203"
+    },
+    "examples/parity/src/metrics/composeVerdict.d.mts": {
+      "mode": "100644",
+      "sha256": "a9962e4d28b2ee6c38fbcd0e60b62efb7a61611b00499513ae246018a0f4c21d"
+    },
+    "examples/parity/src/metrics/composeVerdict.mjs": {
+      "mode": "100644",
+      "sha256": "1fd543b3c08285ef265d58e62fa67efa06b56ac6a72de4a0e766e4a3640f6d2b"
+    },
+    "examples/parity/src/metrics/composeVerdict.test.ts": {
+      "mode": "100644",
+      "sha256": "58cc53fc419b8fc0fcc0ffcb54039a381c367537a1ac5d233a0c23a2d7c02eaf"
     },
     "examples/parity/src/metrics/deltaE.ts": {
       "mode": "100644",
@@ -1312,23 +1384,23 @@
     },
     "examples/parity/src/metrics/evaluator.d.mts": {
       "mode": "100644",
-      "sha256": "e17a6db66beedfbac0fd143e27046651900eba4f684846409685b0b9c9bfc973"
+      "sha256": "483f9a1a38d236613b87ae472862bc2aad938cae9ffccbd469d1b6b392618a2f"
     },
     "examples/parity/src/metrics/evaluator.mjs": {
       "mode": "100644",
-      "sha256": "54177af2bdd8844c023c56dd27d4a7b373f75be96fdc92aeb65563ce28eb6658"
+      "sha256": "0f26a36998aaf4b33cd773228afe13468b0e1bf874c4576d3664fe1936e0a280"
     },
     "examples/parity/src/metrics/evaluatorConsumers.test.ts": {
       "mode": "100644",
-      "sha256": "e34434d3f1456fdee54f4007629fdf77c6ba51ffa40140b9096878363999d4ec"
+      "sha256": "7adbd49b653c5034da249a44a5e1938b0579147733588af35e1fb9328bd70c34"
     },
     "examples/parity/src/metrics/gpuTiming.test.ts": {
       "mode": "100644",
-      "sha256": "4c2dec399b503b7f48b9ff6c37be756526e693e1cb2304548d9fe36c8ed0c5d7"
+      "sha256": "2164a7ec964d237a02ddeac3694a30f2ccb5f6300ab63e19e287ef69ea03bad0"
     },
     "examples/parity/src/metrics/gpuTiming.ts": {
       "mode": "100644",
-      "sha256": "98b1857056bfe1bd56ea310af33296a665a07ee7552fa61e61e537bc886e7570"
+      "sha256": "a95a572ac46fb0879161e8cda1be94758233c1b3d0b9d1b826602e42931c5148"
     },
     "examples/parity/src/metrics/histogram.ts": {
       "mode": "100644",
@@ -1340,7 +1412,7 @@
     },
     "examples/parity/src/metrics/metrics.test.ts": {
       "mode": "100644",
-      "sha256": "82f113f940326a8547f3d314fef2b484ae0f2ecc6b4f55ee52f79041b2b0b7eb"
+      "sha256": "f7f0211ef4f56d68b5060ef4bb68495adfb7728cd789038f91cb43901de2c1bb"
     },
     "examples/parity/src/metrics/regions.test.ts": {
       "mode": "100644",
@@ -1408,19 +1480,19 @@
     },
     "examples/parity/src/parityState.test.ts": {
       "mode": "100644",
-      "sha256": "d29ce3ba1a736817a4175e49907f22d32933c25ab98021f669886b62db73bc92"
+      "sha256": "a01c11715e5e09140ef7c75ec259c6c829075242280ff580b791304e099b288f"
     },
     "examples/parity/src/parityState.ts": {
       "mode": "100644",
-      "sha256": "ef007c7401fe01501838a50b3fe48f28ad5afd73e83d1e4b4addd1f2082dd954"
+      "sha256": "d90b8fe40d4172b07eba6b64de42eb60f12b51bff84ff6027a864a5bf168d7bf"
     },
     "examples/parity/src/readback.test.ts": {
       "mode": "100644",
-      "sha256": "b90c308ca20327d605b31058d260be770b8aba53bcc7704f7063ecc4a14d6f55"
+      "sha256": "0b89899a437588ec73d398e26c3404f596c29cbe13f3b4a1bd12095974e66b4c"
     },
     "examples/parity/src/readback.ts": {
       "mode": "100644",
-      "sha256": "a1309afe2bf71894bd66191b89a330d40c30d9c19aee7844a289e071464e897d"
+      "sha256": "1494a72ada7545c2954bfc92565f008b147b65993e46a45de5bc5ac84366e7c5"
     },
     "examples/parity/src/readbackRows.test.ts": {
       "mode": "100644",
@@ -1436,15 +1508,15 @@
     },
     "examples/parity/src/referenceModeHarness.test.ts": {
       "mode": "100644",
-      "sha256": "c678dff8c70082ce9fca220d15b4bb51510f81c9f78b2671b106484ebafe4be0"
+      "sha256": "63b8e6e1f91621bb912952ad27b884709bd56f3e46730962a9e085d7bafe8101"
     },
     "examples/parity/src/routing.test.ts": {
       "mode": "100644",
-      "sha256": "0926dd81f9332adc69f60116e35bb493420aaf6e12183a041573674c77cc017b"
+      "sha256": "8c8dd83770ea5c3e7206b3c8bfd87ec732b16d7a313dd929b4ab26e2b0a881f6"
     },
     "examples/parity/src/routing.ts": {
       "mode": "100644",
-      "sha256": "e7e87725873bc7eb8194e31601df12537f77c81ff7768c4255bf542840897b89"
+      "sha256": "12a48716cfb803a73bf3906fde466cc80010eebddd57f72bc938b83b1fe86fa7"
     },
     "examples/parity/src/scenes/synthetic.test.ts": {
       "mode": "100644",
@@ -1496,7 +1568,7 @@
     },
     "examples/parity/src/sideB.ts": {
       "mode": "100644",
-      "sha256": "3c7a28eb68a4dcca6d33fed16cd28d75f45a266d7d1130c38a662bd3b13b8133"
+      "sha256": "ac4022d786416531016486138fc7df99bebdd54d5b7c37baa53bfdbfab1b91df"
     },
     "examples/parity/src/sitePath.test.ts": {
       "mode": "100644",
@@ -1521,6 +1593,10 @@
     "examples/parity/src/warmupFrames.ts": {
       "mode": "100644",
       "sha256": "15bf7c9d610b96a95a93df885703500d2f6040900488a2ce8c634ee5190d173b"
+    },
+    "examples/parity/test/fixtures/metrics-atlas-receipt-fail.json": {
+      "mode": "100644",
+      "sha256": "dc77e6763fa161725d00ddc99cf62c513c2e672c7f875c0f6d28a57b1054b887"
     },
     "examples/parity/test/fixtures/metrics-expected-diff.json": {
       "mode": "100644",
@@ -1824,7 +1900,7 @@
     },
     "examples/storybook/src/clouds/controls/experimentalControls.ts": {
       "mode": "100644",
-      "sha256": "876d1b874984bd01dbcf83ace556232d1bd4099eed41459737c6af7c7c325ef3"
+      "sha256": "68c4adcc7970cd71d8e7ac3869390d9f966e0c55b6c0707043853494589a4431"
     },
     "examples/storybook/src/clouds/controls/lightningControls.ts": {
       "mode": "100644",
@@ -2220,7 +2296,7 @@
     },
     "package.json": {
       "mode": "100644",
-      "sha256": "77c15e3507514f834f1f71091fed1f028869274ad415d0bba5ab51d12ef8931b"
+      "sha256": "e3a39478f37f9ebe51297476a20adee59925dc31262a8c20fbfa44d0199ca532"
     },
     "parity/results/0/README.md": {
       "mode": "100644",
@@ -2228,51 +2304,75 @@
     },
     "parity/results/0/baseline-medium/capture.log": {
       "mode": "100644",
-      "sha256": "9353f833e73104f5cd725c688cdf91fd927cda4459addff3b3d04caddbecee43"
+      "sha256": "ee5083b1f335b04199e7568bdbb4adde36d9d4eae38effb2ebe6ed95662777af"
     },
     "parity/results/0/baseline-medium/metrics.json": {
       "mode": "100644",
-      "sha256": "6f5b1174544226741980f85333860e7af700a2c8d6379e9ba022e6cfe56c092c"
+      "sha256": "3c77de7e6f964456b49eb51a803017f16f58b9bec054553711d8d027cfab9cef"
     },
     "parity/results/0/baseline-medium/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/0/below-deck-1km/capture.log": {
       "mode": "100644",
-      "sha256": "264de74a74700410593c91d519b3eb755c5c91f6e7c33b810e48925eff2d358e"
+      "sha256": "6322986fe7f33194874d73621f58769342fe7fa5e83a87b16c6c5f5e9aac3040"
     },
     "parity/results/0/below-deck-1km/metrics.json": {
       "mode": "100644",
-      "sha256": "dbc61db6caeeb1ee4c64ae13abd252c66ffc5212fc52f54218f3c9bd34fd15ea"
+      "sha256": "349d60bf7ebdaab8879527ba64c145dcacbfccb02fc9d101a3d7396030699ca6"
     },
     "parity/results/0/below-deck-1km/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/0/inside-deck/capture.log": {
       "mode": "100644",
-      "sha256": "0a723df015a56dbb88ed41ed3fa65846ee749f76c662123272e31bc0b7d00315"
+      "sha256": "5180ae97f1812e3fe65bcb3c4862e6551999f1e1af6ffe8c2a83210aaf7e8fc7"
     },
     "parity/results/0/inside-deck/metrics.json": {
       "mode": "100644",
-      "sha256": "cc17024aee37476f759f098bab626eca61c9ba866eacf5c907418d2aadcb4605"
+      "sha256": "e61a5c3fc403bb954167b33586c9d280013ad28882ecc389d2c35729b7be5e80"
     },
     "parity/results/0/inside-deck/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/0/odd-size-baseline/capture.log": {
+      "mode": "100644",
+      "sha256": "57465f51ba033a7e72b4c88231dc4a94f75db216b60143963f9e398cdf3f6fcd"
+    },
+    "parity/results/0/odd-size-baseline/metrics.json": {
+      "mode": "100644",
+      "sha256": "b47f7c82311cb5c646d2f416c0d2db5d2956a9f44ea21470c9fa828fdf420eb6"
+    },
+    "parity/results/0/odd-size-baseline/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/0/orbit-140km/capture.log": {
       "mode": "100644",
-      "sha256": "0af705000e5a4eb528087eb3b4a2f41ba8efe2fc873dc2875fa78dcc11ce4968"
+      "sha256": "ac6e330c7b311cca488db0b7df394962755fdb8632edd8bc4711d2e2d91dbf5d"
     },
     "parity/results/0/orbit-140km/metrics.json": {
       "mode": "100644",
-      "sha256": "b38ff1efa5411e75c50a46d1c4e7e18ac8de2a99f0d28f5be999d0876ee7c984"
+      "sha256": "a404d3730bdd1a21680338d4fff57a35bb8d167760d4df13370d31275a4f3bda"
     },
     "parity/results/0/orbit-140km/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/0/retina-baseline/capture.log": {
+      "mode": "100644",
+      "sha256": "1083ffdc71a4074af3f7525f2e9a951925b03d6b1d79953c7d065782a7454dfc"
+    },
+    "parity/results/0/retina-baseline/metrics.json": {
+      "mode": "100644",
+      "sha256": "cf405f867ca3fa47475faed132c1c924fc96f5cec85da500cd499922ae1cd1d7"
+    },
+    "parity/results/0/retina-baseline/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/README.md": {
       "mode": "100644",
@@ -2280,591 +2380,663 @@
     },
     "parity/results/1/accurate-sunsky-off/capture.log": {
       "mode": "100644",
-      "sha256": "79ff83992537864faa0e310659f40594d9beda10d95de3ef92ce5d04f03fed4f"
+      "sha256": "bae3a7c750335221907b616a0a229257295d290050a9afa1806ebd94fbef1780"
     },
     "parity/results/1/accurate-sunsky-off/metrics.json": {
       "mode": "100644",
-      "sha256": "946fca16309257d58db4634e208609fdab8966da100c75cbef1bf24c1d50177c"
+      "sha256": "616acd2797c7b38cd99b87b671c8e2dfa7672a70a09f2ba7290fe0057883dc9a"
     },
     "parity/results/1/accurate-sunsky-off/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/coverage-020/capture.log": {
       "mode": "100644",
-      "sha256": "f68a91304ecf667f35e427de8323176cf44b8c891456e104ffa3e3934cd9289b"
+      "sha256": "f1eb1017d4b0cefa53c25a574986c17b5a12b7ad1aa64822ef375842697bd3c9"
     },
     "parity/results/1/coverage-020/metrics.json": {
       "mode": "100644",
-      "sha256": "b9f81eaba1dada33b16c42fbf631c7a3663ad57a9d92de9de20550d0bbd5ac17"
+      "sha256": "a8dec4c235ff3383376cb0696c5b73a211afef58a249064b39ea39789c812dcf"
     },
     "parity/results/1/coverage-020/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/coverage-045/capture.log": {
       "mode": "100644",
-      "sha256": "4349d01cf664f1b2a91c36624f1d4a9dcc2362bad547c980657edf0b2ee999e0"
+      "sha256": "e5e41691632831d2a5ab983e7e16d98d515a0bc8b6ebd2e4903bcded3460b9dd"
     },
     "parity/results/1/coverage-045/metrics.json": {
       "mode": "100644",
-      "sha256": "f2ce4da2a1792db15cfc15ca78d74283db967d46b99289bb35afcb27a9f12070"
+      "sha256": "23ca99a2da54d29b5fdd3c2aae725304edcb095fc47c8ae8533215b9219a4a10"
     },
     "parity/results/1/coverage-045/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/coverage-070/capture.log": {
       "mode": "100644",
-      "sha256": "d09449839a7ef42123ab00019f9f2898daf6746e8618b23a4757c10126c4737b"
+      "sha256": "963fb864487fb9f5370741d7dfb4919f4d6cf16a920a8794a0a5ed88602ece36"
     },
     "parity/results/1/coverage-070/metrics.json": {
       "mode": "100644",
-      "sha256": "c483ae88432c211ae458644412481a154d938d5335432c97098177c6eaba69cc"
+      "sha256": "5b36d2e42cc6ce3b6d3a6d6f420425578656dd80ce11ac63a2fefdf224c4fc44"
     },
     "parity/results/1/coverage-070/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/coverage-090/capture.log": {
       "mode": "100644",
-      "sha256": "2aa26f1fd532a578e48ed2568b157f2fc1f7fd830c8d5a37855577ae8394b357"
+      "sha256": "e298ee07d0484eecdeeffa39bca0ef39c6ae72ce478ddef8b77711280ec0768c"
     },
     "parity/results/1/coverage-090/metrics.json": {
       "mode": "100644",
-      "sha256": "e4ecfef2fa87ce0360e17970200cef5e40c1a92642a1204070739631e59c329c"
+      "sha256": "1b61237beaf8fa23c25cf9ebba50a27e3c71637fd92f53d2fd7c709dfe9d007a"
     },
     "parity/results/1/coverage-090/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/detail-off/capture.log": {
       "mode": "100644",
-      "sha256": "eec55d94d203af401c2eb8fb6ab9a670a315f6d01f757f5df4d3767408f340d6"
+      "sha256": "08355c23bdaad8953b6f55167b26deaf4d952fa3165d3dfb48fa64ef896b2477"
     },
     "parity/results/1/detail-off/metrics.json": {
       "mode": "100644",
-      "sha256": "f7577629d418cc5f9aa90b9bde7c1edbcaf3d8cff5fe183bc573aa79b8002b83"
+      "sha256": "ed56875a550ed53aa5e07e6a1035e3de1176d053a621dee9dc4663508eba3c52"
     },
     "parity/results/1/detail-off/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/ecef-identity/capture.log": {
       "mode": "100644",
-      "sha256": "5e563b7e5b77fa2efa868c831dff6ecf130d891282058bab9b1b2bc1303736f4"
+      "sha256": "ab23049578fc0f202af7c36c8a0f1d8d93ffc3a100adace30edcd96c5767d1bd"
     },
     "parity/results/1/ecef-identity/metrics.json": {
       "mode": "100644",
-      "sha256": "062ba3c02f62efab64a716a74527027bd23cf9673320a8f923cf2cc83b09b8f2"
+      "sha256": "e3ca0af85358336df5ce540ba71999256d650b5190d0d146d048d56c4eb93b15"
     },
     "parity/results/1/ecef-identity/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/ecef-rotated/capture.log": {
       "mode": "100644",
-      "sha256": "2ce50bfa4c16ce759fb0e9bb85dd41a72e48b854bfb50a7b687e6be6d67b019a"
+      "sha256": "f69aa86249087d3cc99c11dd0184459a73f5db8841f170d465277ccd76f9adf9"
     },
     "parity/results/1/ecef-rotated/metrics.json": {
       "mode": "100644",
-      "sha256": "dfe8364f449b97afef6e4a4f1e374c7b8592753a4f47a917f7b86cda8472e6cc"
+      "sha256": "374e75732532975592d290dfe88c36c05fef9a30fe215fb566908c68b4663511"
     },
     "parity/results/1/ecef-rotated/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/horizon-grazing/capture.log": {
       "mode": "100644",
-      "sha256": "57135cd94b1e540744bfd27a0112c1eb60ad0432dd13c905470918f52da54cd2"
+      "sha256": "2ceb9aece71bd89c371e8ca7d3f6cb37724aac2f515a36f91209a203df8dcf36"
     },
     "parity/results/1/horizon-grazing/metrics.json": {
       "mode": "100644",
-      "sha256": "1b1429932001d07b7ac8f5c9643255282328e3ca7d51849b4dcc357a9d94b010"
+      "sha256": "688ccecd3f15e6f53c707d772ebe2b204c1163ca36bd7152ec2da1f9d2a34108"
     },
     "parity/results/1/horizon-grazing/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/layers-2/capture.log": {
       "mode": "100644",
-      "sha256": "520fcdd08810382a12dde410d4a110063091f797cf9df5a3aa7bb5eb136f059c"
+      "sha256": "2ce2ca7dcfda590dc2a3a83a1a089642ef68040135060cacebca2ebf017ce3d4"
     },
     "parity/results/1/layers-2/metrics.json": {
       "mode": "100644",
-      "sha256": "68dd06814f537476eb6e76c63b71d2954cb6c515e2be9561c89f8ade2f28fb31"
+      "sha256": "a590ed82939ecca6a3a1ee6ac0b1e903f85b595bb4aad80cdb6ad094fe9fe639"
     },
     "parity/results/1/layers-2/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/layers-4/capture.log": {
       "mode": "100644",
-      "sha256": "18b57b2ecdbd6cef88234aa5a77485cc85c3b8b5beac6e4043c60eb290caedbc"
+      "sha256": "e0c51006f1785078c69ae706c5a1968465c7a344ff528bb7235eca9c67f6d87e"
     },
     "parity/results/1/layers-4/metrics.json": {
       "mode": "100644",
-      "sha256": "e7487ca674672ff1dba33cc130f778aace14e9d4bec4cb923564bdb279d1a5b1"
+      "sha256": "307f1a6e014fa1024371cd46103248ec8e41204b7a165d95dde2b233030f6041"
     },
     "parity/results/1/layers-4/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/octaves-1/capture.log": {
       "mode": "100644",
-      "sha256": "4714e08ec25b1b249ba8e24cef3477e3ecfce7c56b7f5ee9e04843889cf1da30"
+      "sha256": "74534ecbe54548c50a693cd58e096e21df4f2e9e88f917bc4ac8fe59e64fa7d1"
     },
     "parity/results/1/octaves-1/metrics.json": {
       "mode": "100644",
-      "sha256": "7e735a01c69e59212681fd92e936382555e11b6224f97ecf6a819abfb6cb9ceb"
+      "sha256": "5c01a3fd221ee97db7dbf2f8b509b646e693c195cf00cfa968acd15552e44fba"
     },
     "parity/results/1/octaves-1/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/octaves-4/capture.log": {
       "mode": "100644",
-      "sha256": "61d61c5d6c98a6c491a9810bcfd99cf473ad490219e51add4fa78e1953af7c8c"
+      "sha256": "e37bda3a7bf62fb765fed7bc076add6faf9eb087a4d698b7af8615e6836b192c"
     },
     "parity/results/1/octaves-4/metrics.json": {
       "mode": "100644",
-      "sha256": "518a636f89768aa67299fb6e8141c897d63112e7c76a1f9bf039ed887bd0793c"
+      "sha256": "8dec1fca349cb51b42618b6089ae7de39dd26dc964c086a6d726d0d80b79338d"
     },
     "parity/results/1/octaves-4/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/octaves-8/capture.log": {
       "mode": "100644",
-      "sha256": "36e73066edcf60757213f83aff6ed6a60bc68a2dc27f5c1ec0fee6d5efee4334"
+      "sha256": "87de067a95c13f1d877bd5c54be668964147baf1fc230b44b2ef589e1bec3ee8"
     },
     "parity/results/1/octaves-8/metrics.json": {
       "mode": "100644",
-      "sha256": "ebd453a1d58b9b7f27a24b2692a7c63da5df0b3a903829faf91027613e7e2e05"
+      "sha256": "99b8b0959dc6331f53bd4a5d06f6ad2f3e4208a025e37767a77050e2c7893d2f"
     },
     "parity/results/1/octaves-8/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/polar-altitude-corrected/capture.log": {
       "mode": "100644",
-      "sha256": "6b0bca23d0781bb9e348fd4d68cf3a52213b59d79e54e82603cad2bb3fdd7f50"
+      "sha256": "3b142094d94385bf0be856d089b60f1172fa23fb09220fa97d3a77f066191972"
     },
     "parity/results/1/polar-altitude-corrected/metrics.json": {
       "mode": "100644",
-      "sha256": "ddde956cf932e543215a8617839a08fd38a04c22c7f2bc33e4be3ab2a9ed97e1"
+      "sha256": "097de02d4f632603c996d7a775de42e02830aa41d8b9378d1b051dec59b65fcf"
     },
     "parity/results/1/polar-altitude-corrected/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/polar-altitude-uncorrected/capture.log": {
       "mode": "100644",
-      "sha256": "dbd2fed2f7500b7eb66bd127966c2084cdc3e15f0f9c1aa05be45135ad9b3a12"
+      "sha256": "3d16469a1ce12814fad8c3baf6a885457bebfd92b7f6d083f6973e34a6d98cc0"
     },
     "parity/results/1/polar-altitude-uncorrected/metrics.json": {
       "mode": "100644",
-      "sha256": "b0dc94e09fe8ca0ef51bd47d57f334aa02384d03f72a38cf8b4bcc2f2c3f339a"
+      "sha256": "dec27095561a0852be2dda64a9b9120eb0bdc322033de4b44b51b2de2357ce32"
     },
     "parity/results/1/polar-altitude-uncorrected/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/preset-high/capture.log": {
       "mode": "100644",
-      "sha256": "375b6581397d10f6b7070233c3d8cfa5430979e5ed3e4063c3f925177a4edc32"
+      "sha256": "e5cebfde0e23196934dc2a9777c7740479f6a798fc748aafe4cfbbf2c73876d9"
     },
     "parity/results/1/preset-high/metrics.json": {
       "mode": "100644",
-      "sha256": "24fb233c4e1de35c01419b88956472250789fa7e4bf41f0da64ae18dba4ad328"
+      "sha256": "ca491e80ebca8c506bbbe434f47e346185ceb29a17251e95204473822e3e3071"
     },
     "parity/results/1/preset-high/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/preset-low/capture.log": {
       "mode": "100644",
-      "sha256": "7c942b9f4412233628529acc8ac4d8c16ab59f2ba8ba65cda1272d3b716b693c"
+      "sha256": "c00022ba3d324f77cd93dd6ef672e480fdb33aec296a4171dfbecb93d5766aaf"
     },
     "parity/results/1/preset-low/metrics.json": {
       "mode": "100644",
-      "sha256": "bcad1aa41a95928a928b825398f7419ce7513383f647a4cdbd4da45c3084cb5b"
+      "sha256": "adfb1fb8c78e232309b1f908abcc22c38ee05126bf9348f1308ae764d0683f0e"
     },
     "parity/results/1/preset-low/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/preset-medium/capture.log": {
       "mode": "100644",
-      "sha256": "d944918803bbdb55df2952cb6e7fd2deb2018b47e2d16c65813954d9058a74b0"
+      "sha256": "d5dc89bd8f1b2ecd939b8795927dc5fea6331c6f55d4a90b6c6544fd3d02d6b2"
     },
     "parity/results/1/preset-medium/metrics.json": {
       "mode": "100644",
-      "sha256": "6affd1befb8e5b4aa43705e7467ed33383a4e0e919843eb2b01b806cf5ea3c30"
+      "sha256": "f5f91820e59b7c6f1048f2b54c6b5885c7880ea57ff4bc2c208fa700ed4e700b"
     },
     "parity/results/1/preset-medium/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/preset-ultra/capture.log": {
       "mode": "100644",
-      "sha256": "ac070bbc422a844a4ecbdd2dd0f8959a830706143993a9249aa4232df04004c7"
+      "sha256": "201f792af6069d3f9dc91821736c01e406e66f9a869815b339e9f2aa29ae24bf"
     },
     "parity/results/1/preset-ultra/metrics.json": {
       "mode": "100644",
-      "sha256": "8c513f15e4537c381615876f54733ce45045c3f755378195764e731d3e332f95"
+      "sha256": "9b555884faca799cd1a4d15a1c3c7b8d95d44603543a7ea2c96b11cbc31fc45d"
     },
     "parity/results/1/preset-ultra/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/res-050/capture.log": {
       "mode": "100644",
-      "sha256": "3b1ac2cca91cca3909831b1afc3a0045deb21fada0e2f14aff6d94634b77443b"
+      "sha256": "209936071df3f829c4a0e191edb69b3d91392caaf390faeeb65bc53037285314"
     },
     "parity/results/1/res-050/metrics.json": {
       "mode": "100644",
-      "sha256": "a4d6a3b50cc88698aac54590dbf5a452026f9c5dc8a923ea6e6ffabeb53122d5"
+      "sha256": "8979f79d4b55ff29626a7ae1bb9274ed5b32305c1f1f16e9cd98dbf4090e0981"
     },
     "parity/results/1/res-050/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/res-100/capture.log": {
       "mode": "100644",
-      "sha256": "5e4ca34d6770ca244ced737ebed3e258a3ee5826f1fff3f02119107c7d481867"
+      "sha256": "835d47a33ce48a2d85c1485cbf55642616a5e4be25df1251f7bc596d37349e2c"
     },
     "parity/results/1/res-100/metrics.json": {
       "mode": "100644",
-      "sha256": "158496e0afb7ec50b481e571c310483b6af40a07d2dba0e6e332f4e62f00c333"
+      "sha256": "c3955582b81e4e6b49edd67a9e96c53a2414553bfe881aa7e80b97093d614e73"
     },
     "parity/results/1/res-100/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/sun-horizon/capture.log": {
       "mode": "100644",
-      "sha256": "188abade4bc32565515e7b9025c478437e91e9c5ea6b969ece804f37b07d7119"
+      "sha256": "060793164df869b484ee6cd2dddbfb4f89421c2ad533c4f30f59fd93287b60dd"
     },
     "parity/results/1/sun-horizon/metrics.json": {
       "mode": "100644",
-      "sha256": "7afcc65ad254263313d4ef4768803046e7dd351f514058520d701448262d3744"
+      "sha256": "4d4086b7957f9068d6a6ba8f17ace400958e23813bfcc74923d79aa8aad2ad90"
     },
     "parity/results/1/sun-horizon/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/sun-low/capture.log": {
       "mode": "100644",
-      "sha256": "e5124a41403d61ce8ce3bc041026135f9eb3cee118ce1fa4f9df5dce81dbd7c1"
+      "sha256": "f72493760e371adba1779b6521a34b0e1c01c662ad918d856ffe4c25c1d2119b"
     },
     "parity/results/1/sun-low/metrics.json": {
       "mode": "100644",
-      "sha256": "235b210510d3c7adc20f848875dddbb2bf35f8da51dc2dadb3321b13703ae9ba"
+      "sha256": "c3c76f7e4cc535120eac37fe0fa9e40e8e50bce523a78fe57dabb320ed0e66a7"
     },
     "parity/results/1/sun-low/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/sun-noon/capture.log": {
       "mode": "100644",
-      "sha256": "caeab548ab1cf442e5889ba478cccec3e31dc58142fc63e33fdc403cf446a300"
+      "sha256": "b13600d5ac52ba24155a783be13c15264267b98344414ba2d42da1a0df792318"
     },
     "parity/results/1/sun-noon/metrics.json": {
       "mode": "100644",
-      "sha256": "67ed22ef143b12e60812a6ebfba63e7f246f24b5bb95fc3784fc537e03b16e74"
+      "sha256": "5a56e9882c51ecf5f448bb537fbb7776ac057eb52b9bfed1139723d22651a1e5"
     },
     "parity/results/1/sun-noon/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/sun-twilight/capture.log": {
       "mode": "100644",
-      "sha256": "4efc81baab45918eb4cc90d136e20c635ebd69d3c21eabc74adcdd73b48bfeaa"
+      "sha256": "70f1ae1da86f956682a2c1931b0005ba6d01081e800a2150b0c7def25f64e398"
     },
     "parity/results/1/sun-twilight/metrics.json": {
       "mode": "100644",
-      "sha256": "abd4658b52078d75d24f6bd38beaa59b771b384e7eaade8df805bacf3c3b3634"
+      "sha256": "eb076866dccd8896ed3ecc11775bd9c161b5e9dd940304477b108f4ecefdf45a"
     },
     "parity/results/1/sun-twilight/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/surface-up/capture.log": {
       "mode": "100644",
-      "sha256": "dab4954b6d268b8a2b213f72fe782bef34524ae586d8efbabcf2c71df510d161"
+      "sha256": "964fe7492f96e90184b6f52a5d6f9c16ba115861c3261012262302bbe2543402"
     },
     "parity/results/1/surface-up/metrics.json": {
       "mode": "100644",
-      "sha256": "26a0c0cd125d9b03bad82c7efd40d22ea572c6b5fee704c96dd220b74b65f15f"
+      "sha256": "49177bf5634841b3fc164e8fa958789b54a751f976a86d2108d97be7e5d88b4e"
     },
     "parity/results/1/surface-up/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/turbulence-off/capture.log": {
       "mode": "100644",
-      "sha256": "6600f22dc8bf631625c4b336719a109f1457c255f2a9aa6fac59c36aefa31c22"
+      "sha256": "69a8d63ba3eefd1fca472a783a067c09e7c26e729221c3ef7659f9509a39e7cc"
     },
     "parity/results/1/turbulence-off/metrics.json": {
       "mode": "100644",
-      "sha256": "d677c9fb487dcf9921e1e971eb957f6ddd7dfd08524e24424d1ed0c66f501c13"
+      "sha256": "e4747f1896b9faf5b751eece34d52d61d05bc48137a7300c4e78125bde80c7fd"
     },
     "parity/results/1/turbulence-off/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/1/wind/capture.log": {
       "mode": "100644",
-      "sha256": "b9443f8f9619183b1e7051da81bcd958127bd9e502507baa0515013acb16a06b"
+      "sha256": "e6b2c773ffe872a73c6291c45a34bf565715f59a39457f854fe11f79d4d713e5"
     },
     "parity/results/1/wind/metrics.json": {
       "mode": "100644",
-      "sha256": "e56a9d54b409588432dc37c3a24d0510a61f3ac649581b7ae0f4cba87b12450b"
+      "sha256": "c1e1618b616bd58e5117b1e9ab2fb307b6fc204d2feb440d8bd6bb1fc0f5d112"
     },
     "parity/results/1/wind/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/2/odd-size-temporal-1/capture.log": {
+      "mode": "100644",
+      "sha256": "65b8cc112fd33098790847d669588ce7956715dcd2e6032673cf714bb437944f"
+    },
+    "parity/results/2/odd-size-temporal-1/metrics.json": {
+      "mode": "100644",
+      "sha256": "c4aa526a1b6f79e9f42817f265771693877446ff7d9a64a15eddeb76c63ccf9b"
+    },
+    "parity/results/2/odd-size-temporal-1/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/2/odd-size-temporal-2/capture.log": {
+      "mode": "100644",
+      "sha256": "4d9bf4eca4e9f1e2961619e859ff6d9529ad7d501eb0618e3f1c078c9bfd23f8"
+    },
+    "parity/results/2/odd-size-temporal-2/metrics.json": {
+      "mode": "100644",
+      "sha256": "112d4379e34d61901c013ca9eb8df0d9043a0f04208fa10967ee1385f6600047"
+    },
+    "parity/results/2/odd-size-temporal-2/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/2/odd-size-temporal-3/capture.log": {
+      "mode": "100644",
+      "sha256": "9964b04b2e9534257564c38bac2053fb6a51facf754ef2f8830974cff8b9aee1"
+    },
+    "parity/results/2/odd-size-temporal-3/metrics.json": {
+      "mode": "100644",
+      "sha256": "561bc67b358e89980b60c9e3b3d80f57695be82bd6beb2d9d1739a00f4b4e059"
+    },
+    "parity/results/2/odd-size-temporal-3/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/2/retina-temporal-static/capture.log": {
+      "mode": "100644",
+      "sha256": "c038c5a93cb3f587fb2ede8a68a5cf2a7f2b2d819ead4deae77bb8490047e64e"
+    },
+    "parity/results/2/retina-temporal-static/metrics.json": {
+      "mode": "100644",
+      "sha256": "8f38f0a8eaf3a8d4e0c5e84215af066bb38ad58225f70c09561fb25015644917"
+    },
+    "parity/results/2/retina-temporal-static/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/2/temporal-cut/capture.log": {
       "mode": "100644",
-      "sha256": "a43c3b9cf0e68b2ff30368d33795a8c489135b837f6810706bc3089d2dab923e"
+      "sha256": "5f7860dffac01301d24ea6f34e54e6f03fadcc3084aef4fb13f25d106cd7beac"
     },
     "parity/results/2/temporal-cut/metrics.json": {
       "mode": "100644",
-      "sha256": "9f6670c0c2296ebaeae069d4b9e35c6283818c29df0e15741d0e97919f4ab070"
+      "sha256": "afee39010bd390a73f573c5e77c307bd2fbb8934fe979dd04caf205aa66d2eb9"
     },
     "parity/results/2/temporal-cut/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/2/temporal-on-orbit/capture.log": {
       "mode": "100644",
-      "sha256": "1fad7efa8588f4980cc5754c9882f25a007edf67130d8a37190a0ccaf6807475"
+      "sha256": "7efda457aae4da375ff9316a3ac2cf28c773b74d52902380bccc3e4ce53e94ab"
     },
     "parity/results/2/temporal-on-orbit/metrics.json": {
       "mode": "100644",
-      "sha256": "4b9a5102d2cf27ac976862678f0e1fc9c1e5589448abcacb4e7064d6283e0cc2"
+      "sha256": "deff0b032462a61510da3bbf2a9e9c11bbe43b1b849c0c8e1ec8c0d5a693091b"
     },
     "parity/results/2/temporal-on-orbit/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/2/temporal-on-static/capture.log": {
       "mode": "100644",
-      "sha256": "4ebcce97101d0817133a0c9ee5dabbd5552f941afde20caf80ba87fa3180c4db"
+      "sha256": "470686bdc8d50a77e936e0c05235bcbb24d838ea78a767bffa91eed12be104ec"
     },
     "parity/results/2/temporal-on-static/metrics.json": {
       "mode": "100644",
-      "sha256": "8e53190d9b00059f30ca6656efaab85c1ae4c900bfa198cb6da4187c187225e8"
+      "sha256": "15414f8d8625ffe5fa5c57fba67a574896b796550bed2cf346c4f255ea430874"
     },
     "parity/results/2/temporal-on-static/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/2/temporal-on-wind/capture.log": {
       "mode": "100644",
-      "sha256": "6c0975ac73dad38d161dc7a5a81b74baf96779b3d51b4dd15f52433b2ee2f40b"
+      "sha256": "bc4c87d515fa5e22e826bee629e6592d8aec7f7b13611101ca23351bfb887920"
     },
     "parity/results/2/temporal-on-wind/metrics.json": {
       "mode": "100644",
-      "sha256": "92b1187f15ea02125f97072ae72459da9c3f374033f6de5d6044314989b63c10"
+      "sha256": "9834e69c9d8921d2e4dbe052a1e4f8751e146d7e70f9c80799d44f7ff061e804"
     },
     "parity/results/2/temporal-on-wind/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/inside-deck-low-sun/capture.log": {
       "mode": "100644",
-      "sha256": "8f6cd1c5120d2f0bcd6563b89fa2e98e116c2b755b51c2bc3a38f6464b78c099"
+      "sha256": "8143f6d4c1ca96c571d7513f8c1ebbc6af78b51568864f1cd47d64cd68d40c7e"
     },
     "parity/results/3/inside-deck-low-sun/metrics.json": {
       "mode": "100644",
-      "sha256": "65dd41f7786d2cd6c4ead73be9fdd67aac519fc4a0fce6c8e922152161940a72"
+      "sha256": "a953efc9a7ba981a74bfc5397865938343b30256bb2ce150b609cf1c928190e9"
     },
     "parity/results/3/inside-deck-low-sun/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/layers-4-shadow/capture.log": {
       "mode": "100644",
-      "sha256": "1286675ae1005fae94ace551d7d11376c984869cebb802385b7705928eb6a7a4"
+      "sha256": "97af317a71ecd345e279003f1bae76f10ac0724c1b0196206d4a91904a6fffb4"
     },
     "parity/results/3/layers-4-shadow/metrics.json": {
       "mode": "100644",
-      "sha256": "1fa5b3ed78c26c7283c7f6b7f8f71739bc92093e0e5e2244f8c38f0da6ee5420"
+      "sha256": "3422c8f5081e8a861301f0583dc78a72e5723b37d4708d395fba821a6bbd3a66"
     },
     "parity/results/3/layers-4-shadow/metrics.json.env": {
       "mode": "100644",
-      "sha256": "d0a2158c998f125c3e315d38f5e0a8dddebefe1517cc390f49376f7bda22feb2"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/3/retina-shadow-plane/capture.log": {
+      "mode": "100644",
+      "sha256": "8168ba17a5b68e95e24a2fdbb38d6b10042c7e75e59b920cd158a7c5474bf8ce"
+    },
+    "parity/results/3/retina-shadow-plane/metrics.json": {
+      "mode": "100644",
+      "sha256": "d2213176115b36c9c2856deea09f341dca499123644558998a3336c479544511"
+    },
+    "parity/results/3/retina-shadow-plane/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
+    },
+    "parity/results/3/retina-shafts-low-sun/capture.log": {
+      "mode": "100644",
+      "sha256": "5b8fe0109f77308cc49a9ed3333674189b65eb9e3df0d7ea856167685ebffc5f"
+    },
+    "parity/results/3/retina-shafts-low-sun/metrics.json": {
+      "mode": "100644",
+      "sha256": "b089fa8d2e0362323ba08ee58ea4143e2c9e38cf6028db36d1c4785a9932fcb6"
+    },
+    "parity/results/3/retina-shafts-low-sun/metrics.json.env": {
+      "mode": "100644",
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-both-moving/capture.log": {
       "mode": "100644",
-      "sha256": "d12ad09f92ea2d1bf48fe7d3dae157a93656bdb4171c8995d2d858ef92813fe9"
+      "sha256": "324a63e4eb2c257751c2650891dffd8b144e93fb87d73c8be98a9c20c9c228ee"
     },
     "parity/results/3/shadow-both-moving/metrics.json": {
       "mode": "100644",
-      "sha256": "992f2b7bbe161ec1967c22432ed8db780fbd386a3949b7774bfff68e03368758"
+      "sha256": "79b2e72c7953ce0ce2405f62f0a8b4c9e59a04889ea7d934cfccd6ae36d74054"
     },
     "parity/results/3/shadow-both-moving/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-cascades-2x512/capture.log": {
       "mode": "100644",
-      "sha256": "f64bd62099b478decadd043516b03d448bbc0e283f5e999ab58e09d04a9fca3d"
+      "sha256": "5828b6d75e320e89a537c7723efdb9df10b437f04b67c5cd2ad955468f1a9518"
     },
     "parity/results/3/shadow-cascades-2x512/metrics.json": {
       "mode": "100644",
-      "sha256": "2dcca3877aa27e71284f874993d975b934f8aa00b3a33609f3c5878cdf885965"
+      "sha256": "5d969f1b5b27d4222d528544aad60f8389fa3ef900e396560f8fb95ce187af11"
     },
     "parity/results/3/shadow-cascades-2x512/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-cascades-4x1024/capture.log": {
       "mode": "100644",
-      "sha256": "2cd21ccab4eba17490d3f7ee8def8af9fb548ceff8eee2d224d91d182e156c32"
+      "sha256": "35dba122543b813c61b56dcb8992657286d3b1f3647d81a05d41204696f4bb9c"
     },
     "parity/results/3/shadow-cascades-4x1024/metrics.json": {
       "mode": "100644",
-      "sha256": "7122af8ff59ea6cdae4f83c4d907b073635228973f0d5c6ae272d0fcfa7de85d"
+      "sha256": "92ff59d8e41fec249fde2184b537d4e98e35eaceb5e991d397dc57ab2c04e9fe"
     },
     "parity/results/3/shadow-cascades-4x1024/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-grazing/capture.log": {
       "mode": "100644",
-      "sha256": "94c25085d34daac3e6d2b7bba7b33dfdfcc9a2cce071c471727bb5269fa0ba05"
+      "sha256": "150a76f6a4c5359ddaf7f2a8fd86933b2dce28a5b489671911e38f91d3f60e83"
     },
     "parity/results/3/shadow-grazing/metrics.json": {
       "mode": "100644",
-      "sha256": "380817e1c610becb8c2e2e350026d6a888046e4c720c9ff6cb0c14dd42d5d349"
+      "sha256": "b4c377b949ae7df46e63ab82f046c643c11e5856999be79a803b4990c6d73ee1"
     },
     "parity/results/3/shadow-grazing/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-plane/capture.log": {
       "mode": "100644",
-      "sha256": "418aea893f405aa6ad568e59d28030196abbc97039d90797ad469d6a3538aa92"
+      "sha256": "e4b1e06019bb9367e3d2f5de0ac02f3e4f2b5eb68766f2383cce0b98ea63c7bf"
     },
     "parity/results/3/shadow-plane/metrics.json": {
       "mode": "100644",
-      "sha256": "78ef44f651a5264266b98a7035e76c839907accb37c193a5bfe22da87cc27deb"
+      "sha256": "d54030e3e8ec38ff66c9cd3f2634a0d6a17667939cf2907f6e49fd0ea31d987e"
     },
     "parity/results/3/shadow-plane/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-sphere/capture.log": {
       "mode": "100644",
-      "sha256": "4538cb905bf8080067811b46e084c5fd806ace9c59baa4fd818e365d4aacc026"
+      "sha256": "33eab1d48fa88b81be8df0911b099879a3d3e6e708f0bc883cc0ce486109c5d8"
     },
     "parity/results/3/shadow-sphere/metrics.json": {
       "mode": "100644",
-      "sha256": "b13bb6378ac769513d86b94e32a1237e4920a0df2aa2463cb024a26c81967b16"
+      "sha256": "86cbe4f64d9b7c0e81d796636d3b8ad75d92eee9d20cd5ca9c1de5cda11efbdb"
     },
     "parity/results/3/shadow-sphere/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-sphere-neutral/capture.log": {
       "mode": "100644",
-      "sha256": "c9861bed40dc26f8b56aa15770d65e2a38a18a154f977ad1532a5a4b44f6e5c2"
+      "sha256": "5e9fb99a55d6afb299b294672c85bc9f78b84f919848b51f6a4365456fc815f3"
     },
     "parity/results/3/shadow-sphere-neutral/metrics.json": {
       "mode": "100644",
-      "sha256": "b906ac4d9b1244c0902c8bfa4458fe1cae8d19242684ca3a23aab1b308c10b61"
+      "sha256": "d0636c265c77e5e836cf58aeda3e87056e7a650b5cf982e9eae04258d37c2d90"
     },
     "parity/results/3/shadow-sphere-neutral/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shadow-temporal/capture.log": {
       "mode": "100644",
-      "sha256": "b7147872144bcc5cb09b1f86c7b20a7cc9d0e30e198601bf0e44cf3614004acf"
+      "sha256": "bb944bf72cb015902e6a618368bda935cc1fd70cb5e594b778a4b2ff53bcb311"
     },
     "parity/results/3/shadow-temporal/metrics.json": {
       "mode": "100644",
-      "sha256": "424f658ece22a50c92e61acdd3f6a8443eaa74093983db76091b1fcd8caf5ab7"
+      "sha256": "03214c8e011d4132fdd8420a6f9995a165255bb8166590e0948230f57b6c213a"
     },
     "parity/results/3/shadow-temporal/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shafts-inside-deck/capture.log": {
       "mode": "100644",
-      "sha256": "7aef4f0663af579a5242b20533d51d8fd39e6ff211868a731537667f00cdf2e5"
+      "sha256": "130b479540d676180d4d2dc62162a0beaea0f69a4ed5b2e8ca58537442ea73b0"
     },
     "parity/results/3/shafts-inside-deck/metrics.json": {
       "mode": "100644",
-      "sha256": "541e5f033764e0c4d9d422b3118050c6e586de3fe309443cfa052f303bdf4bde"
+      "sha256": "73b4f83e64d91e3110996b7dace08d4906f097cd2e779c966f4b2fb81e048b3c"
     },
     "parity/results/3/shafts-inside-deck/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shafts-low-sun/capture.log": {
       "mode": "100644",
-      "sha256": "cc68a281c2b2f65321e69cc414c213e513d0e80a2f56bf51f4917a58093da063"
+      "sha256": "f8868a672da0f40fc3c2f5fe0c03c4f03616ff8bd630a35d379181dea392076d"
     },
     "parity/results/3/shafts-low-sun/metrics.json": {
       "mode": "100644",
-      "sha256": "36a0a4744ff89e64a5349854af6c76cfff46bd1cb2d2cbcb740c58ea1005a7c8"
+      "sha256": "294ea07e998d5896fac43b4a83493cd351b4fe149afa561a9510eed30c5a552d"
     },
     "parity/results/3/shafts-low-sun/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shafts-orbit-off/capture.log": {
       "mode": "100644",
-      "sha256": "48b805c4fb7bdff2423d032460a064073ea88e2dfcebd88c9bacc8787f494095"
+      "sha256": "97ae3129a7b1d980787d24087b86c461481fe50f8f69442013ff83f696622e5d"
     },
     "parity/results/3/shafts-orbit-off/metrics.json": {
       "mode": "100644",
-      "sha256": "e099aabd52306171b62d9a62ef719b609ec72d9b0b6821cf5452d36d02e64e31"
+      "sha256": "54172689dc05401a277bc7c1fbdeab07d262daa6b11cd7b426c9204d21b87966"
     },
     "parity/results/3/shafts-orbit-off/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/shafts-sky-horizon/capture.log": {
       "mode": "100644",
-      "sha256": "394e4cf280e17cf64fa90d0c92697fcb71623314b17c668a5f001164c42c801a"
+      "sha256": "36328a62eb23329fc68c27eccc3df9c6e5cb9cd3fc8bc74ae8376163d80ae504"
     },
     "parity/results/3/shafts-sky-horizon/metrics.json": {
       "mode": "100644",
-      "sha256": "c36e2d9c0534490d08a979e956ba84b7b20ce3f22fafda6a91102a2cfa215d90"
+      "sha256": "3dfe6e45caa2d818aabd9c242bcc60cb23450658c613bd9ac748a1c3153166c4"
     },
     "parity/results/3/shafts-sky-horizon/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/sky-horizon-low-sun/capture.log": {
       "mode": "100644",
-      "sha256": "cd3d68f4a622e150a4df0f260edb0cc7364aa23bfaa8732e1a7463ad74503368"
+      "sha256": "9596895e7fdbaac6aab91bb89f2922b483f8ae1dec3595af034e6b47a67fe533"
     },
     "parity/results/3/sky-horizon-low-sun/metrics.json": {
       "mode": "100644",
-      "sha256": "1dd10e40edad318d6cbcbe6d5ced06639ea6f90c8e74b2e8a5dcd6fa8cea39b5"
+      "sha256": "d247984ec89e95fe900584e41a15229b710232437ffc9c112b3767ff6340e8c2"
     },
     "parity/results/3/sky-horizon-low-sun/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/3/sun-grazing/capture.log": {
       "mode": "100644",
-      "sha256": "54125af9caf1a28d5e73aa5a5b1292b75d6380068812c77cc1156c40df040b2a"
+      "sha256": "b07dc6cdc2e068cd55ccefd0de1bae44e39ce5772ccea9d68d19fcf09ec2ba0d"
     },
     "parity/results/3/sun-grazing/metrics.json": {
       "mode": "100644",
-      "sha256": "e9e7174482704ed597c3c85830d63bfdb3c9c8c36b5d3fe279aa6cc12d7503bf"
+      "sha256": "ee224419936c5a98fc381ebe751582ec528970c8bd0a4ec91fc558ffeb2a5e48"
     },
     "parity/results/3/sun-grazing/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/README.md": {
       "mode": "100644",
@@ -2872,127 +3044,131 @@
     },
     "parity/results/4/debug-cascades/capture.log": {
       "mode": "100644",
-      "sha256": "46e9bc6e6d190bb5edf253af40347d4824f84c2c27c18049f3a479dad83c22b9"
+      "sha256": "f3753a0d7809451bde39804413da6a69b5b2d5422621670e6b88918efc0452a5"
     },
     "parity/results/4/debug-cascades/metrics.json": {
       "mode": "100644",
-      "sha256": "bbfc24eb9b96ada8670a033e770da7fb287d4002c9fedfe0e3a89c3d080f8584"
+      "sha256": "ba78c399ca6de46ab2efcfa20fb840a709510fdb54f7d1f83a880cc159c52ee3"
     },
     "parity/results/4/debug-cascades/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/debug-checker-uv/capture.log": {
       "mode": "100644",
-      "sha256": "a62a4adb1ab21c7093718fe173ad043e4b7e9f56428ca6f7c84e92f987b28bb4"
+      "sha256": "70e855448be7b093829b40eebd67d200784a5829448f3973ac9a13339b85a317"
     },
     "parity/results/4/debug-checker-uv/metrics.json": {
       "mode": "100644",
-      "sha256": "22556c62df60dde1158d3743a0e4bc6ab1bec8fa1faec1ce89219983899ee6e6"
+      "sha256": "5d9c48a87fa6aa45ca89cb4bf6e8305b399e93d85c7725bf829526e2f6686343"
     },
     "parity/results/4/debug-checker-uv/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/debug-front-depth/capture.log": {
       "mode": "100644",
-      "sha256": "7444b06aa452067cfbc881f30d3cd4d25dd94550e26151c53b712c4b50d2984e"
+      "sha256": "e8e243b5a027cd554724d2df646edd8da1fc9d09c99df26ccb13e5c3c5c3840d"
     },
     "parity/results/4/debug-front-depth/metrics.json": {
       "mode": "100644",
-      "sha256": "105b2c97d639156500c23b4dc97727e06785abaa2243f383a6c09db355f950a2"
+      "sha256": "c21055c79265ee003ca780094423853b1bf2592bc9dbbfa18a17703c419a39d8"
     },
     "parity/results/4/debug-front-depth/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/debug-sample-count/capture.log": {
       "mode": "100644",
-      "sha256": "9a133c03dce3b0398de65a9551a9369d21b0564cfaba278676bfeafda1f24f24"
+      "sha256": "7b3659dbc0cf0ee19ccdb74f8619a4651ed71ea1ac09783ef2208e07edb8cf28"
     },
     "parity/results/4/debug-sample-count/metrics.json": {
       "mode": "100644",
-      "sha256": "58cfda78665fe84c29556938585e729146deb8545ece490377a15dee63bdb30e"
+      "sha256": "f14d881e2237aaa8b353d4613d747e80e18cb5693cb3172e90342d161889d261"
     },
     "parity/results/4/debug-sample-count/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/debug-shadow-map/capture.log": {
       "mode": "100644",
-      "sha256": "f1b6cf5d97d87016805651ebd3d38b7b47e139b23b25d124eaba8d3466427b14"
+      "sha256": "9b5b1472b8ce17c89e112a3031f6aa43acb1b7446550e0a0b36e66f3440e5ee1"
     },
     "parity/results/4/debug-shadow-map/metrics.json": {
       "mode": "100644",
-      "sha256": "6e92db13dca5e7d3fc19c7bb4edc091065ed8a02f6dc7c8ae9cc74289801945f"
+      "sha256": "508d7ac2477e474de749651f7bad69e6b90799ad50eff2d682adc70aa9cd8f42"
     },
     "parity/results/4/debug-shadow-map/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/draine-phase/capture.log": {
       "mode": "100644",
-      "sha256": "6be55ec4eb87c14cc463c82b4aa5ebbf5546ccebd54ce68adbd01249d1916e30"
+      "sha256": "5f8486ac66205c650ff6559a7748f9df66bc87dc992a6e5fcc2c01eb70910114"
     },
     "parity/results/4/draine-phase/metrics.json": {
       "mode": "100644",
-      "sha256": "ff66552e6c41fa6f7d35598895ddb383e515181b6dac10befb93a2ed5b2a540f"
+      "sha256": "a60148dbdcc22e97750a9631a4dca2a175c319af4099ba855900ee123b4b97c5"
     },
     "parity/results/4/draine-phase/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/ground-bounce-on/capture.log": {
       "mode": "100644",
-      "sha256": "3d9d4d9e54379498a0063a0635dfbfedb5aa07a404858e7e889ca45eb74b40b2"
+      "sha256": "9334373432bd1cc64f26f4998d68ca0db05b03fbde551127a2d9de420339178c"
     },
     "parity/results/4/ground-bounce-on/metrics.json": {
       "mode": "100644",
-      "sha256": "e62975a25ac5a2ab096fae0351cad7ea32beaea457a93e7b6327f564a79d838a"
+      "sha256": "42160511b4af5b03d476dababc61d5daef8afc908d4fdd07fc531e0685402b0a"
     },
     "parity/results/4/ground-bounce-on/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/haze-on/capture.log": {
       "mode": "100644",
-      "sha256": "ad6aab1e4580adb486e2eaa8d6d70dccc06c306754c0e3416fad982679a9ed8a"
+      "sha256": "dfd0f2f1756d0f04373cddef69a23ceee5bb5e64d3a0cf6f97022c137be6f265"
     },
     "parity/results/4/haze-on/metrics.json": {
       "mode": "100644",
-      "sha256": "658c120b31c59aa61324e2f4cce5ffdcaffe1f7ae28b591fd901ef5c86f612fa"
+      "sha256": "088acb2393263f3929f27dc8e9259c565ab684e42a5323b297d1378915d37590"
     },
     "parity/results/4/haze-on/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/log-depth/capture.log": {
       "mode": "100644",
-      "sha256": "0c941e55b69735f3c626b585657e73ce2708669bd41c4f3911a0efe103967cdb"
+      "sha256": "f5496ef2a91cd6ffeda87d674a10517a5554972934b4bf660e3178a2a3b7c1bb"
     },
     "parity/results/4/log-depth/metrics.json": {
       "mode": "100644",
-      "sha256": "179880a055e3d61571dee346e7f6c8a6650cbaf787b4466213a82676312d2770"
+      "sha256": "7d65eb0f2e97d4e69c01e26112b3cdd85ab24d5feaaaf9c9e54ae6e0a6b2e3db"
     },
     "parity/results/4/log-depth/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/4/procedural-textures/capture.log": {
       "mode": "100644",
-      "sha256": "4617e09b9d2f42fb07f7fb16595be91504d024a856af8a18a47d7184cc9c73f2"
+      "sha256": "f784f96c6928aa7083ada5b7f43aa17aa1e8d36096c6db94210ffead3f844a4d"
     },
     "parity/results/4/procedural-textures/metrics.json": {
       "mode": "100644",
-      "sha256": "38001dec8fbd96d0cc7ed23380187693854c7977a15e32ca84df33ea29861121"
+      "sha256": "a446964ca3eb613e07c69bb6b266da572d835f681bbd4c8f751989fadae00867"
     },
     "parity/results/4/procedural-textures/metrics.json.env": {
       "mode": "100644",
-      "sha256": "6fda256b97877a83e484af0198b23e4a143bdaefef3aca077ce23901fd86852e"
+      "sha256": "16dde0f0779c861df105e7b588f8e83faff521adc621d6169f2041da4a9c7cf9"
     },
     "parity/results/e2e-receipt.json": {
       "mode": "100644",
-      "sha256": "f5c381e57cfe5699d3be0efebb45ef8f9b5f9853db5fb0a1f5575d46ba86eaf9"
+      "sha256": "62bc1e2ebf082fd2e7282dba978f0067a56a3e7f4a1483610312d01b76c26710"
+    },
+    "parity/results/regate-owed.json": {
+      "mode": "100644",
+      "sha256": "b26f6d89134d21d84c3eeb5d0ee0bb71928363f0d64fed8e8d4478e69a38d90b"
     },
     "pnpm-lock.yaml": {
       "mode": "100644",
@@ -3004,7 +3180,7 @@
     },
     "recipes/r3f/README.md": {
       "mode": "100644",
-      "sha256": "fa27a63d16ab2a0e1fddd16eb31bd7c8cba953dfeb63db2b3c13874c8579fef5"
+      "sha256": "268e1227a73718d592e2d54a33cb77c35acdc4633fe8814a61b69bfe4468aad4"
     },
     "recipes/r3f/index.html": {
       "mode": "100644",
@@ -3040,7 +3216,7 @@
     },
     "recipes/vanilla/README.md": {
       "mode": "100644",
-      "sha256": "ca2c6861fcb012b9684ab71dd5275610fb10d07579684a765521c93014d030bf"
+      "sha256": "4ffebe3045fb536af75b4a605e79e0ae574791ae8e2720ce6d219beb93922d0d"
     },
     "recipes/vanilla/index.html": {
       "mode": "100644",
@@ -3080,7 +3256,7 @@
     },
     "recipes/webgl-fallback/README.md": {
       "mode": "100644",
-      "sha256": "440b0a97e5f9cbac451d3bcd5df5c62787f4b889a3b05e53f2cff2d4cdef8ef0"
+      "sha256": "ca8f67e5194bb52c438a8a86124c03b17c7bf591adc46bf29a03646b58f98cdd"
     },
     "recipes/webgl-fallback/index.html": {
       "mode": "100644",
@@ -3852,7 +4028,7 @@
     },
     "scripts/missingReading.test.ts": {
       "mode": "100644",
-      "sha256": "6b58ca8f03d30b1732a57994c55d17e7ebdb7f90979e96c1d644219b399e5351"
+      "sha256": "255d25309cc11c8e5f5bc6eb98e55944cb8dc617839d8c71ce8e5b195ba05cf6"
     },
     "scripts/port-gates/BASELINE.md": {
       "mode": "100644",
@@ -4200,11 +4376,11 @@
     },
     "scripts/verify-results.d.mts": {
       "mode": "100644",
-      "sha256": "3a791939ee5d1ba70aa774a4bd0d65a097f5b45192fcfe4f248851adf2d0f081"
+      "sha256": "d4d432c8b91c476cec50f9f89b43f1bdc1aa586a16bf6b08cfc6fbf42678f421"
     },
     "scripts/verify-results.mjs": {
       "mode": "100644",
-      "sha256": "529e1f2009706bc07ff14d1cd330e37c1c7d3b595183728750e9704e19fbb239"
+      "sha256": "44bf5fc19a6bac7857aa8cdf5f8baa0c3cc1a1e024368cc76963a4e2a64d40f5"
     },
     "scripts/verify-results.test.ts": {
       "mode": "100644",
@@ -4276,7 +4452,7 @@
     },
     "src/CloudsContext.ts": {
       "mode": "100644",
-      "sha256": "1f98aa0d5e2ea850f0f49817583e335ac6027c7898d4953fed98f2806d0f511c"
+      "sha256": "1b12b590d8acbc3ec3f4244b601f806cff9b8afa2844709ef04f30845f5b2607"
     },
     "src/CloudsPassNode.compositeTypes.test.ts": {
       "mode": "100644",
@@ -4296,7 +4472,7 @@
     },
     "src/CloudsPassNode.ts": {
       "mode": "100644",
-      "sha256": "5b376f8ec4e985e127b8d36cc40e656884a38a5ca22a5726b346b3b5ae6abfe7"
+      "sha256": "57f3f82d23c947157f443c33d5ff4a91057f3ee5753eb54cb6d7194151e46e5f"
     },
     "src/DensityProfile.test.ts": {
       "mode": "100644",
@@ -4448,11 +4624,11 @@
     },
     "src/experimental/computeResolve.test.ts": {
       "mode": "100644",
-      "sha256": "cae447bb74ed2646efbe0abf680344aeb51262cf0c4c2a7126ca5fdf1e8b0712"
+      "sha256": "611faacd93d81b99b529a7d3f04e07af7143ceb9e847b5956f29fcdc2fa81d74"
     },
     "src/experimental/computeResolve.ts": {
       "mode": "100644",
-      "sha256": "b515b89799b7353bf47db4b0ef459f49226edad6100fd92ac64cec510bcd2d9e"
+      "sha256": "1f698b8e16fd99e15b3dd1bd4b927149d33c34f472df10659e5119721714d791"
     },
     "src/experimental/computeShadowResolve.test.ts": {
       "mode": "100644",
@@ -4552,11 +4728,11 @@
     },
     "src/experimental/options.test.ts": {
       "mode": "100644",
-      "sha256": "7f6648d438aadbcca5998823b401f1169c3abfdf27493492b5c9debc68fba57e"
+      "sha256": "76d440bbc996fbca544e811ec63fd2598b3fcabbfb585e3e37c2d0bc1958f418"
     },
     "src/experimental/options.ts": {
       "mode": "100644",
-      "sha256": "62926b571b52f9b93082e4ef2e6afa4c608a1939e8befa1be13cc2dd76b16e74"
+      "sha256": "e6be39f02d02034b415ed1eb75024e2a06a3b14326808ad50f0ec0c88e41b5ce"
     },
     "src/experimental/optionsWarnings.test.ts": {
       "mode": "100644",
@@ -4884,7 +5060,7 @@
     },
     "src/pass/graphVariantDigest.baseline.json": {
       "mode": "100644",
-      "sha256": "ba763437568201233ca80396682bbc070afa148775a6ac7f7c2422f8d1113ba3"
+      "sha256": "43fef47cea4c35f1785af42455045ee85d68eedda9af99cbb084c9b8f155e2e5"
     },
     "src/pass/graphVariantDigest.test.ts": {
       "mode": "100644",
@@ -4964,7 +5140,7 @@
     },
     "src/referenceMode.ts": {
       "mode": "100644",
-      "sha256": "b74c7b40fe6922b586bac6d14f0219bc9d7269c134ba37a49f77ecb496f91941"
+      "sha256": "c03089c631da629fae2d897b3978590be1dbfc5386dfda9a400c81f4b743d70c"
     },
     "src/resetHistoryCoverage.test.ts": {
       "mode": "100644",
@@ -4972,11 +5148,11 @@
     },
     "src/resolve/bayer.test.ts": {
       "mode": "100644",
-      "sha256": "9787a6da3cba267503dd2db127977b257e46dcfcd640a78e282dc7b28b6f1683"
+      "sha256": "8999a89de0832de813cb6b4982806d3e48bc7d05eb1d8581000e1eb0441d361f"
     },
     "src/resolve/bayer.ts": {
       "mode": "100644",
-      "sha256": "a9237b71007c1ef5051b9a224eee0d1fa990cac7d0b8f4d63504ac6ebec2cb45"
+      "sha256": "d75dce57d1143bb5657a1064d5a120eb36a6452c511b934370dc3b00126e5525"
     },
     "src/resolve/catmullRom.test.ts": {
       "mode": "100644",
@@ -4988,15 +5164,23 @@
     },
     "src/resolve/cloudsResolve.test.ts": {
       "mode": "100644",
-      "sha256": "179143e64c97e964b43660274c17579c991a86f770490bb208f1486ea76ae107"
+      "sha256": "fd1386ce8cb1d29435fed71146f94ed8025a596cc3572538e3c797c2fac66d02"
     },
     "src/resolve/cloudsResolve.ts": {
       "mode": "100644",
-      "sha256": "f6c252c7ff389335d0a695e899fb014bde2a8cb5ce751609c0baa75c244ad279"
+      "sha256": "274eeab853e7dc59638494fe5d84444f6711725ea3a7c9a6d479fb8037f35323"
+    },
+    "src/resolve/cloudsResolveNeighborhood.test.ts": {
+      "mode": "100644",
+      "sha256": "ebd582eed0dd3e9c51249cc6d18a896f1478b2d35b0d6379b105d647d023b16a"
+    },
+    "src/resolve/freshTexelBlend.test.ts": {
+      "mode": "100644",
+      "sha256": "998cf4605f707188e9b2b4781b7275b59242ae514338fa5dc2ff5c73391b3e7c"
     },
     "src/resolve/shadowLengthResolve.test.ts": {
       "mode": "100644",
-      "sha256": "2cc3a3f271b23be4cf3da7638865b87995285be6a6a6f81158ce79a1f8ca7385"
+      "sha256": "ec4682813544f5aea1bdbf5c178b926089c158c80535304cf3c9b1f0a38c6cbd"
     },
     "src/resolve/shadowLengthResolve.ts": {
       "mode": "100644",
@@ -5553,6 +5737,10 @@
     "test/storybookStaticMode.test.ts": {
       "mode": "100644",
       "sha256": "e3f248c3b0266c9abb1a6dc2456f543432f820d696322d08f6964577c54acee3"
+    },
+    "test/sweepArgs.test.ts": {
+      "mode": "100644",
+      "sha256": "8d1f0a4582db39ad1397d3f388f291805fab8ca79eba354eb1fa0642895891f6"
     },
     "test/threeContextNodeSetup.test.ts": {
       "mode": "100644",

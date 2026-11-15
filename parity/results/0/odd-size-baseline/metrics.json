@@ -1,0 +1,125 @@
+{
+  "case": "odd-size-baseline",
+  "phase": 0,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.971525,
+  "deMean": 0.31,
+  "deP95": 0.5,
+  "histDist": 0.00698,
+  "plate": {
+    "A": {
+      "mean": 0.100954,
+      "std": 0.009956
+    },
+    "B": {
+      "mean": 0.100628,
+      "std": 0.009682,
+      "cloudFraction": 0.165085
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
+      "branch": "(private)",
+      "dirty": 123
+    },
+    "e2e": {
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
+      "verdict": "green",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.09346901997923851,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.971828438161812,
+    "ssimAtReferenceL": 0.9715065874131944,
+    "stabiliserShareOfDeficit": -0.011424668268881126,
+    "meanLuminanceTerm": 0.9999358495875699,
+    "meanContrastStructureTerm": 0.9718771470818754,
+    "sigmaA": 0.005353043446823395,
+    "sigmaB": 0.0053690625361269935,
+    "sigmaD": 0.0008476334337780741,
+    "bandFractions": [
+      0.3771987982005349,
+      0.12500848956834185,
+      0.17983223534916112,
+      0.3179604768819621
+    ]
+  },
+  "shadedFraction": null,
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0,
+    "B": 0.000001
+  },
+  "shadowRadius": null,
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.139513,
+  "width": 1283,
+  "height": 723,
+  "captureMs": 5292,
+  "metricsMs": 737,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 11.28,
+      "passes": {
+        "total": 11.28
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 4.26,
+      "passes": {
+        "render": 4.26
+      },
+      "sampleCount": 32
+    }
+  }
+}

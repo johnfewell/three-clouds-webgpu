@@ -56,17 +56,18 @@ describe('threshold schema', () => {
     expect(() => validateThresholds(thresholds)).not.toThrow()
   })
 
-  it('reports phase 4 as unset on deP95 and histDist', () => {
-    expect(unsetMetrics(thresholds.phases['4'])).toEqual(['deP95', 'histDist'])
+  it('reports no phase as unset now that phase 4 carries its gates', () => {
+    // Phase 4 was the last one with null deP95 and histDist. The
+    // operator approved the gates on 2026-11-11 (vymb.7)
+    expect(unsetMetrics(thresholds.phases['4'])).toEqual([])
     expect(unsetMetrics(thresholds.phases['3'])).toEqual([])
   })
 })
 
 describe('verify-results STATES an ungated phase', () => {
-  it('prints UNGATED for a phase whose thresholds are null', () => {
-    // No phase-4 results are committed yet, so the real tree cannot exercise
-    // this path: a fixture is the only way to prove the line fires at all
-    const dir = mkdtempSync(join(tmpdir(), 'j1wx-'))
+  // The line fires when a phase LEAVES a gate unset. Every committed phase now
+  // sets both, so the only way to exercise it is a thresholds file with a hole
+  function writeFixture(dir: string): void {
     const caseDir = join(dir, '4', 'fixture-case')
     mkdirSync(caseDir, { recursive: true })
     writeFileSync(
@@ -81,21 +82,47 @@ describe('verify-results STATES an ungated phase', () => {
         plate: { A: { std: 0.02 }, B: { std: 0.02, cloudFraction: 0.2 } }
       })
     )
+  }
 
-    let out: string
+  function runWithPhases(phases: Record<string, unknown>, dir: string): string {
+    writeFixture(dir)
+    const thresholdsPath = join(dir, 'thresholds.json')
+    writeFileSync(thresholdsPath, JSON.stringify({ phases }))
+    const env = {
+      ...process.env,
+      PARITY_RESULTS_DIR: dir,
+      PARITY_THRESHOLDS_PATH: thresholdsPath
+    }
     try {
-      out = execFileSync('node', ['scripts/verify-results.mjs'], {
+      return execFileSync('node', ['scripts/verify-results.mjs'], {
         cwd: join(import.meta.dirname, '..', '..', '..'),
         encoding: 'utf-8',
-        env: { ...process.env, PARITY_RESULTS_DIR: dir }
+        env
       })
     } catch (err) {
-      out = String((err as { stdout?: string }).stdout ?? '')
+      return String((err as { stdout?: string }).stdout ?? '')
     }
+  }
 
+  it('prints UNGATED for a phase whose thresholds are null', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'j1wx-'))
+    const out = runWithPhases(
+      { 4: { ssim: 0.98, deP95: null, histDist: null } },
+      dir
+    )
     expect(out).toContain('UNGATED on deP95, histDist')
     // And the point of saying so: deP95 999 does NOT fail, because there is no
     // threshold to fail against. Silent before this change.
     expect(out).not.toContain('deP95 999.00 >')
+  })
+
+  it('says nothing about gating once the phase sets both', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'j1wx-set-'))
+    const out = runWithPhases(
+      { 4: { ssim: 0.98, deP95: 5, histDist: 0.1 } },
+      dir
+    )
+    expect(out).not.toContain('UNGATED')
+    expect(out).toContain('deP95 999.00 > 5.00')
   })
 })

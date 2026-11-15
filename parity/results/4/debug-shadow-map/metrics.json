@@ -3,31 +3,31 @@
   "phase": 4,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.381119,
-  "deMean": 41.04,
+  "ssim": 0.381251,
+  "deMean": 41.02,
   "deP95": 58.86,
-  "histDist": 14.078847,
+  "histDist": 14.079174,
   "plate": {
     "A": {
       "mean": 0.097104,
       "std": 0.062085
     },
     "B": {
-      "mean": 1.463258,
-      "std": 0.978136,
+      "mean": 1.463234,
+      "std": 0.978277,
       "cloudFraction": 1
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 107
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.1389507741696434,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.3784740008990866,
-    "ssimAtReferenceL": 0.3773095516094238,
-    "stabiliserShareOfDeficit": -0.001873532710372975,
-    "meanLuminanceTerm": 0.39120483226910086,
-    "meanContrastStructureTerm": 0.9394129226289514,
+    "ssimAtMeasuredL": 0.37857844293910003,
+    "ssimAtReferenceL": 0.37747915710709,
+    "stabiliserShareOfDeficit": -0.0017689856740877284,
+    "meanLuminanceTerm": 0.3912022625187103,
+    "meanContrastStructureTerm": 0.9397518845204342,
     "sigmaA": 0.002169469076376083,
-    "sigmaB": 0.012682010713369874,
-    "sigmaD": 0.012153708184519106,
+    "sigmaB": 0.012784619134428375,
+    "sigmaD": 0.012213319518452186,
     "bandFractions": [
       0.8856716579861111,
       0.009967447916666667,
@@ -101,30 +101,31 @@
       "b": 0.004583
     },
     "B": {
-      "r": 6.8770995,
-      "g": 0.0012152,
-      "b": 0.0044044
+      "r": 6.8769633,
+      "g": 0.0012236,
+      "b": 0.0043888
     },
     "ratio": {
-      "r": 15.247652,
-      "g": 0.98248,
-      "b": 0.961018
+      "r": 15.24735,
+      "g": 0.989228,
+      "b": 0.957627
     },
     "deviation": {
-      "r": 14.247652,
-      "g": 0.01752,
-      "b": 0.038982
+      "r": 14.24735,
+      "g": 0.010772,
+      "b": 0.042373
     },
     "gated": [
       "g",
       "b"
     ],
     "tolerance": 0.05,
+    "reasonTail": "the channels that decide optical depth; red is the march fallback, clamped by both consumers above the whole plausible distanceToTop",
     "reasons": []
   },
   "convergence": {
     "A": 0.075735,
-    "B": 0.06134
+    "B": 0.060787
   },
   "shadowRadius": {
     "laneAbsent": false,
@@ -144,28 +145,30 @@
     }
   },
   "subgroups": true,
-  "result": "expected-difference",
+  "result": "fail",
   "reasons": [
-    "ssim 0.3811 < 0.9800",
-    "accepted: ADR-011 Amendment 13: the view's RED channel is frontDepth x 1e-5, and frontDepth has no consumer above the march's out-of-range fallback — readShadowOpticalDepth's distanceToFront = max(0, distanceToTop - distanceOffset - frontDepth) clamps to 0 on both sides there, so the plate renders a difference in a quantity both sides discard. The two channels that DECIDE optical depth (meanExtinction, maxOpticalDepth) are the case's positive receipt: the atlas-channel gate holds each to 5 % and measured r 15.2561 / g 1.0046 / b 0.9842 (2026-10-05). Side A's red is additionally pinned at fp16's 65504 because the reference stores metres in the atlas while the port stores unit space (ATTACHMENT UNITS). Footprint from the re-capture on a private-history revision + the case's atlasChannelGate: gated ssim 0.381061 at the reference L, floor = that minus the 1.1e-5 cross-session floor. SCOPE: the red channel's storage divergence only; a drop in green or blue is a real defect that fails the atlas-channel gate, and below this floor the case FAILS as beyond the accepted footprint. [floor ssim 0.3810]"
+    "ssim 0.3813 < 0.9800",
+    "deP95 58.86 > 5.00",
+    "histDist 14.0792 > 0.1000",
+    "beyond the accepted footprint: histDist 14.0792 > floor 14.0789 (ADR-011 Amendment 13: the view's RED channel is frontDepth x 1e-5, and frontDepth has no consumer above the march's out-of-range fallback — readShadowOpticalDepth's distanceToFront = max(0, distanceToTop - distanceOffset - frontDepth) clamps to 0 on both sides there, so the plate renders a difference in a quantity both sides discard. The two channels that DECIDE optical depth (meanExtinction, maxOpticalDepth) are the case's positive receipt: the atlas-channel gate holds each to 5 % and measured r 15.2561 / g 1.0046 / b 0.9842 (2026-10-05). Side A's red is additionally pinned at fp16's 65504 because the reference stores metres in the atlas while the port stores unit space (ATTACHMENT UNITS). Footprint from the re-capture on a private-history revision + the case's atlasChannelGate: gated ssim 0.381061 at the reference L, floor = that minus the 1.1e-5 cross-session floor. SCOPE: the red channel's storage divergence only; a drop in green or blue is a real defect that fails the atlas-channel gate, and below this floor the case FAILS as beyond the accepted footprint.)"
   ],
-  "maxDiffDelta": 15.705151,
+  "maxDiffDelta": 19.169315,
   "width": 1280,
   "height": 720,
-  "captureMs": 5297,
-  "metricsMs": 814,
+  "captureMs": 5164,
+  "metricsMs": 718,
   "gpuMs": {
     "sideA": {
-      "medianMs": 8.71,
+      "medianMs": 7.63,
       "passes": {
-        "total": 8.71
+        "total": 7.63
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 3.94,
+      "medianMs": 3.1,
       "passes": {
-        "render": 3.94
+        "render": 3.1
       },
       "sampleCount": 32
     }

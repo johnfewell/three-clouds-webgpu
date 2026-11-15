@@ -33,12 +33,21 @@ function fixture(metricOverrides: Record<string, unknown>): string {
   return dir
 }
 
-function verify(resultsDir: string): { out: string; status: number } {
+function verify(
+  resultsDir: string,
+  thresholdsPath?: string
+): { out: string; status: number } {
   try {
     const out = execFileSync('node', ['scripts/verify-results.mjs'], {
       cwd: REPO_ROOT,
       encoding: 'utf-8',
-      env: { ...process.env, PARITY_RESULTS_DIR: resultsDir }
+      env: {
+        ...process.env,
+        PARITY_RESULTS_DIR: resultsDir,
+        ...(thresholdsPath == null
+          ? {}
+          : { PARITY_THRESHOLDS_PATH: thresholdsPath })
+      }
     })
     return { out, status: 0 }
   } catch (err) {
@@ -89,9 +98,8 @@ describe('a missing reading is not a pass', () => {
   })
 
   it('does NOT fire for a metric the phase leaves ungated', () => {
-    // Phase 4 gates ssim only (deP95/histDist are null). A missing
-    // deP95 there has no threshold to have been checked against, and is
-    // reported as UNGATED rather than counted as a missing reading
+    // Phase 4 gates all three now (vymb.7), so a hole needs its own thresholds
+    // file, and a missing deP95 there is UNGATED, not a missing reading
     const dir = mkdtempSync(join(tmpdir(), 'k9fo-'))
     const caseDir = join(dir, '4', 'fixture-case')
     mkdirSync(caseDir, { recursive: true })
@@ -107,7 +115,14 @@ describe('a missing reading is not a pass', () => {
         plate: { A: { std: 0.02 }, B: { std: 0.02, cloudFraction: 0.2 } }
       })
     )
-    const { out } = verify(dir)
+    const thresholdsPath = join(dir, 'thresholds.json')
+    writeFileSync(
+      thresholdsPath,
+      JSON.stringify({
+        phases: { 4: { ssim: 0.98, deP95: null, histDist: null } }
+      })
+    )
+    const { out } = verify(dir, thresholdsPath)
     expect(out).not.toContain('has no reading')
     expect(out).toContain('UNGATED on deP95, histDist')
   })

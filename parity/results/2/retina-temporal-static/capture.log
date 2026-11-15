@@ -1,0 +1,33 @@
+[capture][retina-temporal-static] starting (phase 2, #63)
+[capture][retina-temporal-static] screenshots: A=3767188b B=3638297b
+[capture][retina-temporal-static] metrics: ssim=0.9971 deMean=0.28 deP95=0.50 histDist=0.0067 maxDelta=0.1192
+[capture][retina-temporal-static] dual-L: measuredL=0.0528 ssim@measuredL=0.9962 (gated ssim is @refL=0.09) stabiliserShare=22.2% sigmaA=2.33e-3 sigmaB=2.33e-3 sigmaD=1.71e-4
+[capture][retina-temporal-static] plate: A mean=0.1009 std=0.0068 B mean=0.1006 std=0.0064 cloudFraction=16.256%
+[capture][retina-temporal-static] gpuMs: A=25.13ms (32 samples) B=69.70ms (32 samples)
+[capture][retina-temporal-static] eval: pass
+[capture][retina-temporal-static] sequence: 16 frames, dt=0.016666666666666666
+[capture][retina-temporal-static] seq-frame: frame=0 time=0.000 plateMeanA=0.10090917 plateMeanB=0.10057412
+[capture][retina-temporal-static] seq-frame: frame=1 time=0.017 plateMeanA=0.10089549 plateMeanB=0.10056069
+[capture][retina-temporal-static] seq-frame: frame=2 time=0.033 plateMeanA=0.10090295 plateMeanB=0.10056863
+[capture][retina-temporal-static] seq-frame: frame=3 time=0.050 plateMeanA=0.10089708 plateMeanB=0.10056260
+[capture][retina-temporal-static] seq-frame: frame=4 time=0.067 plateMeanA=0.10089134 plateMeanB=0.10055692
+[capture][retina-temporal-static] seq-frame: frame=5 time=0.083 plateMeanA=0.10090174 plateMeanB=0.10056661
+[capture][retina-temporal-static] seq-frame: frame=6 time=0.100 plateMeanA=0.10090698 plateMeanB=0.10057219
+[capture][retina-temporal-static] seq-frame: frame=7 time=0.117 plateMeanA=0.10089886 plateMeanB=0.10056313
+[capture][retina-temporal-static] seq-frame: frame=8 time=0.133 plateMeanA=0.10090605 plateMeanB=0.10057124
+[capture][retina-temporal-static] seq-frame: frame=9 time=0.150 plateMeanA=0.10090490 plateMeanB=0.10057008
+[capture][retina-temporal-static] seq-frame: frame=10 time=0.167 plateMeanA=0.10091480 plateMeanB=0.10058051
+[capture][retina-temporal-static] seq-frame: frame=11 time=0.183 plateMeanA=0.10089881 plateMeanB=0.10056486
+[capture][retina-temporal-static] seq-frame: frame=12 time=0.200 plateMeanA=0.10089864 plateMeanB=0.10056494
+[capture][retina-temporal-static] seq-frame: frame=13 time=0.217 plateMeanA=0.10090413 plateMeanB=0.10057006
+[capture][retina-temporal-static] seq-frame: frame=14 time=0.233 plateMeanA=0.10089887 plateMeanB=0.10056524
+[capture][retina-temporal-static] seq-frame: frame=15 time=0.250 plateMeanA=0.10090225 plateMeanB=0.10056830
+[capture][retina-temporal-static] flickerA: mean=0.0754 max=0.0769
+[capture][retina-temporal-static] flickerB: mean=0.0767 max=0.0783
+[capture][retina-temporal-static] ghostingA: mean=0.2987 p95=1.8410
+[capture][retina-temporal-static] ghostingB: mean=0.3044 p95=1.9094
+[capture][retina-temporal-static] motion: A=(0.0,0.0) score=0.976 B=(0.0,0.0) score=0.973 direction not measurable
+[capture][retina-temporal-static] temporalUpscale: A=true B=true
+[capture][retina-temporal-static] subgroups: true
+[capture][retina-temporal-static] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][retina-temporal-static] provenance: commit (private history) branch (private) dirty 123 key 65106d60b609 e2e green skips(build=false typecheck=false) served 9f4f3d5c1da4 built 9f4f3d5c1da4 servedIsBuilt true servedTree <worktree>

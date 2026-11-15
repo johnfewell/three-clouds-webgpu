@@ -513,8 +513,8 @@ export class CloudsContext implements QualityPresetTarget {
   readonly cloudTypes = new CloudTypes()
 
   /**
-   * Renderer experiments. `cloudFrontRefinement` and `distantShapeDetailFade`
-   * default to true, all others to false. See docs/EXPERIMENTAL.md
+   * Renderer experiments. `cloudFrontRefinement`, `distantShapeDetailFade` and
+   * `freshTexelBlend` default to true, all others to false. See docs/EXPERIMENTAL.md
    *
    * Assign a partial object to preserve other options. Unknown keys and
    * non-boolean values throw. Changes rebuild the graph and reset history

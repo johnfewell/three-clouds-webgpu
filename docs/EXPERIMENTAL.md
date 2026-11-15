@@ -254,6 +254,7 @@ One add and one `max` per media sample. Nothing else in the graph moves.
 | `staticMode` | `false` | A CPU input snapshot check each frame | Skips cloud march, shadow pass and resolve once inputs are unchanged and every temporal history is within 0.1 % of converged |
 | `cirrusDeck` | `false` | One texture read, two ray-sphere tests and one atmosphere irradiance and transfer read per march fragment | A thin streaky cirrus sheet at 10 km behind the volumetric clouds, lit by the sun through the atmosphere |
 | `shadowRoundRobin` | `false` | None: it removes work, a per-update CPU check and one layer copy per reused cascade | Each shadow update marches one cascade instead of all of them, cutting the shadow march by up to the cascade count |
+| `freshTexelBlend` | `true` | One history sample and one variance clip on the one pixel in sixteen that used to skip them | The dot every 4 pixels that shows on soft cloud at 1:1 pixels is reduced to about a third |
 
 ## `cloudFrontRefinement`
 
@@ -1638,6 +1639,60 @@ until the cascade's turn comes or a reset forces all of them. The reset limits
 bound how far that lag can drift, but slow continuous motion stays under them
 by design, so a long pan shows the lag as a slight crawl at the edges of each
 cascade. Off by default, and pinned off by reference mode.
+
+## `freshTexelBlend`
+
+### What it does
+
+With `temporalUpscale` on, each frame marches one pixel of every 4x4 block and
+the resolve carries the other fifteen over from history, clipped to the
+low-resolution neighbourhood. The original writes the pixel it just marched
+with no accumulation at all, so that pixel shows one frame of raw march noise
+while its neighbours are smooth. At one screen pixel per render pixel this
+reads as a grid of dots, one every 4 pixels in each direction, that steps
+through the block in Bayer order. It is easiest to see on shadowed cloud bases
+and under wind.
+
+With this option the just-marched pixel also reprojects and clips its history,
+and the output is a quarter of the fresh value and three quarters of the
+clipped history. The same blend is applied to the shadow length. Without
+`temporalUpscale` the option does nothing, and the compute resolve applies the
+same blend.
+
+### Cost
+
+One bilinear history sample and one four-neighbour variance clip on the one
+pixel in sixteen that skipped them, per output. No frame-time
+cost was measurable.
+
+Measured on an Apple M4 Mac mini, whole-frame GPU time, `temporalUpscale` on,
+the median of 10 runs of 120 frames per arm, option off then the change with
+it on. The last column is the same option-off arm measured twice from one
+build, which is the size of a difference that means nothing:
+
+| scene | off | on | same arm twice |
+| --- | ---: | ---: | ---: |
+| baseline, 2880x1800 | 7.983 ms | -0.011 ms | +0.053 ms |
+| baseline, 1440x900 | 3.016 ms | +0.012 ms | +0.020 ms |
+| moving shadows, 2880x1800 | 9.778 ms | -0.013 ms | +0.008 ms |
+| moving shadows, 1440x900 | 5.064 ms | -0.053 ms | -0.050 ms |
+
+No run was flagged for an unstable GPU clock. Raw data are in
+`perf/2026-11-14-fresh-texel-blend/`.
+
+### Trade-offs
+
+A pixel's fresh march now enters the picture at a quarter strength, once every
+sixteen frames, so new information arrives more slowly and the variance clip
+does more of the work of following change. In lossless 2880x1800 captures the
+difference of the fresh pixel from its four neighbours fell from 3.68 to 1.08
+eight-bit levels under wind, 1.90 to 0.71 under a sun dropping 45 degrees in
+four seconds and 1.93 to 0.64 under a camera orbit, and the mean brightness of
+the patch stayed within 0.7 level of the option-off render through the sun
+sweep. Ordinary pixels also became smoother (1.23 to 0.56 under wind), which
+is less noise and may also be less fine detail. The weight of 0.25 was picked
+blind by the operator over 1, 0.5, 0.125 and 0. On by default since 2026-11-14,
+and pinned off by reference mode, because the original has no such blend.
 
 ## Whole-scene helpers, which are not options
 

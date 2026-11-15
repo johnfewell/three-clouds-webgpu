@@ -3,31 +3,31 @@
   "phase": 1,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.995309,
+  "ssim": 0.998929,
   "deMean": 0.27,
-  "deP95": 0.5,
-  "histDist": 0.007553,
+  "deP95": 0.49,
+  "histDist": 0.00734,
   "plate": {
     "A": {
       "mean": 0.102036,
       "std": 0.004672
     },
     "B": {
-      "mean": 0.101616,
-      "std": 0.003886,
+      "mean": 0.101629,
+      "std": 0.00415,
       "cloudFraction": 0.03861
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 9
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.024191848933696747,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.9891361694683868,
-    "ssimAtReferenceL": 0.9952497072342913,
-    "stabiliserShareOfDeficit": 0.5627423723257108,
-    "meanLuminanceTerm": 0.9999588327723896,
-    "meanContrastStructureTerm": 0.9891768684059382,
+    "ssimAtMeasuredL": 0.9955772692051202,
+    "ssimAtReferenceL": 0.9988703647810879,
+    "stabiliserShareOfDeficit": 0.7445842237967857,
+    "meanLuminanceTerm": 0.9999599845649887,
+    "meanContrastStructureTerm": 0.995617091588116,
     "sigmaA": 0.0011473302405697185,
-    "sigmaB": 0.0010205371585906755,
-    "sigmaD": 0.00025039043312672575,
+    "sigmaB": 0.0011563112951794342,
+    "sigmaD": 0.00007878936151778756,
     "bandFractions": [
       0.7013671875,
       0.04298068576388889,
@@ -101,23 +101,23 @@
   "subgroups": true,
   "result": "pass",
   "reasons": [],
-  "maxDiffDelta": 0.062061,
+  "maxDiffDelta": 0.075343,
   "width": 1280,
   "height": 720,
-  "captureMs": 5280,
-  "metricsMs": 734,
+  "captureMs": 5241,
+  "metricsMs": 699,
   "gpuMs": {
     "sideA": {
-      "medianMs": 13.09,
+      "medianMs": 13.57,
       "passes": {
-        "total": 13.09
+        "total": 13.57
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 3.21,
+      "medianMs": 2.38,
       "passes": {
-        "render": 3.21
+        "render": 2.38
       },
       "sampleCount": 32
     }

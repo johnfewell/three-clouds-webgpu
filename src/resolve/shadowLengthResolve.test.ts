@@ -50,10 +50,10 @@ describe('buildCloudsResolve — colour + shadow length in one fragment', () => 
 
   it.each([
     // 9 closest-fragment loads + 2 current-texel loads = 11 under the upscale,
-    // and the antialiasing path adds 8-neighbour clip loads per output, 27. A
+    // and the antialiasing path adds 4-neighbour clip loads per output, 19. A
     // second closest-fragment search would add 9 to either
     ['temporal upscale', true, 11],
-    ['temporal antialiasing', false, 27]
+    ['temporal antialiasing', false, 19]
   ])(
     '%s: one closest-fragment search serves both outputs',
     (_, upscale, loads) => {

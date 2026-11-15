@@ -158,6 +158,12 @@ export interface AtlasChannelRecord {
   /** Only these are scored. An absent entry is a capture-time refusal */
   gated: ('r' | 'g' | 'b')[]
   tolerance: number
+  /**
+   * The case's own gating sentence (cases/index.ts `atlasChannelGate.reason`).
+   * Stored so a verifier that re-derives a divergence line can carry it
+   * instead of parsing it back out of reasons[]. null when the case declared none
+   */
+  reasonTail?: string | null
   reasons: string[]
 }
 
@@ -406,6 +412,9 @@ export function validateMetricsJson(json: string): MetricsSchema {
       }
       if (!Array.isArray(ac.reasons)) {
         throw new Error('atlasChannels.reasons must be array')
+      }
+      if (ac.reasonTail != null && typeof ac.reasonTail !== 'string') {
+        throw new Error('atlasChannels.reasonTail must be string or null')
       }
     }
   }

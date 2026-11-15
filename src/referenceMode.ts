@@ -44,7 +44,8 @@ export const REFERENCE_EXPERIMENTAL: Readonly<ExperimentalCloudOptions> =
     cloudEnvironment: false,
     staticMode: false,
     cirrusDeck: false,
-    shadowRoundRobin: false
+    shadowRoundRobin: false,
+    freshTexelBlend: false
   })
 
 // Every shape control is zero: the original has none of the four. Written out

@@ -291,10 +291,53 @@ export class WebGPUGpuTimer {
   }
 }
 
+// ────── Plausibility guard ──────
+
+// A frame that takes longer than this is not a frame time
+export const MAX_PLAUSIBLE_GPU_MS = 10_000
+
+function timingDefect(value: number): string | null {
+  if (!Number.isFinite(value)) return `non-finite (${String(value)})`
+  if (value < 0) return `negative (${value} ms)`
+  if (value > MAX_PLAUSIBLE_GPU_MS) {
+    return `above ${MAX_PLAUSIBLE_GPU_MS} ms (${value} ms)`
+  }
+  return null
+}
+
+// Returns why a report cannot be published, or null when it can
+export function implausibleTimingReason(
+  report: GpuTimingReport
+): string | null {
+  const medianDefect = timingDefect(report.medianMs)
+  if (medianDefect != null)
+    return `GPU time rejected, median is ${medianDefect}`
+  for (const [name, ms] of Object.entries(report.passes)) {
+    const passDefect = timingDefect(ms)
+    if (passDefect != null) {
+      return `GPU time rejected, pass ${name} is ${passDefect}`
+    }
+  }
+  return null
+}
+
 // ────── Harness integration helpers ──────
 
 export function unavailableResult(reason: string): SideTimingResult {
   return { available: false, reason }
+}
+
+function sideResult(
+  collector: GpuTimingCollector | null,
+  reason: string | null
+): SideTimingResult {
+  if (reason != null) return { available: false, reason }
+  const report = collector?.report()
+  if (report == null)
+    return { available: false, reason: 'No samples collected' }
+  const rejected = implausibleTimingReason(report)
+  if (rejected != null) return { available: false, reason: rejected }
+  return { available: true, report }
 }
 
 export function buildTimingSummary(
@@ -303,21 +346,10 @@ export function buildTimingSummary(
   sideAReason: string | null,
   sideBReason: string | null
 ): GpuTimingSummary {
-  const sideA: SideTimingResult =
-    sideAReason != null
-      ? { available: false, reason: sideAReason }
-      : sideACollector?.report() != null
-        ? { available: true, report: sideACollector.report()! }
-        : { available: false, reason: 'No samples collected' }
-
-  const sideB: SideTimingResult =
-    sideBReason != null
-      ? { available: false, reason: sideBReason }
-      : sideBCollector?.report() != null
-        ? { available: true, report: sideBCollector.report()! }
-        : { available: false, reason: 'No samples collected' }
-
-  return { sideA, sideB }
+  return {
+    sideA: sideResult(sideACollector, sideAReason),
+    sideB: sideResult(sideBCollector, sideBReason)
+  }
 }
 
 export function formatGpuMs(result: SideTimingResult): string {

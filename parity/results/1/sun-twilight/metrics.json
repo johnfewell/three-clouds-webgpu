@@ -3,31 +3,31 @@
   "phase": 1,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.98863,
-  "deMean": 0.37,
-  "deP95": 0.72,
-  "histDist": 0.018515,
+  "ssim": 0.997438,
+  "deMean": 0.33,
+  "deP95": 0.67,
+  "histDist": 0.01553,
   "plate": {
     "A": {
       "mean": 0.056343,
       "std": 0.008949
     },
     "B": {
-      "mean": 0.0553,
-      "std": 0.00817,
+      "mean": 0.055468,
+      "std": 0.009044,
       "cloudFraction": 0.165141
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 9
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.06992858648300171,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.9877134207510117,
-    "ssimAtReferenceL": 0.9886265422707846,
-    "stabiliserShareOfDeficit": 0.07431861230603694,
-    "meanLuminanceTerm": 0.9997941616946403,
-    "meanContrastStructureTerm": 0.9879134891594368,
+    "ssimAtMeasuredL": 0.9972242887052212,
+    "ssimAtReferenceL": 0.9974349959287486,
+    "stabiliserShareOfDeficit": 0.07591107328914065,
+    "meanLuminanceTerm": 0.9998491511512899,
+    "meanContrastStructureTerm": 0.9973721602619242,
     "sigmaA": 0.0046190742738706604,
-    "sigmaB": 0.004116719175765755,
-    "sigmaD": 0.0009085029946701504,
+    "sigmaB": 0.004677611202500175,
+    "sigmaD": 0.00019051922498598668,
     "bandFractions": [
       0.5218912760416666,
       0.06142578125,
@@ -104,20 +104,20 @@
   "maxDiffDelta": 0.108215,
   "width": 1280,
   "height": 720,
-  "captureMs": 5301,
-  "metricsMs": 757,
+  "captureMs": 5407,
+  "metricsMs": 816,
   "gpuMs": {
     "sideA": {
-      "medianMs": 11.65,
+      "medianMs": 12.36,
       "passes": {
-        "total": 11.65
+        "total": 12.36
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 3,
+      "medianMs": 3.93,
       "passes": {
-        "render": 3
+        "render": 3.93
       },
       "sampleCount": 32
     }

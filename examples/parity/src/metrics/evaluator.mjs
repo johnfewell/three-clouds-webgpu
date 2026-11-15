@@ -47,8 +47,43 @@ export function checkPlate(check) {
   return reasons
 }
 
-function acceptedFloorSsim(entry) {
-  return entry.floor == null ? null : entry.floor.ssim
+// The direction of each metric a floor may pin
+export const FLOOR_DIRECTIONS = {
+  ssim: 'min',
+  deP95: 'max',
+  histDist: 'max'
+}
+
+/** One phrase per floor the case is outside, naming both numbers */
+function floorBreaches(floor, metrics) {
+  if (floor == null || typeof floor !== 'object') return []
+  const out = []
+  for (const [metric, value] of Object.entries(floor)) {
+    if (typeof value !== 'number' || typeof metrics[metric] !== 'number') {
+      continue
+    }
+    const direction = FLOOR_DIRECTIONS[metric]
+    if (direction == null) continue
+    const measured = metrics[metric]
+    const outside =
+      direction === 'min' ? !(measured >= value) : !(measured <= value)
+    if (!outside) continue
+    out.push(
+      direction === 'min'
+        ? `${metric} ${measured.toFixed(4)} < floor ${value.toFixed(4)}`
+        : `${metric} ${measured.toFixed(4)} > floor ${value.toFixed(4)}`
+    )
+  }
+  return out
+}
+
+/** The floor as it travels in the reason line, in registry order */
+function floorNote(floor) {
+  if (floor == null || typeof floor !== 'object') return ''
+  const parts = Object.keys(FLOOR_DIRECTIONS)
+    .filter(metric => typeof floor[metric] === 'number')
+    .map(metric => `${metric} ${floor[metric].toFixed(4)}`)
+  return parts.length === 0 ? '' : ` [floor ${parts.join(', ')}]`
 }
 
 function findAcceptedEntry(caseName, accepted) {
@@ -105,16 +140,19 @@ export function evaluate(metrics, thresholds, caseName, accepted, plateCheck) {
   const acceptedEntry = findAcceptedEntry(caseName, accepted)
   if (acceptedEntry == null) return { result: 'fail', reasons }
 
-  // An accepted floor is an executable tripwire around the measured
-  // footprint. A larger difference is a new failure, not the accepted one
-  // described by the register entry
-  const floorSsim = acceptedFloorSsim(acceptedEntry)
-  if (floorSsim != null && !(metrics.ssim >= floorSsim)) {
+  // An accepted floor is an executable tripwire around the measured footprint
+  // Outside it is a new failure, not the accepted one described by the entry,
+  // and each metric is compared in its own direction (FLOOR_DIRECTIONS)
+  const breaches = floorBreaches(acceptedEntry.floor, metrics)
+  if (breaches.length > 0) {
     return {
       result: 'fail',
       reasons: [
         ...reasons,
-        `beyond the accepted footprint: ssim ${metrics.ssim.toFixed(4)} < floor ${floorSsim.toFixed(4)} (${acceptedEntry.reason})`
+        ...breaches.map(
+          breach =>
+            `beyond the accepted footprint: ${breach} (${acceptedEntry.reason})`
+        )
       ]
     }
   }
@@ -123,8 +161,7 @@ export function evaluate(metrics, thresholds, caseName, accepted, plateCheck) {
     result: 'expected-difference',
     reasons: [
       ...reasons,
-      `accepted: ${acceptedEntry.reason}` +
-        (floorSsim == null ? '' : ` [floor ssim ${floorSsim.toFixed(4)}]`)
+      `accepted: ${acceptedEntry.reason}${floorNote(acceptedEntry.floor)}`
     ]
   }
 }

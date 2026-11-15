@@ -176,6 +176,10 @@ describe('evaluateAtlasChannelReceipt', () => {
     const A = computeAtlasChannelMeans(plate(0.45, 0.0012, 0.0045), W, H)
     const B = computeAtlasChannelMeans(plate(0.45, 0.00144, 0.0045), W, H)
     const receipt = buildAtlasChannelReceipt(A, B, GATE)
+    // storable JSON round trip: the re-derivation carries the receipt's own
+    // sentence and recomputes the numbers, so the texts match exactly
+    const stored = JSON.parse(JSON.stringify(receipt))
+    expect(evaluateAtlasChannelReceipt(stored)).toEqual(receipt.reasons)
     expect(evaluateAtlasChannelReceipt(receipt)).toEqual(receipt.reasons)
     expect(receipt.reasons).toHaveLength(1)
   })
@@ -188,5 +192,75 @@ describe('formatAtlasChannelReceipt', () => {
     const line = formatAtlasChannelReceipt(buildAtlasChannelReceipt(A, B, GATE))
     expect(line).toBe('r 15.2889 g 1.0000* b 1.0000*')
     expect(ATLAS_CHANNELS).toHaveLength(3)
+  })
+})
+
+describe('evaluateAtlasChannelReceipt carries only a sentence that still fits', () => {
+  const A = { r: 0.45, g: 0.0012, b: 0.0045 }
+  const B = { r: 6.88, g: 0.0012, b: 0.0054 }
+  const receipt = () =>
+    JSON.parse(
+      JSON.stringify(
+        buildAtlasChannelReceipt(
+          computeAtlasChannelMeans(plate(A.r, A.g, A.b), W, H),
+          computeAtlasChannelMeans(plate(B.r, B.g, B.b), W, H),
+          GATE
+        )
+      )
+    ) as ReturnType<typeof buildAtlasChannelReceipt>
+
+  it('carries the stored tail when the stored line still describes the means', () => {
+    const stored = receipt()
+    const reasons = evaluateAtlasChannelReceipt(stored)
+    expect(reasons).toHaveLength(1)
+    expect(reasons[0]).toBe(stored.reasons[0])
+    expect(stored.reasons[0]).toContain(GATE.reason)
+  })
+
+  it('prefers the stored reasonTail field over parsing the sentence', () => {
+    const stored = receipt()
+    const declared = { ...stored, reasonTail: 'a sentence the field carries' }
+    expect(evaluateAtlasChannelReceipt(declared)[0]).toContain(
+      'a sentence the field carries'
+    )
+  })
+
+  it('REFUSES a stored sentence that names another channel', () => {
+    const stored = receipt()
+    const wrong = {
+      ...stored,
+      reasons: stored.reasons.map((r: string) =>
+        r.startsWith('atlas channel b:')
+          ? r.replace('atlas channel b:', 'atlas channel g:')
+          : r
+      )
+    }
+    expect(evaluateAtlasChannelReceipt(wrong).join('\n')).toMatch(
+      /REFUSED: its stored b line names channel g/
+    )
+  })
+
+  it('REFUSES a stored sentence whose numbers no longer recompute', () => {
+    const stored = receipt()
+    const stale = {
+      ...stored,
+      reasons: stored.reasons.map((r: string) =>
+        r.replace(
+          /atlas channel (\w): B\/A [\d.]+/,
+          'atlas channel $1: B/A 1.0100'
+        )
+      )
+    }
+    expect(evaluateAtlasChannelReceipt(stale).join('\n')).toMatch(
+      /REFUSED: its stored b line records other numbers/
+    )
+  })
+
+  it('REFUSES when the means no longer fail but the sentence says they do', () => {
+    const stored = receipt()
+    const healed = { ...stored, B: { ...stored.B, b: stored.A.b } }
+    // the line is dropped because nothing fails, so the stale sentence cannot
+    // ride along and re-word a passing receipt into a failure
+    expect(evaluateAtlasChannelReceipt(healed)).toEqual([])
   })
 })

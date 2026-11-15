@@ -1,8 +1,18 @@
 {
-  "key": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+  "key": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
   "filtered": false,
   "dirty": false,
   "tests": [
+    {
+      "spec": "e2e/assets.spec.ts",
+      "title": "chromium-webgpu › assets.spec.ts › baked assets decode in the browser and transfer ownership",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/assets.spec.ts",
+      "title": "chromium-webgpu › assets.spec.ts › baked browser loads reject HTML payloads and cancellation clearly",
+      "status": "passed"
+    },
     {
       "spec": "e2e/basicSkySeam.spec.ts",
       "title": "chromium-webgpu › basicSkySeam.spec.ts › examples/basic renders a sky › no wedge: the sky band has no near-black region",
@@ -21,6 +31,16 @@
     {
       "spec": "e2e/cloudShadow.spec.ts",
       "title": "chromium-webgpu › cloudShadow.spec.ts › public cloudShadow on a material › a material darkens under a cloud and not in the open",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/coreExit.spec.ts",
+      "title": "chromium-webgpu › coreExit.spec.ts › core exit › core runtime matches three bit for bit on the exit cases, faults caught",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/diagnostics.spec.ts",
+      "title": "chromium-webgpu › diagnostics.spec.ts › cloud diagnostics distinguish live configuration from GPU readiness",
       "status": "passed"
     },
     {
@@ -116,6 +136,11 @@
     {
       "spec": "e2e/heightResidue.spec.ts",
       "title": "chromium-webgpu › heightResidue.spec.ts › height-residue invariant (temporal upscale, both sides) › the directional statistic does not move with the size residue mod 4",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/integration.spec.ts",
+      "title": "chromium-webgpu › integration.spec.ts › manual and helper compositions agree with changing live inputs",
       "status": "passed"
     },
     {
@@ -395,6 +420,11 @@
     },
     {
       "spec": "e2e/p3.spec.ts",
+      "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › layers-4-shadow preserves the ADR-015 fidelity floor",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/p3.spec.ts",
       "title": "chromium-webgpu › p3.spec.ts › Phase 3 — Shadow infrastructure › 1. shadow atlas target exists when shadow maps enabled",
       "status": "passed"
     },
@@ -650,6 +680,11 @@
     },
     {
       "spec": "e2e/p4.spec.ts",
+      "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it",
+      "status": "skipped"
+    },
+    {
+      "spec": "e2e/p4.spec.ts",
       "title": "chromium-webgpu › p4.spec.ts › Phase 4 — examples/basic smoke › 10. examples/basic boots and renders without console errors",
       "status": "passed"
     },
@@ -671,6 +706,36 @@
     {
       "spec": "e2e/rainShafts.spec.ts",
       "title": "chromium-webgpu › rainShafts.spec.ts › rain shafts cost one closed march of four steps",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/rainShafts.spec.ts",
+      "title": "chromium-webgpu › rainShafts.spec.ts › rain shafts stop at bare ground without scene depth",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/reversedDepth.spec.ts",
+      "title": "chromium-webgpu › reversedDepth.spec.ts › reversed depth preserves midday cloud shadows",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/reversedDepth.spec.ts",
+      "title": "chromium-webgpu › reversedDepth.spec.ts › reversed depth preserves sunset cloud shadows",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/sceneDepthRebinding.spec.ts",
+      "title": "chromium-webgpu › sceneDepthRebinding.spec.ts › scene-depth replacement changes occlusion without replacing the pass",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/shadowKnobToggles.spec.ts",
+      "title": "chromium-webgpu › shadowKnobToggles.spec.ts › shadow knobs toggled at runtime › every shadow knob toggles without a GPU validation error",
+      "status": "passed"
+    },
+    {
+      "spec": "e2e/shadowPlaceholderLifecycle.spec.ts",
+      "title": "chromium-webgpu › shadowPlaceholderLifecycle.spec.ts › shadow placeholder survives replacement but not pass disposal",
       "status": "passed"
     },
     {
@@ -704,14 +769,14 @@
       "status": "passed"
     }
   ],
-  "ts": "2026-10-08T13:02:56.403Z",
+  "ts": "2026-11-14T19:24:42.143Z",
   "build": {
     "builtRoot": "<worktree>",
     "servedRoot": "<worktree>",
-    "builtSharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880",
-    "servedSharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880",
+    "builtSharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d",
+    "servedSharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d",
     "servedIsBuilt": true,
-    "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+    "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
     "error": null
   }
 }

@@ -168,10 +168,8 @@ describe('fullscreen row origin', () => {
   it('maps top-first WebGPU rows to the reference bottom-first Bayer rows', async () => {
     const { referenceBayerRowCPU } = await import('./bayer')
 
-    expect([0, 1, 2, 3].map(y => referenceBayerRowCPU(y, 720))).toEqual([
-      3, 2, 1, 0
-    ])
-    expect(referenceBayerRowCPU(719, 720)).toBe(0)
+    expect([0, 1, 2, 3].map(y => referenceBayerRowCPU(y))).toEqual([3, 2, 1, 0])
+    expect(referenceBayerRowCPU(719)).toBe(0)
   })
 
   it('the unconverted top-down selector chooses the wrong row on every frame', async () => {
@@ -185,7 +183,7 @@ describe('fullscreen row origin', () => {
       const x = oldIndex % 4
       const oldRow = Math.floor(oldIndex / 4)
       const referenceRow = rows.find(
-        y => bayerIndex2D(x, referenceBayerRowCPU(y, 720)) === frame
+        y => bayerIndex2D(x, referenceBayerRowCPU(y)) === frame
       )
       if (oldRow !== referenceRow) mismatches.push(frame)
     }
@@ -204,58 +202,130 @@ describe('Bayer row phase is a within-cell mirror', () => {
       (height - 1 - y) % 4
     for (const height of [720, 900]) {
       for (let y = 0; y < 8; y++) {
-        expect(referenceBayerRowCPU(y, height)).toBe(absoluteMirror(y, height))
+        expect(referenceBayerRowCPU(y)).toBe(absoluteMirror(y, height))
       }
     }
     // The red: at 901 the absolute mirror gives a different phase on every row
     const disagreements = [0, 1, 2, 3].filter(
-      y => referenceBayerRowCPU(y, 901) !== absoluteMirror(y, 901)
+      y => referenceBayerRowCPU(y) !== absoluteMirror(y, 901)
     )
     expect(disagreements).toEqual([0, 1, 2, 3])
   })
 
-  it('is independent of the height: rows 0..3 map to 3..0 for 900, 901, 902, 903', async () => {
+  it('is independent of the height at shift 0: rows 0..5 map to 3..0 for every size', async () => {
     const { referenceBayerRowCPU } = await import('./bayer')
     for (const height of [900, 901, 902, 903, 1794]) {
+      expect([0, 1, 2, 3, 4, 5].map(y => referenceBayerRowCPU(y))).toEqual([
+        3, 2, 1, 0, 3, 2
+      ])
+      // A height that is not a multiple of 4 carries a cell shift, and the
+      // shift is what restores the absolute phase
       expect(
-        [0, 1, 2, 3, 4, 5].map(y => referenceBayerRowCPU(y, height))
-      ).toEqual([3, 2, 1, 0, 3, 2])
+        [0, 1, 2, 3].map(y => referenceBayerRowCPU(y, (4 - (height % 4)) % 4))
+      ).toEqual([0, 1, 2, 3].map(y => (height - 1 - y) % 4))
     }
   })
 })
 
 // The CPU twin is a CLAIM about the TSL function, not evidence of it: a
 // pre-p0h3 absolute mirror kept every test above green while the compiled
-// shader streaked. The unused height must leave no trace in the emission.
-describe('emitted WGSL: the compiled row phase ignores the height', () => {
+// shader streaked. No height reaches the emission, only the cell shift
+describe('emitted WGSL: the compiled row phase takes the shift, not the height', () => {
   const MARKER = 'bayerHeightMarker'
   const heights = [900, 901, 902, 903, 1794]
 
-  async function compileAt(height: number, y: number): Promise<string> {
-    const marker = uniform(height, 'float')
-    marker.name = MARKER
+  async function compileAt(y: number): Promise<string> {
     const { referenceBayerRow } = await import('./bayer')
-    return compileWGSL(referenceBayerRow(int(y), marker)).fragment
+    return compileWGSL(referenceBayerRow(int(y), int(0))).fragment
   }
 
   it('drops the height uniform at every height', async () => {
     const rows: Record<string, string | number>[] = []
 
     for (const height of heights) {
-      const fragment = await compileAt(height, 7)
+      const fragment = await compileAt(7)
       expect(fragment).not.toContain(MARKER)
-      expect(fragment).not.toContain('var<uniform>')
       rows.push({
         height,
         markerInWGSL: fragment.includes(MARKER) ? 'yes' : 'NO',
         emitted: fragment.match(/f32\( \((.*)\) \)/)?.[1] ?? 'not found'
       })
     }
-    logTable('emitted WGSL, referenceBayerRow(7, h)', rows)
+    logTable('emitted WGSL, referenceBayerRow(7, 0)', rows)
+  })
+
+  it('emits the shifted cell row (y + shift) - ((y + shift) / 4) * 4', async () => {
+    const shift = uniform(3, 'int')
+    shift.name = 'bayerShiftMarker'
+    const { referenceBayerRow } = await import('./bayer')
+    const fragment = compileWGSL(referenceBayerRow(int(7), shift)).fragment
+    expect(fragment).toContain('bayerShiftMarker')
+    // The shift enters inside the emitted node, so the row is (7 + shift)
+    expect(fragment).toContain('nodeConst0 = ( 7 + ')
   })
 
   it('emits the within-cell mirror 3 - (y - (y / 4) * 4)', async () => {
-    const fragment = await compileAt(901, 7)
-    expectWGSL(fragment).toContain('3 - ( 7 - ( ( 7 / 4 ) * 4 ) )')
+    const fragment = await compileAt(7)
+    expectWGSL(fragment).toContain(
+      '3 - ( nodeConst0 - ( ( nodeConst0 / 4 ) * 4 ) )'
+    )
+  })
+})
+
+// task 18: the resolve owns row y with texel row (y + shift) / 4, where the
+// shift is 4*ceil(H/4) - H, so the partial cell sits at the top like WebGL's
+describe('resolve cell shift (task 18)', () => {
+  it('is 0 at every multiple of 4 and the residue complement otherwise', async () => {
+    const { resolveCellShiftCPU } = await import('./bayer')
+    expect([720, 900, 1800].map(resolveCellShiftCPU)).toEqual([0, 0, 0])
+    expect([721, 722, 723].map(resolveCellShiftCPU)).toEqual([3, 2, 1])
+    expect([901, 1794].map(resolveCellShiftCPU)).toEqual([3, 2])
+  })
+
+  it('matches the original resolve cell floor((y + shift) / 4) on every row', async () => {
+    const { resolveCellShiftCPU } = await import('./bayer')
+    const rows: Record<string, string | number>[] = []
+    for (const height of [720, 721, 722, 723, 901, 1794]) {
+      const shift = resolveCellShiftCPU(height)
+      const cells = Array.from({ length: height }, (_, y) =>
+        Math.floor((y + shift) / 4)
+      )
+      // The original reads bottom-up texel floor((H-1-y)/4) of Hl rows
+      const lowResHeight = Math.ceil(height / 4)
+      let mismatches = 0
+      for (let y = 0; y < height; y++) {
+        const original = lowResHeight - 1 - Math.floor((height - 1 - y) / 4)
+        if (original !== cells[y]) mismatches++
+      }
+      // Shift 0 must reproduce the current top-anchored mapping exactly
+      const oldMismatches = Array.from({ length: height }, (_, y) =>
+        Math.floor(y / 4)
+      ).filter((cell, y) => cell !== cells[y]).length
+      rows.push({
+        height,
+        shift,
+        mismatches,
+        oldMismatches: shift === 0 ? '0 (identical)' : oldMismatches,
+        top: cells[0]!,
+        bottom: cells[height - 1]!,
+        beyond: cells.filter(cell => cell >= lowResHeight).length
+      })
+      expect(mismatches).toBe(0)
+      // floor((y+shift)/4) stays inside 0..Hl-1 for every row
+      expect(cells.every(cell => cell >= 0 && cell < lowResHeight)).toBe(true)
+      if (shift === 0) expect(oldMismatches).toBe(0)
+    }
+    logTable('resolve cell ownership vs the original', rows)
+  })
+
+  it('restores the original absolute Bayer phase at every height', async () => {
+    const { referenceBayerRowCPU, resolveCellShiftCPU } =
+      await import('./bayer')
+    for (const height of [720, 721, 722, 723, 901, 1794]) {
+      const shift = resolveCellShiftCPU(height)
+      for (let y = 0; y < height; y++) {
+        expect(referenceBayerRowCPU(y, shift)).toBe((height - 1 - y) % 4)
+      }
+    }
   })
 })

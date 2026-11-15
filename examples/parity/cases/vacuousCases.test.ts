@@ -46,6 +46,7 @@ function hasNonStateDelta(c: CaseDefinition): boolean {
     c.backend != null ||
     c.lighting != null ||
     c.sequence != null ||
+    c.size != null ||
     c.lookOnly === true ||
     (c.ecefRotationY ?? 0) !== 0 ||
     c.scene !== 'synthetic'
@@ -416,6 +417,25 @@ describe('captured cases measure something', () => {
         realDeltas(c!),
         `${name} is expected to declare the BASE value`
       ).toEqual([])
+    }
+  })
+
+  it('size-only deltas (retina-baseline, odd-size-baseline) are non-neutral and pair with baseline-medium', () => {
+    const neutrals = cases.filter(isNeutral)
+    for (const name of ['retina-baseline', 'odd-size-baseline']) {
+      const c = cases.find(x => x.name === name)
+      expect(c, `${name} is not a case`).toBeDefined()
+      expect(isNeutral(c!), `${name} must not be classified as neutral`).toBe(
+        false
+      )
+      expect(hasNonStateDelta(c!)).toBe(true)
+      const twin = neutrals.find(
+        n =>
+          n.pose === c!.pose &&
+          n.sun.elevation === c!.sun.elevation &&
+          n.sun.azimuth === c!.sun.azimuth
+      )
+      expect(twin?.name).toBe('baseline-medium')
     }
   })
 })

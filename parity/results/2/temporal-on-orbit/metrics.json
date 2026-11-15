@@ -3,31 +3,31 @@
   "phase": 2,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.972148,
-  "deMean": 0.29,
-  "deP95": 0.52,
-  "histDist": 0.007643,
+  "ssim": 0.997006,
+  "deMean": 0.27,
+  "deP95": 0.5,
+  "histDist": 0.007196,
   "plate": {
     "A": {
       "mean": 0.101918,
       "std": 0.003931
     },
     "B": {
-      "mean": 0.101439,
-      "std": 0.003622,
+      "mean": 0.101494,
+      "std": 0.003468,
       "cloudFraction": 0.083976
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 67
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.023732230067253113,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.9355597717824344,
-    "ssimAtReferenceL": 0.9721069813252271,
-    "stabiliserShareOfDeficit": 0.5671489774896603,
-    "meanLuminanceTerm": 0.9999556736978178,
-    "meanContrastStructureTerm": 0.9355998749283085,
+    "ssimAtMeasuredL": 0.9915466200940636,
+    "ssimAtReferenceL": 0.9969626765583584,
+    "stabiliserShareOfDeficit": 0.6406971559968959,
+    "meanLuminanceTerm": 0.9999603430603264,
+    "meanContrastStructureTerm": 0.9915857604196943,
     "sigmaA": 0.0012990281295235584,
-    "sigmaB": 0.0014643427290276037,
-    "sigmaD": 0.00046438529857425147,
+    "sigmaB": 0.0012990786484053127,
+    "sigmaD": 0.00010450316801047456,
     "bandFractions": [
       0.5821354166666667,
       0.07039388020833333,
@@ -95,7 +95,7 @@
   "atlasChannels": null,
   "convergence": {
     "A": 0.015326,
-    "B": 0.014013
+    "B": 0.015315
   },
   "shadowRadius": null,
   "subgroups": true,
@@ -104,8 +104,8 @@
   "maxDiffDelta": 0.110505,
   "width": 1280,
   "height": 720,
-  "captureMs": 5294,
-  "metricsMs": 737,
+  "captureMs": 5192,
+  "metricsMs": 670,
   "sequence": {
     "frameCount": 16,
     "flickerA": {
@@ -121,7 +121,7 @@
       "p95": 0
     },
     "ghostingB": {
-      "mean": 0.06,
+      "mean": 0.04,
       "p95": 0
     },
     "motionA": {
@@ -132,7 +132,7 @@
     "motionB": {
       "dx": 0,
       "dy": 0,
-      "score": 0.605786
+      "score": 0.568366
     },
     "motionDirection": {
       "aligned": true,
@@ -142,16 +142,16 @@
   },
   "gpuMs": {
     "sideA": {
-      "medianMs": 6.79,
+      "medianMs": 6.2,
       "passes": {
-        "total": 6.79
+        "total": 6.2
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 3.02,
+      "medianMs": 2.46,
       "passes": {
-        "render": 3.02
+        "render": 2.46
       },
       "sampleCount": 32
     }

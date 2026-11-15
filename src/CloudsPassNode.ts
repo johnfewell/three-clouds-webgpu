@@ -124,6 +124,7 @@ import {
 import {
   buildCloudsResolve,
   CLOUDS_TEMPORAL_ALPHA,
+  FRESH_TEXEL_WEIGHT,
   type CloudsResolveDeps
 } from './resolve/cloudsResolve'
 import {
@@ -1825,7 +1826,10 @@ export class CloudsPassNode extends Node {
       resolveHeight: this._resolveHeight!,
       frame: paramU.frame,
       varianceGamma: this._varianceGamma!,
-      temporalAlpha: this._temporalAlpha!
+      temporalAlpha: this._temporalAlpha!,
+      freshTexelWeight: ctx.experimental.freshTexelBlend
+        ? FRESH_TEXEL_WEIGHT
+        : undefined
     }
   }
 

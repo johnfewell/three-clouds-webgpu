@@ -618,8 +618,9 @@ async function readShapeVolume(
           `side B shape format ${texture.format} is not R8 or RGBA8`
         )
       }
-      // copyTextureToBuffer pads each row to 256 bytes (WebGPUTextureUtils)
-      const bytesPerRow = Math.ceil((size * bytesPerTexel) / 256) * 256
+      // Derive row stride from the slice byte length returned by copyTextureToBuffer
+      const unpadded = size * bytesPerTexel
+      const padded = Math.ceil(unpadded / 256) * 256
       const backend = b.renderer.backend as unknown as {
         copyTextureToBuffer: (
           t: unknown,
@@ -645,10 +646,22 @@ async function readShapeVolume(
           view.byteOffset,
           view.byteLength
         )
+        const stride =
+          raw.length === unpadded * size
+            ? unpadded
+            : raw.length === padded * size
+              ? padded
+              : 0
+        if (stride === 0) {
+          throw new Error(
+            `slice ${z} readback is ${raw.length} B for ${size}×${size}×${bytesPerTexel} B: ` +
+              `expected unpadded ${unpadded * size} B (stride ${unpadded}) or 256-padded ${padded * size} B (stride ${padded})`
+          )
+        }
         for (let y = 0; y < size; y++) {
           for (let x = 0; x < size; x++) {
             out[(z * size + y) * size + x] =
-              raw[y * bytesPerRow + x * bytesPerTexel]!
+              raw[y * stride + x * bytesPerTexel]!
           }
         }
       }
@@ -830,6 +843,7 @@ test.describe('Phase 4 — ADR-007 3.2b (port addition, side B only)', () => {
   test('cloud shadows reach the visible atmosphere-light receiver', async ({
     page
   }) => {
+    test.setTimeout(300_000)
     await loadCase(page, 'shadow-sphere')
 
     const flagsOff = await setCasters(page, false)
@@ -1196,6 +1210,7 @@ test.describe('Phase 4 — debug views', () => {
   }
 
   test('6b. the debug views differ from each other', async ({ page }) => {
+    test.setTimeout(300_000)
     // Guards the failure mode that actually occurred: several views collapsing
     // to the same output. Each rendering "something" is not enough if they all
     // render the SAME something

@@ -15,6 +15,14 @@ export interface HarnessParams {
   reversedDepthBuffer: boolean
   lighting: LightingOverride | null
   atmosphereProfile: AtmosphereProfileMode
+  /**
+   * `lookupGroundLift`: harness-only diagnostic override of side B's atmosphere
+   * lookup ground lift, the fraction of the atmosphere thickness the lookup
+   * path lifts both segment endpoints by (library default 0.01, about 600 m).
+   * Read at graph build, so it must be set before side B builds. Null means the
+   * library default. e2e only, like the atmosphere profile (task 9)
+   */
+  lookupGroundLift: number | null
   // `w` / `h`: render-size override for the case, both sides. All
   // registry heights are ≡ 0 mod 4, which hid a Bayer-phase bug. The
   // height-residue e2e renders 717-719 rows through this, capture never does
@@ -57,6 +65,7 @@ export function parseHarnessParams(search: string): HarnessParams {
     e2e,
     capture
   )
+  const lookupGroundLift = parseLookupGroundLift(p.get('lookupGroundLift'), e2e)
   return {
     caseName,
     capture,
@@ -66,8 +75,27 @@ export function parseHarnessParams(search: string): HarnessParams {
     reversedDepthBuffer,
     lighting,
     atmosphereProfile,
+    lookupGroundLift,
     size
   }
+}
+
+// A diagnostic arm, not a setting: it must name a finite fraction in [0, 1) and
+// it is refused outside e2e, where a capture could otherwise record a look the
+// library does not ship
+export function parseLookupGroundLift(
+  value: string | null,
+  e2e: boolean
+): number | null {
+  if (value == null || value === '') return null
+  if (!e2e)
+    throw new Error('lookupGroundLift requires e2e=1 (diagnostic arm only)')
+  const lift = Number(value)
+  if (!(Number.isFinite(lift) && lift >= 0 && lift < 1))
+    throw new Error(
+      `lookupGroundLift must be a fraction in [0, 1), got ${value}`
+    )
+  return lift
 }
 
 // Both must be present and positive integers. Anything else is no override,

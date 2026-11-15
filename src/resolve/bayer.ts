@@ -29,24 +29,25 @@ export function bayerIndex2D(x: number, y: number): number {
   return bayerIndices[(y % 4) * 4 + (x % 4)]!
 }
 
-// Map a top-first WebGPU pixel row onto WebGL's bottom-first Bayer row. Cells
-// are top-aligned (the march texel is read at `y / 4`) and the jitter shifts
-// rays up, so within-cell row k matches bottom-up sub-row 3 - k
+// Rows of the low-res grid that a height does not use: 4*ceil(H/4) - H. The
+// resolve owns row y with texel row (y + cellShift) / 4, so the partial cell
+// sits at the top, as WebGL's bottom-anchored grid puts it
+export function resolveCellShiftCPU(height: number): number {
+  return 4 * Math.ceil(height / 4) - height
+}
 
-// Mirroring the absolute row instead matched only at heights divisible by 4 and
-// streaked real windows. `height` is kept
-// so call sites and the CPU twin read alike, and it no longer matters
-export function referenceBayerRowCPU(
-  topDownPixelY: number,
-  _height: number
-): number {
-  return 3 - (topDownPixelY % 4)
+// Map a top-first WebGPU pixel row onto WebGL's bottom-first Bayer row. The
+// cell is bottom-anchored by `shift` (resolveCellShift), so within-cell row k
+// matches bottom-up sub-row 3 - ((y + shift) % 4); shift 0 is the old form
+export function referenceBayerRowCPU(topDownPixelY: number, shift = 0): number {
+  return 3 - ((topDownPixelY + shift) % 4)
 }
 
 export function referenceBayerRow(
   topDownPixelY: Node<'int'>,
-  _height: Node<'float'>
+  shift: Node<'int'>
 ): Node<'int'> {
-  const cellRow = topDownPixelY.sub(topDownPixelY.div(int(4)).mul(int(4)))
+  const row = topDownPixelY.add(shift)
+  const cellRow = row.sub(row.div(int(4)).mul(int(4)))
   return int(3).sub(cellRow)
 }

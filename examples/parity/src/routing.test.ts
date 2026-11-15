@@ -11,6 +11,7 @@ const DEFAULTS: HarnessParams = {
   reversedDepthBuffer: false,
   lighting: null,
   atmosphereProfile: 'reference',
+  lookupGroundLift: null,
   size: null
 }
 
@@ -137,6 +138,26 @@ describe('parseHarnessParams', () => {
     const result = parseHarnessParams(search)
     const full = { ...DEFAULTS, ...expected }
     expect(result).toEqual(full)
+  })
+
+  // The lookup ground-lift arm (task 9): a diagnostic, never a capture setting
+  it('parses the lookup ground lift only in e2e', () => {
+    expect(
+      parseHarnessParams('?case=x&e2e=1&lookupGroundLift=0.1').lookupGroundLift
+    ).toBe(0.1)
+    expect(parseHarnessParams('?case=x&e2e=1').lookupGroundLift).toBe(null)
+    expect(() => parseHarnessParams('?case=x&lookupGroundLift=0.1')).toThrow(
+      /requires e2e=1/
+    )
+    expect(() =>
+      parseHarnessParams('?case=x&capture=1&lookupGroundLift=0.1')
+    ).toThrow(/requires e2e=1/)
+  })
+
+  it.each(['1', '-0.1', 'abc', '2'])('refuses lookupGroundLift=%s', value => {
+    expect(() =>
+      parseHarnessParams(`?case=x&e2e=1&lookupGroundLift=${value}`)
+    ).toThrow(/fraction in \[0, 1\)/)
   })
 
   // The aerial node lost its budget-closure lanes with the interim subclass

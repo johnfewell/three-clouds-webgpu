@@ -7,7 +7,11 @@ import { describe, expect, it } from 'vitest'
 // unfinished work, and a hard cap stops it quietly absorbing the ladder
 
 interface Thresholds {
-  accepted: Array<{ pattern: string; reason: string }>
+  accepted: Array<{
+    pattern: string
+    reason: string
+    floor?: { ssim?: number; deP95?: number; histDist?: number }
+  }>
   plate: { minStd: number; minCloudFraction: number }
   phases: Record<string, { ssim: number }>
 }
@@ -66,5 +70,23 @@ describe('accepted non-parity register', () => {
       }
     }
     expect(thresholds.phases['4']!.ssim).toBeGreaterThanOrEqual(0.98)
+  })
+
+  // A floor is a measured footprint, so every number in it is positive and
+  // only the metrics the evaluator knows how to compare may appear. A typo
+  // here would be silently ignored by the direction table
+  it('every accepted floor names known metrics with positive values', () => {
+    const known = new Set(['ssim', 'deP95', 'histDist'])
+    for (const entry of thresholds.accepted) {
+      if (entry.floor == null) continue
+      const keys = Object.keys(entry.floor)
+      expect(keys.length, entry.pattern).toBeGreaterThan(0)
+      for (const key of keys) {
+        expect(known.has(key), `${entry.pattern}: ${key}`).toBe(true)
+        const value = (entry.floor as Record<string, number>)[key]!
+        expect(Number.isFinite(value), `${entry.pattern}: ${key}`).toBe(true)
+        expect(value, `${entry.pattern}: ${key}`).toBeGreaterThan(0)
+      }
+    }
   })
 })

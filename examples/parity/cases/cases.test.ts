@@ -40,9 +40,9 @@ describe('case registry numbering', () => {
     [53, 'ortho-camera — the ray construction is perspective-only']
   ])
 
-  it('numbers span 1–61 with no gaps except the retired ones', () => {
+  it('numbers span 1–69 with no gaps except the retired ones', () => {
     const nums = new Set(cases.map(c => c.number))
-    for (let n = 1; n <= 61; n++) {
+    for (let n = 1; n <= 69; n++) {
       if (RETIRED.has(n)) {
         expect(
           nums.has(n),
@@ -54,9 +54,9 @@ describe('case registry numbering', () => {
     }
     for (const n of nums) {
       expect(n).toBeGreaterThanOrEqual(1)
-      expect(n).toBeLessThanOrEqual(61)
+      expect(n).toBeLessThanOrEqual(69)
     }
-    logTable('number coverage', [{ min: 1, max: 61, unique: nums.size }])
+    logTable('number coverage', [{ min: 1, max: 69, unique: nums.size }])
   })
 
   it('names are unique', () => {
@@ -133,6 +133,12 @@ describe('schema validity', () => {
       expect(typeof c.warmup).toBe('number')
       expect(c.warmup).toBeGreaterThan(0)
       expect(['synthetic', 'world']).toContain(c.scene)
+      if (c.size != null) {
+        expect(Number.isInteger(c.size.width)).toBe(true)
+        expect(c.size.width).toBeGreaterThan(0)
+        expect(Number.isInteger(c.size.height)).toBe(true)
+        expect(c.size.height).toBeGreaterThan(0)
+      }
     }
   })
 
@@ -514,5 +520,86 @@ describe('atmosphere exception register (ADR-013 A6)', () => {
     expect(exception.mode).toBe('raymarch-256')
     expect(exception.reason).toMatch(/ADR-013 Amendment 6/)
     expect(exception.reason).toMatch(/0\.1001/)
+  })
+})
+
+describe('retina and odd-size tier', () => {
+  const EXPECTED_TIER = [
+    {
+      name: 'retina-baseline',
+      number: 62,
+      twin: 'baseline-medium',
+      size: { width: 2880, height: 1800 }
+    },
+    {
+      name: 'retina-temporal-static',
+      number: 63,
+      twin: 'temporal-on-static',
+      size: { width: 2880, height: 1800 }
+    },
+    {
+      name: 'retina-shadow-plane',
+      number: 64,
+      twin: 'shadow-plane',
+      size: { width: 2880, height: 1800 }
+    },
+    {
+      name: 'retina-shafts-low-sun',
+      number: 65,
+      twin: 'shafts-low-sun',
+      size: { width: 2880, height: 1800 }
+    },
+    {
+      name: 'odd-size-temporal-1',
+      number: 66,
+      twin: 'temporal-on-static',
+      size: { width: 1281, height: 721 }
+    },
+    {
+      name: 'odd-size-temporal-2',
+      number: 67,
+      twin: 'temporal-on-static',
+      size: { width: 1282, height: 722 }
+    },
+    {
+      name: 'odd-size-temporal-3',
+      number: 68,
+      twin: 'temporal-on-static',
+      size: { width: 1283, height: 723 }
+    },
+    {
+      name: 'odd-size-baseline',
+      number: 69,
+      twin: 'baseline-medium',
+      size: { width: 1283, height: 723 }
+    }
+  ] as const
+
+  it('eight tier cases exist and match their twins except for name, number and size', () => {
+    for (const spec of EXPECTED_TIER) {
+      const c = caseByName(spec.name)
+      const twin = caseByName(spec.twin)
+      expect(c, `missing case "${spec.name}"`).toBeDefined()
+      expect(twin, `missing twin "${spec.twin}"`).toBeDefined()
+      expect(c!.number).toBe(spec.number)
+      expect(c!.size).toEqual(spec.size)
+
+      const { name: _n1, number: _num1, size: _s1, ...rest } = c!
+      const { name: _n2, number: _num2, size: _s2, ...twinRest } = twin!
+      expect(
+        rest,
+        `case "${spec.name}" differs from twin "${spec.twin}" outside name, number and size`
+      ).toEqual(twinRest)
+    }
+
+    logTable(
+      'retina and odd-size tier',
+      EXPECTED_TIER.map(s => ({
+        '#': s.number,
+        name: s.name,
+        twin: s.twin,
+        size: `${s.size.width}x${s.size.height}`
+      }))
+    )
   })
 })

@@ -652,7 +652,8 @@ async function init(): Promise<void> {
     atmosphereProfile: effectiveAtmosphereProfile(
       params.atmosphereProfile,
       registryCd?.atmosphereException
-    )
+    ),
+    lookupGroundLift: params.lookupGroundLift
   }
   let sideB: SideBHandle | null = null
   try {

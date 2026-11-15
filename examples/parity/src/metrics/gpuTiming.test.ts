@@ -6,6 +6,8 @@ import {
   computeTimingReport,
   formatGpuMs,
   GpuTimingCollector,
+  implausibleTimingReason,
+  MAX_PLAUSIBLE_GPU_MS,
   unavailableResult,
   WebGLGpuTimer,
   WebGPUGpuTimer,
@@ -458,6 +460,77 @@ describe('buildTimingSummary', () => {
       available: false,
       reason: 'No samples collected'
     })
+  })
+
+  it('returns unavailable with a reason instead of a negative median', () => {
+    // this is the value four committed captures actually carry
+    const collectorB = new GpuTimingCollector(1)
+    collectorB.add({
+      totalMs: -850793873.2,
+      passes: [{ name: 'render', ms: -850793873.2 }]
+    })
+
+    const summary = buildTimingSummary(null, collectorB, 'no ext', null)
+    expect(summary.sideB.available).toBe(false)
+    if (!summary.sideB.available) {
+      expect(summary.sideB.reason).toContain('negative')
+    }
+  })
+
+  it('returns unavailable with a reason instead of a non-finite median', () => {
+    const collectorA = new GpuTimingCollector(1)
+    collectorA.add({
+      totalMs: Number.NaN,
+      passes: [{ name: 'total', ms: Number.NaN }]
+    })
+
+    const summary = buildTimingSummary(collectorA, null, null, null)
+    expect(summary.sideA.available).toBe(false)
+    if (!summary.sideA.available) {
+      expect(summary.sideA.reason).toContain('non-finite')
+    }
+  })
+})
+
+// ────── implausibleTimingReason ──────
+
+describe('implausibleTimingReason', () => {
+  const report = (medianMs: number, passes: Record<string, number> = {}) => ({
+    medianMs,
+    passes,
+    sampleCount: 32
+  })
+
+  it('accepts a realistic report', () => {
+    expect(implausibleTimingReason(report(21.6, { render: 21.6 }))).toBeNull()
+    expect(implausibleTimingReason(report(0))).toBeNull()
+    expect(implausibleTimingReason(report(MAX_PLAUSIBLE_GPU_MS))).toBeNull()
+  })
+
+  it('rejects a negative median', () => {
+    const reason = implausibleTimingReason(report(-850793873.2))
+    expect(reason).toContain('negative')
+    expect(reason).toContain('-850793873.2')
+  })
+
+  it('rejects a non-finite median', () => {
+    expect(implausibleTimingReason(report(Number.NaN))).toContain('non-finite')
+    expect(implausibleTimingReason(report(Number.POSITIVE_INFINITY))).toContain(
+      'non-finite'
+    )
+  })
+
+  it('rejects a median above the ceiling', () => {
+    const reason = implausibleTimingReason(report(MAX_PLAUSIBLE_GPU_MS + 1))
+    expect(reason).toContain('above')
+  })
+
+  it('rejects a bad pass even when the median looks fine', () => {
+    const reason = implausibleTimingReason(
+      report(10, { render: 10, shadow: Number.NEGATIVE_INFINITY })
+    )
+    expect(reason).toContain('pass shadow')
+    expect(reason).toContain('non-finite')
   })
 })
 

@@ -1,11 +1,11 @@
 [capture][sun-twilight] starting (phase 1, #10)
-[capture][sun-twilight] screenshots: A=835650b B=786112b
-[capture][sun-twilight] metrics: ssim=0.9886 deMean=0.37 deP95=0.72 histDist=0.0185 maxDelta=0.1082
-[capture][sun-twilight] dual-L: measuredL=0.0699 ssim@measuredL=0.9877 (gated ssim is @refL=0.09) stabiliserShare=7.4% sigmaA=4.62e-3 sigmaB=4.12e-3 sigmaD=9.09e-4
-[capture][sun-twilight] plate: A mean=0.0563 std=0.0089 B mean=0.0553 std=0.0082 cloudFraction=16.514%
-[capture][sun-twilight] gpuMs: A=11.65ms (32 samples) B=3.00ms (32 samples)
+[capture][sun-twilight] screenshots: A=835650b B=798186b
+[capture][sun-twilight] metrics: ssim=0.9974 deMean=0.33 deP95=0.67 histDist=0.0155 maxDelta=0.1082
+[capture][sun-twilight] dual-L: measuredL=0.0699 ssim@measuredL=0.9972 (gated ssim is @refL=0.09) stabiliserShare=7.6% sigmaA=4.62e-3 sigmaB=4.68e-3 sigmaD=1.91e-4
+[capture][sun-twilight] plate: A mean=0.0563 std=0.0089 B mean=0.0555 std=0.0090 cloudFraction=16.514%
+[capture][sun-twilight] gpuMs: A=12.36ms (32 samples) B=3.93ms (32 samples)
 [capture][sun-twilight] eval: pass
 [capture][sun-twilight] temporalUpscale: A=false B=false
 [capture][sun-twilight] subgroups: true
 [capture][sun-twilight] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
-[capture][sun-twilight] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>
+[capture][sun-twilight] provenance: commit (private history) branch (private) dirty 123 key 65106d60b609 e2e green skips(build=false typecheck=false) served 9f4f3d5c1da4 built 9f4f3d5c1da4 servedIsBuilt true servedTree <worktree>

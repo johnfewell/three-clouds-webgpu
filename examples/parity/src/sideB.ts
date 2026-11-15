@@ -103,6 +103,8 @@ export interface SideBOptions {
   // Case 45: construction-time, see the assignment site
   proceduralTextures?: boolean
   atmosphereProfile?: AtmosphereProfileMode
+  /** Harness-only diagnostic override of the lookup ground lift (task 9) */
+  lookupGroundLift?: number | null
 }
 
 export interface SideBHandle {
@@ -180,6 +182,12 @@ export async function createSideB(opts: SideBOptions): Promise<SideBHandle> {
   // 0.1 in WebGL and 0.3 in WebGPU and feeds the LUT precompute (B +11-17 %)
   // Side A is the reference look, so B takes its value. ADR-013.
   atmosphereContext.parameters.groundAlbedo.setScalar(0.1)
+  // Diagnostic arm (task 9): set BEFORE the graph builds, because the lookup
+  // path turns the lift into a constant while it emits the shader. Absent or
+  // null keeps the library default (0.01, about 600 m)
+  if (opts.lookupGroundLift != null) {
+    atmosphereContext.lookupGroundLift = opts.lookupGroundLift
+  }
   // Atmosphere method (ADR-013 Amendment 6): side B reads the LUT as
   // side A does (aerialPerspectiveEffect.frag:135). The former 256-sample
   // raymarch pin cost 6.9x A's frame, kept as opt-in 'raymarch-256'

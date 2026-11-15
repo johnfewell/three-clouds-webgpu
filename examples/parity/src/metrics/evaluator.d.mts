@@ -13,10 +13,20 @@ export interface PhaseThresholds {
   histDist?: number | null
 }
 
+/**
+ * The measured footprint of a documented difference. ssim is a minimum (below
+ * it the case fails), deP95 and histDist are maximums (above them it fails)
+ */
+export interface AcceptedFloor {
+  ssim?: number
+  deP95?: number
+  histDist?: number
+}
+
 export interface AcceptedDifference {
   pattern: string
   reason: string
-  floor?: { ssim: number }
+  floor?: AcceptedFloor
 }
 
 export interface Thresholds {

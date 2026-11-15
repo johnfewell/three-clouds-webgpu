@@ -3,31 +3,31 @@
   "phase": 0,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.974699,
-  "deMean": 0.31,
-  "deP95": 0.55,
-  "histDist": 0.008488,
+  "ssim": 0.995457,
+  "deMean": 0.27,
+  "deP95": 0.5,
+  "histDist": 0.007145,
   "plate": {
     "A": {
       "mean": 0.101314,
       "std": 0.006706
     },
     "B": {
-      "mean": 0.100949,
-      "std": 0.00568,
+      "mean": 0.100917,
+      "std": 0.00648,
       "cloudFraction": 0.076337
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 1
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.05964181572198868,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.9707248531166839,
-    "ssimAtReferenceL": 0.9746991977189228,
-    "stabiliserShareOfDeficit": 0.13575831465781182,
-    "meanLuminanceTerm": 0.9999580529774407,
-    "meanContrastStructureTerm": 0.9707652914766274,
+    "ssimAtMeasuredL": 0.9946940191310872,
+    "ssimAtReferenceL": 0.9954572772543159,
+    "stabiliserShareOfDeficit": 0.14384863837344292,
+    "meanLuminanceTerm": 0.9999610719311781,
+    "meanContrastStructureTerm": 0.9947323922644412,
     "sigmaA": 0.0048154709225329655,
-    "sigmaB": 0.004117408135024533,
-    "sigmaD": 0.0011167761961502825,
+    "sigmaB": 0.004835685113960739,
+    "sigmaD": 0.000291871477141762,
     "bandFractions": [
       0.09333333333333334,
       0.10654513888888889,
@@ -101,23 +101,23 @@
   "subgroups": true,
   "result": "pass",
   "reasons": [],
-  "maxDiffDelta": 0.050055,
+  "maxDiffDelta": 0.058643,
   "width": 320,
   "height": 180,
-  "captureMs": 4453,
-  "metricsMs": 82,
+  "captureMs": 4569,
+  "metricsMs": 103,
   "gpuMs": {
     "sideA": {
-      "medianMs": 4.03,
+      "medianMs": 4.38,
       "passes": {
-        "total": 4.03
+        "total": 4.38
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 2.78,
+      "medianMs": 2.16,
       "passes": {
-        "render": 2.78
+        "render": 2.16
       },
       "sampleCount": 32
     }

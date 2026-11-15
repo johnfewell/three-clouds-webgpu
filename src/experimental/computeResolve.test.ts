@@ -63,3 +63,38 @@ describe('tiled compute resolve', () => {
     })
   }
 })
+
+// task 18: the compute resolve must own low-res row (y + shift) / 4 exactly as
+// the fragment resolve does, or the two resolves disagree at odd sizes
+describe('compute resolve cell ownership (task 18)', () => {
+  for (const upscale of [false, true]) {
+    it(`owns the shifted row for upscale=${upscale}`, () => {
+      const color = new DataTexture(new Uint8Array(16 * 16 * 4), 16, 16)
+      const target = new StorageTexture(63, 61)
+      const kernel = buildComputeCloudsResolve(
+        {
+          colorBuffer: color,
+          depthVelocityBuffer: color,
+          colorHistoryNode: texture(color),
+          resolveWidth: uniform(63),
+          resolveHeight: uniform(61),
+          frame: uniform(0),
+          varianceGamma: uniform(2),
+          temporalAlpha: uniform(0.01)
+        },
+        null,
+        upscale,
+        target
+      )
+      const shader = compileComputeWGSL(kernel)
+      // The buffer coordinate is ( x / 4, ( y + shift ) / 4 ) under the upscale
+      // and the unshifted full-res coord otherwise
+      const shifted = /\w+ \+ \w+ \) \/ 4 \)/.test(shader)
+      log('compute resolve task 18', { upscale, shifted })
+      expect(shifted).toBe(upscale)
+      kernel.dispose()
+      color.dispose()
+      target.dispose()
+    })
+  }
+})

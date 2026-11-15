@@ -3,31 +3,31 @@
   "phase": 4,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.696659,
+  "ssim": 0.695734,
   "deMean": 0.85,
-  "deP95": 5.22,
-  "histDist": 0.00907,
+  "deP95": 5.33,
+  "histDist": 0.009265,
   "plate": {
     "A": {
       "mean": 0.101052,
       "std": 0.009951
     },
     "B": {
-      "mean": 0.100417,
-      "std": 0.009618,
+      "mean": 0.10054,
+      "std": 0.010322,
       "cloudFraction": 0.174451
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 107
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.09455415606498718,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.7003642615217608,
-    "ssimAtReferenceL": 0.6966461732277083,
-    "stabiliserShareOfDeficit": -0.012408694346460731,
-    "meanLuminanceTerm": 0.9990856931163752,
-    "meanContrastStructureTerm": 0.7004772170282062,
+    "ssimAtMeasuredL": 0.6992502324811319,
+    "ssimAtReferenceL": 0.6957208935588501,
+    "stabiliserShareOfDeficit": -0.011735134332432626,
+    "meanLuminanceTerm": 0.9991247154355207,
+    "meanContrastStructureTerm": 0.6993545282774005,
     "sigmaA": 0.005453336207970226,
-    "sigmaB": 0.005334117898423109,
-    "sigmaD": 0.00522434404732507,
+    "sigmaB": 0.005878509046022087,
+    "sigmaD": 0.005236840029603271,
     "bandFractions": [
       0.35735460069444447,
       0.12976128472222223,
@@ -95,32 +95,34 @@
   "atlasChannels": null,
   "convergence": {
     "A": 0.000001,
-    "B": 0.000003
+    "B": 0.000001
   },
   "shadowRadius": null,
   "subgroups": true,
-  "result": "expected-difference",
+  "result": "fail",
   "reasons": [
-    "ssim 0.6967 < 0.9800",
-    "accepted: ADR-014: the reference's compiled looped getWorleyNoise deviates from its own source arithmetic in a hash-argument band the port does not reproduce, so LocalWeather's R (low composed) and G (mid worley) channels differ by construction — texture footprint R corr 0.746 / 67.03% differ, G corr 0.474 / 66.78%, B (perlin) exact, byte-identical across 7 receipts (01:52Z); shape volume bit-exact (#619). Frame footprint from the paired in-session captures on a private-history revision plus the follow-up (a later private-history revision, 2026-09-02 03:08Z, provenance in capture.log, ratified LilacOtter #1680): gated ssim 0.696454 at the reference L, deP95 5.20, histDist 0.023800; the follow-up's share +0.002801 over the same-slot baseline 0.693653. SCOPE (D3, the register-entry rule): the weather-content mechanism only. NOT covered: the B channel is exact and any regression there is a real defect; a residual outside the mechanism's signature (blob positions) is a new task, never register material; below the floor the case FAILS as beyond the accepted footprint. [floor ssim 0.6964]"
+    "ssim 0.6957 < 0.9800",
+    "deP95 5.33 > 5.00",
+    "beyond the accepted footprint: ssim 0.6957 < floor 0.6964 (ADR-014: the reference's compiled looped getWorleyNoise deviates from its own source arithmetic in a hash-argument band the port does not reproduce, so LocalWeather's R (low composed) and G (mid worley) channels differ by construction — texture footprint R corr 0.746 / 67.03% differ, G corr 0.474 / 66.78%, B (perlin) exact, byte-identical across 7 receipts (01:52Z); shape volume bit-exact (#619). Frame footprint from the paired in-session captures on a private-history revision plus the follow-up (a later private-history revision, 2026-09-02 03:08Z, provenance in capture.log, ratified LilacOtter #1680): gated ssim 0.696454 at the reference L, deP95 5.20, histDist 0.023800; the follow-up's share +0.002801 over the same-slot baseline 0.693653. SCOPE (D3, the register-entry rule): the weather-content mechanism only. NOT covered: the B channel is exact and any regression there is a real defect; a residual outside the mechanism's signature (blob positions) is a new task, never register material; below the floor the case FAILS as beyond the accepted footprint.)",
+    "beyond the accepted footprint: deP95 5.3273 > floor 5.2300 (ADR-014: the reference's compiled looped getWorleyNoise deviates from its own source arithmetic in a hash-argument band the port does not reproduce, so LocalWeather's R (low composed) and G (mid worley) channels differ by construction — texture footprint R corr 0.746 / 67.03% differ, G corr 0.474 / 66.78%, B (perlin) exact, byte-identical across 7 receipts (01:52Z); shape volume bit-exact (#619). Frame footprint from the paired in-session captures on a private-history revision plus the follow-up (a later private-history revision, 2026-09-02 03:08Z, provenance in capture.log, ratified LilacOtter #1680): gated ssim 0.696454 at the reference L, deP95 5.20, histDist 0.023800; the follow-up's share +0.002801 over the same-slot baseline 0.693653. SCOPE (D3, the register-entry rule): the weather-content mechanism only. NOT covered: the B channel is exact and any regression there is a real defect; a residual outside the mechanism's signature (blob positions) is a new task, never register material; below the floor the case FAILS as beyond the accepted footprint.)"
   ],
-  "maxDiffDelta": 0.141772,
+  "maxDiffDelta": 0.146753,
   "width": 1280,
   "height": 720,
-  "captureMs": 5900,
-  "metricsMs": 833,
+  "captureMs": 5601,
+  "metricsMs": 746,
   "gpuMs": {
     "sideA": {
-      "medianMs": 13.67,
+      "medianMs": 12.16,
       "passes": {
-        "total": 13.67
+        "total": 12.16
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 2.84,
+      "medianMs": 4.26,
       "passes": {
-        "render": 2.84
+        "render": 4.26
       },
       "sampleCount": 32
     }

@@ -7,12 +7,16 @@ import { experimentalDefaults } from './options'
 describe('experimental cloud options', () => {
   it('ships the promoted set and rebuilds only for real changes', () => {
     const ctx = new CloudsContext()
-    // Two options ship on, so the claim is that the
+    // Three options ship on, so the claim is that the
     // DEFAULT SET is the one the module declares, not that every value is false
     expect(ctx.experimental).toEqual({ ...experimentalDefaults })
     // NAMED, not a count: a third promotion has to be written here, so it cannot
     // arrive by editing one boolean in options.ts
-    const promoted = ['distantShapeDetailFade', 'cloudFrontRefinement'] as const
+    const promoted = [
+      'distantShapeDetailFade',
+      'cloudFrontRefinement',
+      'freshTexelBlend'
+    ] as const
     const onByDefault = Object.entries(ctx.experimental)
       .filter(([, value]) => value)
       .map(([key]) => key)
@@ -24,7 +28,8 @@ describe('experimental cloud options', () => {
     // Setting an option to the value it already has is not a change
     ctx.experimental = {
       distantShapeDetailFade: true,
-      cloudFrontRefinement: true
+      cloudFrontRefinement: true,
+      freshTexelBlend: true
     }
     expect(ctx.graphVersion).toBe(before)
     expect(reset).not.toHaveBeenCalled()

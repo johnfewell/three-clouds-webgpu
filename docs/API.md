@@ -1,4 +1,4 @@
-# API reference: three-clouds-webgpu 0.1.0-alpha.8
+# API reference: three-clouds-webgpu 0.1.0-alpha.9
 
 Generated from this version’s public TypeScript surface, JSDoc and runtime defaults. Start with recommended integration; the advanced and reference groups remain exported for compatibility, not as required setup steps.
 
@@ -117,7 +117,7 @@ Caller-owned seconds and sample index, with optional authoritative inputs
 
 ### clouds
 
-[Source](../src/CloudsPassNode.ts#L2148)
+[Source](../src/CloudsPassNode.ts#L2152)
 
 ```ts
 clouds(options: CloudsOptions): CloudsPassNode
@@ -210,7 +210,7 @@ Detach borrowed slots before disposal and release the pass separately
 | `lightning` | `LightningState \| null` | `null` | The lightning flash lighting the cloud from inside, or `null` for none. A<br>plain field, not a setter: its parts feed uniforms written every frame, so a<br>flash costs no graph rebuild. Read it only when experimental.lightning is on.<br><br>`position` is ECEF metres and belongs inside the cloud volume. `intensity`<br>is 0 whenever no flash is lit. Never reads a clock: the consumer decides<br>when a flash is, and when its envelope has decayed. |
 | `lightingStudy` | `LightingStudy \| null` | `null` | Controlled lighting research fixture, disabled by default and reference mode.<br>Assigned textures are borrowed and must be disposed by their caller.<br>Static fixtures only: rebuild caches and reassign after changing any inputs.<br>Requires dual HG phase. Rejected prototypes are not production lighting. |
 | `cloudTypes` | `CloudTypes` | `new CloudTypes()` | Regional cloud-type controls, used when `experimental.cloudTypeMap` is on |
-| `experimental` | `Readonly<ExperimentalCloudOptions>` | `experimentalDefaults` | Renderer experiments. `cloudFrontRefinement` and `distantShapeDetailFade`<br>default to true, all others to false. See docs/EXPERIMENTAL.md<br><br>Assign a partial object to preserve other options. Unknown keys and<br>non-boolean values throw. Changes rebuild the graph and reset history |
+| `experimental` | `Readonly<ExperimentalCloudOptions>` | `experimentalDefaults` | Renderer experiments. `cloudFrontRefinement`, `distantShapeDetailFade` and<br>`freshTexelBlend` default to true, all others to false. See docs/EXPERIMENTAL.md<br><br>Assign a partial object to preserve other options. Unknown keys and<br>non-boolean values throw. Changes rebuild the graph and reset history |
 | `proceduralWeather` | `ProceduralWeather \| null` | `null` | The generator the flag installed, or null. Read-only on purpose: the<br>pattern and octave counts are graph time, so changing them means building<br>your own and assigning it to `localWeatherTexture` |
 | `lightShafts` | `boolean` | `defaults.lightShafts` | Whether cloud shadow length is marched and read by the aerial consumers |
 | `lightShaftsHalfResolution` | `boolean` | `PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION` | Whether the shaft march runs once per 2x2 quad rather than per fragment.<br>Needs the `subgroups` feature, on by default. Measured, not identical: dE P95<br>0.056-0.071 (2-3x the inert floor, ~8% of the case's A-vs-B mean), not<br>visible at DPR 1, and 7.2-20.0 ms per frame at 1280x720 on the shaft cases. |
@@ -265,7 +265,7 @@ Detach borrowed slots before disposal and release the pass separately
 
 ### CloudsPassNode
 
-[Source](../src/CloudsPassNode.ts#L289)
+[Source](../src/CloudsPassNode.ts#L290)
 
 ```ts
 class CloudsPassNode
@@ -319,7 +319,7 @@ The renderer, scene, camera and atmosphere remain caller-owned
 
 ### CloudsOptions
 
-[Source](../src/CloudsPassNode.ts#L158)
+[Source](../src/CloudsPassNode.ts#L159)
 
 ```ts
 interface CloudsOptions
@@ -642,7 +642,7 @@ upstream and assign it (see ADR-009).
 
 ### assertWebGPUSupported
 
-[Source](../src/CloudsPassNode.ts#L262)
+[Source](../src/CloudsPassNode.ts#L263)
 
 ```ts
 assertWebGPUSupported(renderer: unknown): void
@@ -766,7 +766,7 @@ Existing objects to inspect, never a second configuration store
 | [`CLOUD_SHAPE_TEXTURE_SIZE`](../src/constants.ts#L4) | `CLOUD_SHAPE_TEXTURE_SIZE: 128` | See source declaration |
 | [`cloudShadowAtlasResolution`](../src/shadow/cloudShadowNode.ts#L79) | `cloudShadowAtlasResolution(descriptor: CloudShadowDescriptor): Node<"vec2">` | See source declaration |
 | [`CloudShadowAtOptions`](../src/shadow/cloudShadowNode.ts#L32) | `interface CloudShadowAtOptions` | See source declaration |
-| [`CloudShadowDescriptor`](../src/CloudsPassNode.ts#L187) | `interface CloudShadowDescriptor` | See source declaration |
+| [`CloudShadowDescriptor`](../src/CloudsPassNode.ts#L188) | `interface CloudShadowDescriptor` | See source declaration |
 | [`CloudShadowedAtmosphereLightNode`](../src/shadow/CloudShadowedAtmosphereLightNode.ts#L15) | `class CloudShadowedAtmosphereLightNode` | See source declaration |
 | [`CloudShadowNodeDeps`](../src/shadow/cloudShadowNode.ts#L19) | `interface CloudShadowNodeDeps` | See source declaration |
 | [`CloudShadowNodeOptions`](../src/shadow/cloudShadowNode.ts#L27) | `interface CloudShadowNodeOptions` | See source declaration |
@@ -866,7 +866,7 @@ Existing objects to inspect, never a second configuration store
 | [`evolvingWeatherDefaults`](../src/experimental/evolvingWeather.ts#L73) | `evolvingWeatherDefaults: Readonly<EvolvingWeatherParams>` | See source declaration |
 | [`EvolvingWeatherParams`](../src/experimental/evolvingWeather.ts#L60) | `interface EvolvingWeatherParams` | See source declaration |
 | [`ExperimentalCloudOptions`](../src/experimental/options.ts#L4) | `interface ExperimentalCloudOptions` | See source declaration |
-| [`experimentalDefaults`](../src/experimental/options.ts#L37) | `experimentalDefaults: Readonly<ExperimentalCloudOptions>` | See source declaration |
+| [`experimentalDefaults`](../src/experimental/options.ts#L40) | `experimentalDefaults: Readonly<ExperimentalCloudOptions>` | See source declaration |
 | [`FlashSample`](../src/experimental/lightning.ts#L262) | `interface FlashSample` | See source declaration |
 | [`flashScheduleDefaults`](../src/experimental/lightning.ts#L254) | `flashScheduleDefaults: Readonly<FlashScheduleOptions>` | See source declaration |
 | [`FlashScheduleOptions`](../src/experimental/lightning.ts#L243) | `interface FlashScheduleOptions` | See source declaration |
@@ -906,8 +906,8 @@ Existing objects to inspect, never a second configuration store
 
 | Export | Signature | Description |
 | --- | --- | --- |
-| [`applyPortDefaults`](../src/referenceMode.ts#L139) | `applyPortDefaults(ctx: CloudsContext): boolean` | See source declaration |
-| [`applyReferenceMode`](../src/referenceMode.ts#L106) | `applyReferenceMode(ctx: CloudsContext): boolean` | See source declaration |
+| [`applyPortDefaults`](../src/referenceMode.ts#L140) | `applyPortDefaults(ctx: CloudsContext): boolean` | See source declaration |
+| [`applyReferenceMode`](../src/referenceMode.ts#L107) | `applyReferenceMode(ctx: CloudsContext): boolean` | See source declaration |
 | [`CameraUniforms`](../src/CameraUniforms.ts#L20) | `class CameraUniforms` | See source declaration |
 | [`cpuBlendCloudTypeParameter`](../src/experimental/cloudTypeMap.ts#L390) | `cpuBlendCloudTypeParameter(base: [number, number, number, number], morph: number, param: CloudTypeParam, anchors: readonly CloudTypeArchetype[]): [number, number, number, number]` | See source declaration |
 | [`cpuCloudShadowTransmittance`](../src/shadow/cloudShadowNode.ts#L88) | `cpuCloudShadowTransmittance(opticalDepth: number): number` | See source declaration |
@@ -921,11 +921,11 @@ Existing objects to inspect, never a second configuration store
 | [`LayerUniforms`](../src/layerUniforms.ts#L13) | `interface LayerUniforms` | See source declaration |
 | [`moonlightCPU`](../src/experimental/moonlight.ts#L47) | `moonlightCPU(sunDirection: Vector3, moonDirection: Vector3, cameraPositionECEF: Vector3, gain: number, color: Vector3, out: { lightDirection: Vector3; irradianceRatio: Vector3; }): { blend: number; illuminated: number; }` | See source declaration |
 | [`PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION`](../src/referenceMode.ts#L19) | `PORT_DEFAULT_LIGHT_SHAFTS_HALF_RESOLUTION: true` | See source declaration |
-| [`REFERENCE_MODE`](../src/referenceMode.ts#L71) | `REFERENCE_MODE: ReferenceModePins` | See source declaration |
-| [`REFERENCE_MODE_PORT_ONLY_PATHS`](../src/referenceMode.ts#L82) | `REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[]` | See source declaration |
+| [`REFERENCE_MODE`](../src/referenceMode.ts#L72) | `REFERENCE_MODE: ReferenceModePins` | See source declaration |
+| [`REFERENCE_MODE_PORT_ONLY_PATHS`](../src/referenceMode.ts#L83) | `REFERENCE_MODE_PORT_ONLY_PATHS: readonly string[]` | See source declaration |
 | [`REFERENCE_SHADOW_UPDATE_INTERVAL`](../src/referenceMode.ts#L24) | `REFERENCE_SHADOW_UPDATE_INTERVAL: 1` | See source declaration |
-| [`referenceModePins`](../src/referenceMode.ts#L93) | `referenceModePins(ctx: CloudsContext): ReferenceModePins` | See source declaration |
-| [`ReferenceModePins`](../src/referenceMode.ts#L63) | `interface ReferenceModePins` | See source declaration |
+| [`referenceModePins`](../src/referenceMode.ts#L94) | `referenceModePins(ctx: CloudsContext): ReferenceModePins` | See source declaration |
+| [`ReferenceModePins`](../src/referenceMode.ts#L64) | `interface ReferenceModePins` | See source declaration |
 | [`shadowRadiusFromFootprintCPU`](../src/shadow/shadowRadius.ts#L111) | `shadowRadiusFromFootprintCPU(sizePx: number, shadowRadius?: number): number` | See source declaration |
 | [`twilightBlendCPU`](../src/experimental/moonlight.ts#L25) | `twilightBlendCPU(sunElevation: number): number` | See source declaration |
 | [`updateLayerUniforms`](../src/layerUniforms.ts#L156) | `updateLayerUniforms(uniforms: LayerUniforms, ctx: CloudsContext): void` | See source declaration |
@@ -1174,6 +1174,7 @@ Source: `experimentalDefaults`. Changing an option rebuilds the graph and invali
 | `staticMode` | `false` | [Behavior and cost](EXPERIMENTAL.md#staticmode) |
 | `cirrusDeck` | `false` | [Behavior and cost](EXPERIMENTAL.md#cirrusdeck) |
 | `shadowRoundRobin` | `false` | [Behavior and cost](EXPERIMENTAL.md#shadowroundrobin) |
+| `freshTexelBlend` | `true` | [Behavior and cost](EXPERIMENTAL.md#freshtexelblend) |
 
 ### Quality presets
 

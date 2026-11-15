@@ -5,7 +5,28 @@ Notable changes to `three-clouds-webgpu`, the WebGPU/TSL port of
 describe candidate tarballs; earlier entries describe historical or unreleased
 work.
 
+## 0.1.0-alpha.9
+
+- Fix a grid of dots, one every 4 pixels, on clouds under `temporalUpscale`,
+  visible at 1:1 pixels on high-density screens. The pixel rendered in the
+  current frame was written with no accumulation while its fifteen neighbours
+  were accumulated history. It is now blended with its own clipped history.
+  This is `experimental.freshTexelBlend`, on by default. Set it to `false` for
+  the previous output. No measurable cost on an Apple M4 Mac mini at
+  2880x1800.
+- Clip temporal history against the 4 direct neighbours instead of the full 3x3
+  block, as the original library does. Moving clouds keep more contrast.
+- Fix streaks in the temporal upscale when the render height is not a multiple
+  of 4.
+- Stop experimental rain shafts at the ground instead of marching below it.
+- Dispose the cloud-shadow placeholder texture the pass owns.
+
 ## 0.1.0-alpha.8
+
+- Fix cloud resolve variance clipping to use the original's four cross
+  neighbours instead of eight surrounding neighbours. This fidelity fix makes
+  clouds crisper to match the original, including the cloud shadow-length
+  resolve. The shadow atlas keeps its original nine-sample resolve.
 
 - Fix the experimental `cloudEnvironment` bake weighting the sky behind the
   clouds by their opacity instead of their transmittance. A cloud-free direction

@@ -12,6 +12,9 @@ types/
 # scripts and committed as evidence, not edited.
 parity/results/
 examples/parity/e2e/evidence/reversed-depth/**/*.json
+# A committed metrics.json copied byte-for-byte as a test fixture (the PR 480
+# atlas failure), so a test reads the artifact evidence actually carries
+examples/parity/test/fixtures/metrics-atlas-receipt-fail.json
 # Raw benchmark receipts, written by the benchmark scripts: evidence.
 perf/
 pnpm-lock.yaml

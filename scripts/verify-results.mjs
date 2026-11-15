@@ -14,6 +14,8 @@ import {
   unsetMetrics,
   validateThresholds
 } from '../examples/parity/cases/thresholdSchema.mjs'
+import { evaluateAtlasChannelReceipt } from '../examples/parity/src/metrics/atlasChannels.ts'
+import { composeVerdict } from '../examples/parity/src/metrics/composeVerdict.mjs'
 import {
   checkMetricsVersion,
   evaluate as evaluateMetrics
@@ -185,6 +187,23 @@ export function checkShadedFraction(sf) {
 }
 
 /**
+ * a capture's own shaded-fraction reasons, for the complete verdict.
+ * The receipt RAN when it was taken, so the in-memory reasons are the
+ * measurement. `checkShadedFraction` above re-derives them for stored
+ * evidence, whose numbers were rounded. A block that carries reasons uses
+ * them, and one captured before they were recorded is re-derived
+ */
+export function captureShadedFractionReasons(sf) {
+  if (sf == null) return []
+  if (typeof sf.skipped === 'string' && sf.skipped.length > 0) return []
+  if (sf.error) {
+    return [`shaded-fraction receipt could not be taken: ${sf.error}`]
+  }
+  if (Array.isArray(sf.reasons)) return [...sf.reasons]
+  return checkShadedFraction(sf)
+}
+
+/**
  * the packed debug plate's per-channel agreement.
  *
  * Mirrors buildAtlasChannelReceipt's reasons in
@@ -195,52 +214,45 @@ export function checkShadedFraction(sf) {
 export function checkAtlasChannels(ac) {
   if (ac == null) return []
   if (ac.error) return [`atlas-channel receipt could not be taken: ${ac.error}`]
-  const reasons = []
-  if (!Array.isArray(ac.gated) || ac.gated.length === 0) {
-    return [
-      'atlas-channel receipt REFUSED: the capture gated no channel, so ' +
-        'nothing about the atlas was measured'
-    ]
-  }
-  if (typeof ac.tolerance !== 'number' || !(ac.tolerance > 0)) {
-    return [
-      `atlas-channel receipt REFUSED: tolerance ${JSON.stringify(ac.tolerance)} is not a positive fraction of the channel mean`
-    ]
-  }
-  for (const c of ac.gated) {
-    if (!(ac.ratio?.[c] > 0)) {
-      reasons.push(
-        `atlas-channel receipt REFUSED: gated channel ${c} has no signal on side A (ratio ${JSON.stringify(ac.ratio?.[c])})`
-      )
-    }
-  }
-  if (reasons.length > 0) return reasons
-  for (const c of ac.gated) {
-    const deviation = Math.abs(ac.ratio[c] - 1)
-    if (!(deviation <= ac.tolerance)) {
-      reasons.push(
-        `atlas channel ${c}: B/A ${ac.ratio[c].toFixed(4)} (deviation ${(deviation * 100).toFixed(2)} % > ${(ac.tolerance * 100).toFixed(2)} %) — the channels that decide optical depth disagree`
-      )
-    }
-  }
-  return reasons
+  // ONE rule, in the TypeScript module the capture also builds its receipt
+  // with, so a stored failure and a re-derived one cannot be worded apart
+  return evaluateAtlasChannelReceipt(ac)
+}
+
+// The metrics a floor may pin, and the range each is measured in. ssim is a
+// minimum, the two distance metrics are maximums (FLOOR_DIRECTIONS)
+const FLOOR_RANGES = {
+  ssim: [0, 1],
+  deP95: [0, Number.POSITIVE_INFINITY],
+  histDist: [0, Number.POSITIVE_INFINITY]
 }
 
 export function validateAcceptedFloors(accepted) {
   if (!Array.isArray(accepted)) return
   for (const entry of accepted) {
     if (entry == null || entry.floor == null) continue
-    const value = entry.floor.ssim
-    if (
-      typeof entry.floor !== 'object' ||
-      typeof value !== 'number' ||
-      !Number.isFinite(value) ||
-      value < 0 ||
-      value > 1
-    ) {
+    const floor = entry.floor
+    const malformed = why => {
       throw new Error(
-        `thresholds.json: accepted[] entry '${String(entry.pattern)}' has a malformed floor ${JSON.stringify(entry.floor)} — floor.ssim must be a finite number in [0, 1]`
+        `thresholds.json: accepted[] entry '${String(entry.pattern)}' has a malformed floor ${JSON.stringify(floor)} — ${why}`
       )
+    }
+    if (typeof floor !== 'object') malformed('a floor must be an object')
+    for (const [metric, value] of Object.entries(floor)) {
+      const range = FLOOR_RANGES[metric]
+      if (range == null) {
+        malformed(`floor.${metric} is not a metric the evaluator compares`)
+      }
+      if (
+        typeof value !== 'number' ||
+        !Number.isFinite(value) ||
+        value < (range[0] ?? 0) ||
+        value > (range[1] ?? Number.POSITIVE_INFINITY)
+      ) {
+        malformed(
+          `floor.${metric} must be a finite number in [${range[0]}, ${range[1]}]`
+        )
+      }
     }
   }
 }
@@ -480,24 +492,13 @@ export function evaluateCommittedMetrics(
   if (servedReasons.length > 0) {
     return { result: 'fail', reasons: servedReasons }
   }
-  // shaded-fraction is a hard gate (ratio, or b-only on side B)
-  // that accepted[] cannot downgrade. A missing block predates the receipt
-  const receiptReasons = checkShadedFraction(metrics.shadedFraction)
-  if (receiptReasons.length > 0) {
-    return { result: 'fail', reasons: receiptReasons }
-  }
-  // the same standing for the packed plate's gated channels
-  // A case without the block does not declare the gate
-  const atlasReasons = checkAtlasChannels(metrics.atlasChannels)
-  if (atlasReasons.length > 0) {
-    return { result: 'fail', reasons: atlasReasons }
-  }
-  return evaluateMetrics(
+  // the metric verdict is kept, then the hard receipts are
+  // appended in the capture's order and force FAIL. The arithmetic reasons are
+  // evidence of their own and must survive an independent receipt failure
+  return composeVerdict(
+    evaluateMetrics(metrics, phaseThresholds, caseName, accepted, plateCheck),
     metrics,
-    phaseThresholds,
-    caseName,
-    accepted,
-    plateCheck
+    { shadedFraction: checkShadedFraction, atlasChannel: checkAtlasChannels }
   )
 }
 

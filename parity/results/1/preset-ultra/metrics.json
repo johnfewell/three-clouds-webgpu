@@ -3,31 +3,31 @@
   "phase": 1,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.986048,
-  "deMean": 0.32,
-  "deP95": 0.55,
-  "histDist": 0.007616,
+  "ssim": 0.996504,
+  "deMean": 0.27,
+  "deP95": 0.49,
+  "histDist": 0.006903,
   "plate": {
     "A": {
       "mean": 0.100817,
       "std": 0.009832
     },
     "B": {
-      "mean": 0.100396,
-      "std": 0.009018,
-      "cloudFraction": 0.189147
+      "mean": 0.100492,
+      "std": 0.009549,
+      "cloudFraction": 0.189148
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 9
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.09043699875473976,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.9860594954131763,
-    "ssimAtReferenceL": 0.9860323350282618,
-    "stabiliserShareOfDeficit": -0.0019483071609998357,
-    "meanLuminanceTerm": 0.9999542698667931,
-    "meanContrastStructureTerm": 0.9861041606404483,
+    "ssimAtMeasuredL": 0.9964945982388316,
+    "ssimAtReferenceL": 0.9964880579077116,
+    "stabiliserShareOfDeficit": -0.0018657864534875979,
+    "meanLuminanceTerm": 0.999960086166979,
+    "meanContrastStructureTerm": 0.9965339755704965,
     "sigmaA": 0.005265094925638367,
-    "sigmaB": 0.004855108787593974,
-    "sigmaD": 0.001006426931711804,
+    "sigmaB": 0.005281582285922562,
+    "sigmaD": 0.00031285490398313834,
     "bandFractions": [
       0.3744802517361111,
       0.1253049045138889,
@@ -95,29 +95,29 @@
   "atlasChannels": null,
   "convergence": {
     "A": 0.000001,
-    "B": 0.000002
+    "B": 0
   },
   "shadowRadius": null,
   "subgroups": true,
   "result": "pass",
   "reasons": [],
-  "maxDiffDelta": 0.094511,
+  "maxDiffDelta": 0.098088,
   "width": 1280,
   "height": 720,
-  "captureMs": 5331,
-  "metricsMs": 761,
+  "captureMs": 5273,
+  "metricsMs": 736,
   "gpuMs": {
     "sideA": {
-      "medianMs": 13.77,
+      "medianMs": 13.99,
       "passes": {
-        "total": 13.77
+        "total": 13.99
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 2.92,
+      "medianMs": 2.68,
       "passes": {
-        "render": 2.92
+        "render": 2.68
       },
       "sampleCount": 32
     }

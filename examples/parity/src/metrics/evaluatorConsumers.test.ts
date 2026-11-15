@@ -1,13 +1,15 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { join, relative, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import {
+  captureShadedFractionReasons,
   checkAtlasChannels,
   checkShadedFraction,
   evaluateCommittedMetrics
 } from '../../../../scripts/verify-results.mjs'
 import { table } from '../../../../test/helpers/cpuTwin'
+import { composeVerdict } from './composeVerdict.mjs'
 import {
   evaluate as evaluateBrowser,
   type Metrics,
@@ -65,6 +67,28 @@ function plateCheck(
   }
 }
 
+/**
+ * The ladder rows frozen in parity/results/regate-owed.json: their metrics the
+ * capture recorded before vymb.7 gave phase 4 its deP95 and histDist gates.
+ * Evidence is never edited, so the screen is a LIST (reviewed, shrink-only) and
+ * not a rule that could quietly excuse a new disagreement. Any row this list
+ * omits is compared exactly, so the screen cannot hide anything by itself
+ */
+function frozenRegateRows(): Set<string> {
+  const path = join(ROOT, 'parity', 'results', 'regate-owed.json')
+  if (!existsSync(path)) return new Set()
+  const parsed = JSON.parse(readFileSync(path, 'utf8')) as { rows?: string[] }
+  return new Set(parsed.rows ?? [])
+}
+
+function awaitingRegate(path: string, metrics: StoredMetrics): boolean {
+  const key = `${String(metrics.case)}/${String(metrics.phase)}`
+  if (!frozenRegateRows().has(key)) return false
+  // and only while the artifact still carries its pre-gate verdict
+  const reasons = metrics.reasons ?? []
+  return !reasons.some(r => /^(deP95|histDist) |\[floor [^\]]*deP95/.test(r))
+}
+
 describe('single-source metric evaluator', () => {
   it('all three consumers import the shared implementation', () => {
     const consumers = [
@@ -105,12 +129,19 @@ describe('single-source metric evaluator', () => {
     ) as Thresholds
     const paths = committedMetricsPaths()
     const counts = { pass: 0, 'expected-difference': 0, fail: 0 }
+    const awaiting: string[] = []
 
     expect(paths.length).toBeGreaterThan(0)
     for (const metricsPath of paths) {
       const metrics = JSON.parse(
         readFileSync(metricsPath, 'utf8')
       ) as StoredMetrics
+      // Evidence is never edited, so an artifact predating a gate the operator
+      // added cannot agree with the new rule until re-captured (vymb.7, phase 4)
+      if (awaitingRegate(metricsPath, metrics)) {
+        awaiting.push(metricsPath)
+        continue
+      }
       const phaseThresholds = thresholds.phases[metrics.phase] ?? {}
       const check = plateCheck(thresholds, metrics)
       const captureVerdict = evaluateCapture(
@@ -146,35 +177,12 @@ describe('single-source metric evaluator', () => {
       )
 
       // The shared evaluator answers the METRIC question only and production
-      // composes the shaded-fraction receipt on top. That composition is written
-      // twice (capture.mjs:845-855, verify-results checkShadedFraction)
-      const sf = metrics.shadedFraction as
-        { skipped?: boolean; error?: string; reasons?: string[] } | undefined
-      const receiptReasons =
-        sf == null
-          ? []
-          : sf.skipped
-            ? []
-            : sf.error
-              ? [`shaded-fraction receipt could not be taken: ${sf.error}`]
-              : (sf.reasons ?? [])
-      // the atlas-channel gate composes the same way, from the same
-      // two sources (capture.mjs and verify-results checkAtlasChannels)
-      const ac = metrics.atlasChannels as
-        { error?: string; reasons?: string[] } | undefined
-      const atlasReasons =
-        ac == null
-          ? []
-          : ac.error
-            ? [`atlas-channel receipt could not be taken: ${ac.error}`]
-            : (ac.reasons ?? [])
-      const composed = { ...captureVerdict }
-      for (const extra of [receiptReasons, atlasReasons]) {
-        if (extra.length > 0) {
-          composed.reasons = [...composed.reasons, ...extra]
-          composed.result = 'fail'
-        }
-      }
+      // composes the hard receipts on top through ONE helper, so the three
+      // consumers cannot order or drop a receipt reason differently
+      const composed = composeVerdict(captureVerdict, metrics, {
+        shadedFraction: captureShadedFractionReasons,
+        atlasChannel: checkAtlasChannels
+      })
 
       expect(browserVerdict, metricsPath).toEqual(captureVerdict)
       expect(verifyVerdict, metricsPath).toEqual(composed)
@@ -196,6 +204,10 @@ describe('single-source metric evaluator', () => {
       counts[composed.result]++
     }
 
+    table(
+      'shared-evaluator-awaiting-recapture',
+      awaiting.map(path => ({ path: relative(ROOT, path) }))
+    )
     table('shared-evaluator-committed-verdicts', [
       { result: 'pass', count: counts.pass },
       {
@@ -246,9 +258,15 @@ describe('verify-results receipt mirrors', () => {
     ).toMatch(/side B plate did not brighten/)
   })
 
+  // The means travel too: the verify-time rule now recomputes the ratio from
+  // them, so a fixture that only declares `ratio` measures nothing
   const ac = (ratio: Record<string, number>, tolerance = 0.05) => ({
     A: { r: 0.45, g: 0.0012, b: 0.0045 },
-    B: { r: 6.88, g: 0.0012, b: 0.0045 },
+    B: {
+      r: 0.45 * ratio['r']!,
+      g: 0.0012 * ratio['g']!,
+      b: 0.0045 * ratio['b']!
+    },
     ratio,
     deviation: { r: 14.29, g: 0, b: 0 },
     gated: ['g', 'b'],

@@ -28,9 +28,10 @@ import {
 import type { Node, StorageTexture, TextureNode } from 'three/webgpu'
 
 import { bayerIndices, referenceBayerRow } from '../resolve/bayer'
-import type {
-  CloudsResolveDeps,
-  CloudsResolveShadowLengthDeps
+import {
+  resolveCellShift,
+  type CloudsResolveDeps,
+  type CloudsResolveShadowLengthDeps
 } from '../resolve/cloudsResolve'
 import { clipAABB, OFFSETS_9 } from '../resolve/varianceClipping'
 
@@ -138,10 +139,10 @@ export function createTileClosest(tile: ResolveTile) {
 function currentBayerCell(
   coord: Node<'ivec2'>,
   frame: Node<'float'>,
-  height: Node<'float'>
+  shift: Node<'int'>
 ) {
   return Fn(() => {
-    const index = referenceBayerRow(coord.y, height).mul(4).add(coord.x.mod(4))
+    const index = referenceBayerRow(coord.y, shift).mul(4).add(coord.x.mod(4))
     const cell = int(0).toVar()
     for (let i = 1; i < 16; i++) {
       If(index.equal(i), () => {
@@ -160,6 +161,11 @@ export function buildComputeCloudsResolve(
   shadowOutput?: StorageTexture
 ) {
   const size = vec2(textureSize(texture(deps.colorBuffer)) as never)
+  // Rows the low-res grid has beyond the viewport (task 18). Zero at every
+  // multiple of 4 and for the non-upscale path, which reads full-res coords
+  const shift = upscale
+    ? resolveCellShift(deps.colorBuffer, deps.resolveHeight)
+    : int(0)
   const stride = upscale ? 2 : 8
   const halo = upscale ? 3 : 1
   const colorTile = createResolveTile(deps.colorBuffer, size, stride, halo)
@@ -178,6 +184,9 @@ export function buildComputeCloudsResolve(
   const clipShadow =
     shadowTile == null ? null : createTileClip(shadowTile, size, upscale, true)
 
+  const blendWeight = upscale ? deps.freshTexelWeight : undefined
+  const rawFresh = upscale && blendWeight == null
+
   return Fn(() => {
     colorTile.fill().toStack()
     depthTile.fill().toStack()
@@ -193,7 +202,10 @@ export function buildComputeCloudsResolve(
         .and(coord.y.lessThan(deps.resolveHeight.toInt())),
       () => {
         const uv = vec2(coord).add(0.5).div(fullSize)
-        const bufferCoord = upscale ? coord.div(int(4)) : coord
+        const shiftedRow = coord.y.add(shift).div(int(4))
+        const bufferCoord = upscale
+          ? ivec2(coord.x.div(int(4)), shiftedRow)
+          : coord
         const current = colorTile.load(bufferCoord)
         const color = current.toVar()
         const currentShadow =
@@ -210,14 +222,19 @@ export function buildComputeCloudsResolve(
           clipShadow,
           { uv, bufferCoord, current, color, currentShadow, shaft }
         )
-        if (upscale)
-          If(
-            currentBayerCell(coord, deps.frame, deps.resolveHeight).not(),
-            () => {
-              accumulate().toStack()
-            }
-          )
-        else accumulate().toStack()
+        const cell = currentBayerCell(coord, deps.frame, shift)
+        // experimental.freshTexelBlend, as in the fragment resolve
+        const blend = createComputeFreshBlend(blendWeight, accumulate, cell, {
+          current,
+          color,
+          currentShadow,
+          shaft: shadowTile == null ? null : shaft
+        })
+        if (rawFresh)
+          If(cell.not(), () => {
+            accumulate().toStack()
+          })
+        else blend().toStack()
         if (deps.shadowHistoryValid != null) {
           If(deps.shadowHistoryValid.not(), () => {
             shaft.assign(currentShadow)
@@ -229,6 +246,31 @@ export function buildComputeCloudsResolve(
       }
     )
   })().computeKernel([8, 8, 1])
+}
+
+// The plain accumulation when the option is off or the resolve is full-res
+function createComputeFreshBlend(
+  weight: number | undefined,
+  accumulate: () => Node,
+  cell: Node<'bool'>,
+  state: {
+    current: Node<'vec4'>
+    color: Node<'vec4'>
+    currentShadow: Node<'vec4'>
+    shaft: Node<'vec4'> | null
+  }
+) {
+  if (weight == null) return accumulate
+  const { color, current, currentShadow, shaft } = state
+  return Fn(() => {
+    accumulate().toStack()
+    If(cell, () => {
+      color.assign(mix(color, current, float(weight)))
+      if (shaft != null) {
+        shaft.assign(mix(shaft, currentShadow, float(weight)))
+      }
+    })
+  }, 'void')
 }
 
 function createComputeAccumulation(

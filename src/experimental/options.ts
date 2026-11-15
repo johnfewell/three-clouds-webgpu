@@ -32,6 +32,9 @@ export interface ExperimentalCloudOptions {
   // Each shadow update re-renders one cascade in turn and reuses the others,
   // with a full update after a reset or a large camera or sun move
   shadowRoundRobin: boolean
+  // Under temporalUpscale, blends the just-rendered texel with its clipped
+  // history instead of writing it raw, which removes a 4 pixel dot grid
+  freshTexelBlend: boolean
 }
 
 export const experimentalDefaults: Readonly<ExperimentalCloudOptions> =
@@ -61,7 +64,11 @@ export const experimentalDefaults: Readonly<ExperimentalCloudOptions> =
     cloudEnvironment: false,
     staticMode: false,
     cirrusDeck: false,
-    shadowRoundRobin: false
+    shadowRoundRobin: false,
+    // Promoted 2026-11-14: picked blind twice by
+    // the operator, with no measurable frame-time cost on the Mac mini
+    // Reference mode pins it off, so the parity ladder is unaffected
+    freshTexelBlend: true
   })
 
 // Options that build a separate graph or run host dispatch without modifying

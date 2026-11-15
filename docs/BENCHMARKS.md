@@ -441,6 +441,44 @@ Measurements conducted on an Apple Silicon GPU running native WebGPU under count
 - **Bindings & Uniform Sharing**: `TextureNode.getBase()` deduplicates texture matrix and `flipY` uniforms. Warm unchanged frames execute with 0 bind-group key string allocations.
 - **Cloud Environment Map**: Dynamic cube PMREM generation in r187 is ~1 ms/frame more expensive overall (+2.1 ms per bake frame). Default remains 64×64, 4-frame update interval, and strictly opt-in (`cloudEnvironment = false`) with zero overhead when disabled. The bake overhead in scenes that enable it, such as the ocean examples, is a known follow-up.
 
+### 2026-11-11: Re-baseline (three 0.187)
+
+Two protocols, two machines, one commit. Protocol 1 launches Chrome and
+therefore ran on an Apple M4 Mac mini (Chrome 157, GPU lock and QUIET held),
+protocol 2 launches Playwright's bundled Chromium and ran on an Apple M5 Pro
+laptop (Chromium for Testing 151, the laptop GPU lock held per run).
+Library build `build/shared.js` sha256 `6de7419d` in both places.
+
+These figures belong to the development revision of 2026-11-11 and to nothing
+after it. Raw JSON, logs, the reduction commands, the positive
+control and every clock warning are in `perf/2026-11-11-main/`.
+
+#### Consumer path, library defaults (protocol 1, Mac mini M4, uncapped)
+
+| DPR | A (WebGL original) ms | B (port) ms | B/A | B/A per rep |
+|---|---|---|---|---|
+| 1 | 11.13 [11.10-11.39] | 11.61 [11.57-11.67] | **1.043x** | 1.025-1.046x |
+| 2 | 23.40 [23.34-23.43] | 23.15 [23.07-23.28] | **0.989x** | 0.988-0.995x |
+
+N=5, position alternating (verified in the log). The 2026-10-04 figures were
+0.924x and 1.112x, so DPR 2 reverses and the port is no longer ahead at DPR 1.
+At DPR 1 with vsync both sides sit on one 16.67 ms vsync and are
+indistinguishable; DPR 2 vsync reads 0.988x, agreeing with the uncapped cell.
+
+#### Parity harness, settings matched (protocol 2, M5 Pro laptop)
+
+`--arms A,B --n 5 --warmup 4 --frames 10`, the frames right after a fresh page
+load. Probe units, because this machine's clock moved inside every run: the
+composite share of side B's 2880x1800 baseline-medium frame is
+**11.26 of 29.28 units (37.8 %)**, the largest single stage, against the 36 %
+on record; side B's composite share is about 35 % at 2560x1440 and 20-23 % at
+1280x720. The full per-stage table, all ten clock-warning rows and the
+primary-march sample-count check (equal within 0.05 % on all ten cells) are in
+the perf README.
+
+Both tables' milliseconds are machine-specific and the two machines' numbers
+must never be placed in one table.
+
 ## Agent Run Instructions
 
 A cheaper agent can operate the same CLI without changing the protocol:

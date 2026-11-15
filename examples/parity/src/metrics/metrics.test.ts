@@ -221,6 +221,66 @@ describe('evaluate', () => {
     expect(result.reasons.some(r => r.includes('accepted'))).toBe(true)
   })
 
+  // A floor may pin a distance metric as well as ssim. ssim is a MINIMUM (it is
+  // higher-is-better); deP95 and histDist are MAXIMUMS (lower-is-better), so
+  // the same footprint fails in the opposite direction
+  describe('accepted floor direction', () => {
+    const accepted = [
+      {
+        pattern: 'floor-*',
+        reason: 'ADR-000: a documented difference',
+        floor: { deP95: 18.99, histDist: 0.1959 }
+      }
+    ]
+    const phases = { ssim: 0.98, deP95: 5, histDist: 0.1 }
+
+    it('an EXCEEDED distance ceiling is beyond the accepted footprint', () => {
+      const result = evaluate(
+        { ssim: 0.99, deMean: 0, deP95: 19.0, histDist: 0.196 },
+        phases,
+        'floor-exceeded',
+        accepted
+      )
+      expect(result.result).toBe('fail')
+      expect(result.reasons.join('\n')).toMatch(
+        /beyond the accepted footprint: deP95 19\.0000 > floor 18\.9900/
+      )
+      expect(result.reasons.join('\n')).toMatch(
+        /beyond the accepted footprint: histDist 0\.1960 > floor 0\.1959/
+      )
+    })
+
+    it('a distance AT the ceiling is inside the footprint', () => {
+      const result = evaluate(
+        { ssim: 0.99, deMean: 0, deP95: 18.99, histDist: 0.1959 },
+        phases,
+        'floor-at-ceiling',
+        accepted
+      )
+      expect(result.result).toBe('expected-difference')
+      expect(result.reasons.join('\n')).toMatch(
+        /\[floor deP95 18\.9900, histDist 0\.1959\]/
+      )
+    })
+
+    it('ssim keeps its own direction alongside the ceilings', () => {
+      const withSsim = [
+        {
+          pattern: 'floor-*',
+          reason: 'ADR-000: a documented difference',
+          floor: { ssim: 0.9, deP95: 18.99 }
+        }
+      ]
+      const below = evaluate(
+        { ssim: 0.85, deMean: 0, deP95: 10, histDist: 0 },
+        phases,
+        'floor-below-ssim',
+        withSsim
+      )
+      expect(below.reasons.join('\n')).toMatch(/ssim 0\.8500 < floor 0\.9000/)
+    })
+  })
+
   it('no thresholds means pass', () => {
     const result = evaluate(
       { ssim: 0.5, deMean: 50, deP95: 100, histDist: 2 },

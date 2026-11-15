@@ -622,8 +622,8 @@ export function caseToParityCase(cd: CaseDefinition): ParityCase {
   const eff = effectiveState(cd)
   return {
     name: cd.name,
-    width: 1280,
-    height: 720,
+    width: cd.size?.width ?? 1280,
+    height: cd.size?.height ?? 720,
     pixelRatio: 1,
     time: cd.time,
     frame: cd.frame,

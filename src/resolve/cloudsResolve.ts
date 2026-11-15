@@ -10,8 +10,11 @@ import {
   ivec2,
   mix,
   struct,
+  texture,
   textureLoad,
+  textureSize,
   uv,
+  vec2,
   vec4
 } from 'three/tsl'
 import type { Node, TextureNode } from 'three/webgpu'
@@ -35,6 +38,18 @@ const NEIGHBOR_OFFSETS_9 = [
 // The weight a full-resolution resolve gives the current frame
 // Cite: CloudsResolveMaterial.ts:78
 export const CLOUDS_TEMPORAL_ALPHA = 0.1
+
+// experimental.freshTexelBlend: the share of the just-rendered texel kept
+// against its clipped history. The operator picked 0.25 blind, twice
+export const FRESH_TEXEL_WEIGHT = 0.25
+
+export function freshTexelBlendCPU(
+  clippedHistory: number,
+  current: number,
+  weight = FRESH_TEXEL_WEIGHT
+): number {
+  return clippedHistory + (current - clippedHistory) * weight
+}
 
 function createGetClosestFragment(depthVelocityBuffer: Texture) {
   return /*#__PURE__*/ Fn(([coord]: [Node<'ivec2'>]) => {
@@ -82,6 +97,18 @@ export function isCurrentFrameCPU(
   return bayerIndex2D(pixelX % 4, pixelY % 4) === frame % 16
 }
 
+// Unused low-res rows, 4*ceil(H/4) - H: WebGL's grid is bottom-anchored so its
+// partial cell sits at the top, and the top-anchored port must skip that shift
+// Hoisted above every branch, as TSL emits a var where its node is first used
+export function resolveCellShift(
+  colorBuffer: Texture,
+  resolveHeight: Node<'float'>
+): Node<'int'> {
+  // vec2() because textureSize() is typed as the legacy untyped Node base
+  const lowResHeight = vec2(textureSize(texture(colorBuffer)) as never).y
+  return lowResHeight.toInt().mul(int(4)).sub(resolveHeight.toInt())
+}
+
 // Precomputed Bayer lookup table [y*4+x] → bayerIndex2D(x, y)
 const BAYER_TABLE: readonly number[] = (() => {
   const table: number[] = []
@@ -106,27 +133,33 @@ export interface CloudsResolveDeps {
   frame: Node<'float'>
   varianceGamma: Node<'float'>
   temporalAlpha: Node<'float'>
+  // Set under experimental.freshTexelBlend. Unset emits the original resolve
+  freshTexelWeight?: number
 }
 
 // Cite: cloudsResolve.frag:63–118
 export function buildTemporalUpscale(deps: CloudsResolveDeps) {
   const getClosestFragment = createGetClosestFragment(deps.depthVelocityBuffer)
-  const varClip = varianceClippingUv(deps.colorBuffer)
+  // The cloud shader leaves VARIANCE_9_SAMPLES unset, unlike the shadow atlas
+  // Cite: varianceClipping.glsl:13-15
+  const varClip = varianceClippingUv(deps.colorBuffer, { samples: 4 })
 
   return Fn(() => {
     const fullResUv = uv()
     // Full-res pixel coords (equivalent to ivec2(gl_FragCoord.xy))
     const coordX = fullResUv.x.mul(deps.resolveWidth).toInt()
     const coordY = fullResUv.y.mul(deps.resolveHeight).toInt()
+    const shift = resolveCellShift(deps.colorBuffer, deps.resolveHeight)
 
-    // Low-res coords (integer division by 4)
-    const lowResCoord = ivec2(coordX.div(int(4)), coordY.div(int(4)))
+    // Low-res coords (integer division by 4 of the shifted row, task 18)
+    const lowResRow = coordY.add(shift).div(int(4))
+    const lowResCoord = ivec2(coordX.div(int(4)), lowResRow)
 
     // WebGL's gl_FragCoord is bottom-up and this uv is top-down, so select the
     // same physical Bayer row. Cite: cloudsResolve.frag:163
     // (bayerIndices[coord.x % 4][coord.y % 4])
     const cellX = coordX.sub(coordX.div(int(4)).mul(int(4)))
-    const cellY = referenceBayerRow(coordY, deps.resolveHeight)
+    const cellY = referenceBayerRow(coordY, shift)
     const flatIdx = cellY.mul(int(4)).add(cellX)
 
     const bayerValue = int(BAYER_TABLE[0]).toVar()
@@ -179,7 +212,7 @@ export function buildTemporalUpscale(deps: CloudsResolveDeps) {
 // Cite: cloudsResolve.frag:120–152
 export function buildTemporalAntialiasing(deps: CloudsResolveDeps) {
   const getClosestFragment = createGetClosestFragment(deps.depthVelocityBuffer)
-  const varClip = varianceClipping(deps.colorBuffer)
+  const varClip = varianceClipping(deps.colorBuffer, { samples: 4 })
 
   return Fn(() => {
     const coordX = uv().x.mul(deps.resolveWidth).toInt()
@@ -244,10 +277,13 @@ export function buildCloudsResolve(
     const coordX = fullResUv.x.mul(deps.resolveWidth).toInt()
     const coordY = fullResUv.y.mul(deps.resolveHeight).toInt()
     const coord = ivec2(coordX, coordY)
-    // The buffers are marched at quarter resolution under the upscale and at
-    // full resolution otherwise, and the clipping neighbourhood follows
+    // Quarter-res under the upscale, full-res otherwise, and under the
+    // upscale the owned row is (y + shift) / 4, not y / 4 (task 18)
+    const shift = temporalUpscale
+      ? resolveCellShift(deps.colorBuffer, deps.resolveHeight)
+      : int(0)
     const bufferCoord = temporalUpscale
-      ? ivec2(coordX.div(int(4)), coordY.div(int(4)))
+      ? ivec2(coordX.div(int(4)), coordY.add(shift).div(int(4)))
       : coord
 
     const currentColor = textureLoad(deps.colorBuffer, bufferCoord, int(0))
@@ -279,7 +315,7 @@ export function buildCloudsResolve(
       // WebGL's gl_FragCoord is bottom-up and this uv is top-down, so select
       // the same physical Bayer row. Cite: cloudsResolve.frag:163
       const cellX = coordX.sub(coordX.div(int(4)).mul(int(4)))
-      const cellY = referenceBayerRow(coordY, deps.resolveHeight)
+      const cellY = referenceBayerRow(coordY, shift)
       const flatIdx = cellY.mul(int(4)).add(cellX)
       const bayerValue = int(BAYER_TABLE[0]).toVar()
       for (let i = 1; i < 16; i++) {
@@ -291,9 +327,23 @@ export function buildCloudsResolve(
       const frame16 = frameInt.sub(frameInt.div(int(16)).mul(int(16)))
       // Cite: cloudsResolve.frag:75–82. The texel just rendered is output
       // without accumulation, every other texel reprojects its history
-      If(bayerValue.equal(frame16).not(), () => {
-        accumulate().toStack()
+      const isFresh = bayerValue.equal(frame16)
+      const blend = createFreshTexelBlend(deps.freshTexelWeight, {
+        accumulate,
+        isFresh,
+        currentColor,
+        color,
+        currentShadowLength,
+        shadowLengthOut,
+        withShadowLength
       })
+      // Cite: cloudsResolve.frag:75–82. The texel just rendered is output
+      // without accumulation, every other texel reprojects its history
+      if (blend != null) blend().toStack()
+      else
+        If(isFresh.not(), () => {
+          accumulate().toStack()
+        })
     } else {
       accumulate().toStack()
     }
@@ -315,6 +365,36 @@ export function buildCloudsResolve(
       ? (out.get('shadowLength') as Node<'vec4'>)
       : null
   }
+}
+
+// experimental.freshTexelBlend. The raw texel carries one frame of march noise,
+// seen as a dot every 4 pixels at 1:1, so clip its history too and keep only a
+// share of the fresh value. Null when the option is off
+function createFreshTexelBlend(
+  weight: number | undefined,
+  state: {
+    accumulate: () => Node
+    isFresh: Node<'bool'>
+    currentColor: Node<'vec4'>
+    color: Node<'vec4'>
+    currentShadowLength: Node<'vec4'>
+    shadowLengthOut: Node<'vec4'>
+    withShadowLength: boolean
+  }
+) {
+  if (weight == null) return null
+  const { color, currentColor, currentShadowLength, shadowLengthOut } = state
+  return Fn(() => {
+    state.accumulate().toStack()
+    If(state.isFresh, () => {
+      color.assign(mix(color, currentColor, float(weight)))
+      if (state.withShadowLength) {
+        shadowLengthOut.assign(
+          mix(shadowLengthOut, currentShadowLength, float(weight))
+        )
+      }
+    })
+  }, 'void')
 }
 
 function createCloudsAccumulation(
@@ -362,12 +442,12 @@ function createCloudsAccumulation(
       const historyColor = deps.colorHistoryNode.sample(prevUv).level(float(0))
       if (temporalUpscale) {
         // Cite: cloudsResolve.frag:100 (vec2/textureOffset overload at vUv)
-        const varClip = varianceClippingUv(deps.colorBuffer)
+        const varClip = varianceClippingUv(deps.colorBuffer, { samples: 4 })
         color.assign(
           varClip(fullResUv, currentColor, historyColor, deps.varianceGamma)
         )
       } else {
-        const varClip = varianceClipping(deps.colorBuffer)
+        const varClip = varianceClipping(deps.colorBuffer, { samples: 4 })
         const clipped = varClip(coord, currentColor, historyColor, float(1))
         color.assign(mix(clipped, currentColor, deps.temporalAlpha))
       }
@@ -378,7 +458,10 @@ function createCloudsAccumulation(
           1
         )
         if (temporalUpscale) {
-          const varClipSL = varianceClippingUv(shadowLength.shadowLengthBuffer)
+          const varClipSL = varianceClippingUv(
+            shadowLength.shadowLengthBuffer,
+            { samples: 4 }
+          )
           shadowLengthOut.assign(
             varClipSL(
               fullResUv,
@@ -388,7 +471,9 @@ function createCloudsAccumulation(
             )
           )
         } else {
-          const varClipSL = varianceClipping(shadowLength.shadowLengthBuffer)
+          const varClipSL = varianceClipping(shadowLength.shadowLengthBuffer, {
+            samples: 4
+          })
           const clipped = varClipSL(
             coord,
             currentShadowLength,

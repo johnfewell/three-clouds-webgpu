@@ -1,0 +1,33 @@
+[capture][odd-size-temporal-1] starting (phase 2, #66)
+[capture][odd-size-temporal-1] screenshots: A=694879b B=672178b
+[capture][odd-size-temporal-1] metrics: ssim=0.9773 deMean=0.30 deP95=0.51 histDist=0.0069 maxDelta=0.1362
+[capture][odd-size-temporal-1] dual-L: measuredL=0.0493 ssim@measuredL=0.9717 (gated ssim is @refL=0.09) stabiliserShare=19.9% sigmaA=2.44e-3 sigmaB=2.43e-3 sigmaD=4.84e-4
+[capture][odd-size-temporal-1] plate: A mean=0.1010 std=0.0067 B mean=0.1007 std=0.0062 cloudFraction=16.537%
+[capture][odd-size-temporal-1] gpuMs: A=6.54ms (32 samples) B=3.12ms (32 samples)
+[capture][odd-size-temporal-1] eval: pass
+[capture][odd-size-temporal-1] sequence: 16 frames, dt=0.016666666666666666
+[capture][odd-size-temporal-1] seq-frame: frame=0 time=0.000 plateMeanA=0.10104341 plateMeanB=0.10068054
+[capture][odd-size-temporal-1] seq-frame: frame=1 time=0.017 plateMeanA=0.10104507 plateMeanB=0.10068331
+[capture][odd-size-temporal-1] seq-frame: frame=2 time=0.033 plateMeanA=0.10104099 plateMeanB=0.10067760
+[capture][odd-size-temporal-1] seq-frame: frame=3 time=0.050 plateMeanA=0.10103631 plateMeanB=0.10066860
+[capture][odd-size-temporal-1] seq-frame: frame=4 time=0.067 plateMeanA=0.10103412 plateMeanB=0.10066803
+[capture][odd-size-temporal-1] seq-frame: frame=5 time=0.083 plateMeanA=0.10103966 plateMeanB=0.10067241
+[capture][odd-size-temporal-1] seq-frame: frame=6 time=0.100 plateMeanA=0.10103534 plateMeanB=0.10066894
+[capture][odd-size-temporal-1] seq-frame: frame=7 time=0.117 plateMeanA=0.10103421 plateMeanB=0.10066956
+[capture][odd-size-temporal-1] seq-frame: frame=8 time=0.133 plateMeanA=0.10103882 plateMeanB=0.10067672
+[capture][odd-size-temporal-1] seq-frame: frame=9 time=0.150 plateMeanA=0.10105107 plateMeanB=0.10068699
+[capture][odd-size-temporal-1] seq-frame: frame=10 time=0.167 plateMeanA=0.10105078 plateMeanB=0.10068542
+[capture][odd-size-temporal-1] seq-frame: frame=11 time=0.183 plateMeanA=0.10104227 plateMeanB=0.10067720
+[capture][odd-size-temporal-1] seq-frame: frame=12 time=0.200 plateMeanA=0.10103038 plateMeanB=0.10066575
+[capture][odd-size-temporal-1] seq-frame: frame=13 time=0.217 plateMeanA=0.10104148 plateMeanB=0.10067309
+[capture][odd-size-temporal-1] seq-frame: frame=14 time=0.233 plateMeanA=0.10103341 plateMeanB=0.10066749
+[capture][odd-size-temporal-1] seq-frame: frame=15 time=0.250 plateMeanA=0.10104251 plateMeanB=0.10067591
+[capture][odd-size-temporal-1] flickerA: mean=0.0793 max=0.0845
+[capture][odd-size-temporal-1] flickerB: mean=0.0809 max=0.0862
+[capture][odd-size-temporal-1] ghostingA: mean=0.2734 p95=1.6264
+[capture][odd-size-temporal-1] ghostingB: mean=0.2774 p95=1.6749
+[capture][odd-size-temporal-1] motion: A=(0.0,0.0) score=0.933 B=(0.0,0.0) score=0.926 direction not measurable
+[capture][odd-size-temporal-1] temporalUpscale: A=true B=true
+[capture][odd-size-temporal-1] subgroups: true
+[capture][odd-size-temporal-1] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
+[capture][odd-size-temporal-1] provenance: commit (private history) branch (private) dirty 123 key 65106d60b609 e2e green skips(build=false typecheck=false) served 9f4f3d5c1da4 built 9f4f3d5c1da4 servedIsBuilt true servedTree <worktree>

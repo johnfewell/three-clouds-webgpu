@@ -1,0 +1,10 @@
+{
+  "why": "Rows captured before phase 4 had deP95 and histDist gates. Their metrics.json predates the operator's gate decision, so they cannot agree with the new rule until the ladder is re-captured. Evidence is never edited: this list is reviewed and shrink-only, and a row leaves it when a capture records a verdict that names the distance metrics.",
+  "rows": [
+    "debug-cascades/4",
+    "debug-front-depth/4",
+    "debug-sample-count/4",
+    "debug-shadow-map/4",
+    "procedural-textures/4"
+  ]
+}

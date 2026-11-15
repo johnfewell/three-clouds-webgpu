@@ -20,6 +20,7 @@ import {
   validateThresholds
 } from '../cases/thresholdSchema.mjs'
 import { chromiumLaunchOptions } from '../src/e2eSupport/chromeFlags.mjs'
+import { composeVerdict } from '../src/metrics/composeVerdict.mjs'
 import {
   evaluate as evaluateMetrics,
   METRICS_VERSION
@@ -919,50 +920,28 @@ async function main() {
       }
 
       const pt = getPhaseThresholds(caseInfo.phase)
-      const evalResult = evaluateMetrics(
-        {
-          ssim: result.ssim,
-          deMean: result.deMean,
-          deP95: result.deP95,
-          histDist: result.histDist
-        },
-        pt,
-        caseInfo.name,
-        thresholds.accepted,
-        {
-          minStd: thresholds.plate?.minStd ?? 0.002,
-          minCloudFraction: thresholds.plate?.minCloudFraction ?? 0.0005,
-          plate: result.plate
-        }
+      // the metric verdict, then the hard receipts in
+      // capture order. A failing receipt is a fail whatever SSIM says: the
+      // receipt exists because SSIM cannot see it
+      const evalResult = composeVerdict(
+        evaluateMetrics(
+          {
+            ssim: result.ssim,
+            deMean: result.deMean,
+            deP95: result.deP95,
+            histDist: result.histDist
+          },
+          pt,
+          caseInfo.name,
+          thresholds.accepted,
+          {
+            minStd: thresholds.plate?.minStd ?? 0.002,
+            minCloudFraction: thresholds.plate?.minCloudFraction ?? 0.0005,
+            plate: result.plate
+          }
+        ),
+        result
       )
-      // a shadow case whose receipt fails (flags not off, plate did
-      // not brighten, or B's shaded fraction below the floor) FAILS, whatever
-      // SSIM says: the receipt exists because SSIM cannot see it
-      if (result.shadedFraction) {
-        const sf = result.shadedFraction
-        const receiptReasons = sf.skipped
-          ? []
-          : sf.error
-            ? [`shaded-fraction receipt could not be taken: ${sf.error}`]
-            : sf.reasons
-        if (receiptReasons.length > 0) {
-          evalResult.reasons = [...evalResult.reasons, ...receiptReasons]
-          if (evalResult.result !== 'fail') evalResult.result = 'fail'
-        }
-      }
-      // Same standing for the atlas-channel gate: a declared channel that
-      // disagrees, or a gated channel carrying no signal, is a fail whatever
-      // the plate's SSIM says
-      if (result.atlasChannels) {
-        const ac = result.atlasChannels
-        const atlasReasons = ac.error
-          ? [`atlas-channel receipt could not be taken: ${ac.error}`]
-          : ac.reasons
-        if (atlasReasons.length > 0) {
-          evalResult.reasons = [...evalResult.reasons, ...atlasReasons]
-          if (evalResult.result !== 'fail') evalResult.result = 'fail'
-        }
-      }
       caseLog(
         `eval: ${evalResult.result}${evalResult.reasons.length ? ' — ' + evalResult.reasons.join('; ') : ''}`
       )
@@ -1352,6 +1331,9 @@ async function main() {
                   deviation: roundAtlasRatio(result.atlasChannels.deviation),
                   gated: result.atlasChannels.gated,
                   tolerance: result.atlasChannels.tolerance,
+                  // The case's own gating sentence, so a verifier can reword
+                  // the divergence line it re-derives without losing it
+                  reasonTail: result.atlasChannels.reasonTail ?? null,
                   reasons: result.atlasChannels.reasons
                 },
         // Step 1. Written whole (summary, laneAbsent, error AND

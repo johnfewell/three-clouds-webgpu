@@ -67,6 +67,9 @@ const TYPE_AWARE_IGNORES = [
   // both Node CLIs execute one implementation. TypeScript imports are
   // checked through evaluator.d.mts, the runtime is exercised by Vitest
   'examples/parity/src/metrics/evaluator.mjs',
+  // the complete-verdict composition, plain .mjs for the same
+  // reason as the evaluator above, with its types in composeVerdict.d.mts
+  'examples/parity/src/metrics/composeVerdict.mjs',
   // the Chromium flag merge is plain .mjs so
   // the Playwright config and the Node capture scripts share one
   // implementation, checked through chromeFlags.d.mts and its Vitest test

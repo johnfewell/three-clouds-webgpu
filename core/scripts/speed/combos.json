@@ -1,0 +1,58 @@
+[
+  { "id": "c0-temporal", "set": [["temporalUpscale", true]] },
+  {
+    "id": "c1-temporal+interval2",
+    "set": [
+      ["temporalUpscale", true],
+      ["shadow.updateInterval", 2]
+    ]
+  },
+  {
+    "id": "c2-temporal+halfres+interval4+shadow128",
+    "set": [
+      ["temporalUpscale", true],
+      ["lightShaftsHalfResolution", true],
+      ["shadow.updateInterval", 4],
+      ["shadow.mapSize", [128, 128]]
+    ]
+  },
+  {
+    "id": "c3-temporal+res0.75+halfres+interval4+cascades2",
+    "set": [
+      ["temporalUpscale", true],
+      ["resolutionScale", 0.75],
+      ["lightShaftsHalfResolution", true],
+      ["shadow.updateInterval", 4],
+      ["shadow.cascadeCount", 2]
+    ]
+  },
+  {
+    "id": "c4-max-existing",
+    "set": [
+      ["temporalUpscale", true],
+      ["resolutionScale", 0.5],
+      ["lightShaftsHalfResolution", true],
+      ["shadow.updateInterval", 4],
+      ["shadow.cascadeCount", 1],
+      ["shadow.mapSize", [128, 128]],
+      ["clouds.maxIterationCountToSun", 0],
+      ["clouds.minStepSize", 200]
+    ]
+  },
+  {
+    "id": "c5-low+temporal",
+    "preset": "low",
+    "set": [["temporalUpscale", true]]
+  },
+  {
+    "id": "c6-low+temporal+res0.5+interval4+cascades1",
+    "preset": "low",
+    "set": [
+      ["temporalUpscale", true],
+      ["resolutionScale", 0.5],
+      ["shadow.updateInterval", 4],
+      ["shadow.cascadeCount", 1]
+    ]
+  },
+  { "id": "shadowIter-25-again", "set": [["shadow.maxIterationCount", 25]] }
+]

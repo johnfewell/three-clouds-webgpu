@@ -49,7 +49,8 @@ export const experimentLabels = {
   cloudEnvironment: 'Cloud environment map',
   staticMode: 'Static rendering mode (skip unchanged)',
   cirrusDeck: 'Cirrus deck (2D texture)',
-  shadowRoundRobin: 'Shadow cascades round-robin'
+  shadowRoundRobin: 'Shadow cascades round-robin',
+  freshTexelBlend: 'Fresh texel blend (dot grid fix)'
 } satisfies Record<keyof ExperimentalCloudOptions, string>
 
 type ExperimentKey = keyof ExperimentalCloudOptions
@@ -96,6 +97,7 @@ export const experimentalArgs = (): ExperimentalArgs => ({
   'experimental-staticMode': experimentalDefaults.staticMode,
   'experimental-cirrusDeck': experimentalDefaults.cirrusDeck,
   'experimental-shadowRoundRobin': experimentalDefaults.shadowRoundRobin,
+  'experimental-freshTexelBlend': experimentalDefaults.freshTexelBlend,
   cloudTypeRegions: 4,
   ...shapeArgs()
 })
@@ -139,7 +141,8 @@ export function selectedExperiments(
     cloudEnvironment: enabled && args['experimental-cloudEnvironment'],
     staticMode: enabled && args['experimental-staticMode'],
     cirrusDeck: enabled && args['experimental-cirrusDeck'],
-    shadowRoundRobin: enabled && args['experimental-shadowRoundRobin']
+    shadowRoundRobin: enabled && args['experimental-shadowRoundRobin'],
+    freshTexelBlend: enabled && args['experimental-freshTexelBlend']
   }
 }
 
@@ -217,6 +220,7 @@ export const experimentalArgTypes = (): ArgTypes<ExperimentalArgs> => ({
   'experimental-staticMode': experimentControl('staticMode'),
   'experimental-cirrusDeck': experimentControl('cirrusDeck'),
   'experimental-shadowRoundRobin': experimentControl('shadowRoundRobin'),
+  'experimental-freshTexelBlend': experimentControl('freshTexelBlend'),
   cloudTypeRegions: {
     name: 'Type regions per weather tiling',
     control: { type: 'number' as const, min: 1, max: 24, step: 1 },

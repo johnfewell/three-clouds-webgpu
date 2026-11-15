@@ -1,11 +1,11 @@
 [capture][layers-2] starting (phase 1, #26)
-[capture][layers-2] screenshots: A=580006b B=546377b
-[capture][layers-2] metrics: ssim=0.9898 deMean=0.31 deP95=0.54 histDist=0.0083 maxDelta=0.1103
-[capture][layers-2] dual-L: measuredL=0.0875 ssim@measuredL=0.9897 (gated ssim is @refL=0.09) stabiliserShare=1.1% sigmaA=4.27e-3 sigmaB=3.88e-3 sigmaD=8.02e-4
-[capture][layers-2] plate: A mean=0.1014 std=0.0094 B mean=0.1009 std=0.0085 cloudFraction=8.932%
-[capture][layers-2] gpuMs: A=10.70ms (32 samples) B=2.32ms (32 samples)
+[capture][layers-2] screenshots: A=580006b B=549784b
+[capture][layers-2] metrics: ssim=0.9972 deMean=0.28 deP95=0.49 histDist=0.0075 maxDelta=0.1103
+[capture][layers-2] dual-L: measuredL=0.0875 ssim@measuredL=0.9972 (gated ssim is @refL=0.09) stabiliserShare=1.3% sigmaA=4.27e-3 sigmaB=4.26e-3 sigmaD=2.58e-4
+[capture][layers-2] plate: A mean=0.1014 std=0.0094 B mean=0.1011 std=0.0090 cloudFraction=8.932%
+[capture][layers-2] gpuMs: A=11.43ms (32 samples) B=2.45ms (32 samples)
 [capture][layers-2] eval: pass
 [capture][layers-2] temporalUpscale: A=false B=false
 [capture][layers-2] subgroups: true
 [capture][layers-2] atmosphere: requested=reference effective=reference B raymarchScattering=false B accurateShadowScattering=false
-[capture][layers-2] provenance: commit (private history) branch (private) dirty 9 key 98732148929a e2e green skips(build=false typecheck=false) served 755292708551 built 755292708551 servedIsBuilt true servedTree <worktree>
+[capture][layers-2] provenance: commit (private history) branch (private) dirty 123 key 65106d60b609 e2e green skips(build=false typecheck=false) served 9f4f3d5c1da4 built 9f4f3d5c1da4 servedIsBuilt true servedTree <worktree>

@@ -188,6 +188,25 @@ describe('caseToParityCase', () => {
     expect(pc.lighting).toBe('post')
   })
 
+  it('forwards cd.size to ParityCase width and height', () => {
+    const retina = caseToParityCase(caseByName('retina-baseline')!)
+    expect(retina.width).toBe(2880)
+    expect(retina.height).toBe(1800)
+    expect(retina.pixelRatio).toBe(1)
+
+    const odd1 = caseToParityCase(caseByName('odd-size-temporal-1')!)
+    expect(odd1.width).toBe(1281)
+    expect(odd1.height).toBe(721)
+
+    const odd2 = caseToParityCase(caseByName('odd-size-temporal-2')!)
+    expect(odd2.width).toBe(1282)
+    expect(odd2.height).toBe(722)
+
+    const odd3 = caseToParityCase(caseByName('odd-size-temporal-3')!)
+    expect(odd3.width).toBe(1283)
+    expect(odd3.height).toBe(723)
+  })
+
   it('camera callback sets position and lookAt', () => {
     const cd = caseByName('inside-deck')!
     const pc = caseToParityCase(cd)

@@ -1,7 +1,7 @@
 # Release procedure: three-clouds-webgpu
 
 A release is an exact source tree, package archive and set of verification
-receipts. The working version is `0.1.0-alpha.8`. Check `package.json` and the
+receipts. The working version is `0.1.0-alpha.9`. Check `package.json` and the
 matching changelog entry before preparing a candidate; an older tag does not
 establish the version or verification state of the current tree.
 
@@ -20,7 +20,7 @@ pnpm check
 pnpm format:check
 pnpm build
 pnpm pack --pack-destination <output-directory>
-pnpm pack:verify <output-directory>/three-clouds-webgpu-0.1.0-alpha.8.tgz
+pnpm pack:verify <output-directory>/three-clouds-webgpu-0.1.0-alpha.9.tgz
 ```
 
 The final build occurs after the test suite, so the archive is made from the

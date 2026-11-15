@@ -3,31 +3,31 @@
   "phase": 4,
   "readback": "linear",
   "metricsVersion": 4,
-  "ssim": 0.815795,
-  "deMean": 4.53,
-  "deP95": 18.98,
-  "histDist": 0.19575,
+  "ssim": 0.811105,
+  "deMean": 3.79,
+  "deP95": 16.21,
+  "histDist": 0.19928,
   "plate": {
     "A": {
       "mean": 0.077019,
       "std": 0.072611
     },
     "B": {
-      "mean": 0.090927,
-      "std": 0.095655,
+      "mean": 0.092165,
+      "std": 0.097063,
       "cloudFraction": 1
     }
   },
   "provenance": {
     "git": {
-      "commit": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "branch": "(private)",
-      "dirty": 107
+      "dirty": 123
     },
     "e2e": {
-      "inputsKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed",
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
       "verdict": "green",
-      "detail": "e2e passed, all 140 tests",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
       "overrideArmed": false
     },
     "build": {
@@ -40,8 +40,8 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "served": {
         "root": "<worktree>",
@@ -52,12 +52,12 @@
           "shared2.js",
           "webgpu.js"
         ],
-        "digest": "75529270855137ddd73af6ae32b7551538c64073cb5a256b68bbab72fa900722",
-        "sharedSha256": "da7ed403364cb3452ec384ad794ec6024f51d06cc6d6a383d8f6c74616433880"
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
       },
       "error": null,
       "servedIsBuilt": true,
-      "builtFromKey": "98732148929af4cf06ac8dc9eb815d3d9db88740927f88743f2ce216b24677ed"
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
     },
     "skips": {
       "build": false,
@@ -65,7 +65,7 @@
     },
     "servedTree": {
       "root": "<worktree>",
-      "head": "672820c304ed5fd84479d58322fda18168e5ec29",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
       "error": null
     }
   },
@@ -76,14 +76,14 @@
   "ssimAttribution": {
     "measuredL": 0.1570570175535977,
     "referenceL": 0.09,
-    "ssimAtMeasuredL": 0.8166255135875118,
-    "ssimAtReferenceL": 0.8157952349011707,
-    "stabiliserShareOfDeficit": -0.004527776478530706,
-    "meanLuminanceTerm": 0.9830385527801875,
-    "meanContrastStructureTerm": 0.8245116684280839,
+    "ssimAtMeasuredL": 0.8118191611988698,
+    "ssimAtReferenceL": 0.8111050868267421,
+    "stabiliserShareOfDeficit": -0.0037946178616107976,
+    "meanLuminanceTerm": 0.9823599233836792,
+    "meanContrastStructureTerm": 0.8199480682829805,
     "sigmaA": 0.04814204304402038,
-    "sigmaB": 0.060771098644698825,
-    "sigmaD": 0.027316227272054166,
+    "sigmaB": 0.06314059064480496,
+    "sigmaD": 0.028307262811553893,
     "bandFractions": [
       0.066376953125,
       0.017170138888888888,
@@ -99,28 +99,30 @@
   },
   "shadowRadius": null,
   "subgroups": true,
-  "result": "expected-difference",
+  "result": "fail",
   "reasons": [
-    "ssim 0.8158 < 0.9800",
-    "accepted: ADR-011 Amendment 6: integer weather, shape and detail branch counters are discontinuous under cross-backend floating-point and filtering variance; channel semantics and a structured plate are the receipt"
+    "ssim 0.8111 < 0.9800",
+    "deP95 16.21 > 5.00",
+    "histDist 0.1993 > 0.1000",
+    "beyond the accepted footprint: histDist 0.1993 > floor 0.1959 (ADR-011 Amendment 6: integer weather, shape and detail branch counters are discontinuous under cross-backend floating-point and filtering variance; channel semantics and a structured plate are the receipt)"
   ],
-  "maxDiffDelta": 0.326934,
+  "maxDiffDelta": 0.345695,
   "width": 1280,
   "height": 720,
-  "captureMs": 5520,
-  "metricsMs": 921,
+  "captureMs": 5325,
+  "metricsMs": 784,
   "gpuMs": {
     "sideA": {
-      "medianMs": 9.35,
+      "medianMs": 9.89,
       "passes": {
-        "total": 9.35
+        "total": 9.89
       },
       "sampleCount": 32
     },
     "sideB": {
-      "medianMs": 2.48,
+      "medianMs": 2.45,
       "passes": {
-        "render": 2.48
+        "render": 2.45
       },
       "sampleCount": 32
     }

@@ -17,6 +17,11 @@ export interface CasePose {
   readonly lookAt: readonly [number, number, number]
 }
 
+export interface CaseSize {
+  readonly width: number
+  readonly height: number
+}
+
 export interface CaseState {
   readonly enabled: boolean
   readonly qualityPreset: QualityPreset
@@ -144,6 +149,7 @@ export interface CaseDefinition {
   readonly backend?: 'webgpu' | 'webgl2'
   readonly camera?: 'perspective' | 'orthographic'
   readonly lighting?: 'post' | 'lights'
+  readonly size?: CaseSize
 }
 
 // Phase assignment for each parity key: a phase-N case must not change
@@ -1193,6 +1199,116 @@ export const cases: readonly CaseDefinition[] = [
     warmup: 64,
     state: { shadow: true, lightShafts: true },
     scene: 'synthetic'
+  },
+  // Retina (2880x1800) and odd-size (H % 4 = 1, 2, 3) tier
+  // Each case matches its named 1280x720 twin in every field except size
+  {
+    name: 'retina-baseline',
+    number: 62,
+    phase: 0,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: {},
+    scene: 'synthetic',
+    size: { width: 2880, height: 1800 }
+  },
+  {
+    name: 'retina-temporal-static',
+    number: 63,
+    phase: 2,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { temporalUpscale: true },
+    sequence: SEQ_TEMPORAL,
+    scene: 'synthetic',
+    size: { width: 2880, height: 1800 }
+  },
+  {
+    name: 'retina-shadow-plane',
+    number: 64,
+    phase: 3,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_LOW,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { shadow: true },
+    scene: 'synthetic',
+    size: { width: 2880, height: 1800 }
+  },
+  {
+    name: 'retina-shafts-low-sun',
+    number: 65,
+    phase: 3,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_LOW,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { shadow: true, lightShafts: true },
+    scene: 'synthetic',
+    size: { width: 2880, height: 1800 }
+  },
+  {
+    name: 'odd-size-temporal-1',
+    number: 66,
+    phase: 2,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { temporalUpscale: true },
+    sequence: SEQ_TEMPORAL,
+    scene: 'synthetic',
+    size: { width: 1281, height: 721 }
+  },
+  {
+    name: 'odd-size-temporal-2',
+    number: 67,
+    phase: 2,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { temporalUpscale: true },
+    sequence: SEQ_TEMPORAL,
+    scene: 'synthetic',
+    size: { width: 1282, height: 722 }
+  },
+  {
+    name: 'odd-size-temporal-3',
+    number: 68,
+    phase: 2,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: { temporalUpscale: true },
+    sequence: SEQ_TEMPORAL,
+    scene: 'synthetic',
+    size: { width: 1283, height: 723 }
+  },
+  {
+    name: 'odd-size-baseline',
+    number: 69,
+    phase: 0,
+    pose: POSE_ORBIT_60KM,
+    sun: SUN_DEFAULT,
+    time: 0,
+    frame: 0,
+    warmup: 64,
+    state: {},
+    scene: 'synthetic',
+    size: { width: 1283, height: 723 }
   }
 ]
 

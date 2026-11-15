@@ -16,6 +16,13 @@ export const MIN_SIGNAL_FRACTION: number
 export function checkShadedFraction(sf: unknown): string[]
 
 /**
+ * a capture's own shaded-fraction reasons for the complete verdict.
+ * A receipt taken in memory keeps the reasons it was built with, while one
+ * that predates the recorded reasons is re-derived
+ */
+export function captureShadedFractionReasons(sf: unknown): string[]
+
+/**
  * the packed debug plate's per-channel agreement. Only the `gated`
  * channels are scored, so the ungated frontDepth divergence can neither fail
  * this nor excuse the ones that decide optical depth

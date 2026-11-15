@@ -1,0 +1,187 @@
+{
+  "case": "retina-shafts-low-sun",
+  "phase": 3,
+  "readback": "linear",
+  "metricsVersion": 4,
+  "ssim": 0.996037,
+  "deMean": 0.28,
+  "deP95": 0.43,
+  "histDist": 0.009291,
+  "plate": {
+    "A": {
+      "mean": 0.035513,
+      "std": 0.006323
+    },
+    "B": {
+      "mean": 0.035227,
+      "std": 0.005816,
+      "cloudFraction": 0.161792
+    }
+  },
+  "provenance": {
+    "git": {
+      "commit": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
+      "branch": "(private)",
+      "dirty": 123
+    },
+    "e2e": {
+      "inputsKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56",
+      "verdict": "green",
+      "detail": "e2e passed (152 passed, 1 SKIPPED — skipped is not passed: chromium-webgpu › p4.spec.ts › Phase 4 — examples/r3f optional tiles view (credentialed) › 9c. the ?tiles=1 view streams, settles and renders clouds over it)",
+      "overrideArmed": false
+    },
+    "build": {
+      "built": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
+      },
+      "served": {
+        "root": "<worktree>",
+        "files": [
+          "index.js",
+          "r3f.js",
+          "shared.js",
+          "shared2.js",
+          "webgpu.js"
+        ],
+        "digest": "9f4f3d5c1da4f985f6315c5f1101ebeaea0ae11fd35122abdb8c6b8853d0dbe3",
+        "sharedSha256": "d4ed1310a2ae46d11f2fce5e29152a625f9a4f8ea6363734270d3d186696026d"
+      },
+      "error": null,
+      "servedIsBuilt": true,
+      "builtFromKey": "65106d60b609578880d1cdbad0f0d2594eb8915eace1fbb6eb52758efee4ec56"
+    },
+    "skips": {
+      "build": false,
+      "typecheck": false
+    },
+    "servedTree": {
+      "root": "<worktree>",
+      "head": "269b5f40ed17473d79eb7ba466cd763d6ef7651b",
+      "error": null
+    }
+  },
+  "temporalUpscale": {
+    "A": false,
+    "B": false
+  },
+  "ssimAttribution": {
+    "measuredL": 0.032722389325499535,
+    "referenceL": 0.09,
+    "ssimAtMeasuredL": 0.9956158012316496,
+    "ssimAtReferenceL": 0.9960374797699889,
+    "stabiliserShareOfDeficit": 0.09618143716097079,
+    "meanLuminanceTerm": 0.9998241247585868,
+    "meanContrastStructureTerm": 0.995785466706277,
+    "sigmaA": 0.004292606808719091,
+    "sigmaB": 0.004209863861061238,
+    "sigmaD": 0.0003450973672472535,
+    "bandFractions": [
+      0,
+      0,
+      0.0000030864197530864196,
+      0.9999969135802469
+    ]
+  },
+  "shadedFraction": {
+    "A": {
+      "fraction": 0.998841,
+      "meanOn": 0.035513,
+      "meanOff": 0.074676,
+      "rise": 0.524432,
+      "classified": 5184000
+    },
+    "B": {
+      "fraction": 0.999589,
+      "meanOn": 0.035227,
+      "meanOff": 0.073993,
+      "rise": 0.523913,
+      "classified": 5184000
+    },
+    "ratio": 1.000749,
+    "compare": "ratio",
+    "flagsOff": {
+      "A": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "B": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "flagsRestored": {
+      "A": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "B": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "reasons": []
+  },
+  "atlasChannels": null,
+  "convergence": {
+    "A": 0.235185,
+    "B": 0.186603
+  },
+  "shadowRadius": {
+    "laneAbsent": false,
+    "error": null,
+    "lanePixels": 5184000,
+    "framePixels": 5184000,
+    "reasons": [],
+    "summary": {
+      "sampled": 5184000,
+      "classified": 5184000,
+      "min": 3,
+      "median": 3,
+      "p95": 3,
+      "max": 3,
+      "armedFraction": 1,
+      "atCeilingFraction": 1
+    }
+  },
+  "subgroups": true,
+  "result": "pass",
+  "reasons": [],
+  "maxDiffDelta": 0.075765,
+  "width": 2880,
+  "height": 1800,
+  "captureMs": 42638,
+  "metricsMs": 20964,
+  "gpuMs": {
+    "sideA": {
+      "medianMs": 128.2,
+      "passes": {
+        "total": 128.2
+      },
+      "sampleCount": 32
+    },
+    "sideB": {
+      "medianMs": 522.5,
+      "passes": {
+        "render": 522.5
+      },
+      "sampleCount": 32
+    }
+  }
+}
